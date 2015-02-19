@@ -1,0 +1,169 @@
+\documentclass{beamer}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usetheme{Boadilla}
+\title{Metody probabilistyczne I}
+\author{Jędrzej Potoniec}
+\date{}
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+\part{Organizacja przedmiotu}
+\frame{\partpage}
+\begin{frame}{Kontakt}
+mgr inż. Jędrzej Potoniec \\
+\url{Jedrzej.Potoniec@cs.put.poznan.pl}\\
+\url{http://www.cs.put.poznan.pl/jpotoniec}
+\end{frame}
+\begin{frame}{Zasady oceniania}
+Egzamin zaliczający obie części przedmiotu:
+\begin{description}
+\item[ćwiczenia] 75\% puntków
+\item[wykład] 25\% punktów
+\item[można] mieć kartkę ze wzorami i~kalkulator (bez WiFi, GSM itp)
+\item[nie można] komunikować się z innymi
+\item[nie trzeba] uczyć się na pamięc definicji, twierdzeń (ale trzeba je umieć stosować!)
+\item[dodatkowo] punkty za aktywność
+\end{description}
+\end{frame}
+\begin{frame}{Skala ocen}
+\begin{center}
+\begin{tabular}{l|r}
+\% punktów & ocena \\
+\hline
+$\left(-\infty; 50\right]$ & 2,0 \\
+$\left(50; 60\right]$ & 3,0 \\
+$\left(60; 70\right]$ & 3,5 \\
+$\left(70; 80\right]$ & 4,0 \\
+$\left(80; 90\right]$ & 4,5 \\
+$\left(90; \infty\right)$ & 5,0 \\
+\end{tabular}
+\end{center}
+\end{frame}
+\begin{frame}{Obecność}
+\begin{block}{Regulamin studiów, rozdział II, par.8 pkt. 2}
+Uczestnictwo w zajęciach objętych planem studiów jest obowiązkowe dla nauczycieli akademickich i~studentów.
+Uczestnictwo w ćwiczeniach, zajęciach laboratoryjnych, projektowych, seminariach, pracowniach, lektoratach i~zajęciach WF jest kontrolowane przez prowadzącego.
+\end{block}
+{\tiny Regulamin studiów uchwalony przez Senat Akademicki Politechniki Poznańskiej Uchwałą Nr 175 z dnia 25 kwietnia 2012 r. Zmiany wprowadzone Uchwałą Nr 185 z dnia 27 czerwca 2012 r.}
+\end{frame}
+\begin{frame}{Inspiracje}
+\begin{itemize}
+\item \emph{Metody probabilistyczne} prof. J. Węglarz @ PUT
+\item \emph{CS 223 -- Random Processes and Algorithms} @ Harvard \\
+\url{http://www.eecs.harvard.edu/~michaelm/CS223/handouts.html}
+\end{itemize}
+\end{frame}
+\begin{frame}{Literatura}
+\begin{enumerate}
+\item M. Mitzenmacher, E. Upfal \emph{Metody probabilistyczne i~obliczenia} (WNT 2009)
+\item W. Krysicki, J. Bartos i~in. \emph{Rachunek prawdopodobieństwa i~statystyka matematyczna w zadaniach} (PWN 2010)
+\item A. Plucińska, E. Pluciński \emph{Probabilistyka: rachunek prawdopodobieństwa, statystyka matematyczna, procesy stochastyczne} (WNT 2000)
+\item Amir D. Aczel \emph{Statystyka w zarządzaniu} (PWN 2006)
+\item S. Takahashi, Trend-Pro Co. Ltd. \emph{Manga Guide to Statistics} (No starch press 2008)
+\item M. Heller \emph{Filozofia przypadku: kosmiczna fuga z preludium i~coda} (Copernicus Center Press 2012)
+\end{enumerate}
+\end{frame}
+\begin{frame}{Plan wykładu}
+\begin{enumerate}
+\item Wstęp
+\only<1>{\begin{enumerate}
+\item Informacje organizacyjne
+\item \emph{Zastosowania probabilistyki w informatyce}
+\end{enumerate}}
+\item Aksjomatyka rachunku prawdopodobieństwa
+\only<2>{\begin{enumerate}
+\item Przestrzeń zdarzeń elementarnych
+\item Zdarzenia i działania na nich
+\item Aksjomatyczna definicja prawdopodobieństwa
+\item \emph{Probabilistyczne porównywanie wielomianów}
+\item Prawdopodobieństwo warunkowe, zupełne i twierdzenie Bayesa
+\item Niezależność zdarzeń
+\item \emph{Klasyfikator Bayesa i filtry antyspamowe}
+\end{enumerate}}
+\item Zmienne losowe
+\only<3>{
+	\begin{enumerate}
+	\item Pojęcie zmiennej losowej, funkcji prawdopodobieństwa i~dystrybuanty
+	\item Typy zmiennych losowych
+	\item Momenty zmiennych losowych, nierówności Markowa i~Czebyszewa
+	\item \emph{Podstawowa metoda Monte-Carlo}
+	\item Przykładowe rozkłady prawdopodobieństwa: jednostajne, dwupunktowy, dwumianowy, Poissona, geometryczny, Gaussa
+	\item Problem znakowania pakietów
+	\item Dwuwymiarowe zmienne losowe
+	\item Kowariancja, korelacja, regresja
+	\item Ciągi zmiennych losowych
+	\item Twierdzenia graniczne
+	\end{enumerate}
+}
+\item Procesy losowe
+\only<4>{
+	\begin{enumerate}
+\item Pojęcie procesu losowego i jego opis
+\item Momenty procesu losowego
+\item Procesy stacjonarne
+\item Procesy o przyrostach niezależnych, procesy Markowa
+\item Rozkład wykładniczy
+\item Proces Poissona
+\item \emph{Kolejka \texttt{M|M|1}}
+\end{enumerate}}
+\end{enumerate}
+\end{frame}
+\begin{frame}{Harmonogram wykładów}
+\begin{description}
+\item[28.02] %TODO
+\item[09.05]
+\item[30.05]
+\item[14.06]
+\end{description}
+\end{frame}
+\begin{frame}{Harmonogram ćwiczeń}
+\begin{description}
+\item[10.05] %TODO
+\item[16.05]
+\item[30/31.05]
+\item[20.06]
+\end{description}
+\end{frame}
+
+\part{Zastosowania probabilistyki w informatyce}
+\frame{\partpage}
+\begin{frame}{Filtrowanie poczty}
+\centering\includegraphics[width=.85\textwidth]{spam.jpg}
+
+{\tiny ,,Spam \#Spam'' by Mike Mozart CC-BY-SA 2.0 \url{https://flic.kr/p/nm6DGC}}
+\end{frame}
+%TODO: load balancing?
+\begin{frame}{Kryptografia}
+\centering\includegraphics[width=.9\textwidth]{dsa.png}
+
+{\tiny \url{http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf} (fragmenty)}
+\end{frame}
+\begin{frame}{Rozpoznawanie mowy}
+\centering\includegraphics[width=.8\textwidth,bb=0 50mm 220mm 220mm,clip]{siri.jpg}
+
+{\tiny ,,Siri will you marry me LOL'' by J.S. Zolliker CC-BY-SA 2.0 \url{https://flic.kr/p/aCUCY5}}
+\end{frame}
+\begin{frame}{Testy interfejsu użytkownika}
+\centering\includegraphics[width=.9\textwidth]{ab.png}
+
+{\tiny \url{http://www.testsignificance.com/}}
+\end{frame}
+\begin{frame}{Kompresja i kodowanie}
+\centering\includegraphics[width=.7\textwidth]{morse.png}
+
+{\tiny By Rhey T. Snodgrass \& Victor F. Camp, 1922 [Public domain], via Wikimedia Commons}
+\end{frame}
+
+%TODO: big data?
+
+\part{Aksjomatyka rachunku prawdopodobieństwa}
+\frame{\partpage}
+\begin{frame}{Przestrzeń zdarzeń elementarnych}
+\begin{itemize}
+\item 
+\end{itemize}
+\end{frame}
+\end{document}
+

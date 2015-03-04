@@ -2,6 +2,22 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usetheme{Boadilla}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.misc} 
+\usetikzlibrary{positioning} 
+\usetikzlibrary{petri} 
+\usetikzlibrary{calc,intersections,through,backgrounds}
+\tikzset{every node/.style={rectangle, rounded corners=3mm, very thick, draw=red!80, top color=red!5, bottom color=red!40}}
+%http://tex.stackexchange.com/questions/99119/beamer-problematic-use-of-visible-and-only-in-combination-with-tikz-to-draw-a
+\tikzset{
+	invisible/.style={opacity=0},
+		visible on/.style={alt=#1{}{invisible}},
+		alt/.code args={<#1>#2#3}{%
+			\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+		},
+}
+
 \title{Metody probabilistyczne I}
 \author{Jędrzej Potoniec}
 \date{}
@@ -169,10 +185,33 @@ Uczestnictwo w ćwiczeniach, zajęciach laboratoryjnych, projektowych, seminaria
 
 \part{Aksjomatyka rachunku prawdopodobieństwa}
 \frame{\partpage}
-\begin{frame}{Przestrzeń zdarzeń elementarnych}
-\begin{itemize}
-\item 
-\end{itemize}
+\begin{frame}{Zjawiska losowe i deterministyczne}
+\begin{center}
+\begin{tikzpicture}
+\node (w) {zbiór warunków}
+	child { node (det) [below left=of w.center] {zjawisko deterministyczne}}
+	child { node (los) [below right=of w.center] {zjawisko losowe}};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+\begin{frame}{Zdarzenia}
+
+\[\only<2->{\Omega=\{\omega_1, \omega_2, \ldots, \omega_6\} \qquad \only<3->{A=\{\omega_1, \omega_4, \omega_5\} \qquad B=\{\omega_2, \omega_5\}}}\]
+\begin{center}
+\begin{tikzpicture}[dice/.style={draw=black,thick,rectangle,minimum size=10mm}]
+\node (d1) [dice,tokens=1] {$\omega_1$};
+\node (d2) [dice,tokens=2,right=of d1] {$\omega_2$};
+\node (d3) [dice,tokens=3,right=of d2] {$\omega_3$};
+\node (d4) [dice,tokens=4,below=of d1] {$\omega_4$};
+\node (d5) [dice,tokens=5,right=of d4] {$\omega_5$};
+\node (d6) [dice,tokens=6,right=of d5] {$\omega_6$};
+\draw [visible on=<2->] ($.5*(d2.south)+.5*(d5.north)$) circle (35mm) node {$\Omega$};
+\draw [rounded corners,visible on=<3>] ($(d1.west)-(2mm,0)$) |- ($(d1.east)+(2mm,7mm)$) |- ($(d5.east)+(2mm,7mm)$) |- ($(d4.west)-(2mm,7mm)$) -- cycle node {$A$};
+\draw [rounded corners,visible on=<3>] ($(d2.west)-(2mm,0)$) |- ($(d2.east)+(2mm,7mm)$) |- ($(d5.west)-(2mm,7mm)$)  -- cycle node {$B$};
+\end{tikzpicture}
+%TODO: podpisać: przestrzeń zdarzeń elementarnych, zdarzenie elementarne, zdarzenie
+\end{center}
+
 \end{frame}
 \end{document}
 

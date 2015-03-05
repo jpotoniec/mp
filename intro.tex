@@ -8,7 +8,15 @@
 \usetikzlibrary{positioning} 
 \usetikzlibrary{petri} 
 \usetikzlibrary{calc,intersections,through,backgrounds}
-\tikzset{every node/.style={rectangle, rounded corners=3mm, very thick, draw=red!80, top color=red!5, bottom color=red!40}}
+ \usetikzlibrary{calc,decorations.pathmorphing,patterns}
+\tikzset{
+	decoration={random steps,segment length=2.5mm,amplitude=0.3mm},
+	color1/.style={color=black},
+	color2/.style={color=green!50!black!50},
+	color3/.style={color=blue!50!black!50},
+	set/.style={very thick, decorate},
+	diagram/.style={rectangle, rounded corners=3mm, very thick, draw=red!80, top color=red!5, bottom color=red!40},
+}
 %http://tex.stackexchange.com/questions/99119/beamer-problematic-use-of-visible-and-only-in-combination-with-tikz-to-draw-a
 \tikzset{
 	invisible/.style={opacity=0},
@@ -17,6 +25,27 @@
 			\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
 		},
 }
+
+% % http://tex.stackexchange.com/questions/39296/simulating-hand-drawn-lines
+% \pgfdeclaredecoration{penciline}{initial}{
+% 	\state{initial}[width=+\pgfdecoratedinputsegmentremainingdistance,auto corner on length=1mm,]{
+% 		\pgfpathcurveto%
+% 		{% From
+% 			\pgfqpoint{\pgfdecoratedinputsegmentremainingdistance}
+% 			{\pgfdecorationsegmentamplitude}
+% 		}
+% 		{%  Control 1
+% 			\pgfmathrand
+% 				\pgfpointadd{\pgfqpoint{\pgfdecoratedinputsegmentremainingdistance}{0pt}}
+% 			{\pgfqpoint{-\pgfdecorationsegmentaspect\pgfdecoratedinputsegmentremainingdistance}%
+% 				{\pgfmathresult\pgfdecorationsegmentamplitude}
+% 			}
+% 		}
+% 		{%TO 
+% 			\pgfpointadd{\pgfpointdecoratedinputsegmentlast}{\pgfpoint{1pt}{1pt}}
+% 		}
+% 	\state{final}{}
+% }
 
 \title{Metody probabilistyczne I}
 \author{Jędrzej Potoniec}
@@ -88,6 +117,8 @@ Uczestnictwo w ćwiczeniach, zajęciach laboratoryjnych, projektowych, seminaria
 \centering\includegraphics[height=.7\textheight]{books/mg_statistics_big.png}}
 \only<6>{\item M. Heller \emph{Filozofia przypadku: kosmiczna fuga z preludium i~coda} (Copernicus Center Press 2012)\\
 \centering\includegraphics[height=.7\textheight]{books/heller.jpg}}
+\only<7>{\item Eliezer Yudkowsky \emph{Harry Potter and Methods of Rationality} \url{http://hpmor.com/}\\
+\centering\includegraphics[height=.7\textheight]{books/hpmor.jpg}}
 \end{itemize}
 \end{frame}
 \begin{frame}{Plan wykładu}
@@ -187,7 +218,7 @@ Uczestnictwo w ćwiczeniach, zajęciach laboratoryjnych, projektowych, seminaria
 \frame{\partpage}
 \begin{frame}{Zjawiska losowe i deterministyczne}
 \begin{center}
-\begin{tikzpicture}
+\begin{tikzpicture}[every node/.style={diagram}]
 \node (w) {zbiór warunków}
 	child { node (det) [below left=of w.center] {zjawisko deterministyczne}}
 	child { node (los) [below right=of w.center] {zjawisko losowe}};
@@ -196,22 +227,81 @@ Uczestnictwo w ćwiczeniach, zajęciach laboratoryjnych, projektowych, seminaria
 \end{frame}
 \begin{frame}{Zdarzenia}
 
-\[\only<2->{\Omega=\{\omega_1, \omega_2, \ldots, \omega_6\} \qquad \only<3->{A=\{\omega_1, \omega_4, \omega_5\} \qquad B=\{\omega_2, \omega_5\}}}\]
+\[\only<3>{\Omega=\{\omega_1, \omega_2, \omega_3, \omega_4, \omega_5, \omega_6\}}\] \[\only<4>{A=\{\omega_1, \omega_4, \omega_5\} \qquad B=\{\omega_2, \omega_5\}}\]
 \begin{center}
-\begin{tikzpicture}[dice/.style={draw=black,thick,rectangle,minimum size=10mm}]
-\node (d1) [dice,tokens=1] {$\omega_1$};
-\node (d2) [dice,tokens=2,right=of d1] {$\omega_2$};
-\node (d3) [dice,tokens=3,right=of d2] {$\omega_3$};
-\node (d4) [dice,tokens=4,below=of d1] {$\omega_4$};
-\node (d5) [dice,tokens=5,right=of d4] {$\omega_5$};
-\node (d6) [dice,tokens=6,right=of d5] {$\omega_6$};
-\draw [visible on=<2->] ($.5*(d2.south)+.5*(d5.north)$) circle (35mm) node {$\Omega$};
-\draw [rounded corners,visible on=<3>] ($(d1.west)-(2mm,0)$) |- ($(d1.east)+(2mm,7mm)$) |- ($(d5.east)+(2mm,7mm)$) |- ($(d4.west)-(2mm,7mm)$) -- cycle node {$A$};
-\draw [rounded corners,visible on=<3>] ($(d2.west)-(2mm,0)$) |- ($(d2.east)+(2mm,7mm)$) |- ($(d5.west)-(2mm,7mm)$)  -- cycle node {$B$};
+\begin{tikzpicture}[dice/.style={draw=black,thick,rectangle,minimum size=10mm,diagram},
+every token/.style={top color=black, bottom color=black, semitransparent}]
+\node (d1) [dice,tokens=1] 		{} node[visible on=<2->] (d1label) at (d1.south) {$\omega_1$};
+\node (d2) [dice,tokens=2,right=of d1]  {} node[visible on=<2->] (d2label) at (d2.south) {$\omega_2$};
+\node (d3) [dice,tokens=3,right=of d2]  {} node[visible on=<2->] (d3label) at (d3.south) {$\omega_3$};
+\node (d4) [dice,tokens=4,below=of d1]  {} node[visible on=<2->] (d4label) at (d4.north) {$\omega_4$};
+\node (d5) [dice,tokens=5,right=of d4]  {} node[visible on=<2->] (d5label) at (d5.north) {$\omega_5$};
+\node (d6) [dice,tokens=6,right=of d5]  {} node[visible on=<2->] (d6label) at (d6.north) {$\omega_6$};
+\coordinate (center) at ($.5*(d2.south)+.5*(d5.north)$);
+\begin{scope}[visible on=<2>]
+\path ($(center)-(6cm,0)$) node[align=center] (elementarne) {zdarzenia\\elementarne};
+\foreach \label in {d1label, d2label, d3label, d4label, d5label, d6label}
+	\draw[->,set,draw=black] (elementarne.east) -- (\label);
+\end{scope}
+\draw [set,color1,visible on=<3->] (center)  circle (33mm) node (omegalabel) at ($(center)-(37mm,0)$) {$\Omega$};
+\path [visible on=<3>,->,set,draw=black] ($(omegalabel)-(3cm,1cm)$) node[align=center] (pze) {przestrzeń\\zdarzeń\\elementarnych} (pze) -- (omegalabel);
+\draw [set,color2,visible on=<4>] ($(d1.west)-(2mm,0)$) |- ($(d1.east)+(2mm,7mm)$) |- ($(d5.east)+(2mm,7mm)$) |- ($(d4.west)-(2mm,7mm)$) -- cycle node (A) at ($.5*(d1.south)+.5*(d4.north)$) {$A$};
+\draw [set,color3,visible on=<4>] ($(d2.west)-(2mm,0)$) |- ($(d2.east)+(3mm,7mm)$) |- ($(d5.west)-(2mm,8mm)$)  -- cycle node (B) at (center) {$B$};
+\begin{scope}[visible on=<4>]
+\path ($(A)-(5cm,-1cm)$) node[align=center] (zdarzenia) {zdarzenia};
+\draw[->,set,draw=black] (zdarzenia) -- (A);
+\draw[->,set,draw=black] (zdarzenia) -- (B);
+\end{scope}
 \end{tikzpicture}
-%TODO: podpisać: przestrzeń zdarzeń elementarnych, zdarzenie elementarne, zdarzenie
 \end{center}
+\end{frame}
 
+\begin{frame}{Działania na zdarzeniach}
+\begin{itemize}
+\item $A$ pociąga $B$
+\item $X$ jest sumą zdarzeń $A$ i $B$
+\item $X$ jest iloczynem zdarzeń $A$ i $B$
+\item $A$ i $B$ są rozłączne
+\item $A$ i $A'$ są przeciwstawne
+\item $A_1$, $A_2$, \ldots tworzą podział przestrzeni $\Omega$
+\end{itemize}
+%
+%\begin{center}
+%\begin{tikzpicture}
+%\draw [set,color1] (0,0)  circle (25mm);
+%\begin{scope}[visible on=<2>]
+%\draw [set,color2] (0,0) circle (15mm);
+%\draw [set,color3] (0,7mm) circle (5mm);
+%\end{scope}
+%\end{tikzpicture}
+%\end{center}
+\end{frame}
+
+\begin{frame}{Przestrzeń probabilistyczna}
+\[(\Omega,\mathcal{A},P)\]
+
+\begin{center}
+\begin{tikzpicture}
+\node[diagram] (root) {$\left|\Omega\right|$}
+	child { node [diagram,below left=of root.center] {$\mathcal{A}=2^\Omega$} edge from parent node[left] {$\leq\left|\mathbb{N}\right|$}}
+	child { node [diagram,below right=of root.center] {$\mathcal{A}\subset 2^\Omega$} edge from parent node[right] {$=\left|\mathbb{R}\right|$}};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}{Aksjomaty Kołmogorowa}
+\begin{minipage}{.6\textwidth}
+\begin{enumerate}
+\item \[P\colon \mathcal{A} \to \left[0;1\right]\]
+\item \[P(\Omega)=1\]
+\item dla dowolnego, najwyżej przeliczalnego ciągu rozłącznych zdarzeń $A_1, A_2, \ldots \in \mathcal{A}$: \[ P(A_1\cup A_2\cup \ldots)=P(A_1)+P(A_2)+\ldots\]
+\end{enumerate}
+\end{minipage}
+\begin{minipage}{.39\textwidth}
+\centering \includegraphics[width=\textwidth,clip,bb=0 0 10cm 11cm]{kolmogorov.jpg} \\
+Andriej Kołmogorow (1903--1987) \\
+{\tiny \url{http://owpdb.mfo.de/detail?photo_id=7493} CC BY-SA 2.0 DE}
+\end{minipage}
 \end{frame}
 \end{document}
 

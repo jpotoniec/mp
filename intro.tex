@@ -3,6 +3,13 @@
 \usepackage[utf8]{inputenc}
 \usetheme{Boadilla}
 
+%http://tex.stackexchange.com/questions/42619/x-mark-to-match-checkmark
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+\newcommand{\R}{\ensuremath\mathbb{R}}
+
 \usepackage{tikz}
 \usetikzlibrary{shapes.misc} 
 \usetikzlibrary{positioning,intersections} 
@@ -369,6 +376,69 @@ Andriej Kołmogorow (1903--1987) \\
 	{\tiny \url{http://commons.wikimedia.org/wiki/File:Electronic_dart_board.jpg} by Krzysztof Szymański CC BY 2.5}
 }
 \end{center}
+\end{frame}
+\begin{frame}{Porównywanie wielomianów}
+\only<4>{Ile najwyżej pierwiastków rzeczywistych mają poniższe wielomiany?}
+\only<1,2,4,6-8>{
+\begin{align*}
+% maxima: A(x):=(x-2)^2*(x-4)^2*(x-6)^2*(x-8)^2;
+A(x)= & \left(x-8\right)^2\,\left(x-6\right)^2\,\left(x-4\right)^2\,\left(x-2\right)^2 \\
+% maxima: B(x):=A(x)-(x-1)*(x-2)*(x-4)*(x-6)*(x-8);
+B(x)= & x^8-40\,x^7+680\,x^6-6401\,x^5+36389\,x^4-\\& 127520\,x^3+268060\,x^2-307984\,x+147840\\
+% maxima: tex(expand(A(x)));
+C(x)= & x^8-40\,x^7+680\,x^6-6400\,x^5+36368\,x^4- \\& 127360\,x^3+267520\,x^2-307200\,x+147456\\
+% %maxima: A(x):=(x-1)*(x-2)*(x-3)*(x-4)*(x-5)*(x-6)*(x-7)*(x-8)*(x-9)*(x-10);
+% A(x) = &\left(x-10\right)\,\left(x-9\right)\,\left(x-8\right)\,\left(x-7\right)\,\left(x-6\right)\,\left(x-5\right)\,\\
+%  & \left(x-4\right)\,\left(x-3\right)\,\left(x-2\right)\,\left(x-1\right) \\
+% %maxima: tex(expand(A(x)));
+% B(x) = & x^{10}-55\,x^9+1320\,x^8-18150\,x^7+157773\,x^6-902055\,x^5+\\
+%  & 3416930\,x^4-8409500\,x^3+12753576\,x^2-10628640\,x+3628800 \\
+% %maxima: C(x):=(x-2)*(x-2)*(x-4)*(x-4)*(x-6)*(x-6)*(x-7)*(x-8)*(x-9)*(x-10);
+% C(x) = & x^{10}-58\,x^9+1479\,x^8-21798\,x^7+205224\,x^6-1286736\,x^5+\\
+%  & 5427056\,x^4-15159392\,x^3+26753280\,x^2-26850816\,x+11612160
+\only<4>{A(x)-B(x) = & \ldots \\ A(x)-C(x) = & \ldots}
+\end{align*}
+\only<2>{
+	Jaki jest koszt deterministycznego sprawdzenia czy $A(x)\equiv B(x)$ (w~ogólności oba wielomiany stopnia $n$)?
+	%żeby rozwinąć A(x) potrzeba O(n^2) mnożeń
+}
+\only<6-8>
+{
+	\begin{align*}
+		\only<6->{A(2) &=0 	& B(2) &=0 		& C(2) &=0}\\
+		\only<7->{A(1) &=11025 	& B(1) &=11025 		& C(1) &=11025}\\
+		\only<8->{A(3) &=225 	& B(3) &=\alert{255} 	& C(3) &=225}\\
+	\end{align*}
+}
+}
+\only<3>{
+	\begin{block}{Zasadnicze twierdzenie algebry}
+		Każdy wielomian stopnia $n>0$ można przedstawić jako iloczyn \[a(x-x_1)(x-x_2)\ldots(x-x_n)\] dla pewnych $a,x_1,\ldots,x_n\in\mathbb{C}$
+	\end{block}
+}
+\only<5>{
+
+	\begin{center}
+	\begin{tikzpicture}
+	\node[diagram] (root) {$A(x)\equiv B(x)$}
+		child { node [diagram,below left=of root.center,align=left] {$A(x)-B(x)\equiv 0$\\$\forall x\in\R\colon A(x)-B(x)=0$} edge from parent node[left] {\cmark}}
+		child { node [diagram,below right=of root.center,align=left] {$A(x)-B(x)\not\equiv 0$\\$\exists x\in\R\colon A(x)-B(x)\neq 0$} edge from parent node[right] {\xmark}};
+	\end{tikzpicture}
+	\end{center}
+}
+\only<9-11>{
+	\[ \Omega = \{ \omega_1, \omega_2, \ldots, \omega_{799}, \omega_{800} \} \]
+	\only<10->{\[X = \{\omega_{x_1}, \omega_{x_2}, \ldots, \omega_{x_k} \} \qquad A(x_i)-B(x_i)=0 \qquad k\leq 8 \] \\}
+	\only<11->{\[P(X)=\frac{\left|X\right|}{\left|\Omega\right|}\leq\frac{1}{100}\]}
+}
+\only<12>{
+	Koszt obliczeniowy dla wielomianu \ldots
+	\begin{itemize}
+		\item \ldots w postaci iloczynu, np. $(x-1)(x-2)$? %mnożenie O(1) czyli O(k)
+		\item \ldots w postaci kanonicznej, np. $x^2-3x+2$? %szybkie potęgowanie O(log(k)), czyli O(klog(k))
+		%ostatecznie O(klog k)<O(k^2)
+	\end{itemize}
+}
 \end{frame}
 \end{document}
 

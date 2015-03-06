@@ -199,12 +199,12 @@ Uczestnictwo w ćwiczeniach, zajęciach laboratoryjnych, projektowych, seminaria
 \end{frame}
 %TODO: load balancing?
 \begin{frame}{Kryptografia}
-\centering\includegraphics[width=.9\textwidth]{dsa.png}
+\centering\includegraphics[width=.85\textwidth]{dsa.png}
 
 {\tiny \url{http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf} (fragmenty)}
 \end{frame}
 \begin{frame}{Rozpoznawanie mowy}
-\centering\includegraphics[width=.8\textwidth,bb=0 50mm 220mm 220mm,clip]{siri.jpg}
+\centering\includegraphics[width=.8\textwidth,viewport=0 50mm 220mm 220mm,clip]{siri.jpg}
 
 {\tiny ,,Siri will you marry me LOL'' by J.S. Zolliker CC-BY-SA 2.0 \url{https://flic.kr/p/aCUCY5}}
 \end{frame}
@@ -251,7 +251,7 @@ every token/.style={top color=black, bottom color=black, semitransparent}]
 %\foreach \label in {d1label, d2label, d3label, d4label, d5label, d6label}
 %	\draw[->,set,draw=black] (elementarne.east) -- (\label);
 %\end{scope}
-\draw [set,color1,visible on=<3->] (center)  circle (33mm) node (omegalabel) at ($(center)-(37mm,0)$) {$\Omega$};
+\draw [set,color1,visible on=<3->] (center)  circle [x radius=40mm, y radius=31mm] node (omegalabel) at ($(center)-(43mm,0)$) {$\Omega$};
 %\path [visible on=<3>,->,set,draw=black] ($(omegalabel)-(3cm,1cm)$) node[align=center] (pze) {przestrzeń\\zdarzeń\\elementarnych} (pze) -- (omegalabel);
 \draw [set,color2,visible on=<4>] ($(d1.west)-(2mm,0)$) |- ($(d1.east)+(2mm,7mm)$) |- ($(d5.east)+(2mm,7mm)$) |- ($(d4.west)-(2mm,7mm)$) -- cycle node (A) at ($.5*(d1.south)+.5*(d4.north)$) {$A$};
 \draw [set,color3,visible on=<4>] ($(d2.west)-(2mm,0)$) |- ($(d2.east)+(3mm,7mm)$) |- ($(d5.west)-(2mm,8mm)$)  -- cycle node (B) at (center) {$B$};
@@ -324,7 +324,7 @@ every token/.style={top color=black, bottom color=black, semitransparent}]
 \end{enumerate}
 \end{minipage}
 \begin{minipage}{.39\textwidth}
-\centering \includegraphics[width=\textwidth,clip,bb=0 0 10cm 11cm]{kolmogorov.jpg} \\
+\centering \includegraphics[width=\textwidth,clip,viewport=0 0 10cm 11cm]{kolmogorov.jpg} \\
 Andriej Kołmogorow (1903--1987) \\
 {\tiny \url{http://owpdb.mfo.de/detail?photo_id=7493} CC BY-SA 2.0 DE}
 \end{minipage}

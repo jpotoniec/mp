@@ -3,6 +3,24 @@
 \usepackage[utf8]{inputenc}
 \usetheme{Boadilla}
 
+\usepackage{calc}
+
+\makeatletter
+\newlength{\koza@len}
+\newcommand{\koza}[2][]
+{
+\setlength{\koza@len}{1357pt*\real{#2}}
+
+\begingroup\edef\x
+{
+	\endgroup
+	\noexpand\includegraphics[clip, #1, viewport=0 0 {\the\koza@len} 1108pt]{monty_hall/koza.jpg}
+	\noexpand\includegraphics[clip, #1, viewport={\the\koza@len} 0 1357pt 1108pt]{monty_hall/ferrari.jpg}
+}
+\x
+}
+\makeatother
+
 %http://tex.stackexchange.com/questions/42619/x-mark-to-match-checkmark
 \usepackage{pifont}
 \newcommand{\cmark}{\ding{51}}
@@ -440,5 +458,55 @@ C(x)= & x^8-40\,x^7+680\,x^6-6400\,x^5+36368\,x^4- \\& 127360\,x^3+267520\,x^2-3
 	\end{itemize}
 }
 \end{frame}
+\begin{frame}{Prawdopodobieństwo warunkowe}
+\url{http://www.yudkowsky.net/rational/bayes}
+\end{frame}
+\begin{frame}{Monty Hall}
+\begin{minipage}{.30\textwidth}
+\includegraphics<1>[width=\textwidth]{monty_hall/koza.jpg}
+\includegraphics<2->[width=\textwidth]{monty_hall/stage-406306_1280.jpg}
+\only<3->{\koza[scale=.08]{0.66}}
+\end{minipage}
+\hfill
+\begin{minipage}{.30\textwidth}
+\includegraphics<1>[width=\textwidth]{monty_hall/ferrari.jpg}
+\includegraphics<2-3>[width=\textwidth]{monty_hall/stage-406306_1280.jpg}
+\only<4->{\colorbox{green}{\includegraphics[width=\textwidth]{monty_hall/stage-406306_1280.jpg}}}
+\only<3->{\koza[scale=.08]{0.66}}
+\end{minipage}
+\hfill
+\begin{minipage}{.30\textwidth}
+\includegraphics<1>[width=\textwidth]{monty_hall/koza.jpg}
+\includegraphics<2-4>[width=\textwidth]{monty_hall/stage-406306_1280.jpg}
+\includegraphics<5>[width=\textwidth]{monty_hall/curtain-152112_1280.png}
+\only<3-4>{\koza[scale=.08]{0.66}}
+\only<5->{\koza[scale=.08]{1}}
+\end{minipage}
+\end{frame}
+\begin{frame}{Credits}
+\begin{itemize}
+\item koza: Photographer: Armin Kübelbeck, CC-BY-SA, Wikimedia Commons, \url{http://creativecommons.org/licenses/by-sa/3.0/}, \url{http://commons.wikimedia.org/wiki/File:Hausziege_04.jpg}
+\item ferrari: domena publiczna \url{http://commons.wikimedia.org/wiki/File:Ferrari_California_Paris_August_2010.jpg}
+\item kurtyny: domena publiczna \url{http://pixabay.com/pl/etap-kurtyna-teatr-czerwony-406306/} \url{http://pixabay.com/pl/kurtyna-etap-teatr-filmy-kino-152112/}
+\end{itemize}
+\end{frame}
+
+% \newlength{\koza}
+% \setlength{\koza}{1357pt*\real{.8}}
+% 
+% \begingroup\edef\x
+% {
+% 	\endgroup
+% 	\noexpand\includegraphics[clip, scale=.1, viewport=0 0 {\the\koza} 1108pt]{monty_hall/koza.jpg}
+% 	%\noexpand\includegraphics[clip, scale=.1, viewport={\the\ferrari} 0 3676pt 1108pt]{monty_hall/ferrari.jpg}
+% 	\noexpand\includegraphics[clip, scale=.1, viewport={\the\koza} 0 1357pt 1108pt]{monty_hall/ferrari.jpg}
+% }
+% \x
+%\def\x{\includegraphics[scale=.1,clip,viewport=0 0 }\expandafter\x\the\koza 1108]{monty_hall/koza.jpg}}
+%\setlength{\kozain}{\koza*\ratio{1}{72}}
+%\begin{tikzpicture}
+%\node (koza) {\x};
+%%\node (ferrari) [xshift=\koza]  {\includegraphics[scale=.1,clip,viewport=\ferrari 0 3676 1108]{monty_hall/ferrari.jpg}};
+%\end{tikzpicture}
 \end{document}
 

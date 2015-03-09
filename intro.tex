@@ -5,6 +5,8 @@
 
 \usepackage{calc}
 
+\newcommand{\set}[1]{\ensuremath\mathbf{#1}}
+
 \makeatletter
 \newlength{\koza@len}
 \newcommand{\koza}[2][]
@@ -23,10 +25,12 @@
 
 %http://tex.stackexchange.com/questions/42619/x-mark-to-match-checkmark
 \usepackage{pifont}
-\newcommand{\cmark}{\ding{51}}
-\newcommand{\xmark}{\ding{55}}
+\newcommand{\cmark}{\text{\ding{51}}}
+\newcommand{\xmark}{\text{\ding{55}}}
 
 \newcommand{\R}{\ensuremath\mathbb{R}}
+
+\usepackage{xcolor}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes.misc} 
@@ -35,16 +39,16 @@
 \usetikzlibrary{calc,intersections,through,backgrounds}
  \usetikzlibrary{calc,decorations.pathmorphing,patterns}
 
-\colorlet{Color1}{black}
-\colorlet{Color2}{green!50!black!50}
-\colorlet{Color3}{blue!50!black!50}
-\colorlet{Color4}{red!50!black!50}
+\colorlet{color1}{black}
+\colorlet{color2}{green!50!black!50}
+\colorlet{color3}{blue!50!black!50}
+\colorlet{color4}{red!50!black!50}
 \tikzset{
 	decoration={random steps,segment length=2.5mm,amplitude=0.3mm},
-	color1/.style={color=Color1},
-	color2/.style={color=Color2},
-	color3/.style={color=Color3},
-	color4/.style={color=Color4},
+	color1/.style={color=color1},
+	color2/.style={color=color2},
+	color3/.style={color=color3},
+	color4/.style={color=color4},
 	set/.style={very thick, decorate},
 	diagram/.style={rectangle, rounded corners=1.5mm, very thick, draw=red!80, top color=red!5, bottom color=red!40},
 }
@@ -458,28 +462,187 @@ C(x)= & x^8-40\,x^7+680\,x^6-6400\,x^5+36368\,x^4- \\& 127360\,x^3+267520\,x^2-3
 	\end{itemize}
 }
 \end{frame}
-\begin{frame}{Prawdopodobieństwo warunkowe}
-\url{http://www.yudkowsky.net/rational/bayes}
-\end{frame}
 \begin{frame}{Badanie raka}
+\newcommand{\eR}{\ensuremath\textcolor{color2}{R}}
+\newcommand{\enR}{\ensuremath\textcolor{color3}{R'}}
+\newcommand{\eM}{\ensuremath\textcolor{color4}{M}}
+\only<1-7>{
 \begin{block}{}
 Grupa kobiet w wieku 40 lat bierze udział w przesiewowej mammografi, znane są następujące fakty:
-\only<1-4>{
 \begin{itemize}
-\item $\only<3->{P(R)=}1\%$ ma raka \only<2->{($R$)}
-\item $\only<3->{P(M|R)=}80\%$ kobiet mających raka \only<2->{($R$)} otrzymuje pozytywny wyniki mammografi \only<2->{($M$)}
-\item $\only<3->{P(M|R')=}9{,}6\%$ kobiet niemajacych raka \only<2->{($R'$)} otrzymuje pozytywny wynik mammografii \only<2->{($M$)}
+\item $\only<3->{P(\eR)=}1\%$ ma raka \only<2>{($\eR$)}
+\item $\only<3->{P(\eM|\eR)=}80\%$ kobiet chorych na raka \only<2>{($\eR$) }otrzymuje pozytywny wyniki mammografi \only<2>{($\eM$)}
+\item $\only<3->{P(\eM|\enR)=}9{,}6\%$ kobiet zdrowych \only<2>{($\enR$) }otrzymuje pozytywny wynik mammografii \only<2>{($\eM$)}
 \end{itemize}
-Pewna kobieta otrzymała pozytywny wyniki mammografi. Jakie jest prawdopodobieństwo, że ma raka \only<4->{$P(R|M)$}?
-}
+Pewna kobieta otrzymała pozytywny wyniki mammografi. Jakie jest prawdopodobieństwo\only<4->{ $P(\eR|\eM)$}, że ma raka?
 \end{block}
+}
 \begin{tikzpicture}[x=0.1cm,y=.5cm]
-\draw (0,0) rectangle (1,1);
+\only<5->
+{
 \fill [color2] (0,0) rectangle (1,1);
-\draw (1,0) rectangle (100, 1);
 \fill [color3] (1,0) rectangle (100, 1);
+\draw (0,0) rectangle (100,1);
+\node at (50,1.5) {$100\%$};
+\node [color2] at ($(2.5,-0.5)$) {$1\%$};
+\node [color3] at ($(1,-0.5)+.5*(99,0)$) {$99\%$};
+}
+\only<6->
+{
+\draw [dashed] (0,0) -- (0,-2);
+\draw [dashed] (1,0) -- (45,-2);
+\fill [color4] (0,-2) rectangle ++($(0,-1)+.8*(45,0)$);
+\draw [color2] (0,-2) rectangle ++(45,-1);
+\node [color2] at ($(0,-1.5)+.5*(45,0)$) {$100\%$};
+\node [color4] at ($(0,-3.5)+.5*.8*(45,0)$) {$80\%$};
+}
+\only<7->
+{
+\draw [dashed] (1,0) -- (55,-2);
+\draw [dashed] (100,0) -- (100,-2);
+\fill [color4] (55,-2) rectangle ++($(0,-1)+.096*(45,0)$);
+\draw [color3] (55,-2) rectangle ++(45,-1);
+\node [color3] at ($(55,-1.5)+.5*(45,0)$) {$100\%$};
+\node [color4] at ($(55,-3.5)+.7*.096*(45,0)$) {$9{,}6\%$};
+}
 \end{tikzpicture}
+\only<1>{\footnotesize Źródło: \url{http://www.yudkowsky.net/rational/bayes}}
+\let\eR\undefined
+\let\enR\undefined
+\let\eM\undefined
 \end{frame}
+\begin{frame}{Prawdopodobieństwo warunkowe}
+\[ P(A|B)=\frac{P(A\cap B)}{P(B)} \qquad P(B)>0 \]
+\only<2>
+{
+\begin{block}{Twierdzenie o prawdopodobieństwie warunkowym}
+Prawdopodobieństwo warunkowe spełnia aksjomaty Kołmogorowa
+\end{block}
+}
+\only<3>
+{
+	\begin{block}{Twierdzenie}
+	\begin{align*}
+		P(A_1 \cap A_2)= & P(A_2|A_1)P(A_1) \\
+		P(A_1 \cap A_2 \cap A_3)=& P(A_3|A_1\cap A_2)P(A_2|A_1)P(A_1) \\
+		P(A_1 \cap A_2 \cap A_3\cap A_4)=& P(A_4|A_1\cap A_2\cap A_3) P(A_3|A_1\cap A_2)P(A_2|A_1)P(A_1) \\
+		\ldots
+	\end{align*}
+	\end{block}
+}
+\only<4-5>
+{
+\begin{block}{\only<4>{Twierdzenie o prawdopodobieństwie całkowitym (zupełnym)}\only<5>{Twierdzenie Bayesa}}
+Niech:
+\begin{itemize}
+\item $A_1, A_2, \ldots \in \mathcal{A}$
+\item $\forall i\neq j\colon A_i\not\equiv A_j$
+\item $A_1\cup A_2\cup \ldots \equiv \Omega$
+\item $\forall i\colon P(A_i)>0$
+\end{itemize}
+wtedy:
+\[
+\only<4>{P(B)=P(B|A_1)P(A_1)+P(B|A_2)P(A_2)+\ldots}
+\only<5>{P(A_i|B)=\frac{P(B|A_i)P(A_i)}{P(B|A_1)P(A_1)+P(B|A_2)P(A_2)+\ldots}}
+\]
+\end{block}
+}
+\end{frame}
+\begin{frame}{Niezależność pary zdarzeń}
+\[ P(A|B)=P(A) \iff P(A\cap B)=P(A)P(B) \]
+\only<2>
+{
+\begin{block}{Twierdzenie}
+Dla dowolnych zdarzeń $A$ i $B$ nad przestrzenią $\Omega$:
+\begin{enumerate}
+\item $A$ i $\Omega$ są niezależne
+\item $A$ i $\emptyset$ są niezależne
+\item $\Omega$ i $\emptyset$ są niezależne
+\item jeżeli $A$ i $B$ są niezależne, to $A$ i $B'$ także są niezależne
+\end{enumerate}
+\end{block}
+}
+\end{frame}
+\begin{frame}{Niezależność większej liczby zdarzeń}
+Zdarzenia ze zbioru co najwyżej przeliczalnego $\set{A}=\{A_1, A_2, \ldots\}$ są (wzajemnie) niezależne wtedy, i tylko wtedy gdy dla dowolnego, skończonego $\set{B}\subseteq \set{A}$ zachodzi:
+\[ \prod_{A_i\in \set{B}} P(A_i)=P\left(\bigcap_{A_i\in \set{B}}A_i\right)\]
+\only<2>
+{
+	\begin{block}{Przypadki szczególne}
+	\begin{itemize}
+	\item niezależność parami
+	\item niezależność trójkami
+	\item \ldots
+	\end{itemize}
+	\end{block}
+}
+\only<3>
+{
+	\begin{block}{Twierdzenie}
+	Dla niezależnych zdarzeń $A, B, C$ zachodzi:
+	\begin{enumerate}
+	\item $A\cup B$ i $C$ są niezależne
+	\item jeżeli $P(C)>0$, to $P(A\cap B|C)=P(A|C)P(B|C)$
+	\end{enumerate}
+	\end{block}
+}
+\end{frame}
+\begin{frame}{Filtr antyspamowy}
+\only<1,5>
+{
+\begin{block}{List 1}
+Szanowny Panie,\\
+uprzejmie proszę o przepisanie oceny.\\
+Student
+\end{block}
+\[ P(\cmark | \text{szanowny, panie, student, uprzejmie, prosić, przepisać, ocena})=1 \]
+}
+\only<2,6>
+{
+\begin{block}{List 2}
+Szanowny Panie,\\
+proszę wystawić oceny!!\\
+Profesor Ważny
+\end{block}
+\[ P(\cmark | \text{szanowny, panie, profesor, prosić, wystawić, ocena})=1 \]
+}
+\only<3,7>
+{
+\begin{block}{List 3}
+Szanowny Panie,\\
+proszę przyjechać na konferencję o mydle i powidle.\\
+Profesor Pidżąg
+\end{block}
+\[ P(\xmark | \text{sz., p., profesor, prosić, przyjechać, konferencja, mydło, powidło})=1 \]
+}
+\only<4,8>
+{
+	\begin{block}{List 4}
+	Szanowny Panie,\\
+	uprzejmie proszę przyjechać na konferencję o wystawianiu ocen.\\
+	Profesor
+	\end{block}
+	\begin{align*}
+	P(\cmark |& \text{sz., p., profesor, uprzejmie, prosić, przyjechać,}\\&\text{konferencja, wystawić, ocena})=?\\
+	P(\xmark |& \text{sz., p., profesor, uprzejmie, prosić, przyjechać,}\\&\text{konferencja, wystawić, ocena})=?
+	\end{align*}
+}
+\only<5->
+{
+\begin{tabular}{lrr|lrr}
+wyraz & \cmark & \xmark & wyraz & \cmark & \xmark \\
+\hline
+szanowny & \only<5>{1}\only<6->{2} & \only<7->{1}	& profesor &  \only<6->{1}& \only<7->{1} \\
+panie & \only<5>{1}\only<6->{2} & \only<7->{1}	& wystawić &  \only<6->{1}& \\
+student & \only<5->{1} &		& \\
+uprzejmie & \only<5->{1} & 	& przyjechać & & \only<7->{1}\\
+prosić & \only<5>{1}\only<6->{2} & \only<7->{1}	& konferencja & & \only<7->{1}\\
+przepisać & \only<5->{1} & 	& mydło & & \only<7->{1} \\
+ocena & \only<5>{1}\only<6->{2}& 	& powidło & & \only<7->{1}\\
+\end{tabular}
+}
+\end{frame}
+\end{document}
 \begin{frame}{Monty Hall}
 \begin{minipage}{.30\textwidth}
 \includegraphics<1>[width=\textwidth]{monty_hall/koza.jpg}
@@ -527,5 +690,4 @@ Pewna kobieta otrzymała pozytywny wyniki mammografi. Jakie jest prawdopodobień
 %\node (koza) {\x};
 %%\node (ferrari) [xshift=\koza]  {\includegraphics[scale=.1,clip,viewport=\ferrari 0 3676 1108]{monty_hall/ferrari.jpg}};
 %\end{tikzpicture}
-\end{document}
 

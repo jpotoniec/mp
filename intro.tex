@@ -3,6 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usetheme{Boadilla}
 
+\graphicspath{{bayes/}}
+
 \usepackage{calc}
 
 \newcommand{\set}[1]{\ensuremath\mathbf{#1}}
@@ -587,44 +589,87 @@ Zdarzenia ze zbioru co najwyżej przeliczalnego $\set{A}=\{A_1, A_2, \ldots\}$ s
 	\end{block}
 }
 \end{frame}
+\part{Jak działa filtr antyspamowy, czyli dzień z~życia nauczyciela akademickiego}
+\frame{\partpage}
 \begin{frame}{Filtr antyspamowy}
 \only<1,7>
 {
+	\begin{minipage}{.50\textwidth}
 \begin{block}{List 1}
 Proszę przepisać ocenę.\\
 Student Wytrwały
 \end{block}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\includegraphics[width=\textwidth]{bayes/Sleeping_students.jpg}\\
+{\tiny \url{http://commons.wikimedia.org/wiki/File:Sleeping_students.jpg} domena publiczna}
+\end{minipage}
 \[ P(\cmark | \text{prosić, przepisać, ocena, student})=1 \]
 }
 \only<2,8>
 {
+	\begin{minipage}{.50\textwidth}
 \begin{block}{List 2}
 Proszę wystawić oceny.\\
 Profesor Ważny
 \end{block}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\includegraphics[width=\textwidth]{bayes/scientist-28748_1280.png}\\
+{\tiny \url{http://pixabay.com/p-28748/} domena publiczna}
+\end{minipage}
 \[ P(\cmark | \text{prosić, wystawić, ocena, profesor})=1 \]
 }
 \only<3,9>
 {
+	\begin{minipage}{.50\textwidth}
 \begin{block}{List 3}
 Proszę o ocenę 3.\\
 Student Panda
 \end{block}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\includegraphics[width=\textwidth]{bayes/Panda_Cub_from_Wolong,_Sichuan,_China.JPG}\\
+{\tiny \url{http://commons.wikimedia.org/wiki/File:Panda_Cub_from_Wolong,_Sichuan,_China.JPG} domena publiczna}
+\end{minipage}
+
 \[ P(\xmark | \text{proszę, ocena, student})=1 \]
 }
 \only<4,10>
 {
+	\begin{minipage}{.50\textwidth}
 \begin{block}{List 4}
 Proszę przepisać szafę
 \end{block}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\begin{centering}
+\includegraphics[height=.5\textheight]{bayes/Eichenschrank_Oberschwaben.jpg}\\
+\end{centering}
+{\tiny \url{http://commons.wikimedia.org/wiki/File:Eichenschrank_Oberschwaben.jpg} domena publiczna}
+\end{minipage}
 \[ P(\xmark | \text{proszę, przepisać, szafa})=1 \]
 }
 \only<5,11>
 {
+	\begin{minipage}{.50\textwidth}
 \begin{block}{List 5}
 Wystaw profesora.\\
 Student Tajniak
 \end{block}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\begin{centering}
+\def\svgwidth{\textwidth}
+\input{bayes/Spy_silhouette.pdf_tex}
+\end{centering}
+{\tiny \url{http://commons.wikimedia.org/wiki/File:Spy_silhouette.svg} CC BY-SA 3.0 by \emph{Itzhak Baum} aka \emph{Setreset}}
+\end{minipage}
 \[ P(\xmark | \text{wystawić, profesor, student})=1 \]
 }
 

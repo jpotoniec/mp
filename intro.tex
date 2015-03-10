@@ -271,12 +271,12 @@ Uczestnictwo w ćwiczeniach, zajęciach laboratoryjnych, projektowych, seminaria
 \begin{center}
 \begin{tikzpicture}[dice/.style={draw=black,thick,rectangle,minimum size=10mm,diagram},
 every token/.style={top color=black, bottom color=black, semitransparent}]
-\node (d1) [dice,tokens=1] 		{} node[visible on=<2->] (d1label) at (d1.south) {$\omega_1$};
-\node (d2) [dice,tokens=2,right=of d1]  {} node[visible on=<2->] (d2label) at (d2.south) {$\omega_2$};
-\node (d3) [dice,tokens=3,right=of d2]  {} node[visible on=<2->] (d3label) at (d3.south) {$\omega_3$};
-\node (d4) [dice,tokens=4,below=of d1]  {} node[visible on=<2->] (d4label) at (d4.north) {$\omega_4$};
-\node (d5) [dice,tokens=5,right=of d4]  {} node[visible on=<2->] (d5label) at (d5.north) {$\omega_5$};
-\node (d6) [dice,tokens=6,right=of d5]  {} node[visible on=<2->] (d6label) at (d6.north) {$\omega_6$};
+\node (d1) [dice,tokens=1] 		{} node[visible on=<2->] (d1label) at ($(d1.south)-(0,.15)$) {$\omega_1$};
+\node (d2) [dice,tokens=2,right=of d1]  {} node[visible on=<2->] (d2label) at ($(d2.south)-(0,.15)$) {$\omega_2$};
+\node (d3) [dice,tokens=3,right=of d2]  {} node[visible on=<2->] (d3label) at ($(d3.south)-(0,.15)$) {$\omega_3$};
+\node (d4) [dice,tokens=4,below=of d1]  {} node[visible on=<2->] (d4label) at ($(d4.north)+(0,.15)$) {$\omega_4$};
+\node (d5) [dice,tokens=5,right=of d4]  {} node[visible on=<2->] (d5label) at ($(d5.north)+(0,.15)$) {$\omega_5$};
+\node (d6) [dice,tokens=6,right=of d5]  {} node[visible on=<2->] (d6label) at ($(d6.north)+(0,.15)$) {$\omega_6$};
 \coordinate (center) at ($.5*(d2.south)+.5*(d5.north)$);
 %\begin{scope}[visible on=<2>]
 %\path ($(center)-(6cm,0)$) node[align=center] (elementarne) {zdarzenia\\elementarne};

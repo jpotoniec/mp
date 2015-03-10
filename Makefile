@@ -1,6 +1,6 @@
 all: intro.pdf
 
-intro.pdf: intro.tex
+intro.pdf: intro.tex beamercolorthemePUT.sty beamerthemePUT.sty
 	pdflatex intro.tex
 
 intro.pdf: bayes/Spy_silhouette.pdf

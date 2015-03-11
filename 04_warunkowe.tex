@@ -1,6 +1,6 @@
 \documentclass{mp}
 
-\graphicspath{{04_warunkowe/bayes/}}
+\graphicspath{{04_warunkowe/bayes/},{04_warunkowe/}}
 
 \makeatletter
 \newlength{\koza@len}
@@ -22,6 +22,8 @@
 \subtitle{Prawdopodobieństwo warunkowe}
 \begin{document}
 \frame{\titlepage}
+\part{Podstawy interpretacji wyników badań medycznych}
+\frame{\partpage}
 \begin{frame}{Badanie raka}
 \newcommand{\eR}{\ensuremath\textcolor{color2}{R}}
 \newcommand{\enR}{\ensuremath\textcolor{color3}{R'}}
@@ -71,6 +73,8 @@ Pewna kobieta otrzymała pozytywny wyniki mammografi. Jakie jest prawdopodobień
 \let\enR\undefined
 \let\eM\undefined
 \end{frame}
+\part{Formalizm matematyczny}
+\frame{\partpage}
 \begin{frame}{Prawdopodobieństwo warunkowe}
 \[ P(A|B)=\frac{P(A\cap B)}{P(B)} \qquad P(B)>0 \]
 \only<2>
@@ -107,6 +111,13 @@ wtedy:
 \]
 \end{block}
 }
+\end{frame}
+\begin{frame}{Thomas Bayes}
+\begin{center}
+\includegraphics[height=.7\textheight]{Thomas_Bayes.png}\\
+Thomas Bayes (1702--1761)
+\end{center}
+{\tiny \url{http://commons.wikimedia.org/wiki/File:Thomas_Bayes.gif} domena publiczna}
 \end{frame}
 \begin{frame}{Niezależność pary zdarzeń}
 \[ P(A|B)=P(A) \iff P(A\cap B)=P(A)P(B) \]

@@ -8,7 +8,7 @@ $(PDF): mp.cls beamercolorthemePUT.sty beamerthemePUT.sty
 	pdflatex $^
 	pdflatex $^
 
-01_wstep.pdf: bayes/Spy_silhouette.pdf
+04_warunkowe.pdf: 04_warunkowe/bayes/Spy_silhouette.pdf
 
 #ftp://ftp.gust.org.pl/TeX/info/svg-inkscape/InkscapePDFLaTeX.pdf
 %.pdf: %.svg

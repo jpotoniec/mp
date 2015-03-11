@@ -1,0 +1,364 @@
+\documentclass{mp}
+
+\graphicspath{{bayes/}}
+
+\makeatletter
+\newlength{\koza@len}
+\newcommand{\koza}[2][]
+{
+\setlength{\koza@len}{1357pt*\real{#2}}
+
+\begingroup\edef\x
+{
+	\endgroup
+	\noexpand\includegraphics[clip, #1, viewport=0 0 {\the\koza@len} 1108pt]{monty_hall/koza.jpg}
+	\noexpand\includegraphics[clip, #1, viewport={\the\koza@len} 0 1357pt 1108pt]{monty_hall/ferrari.jpg}
+}
+\x
+}
+\makeatother
+
+
+\subtitle{Prawdopodobieństwo warunkowe}
+\begin{document}
+\frame{\titlepage}
+\begin{frame}{Badanie raka}
+\newcommand{\eR}{\ensuremath\textcolor{color2}{R}}
+\newcommand{\enR}{\ensuremath\textcolor{color3}{R'}}
+\newcommand{\eM}{\ensuremath\textcolor{color4}{M}}
+\only<1-7>{
+\begin{block}{}
+Grupa kobiet w wieku 40 lat bierze udział w przesiewowej mammografi, znane są następujące fakty:
+\begin{itemize}
+\item $\only<3->{P(\eR)=}1\%$ ma raka \only<2>{($\eR$)}
+\item $\only<3->{P(\eM|\eR)=}80\%$ kobiet chorych na raka \only<2>{($\eR$) }otrzymuje pozytywny wyniki mammografi \only<2>{($\eM$)}
+\item $\only<3->{P(\eM|\enR)=}9{,}6\%$ kobiet zdrowych \only<2>{($\enR$) }otrzymuje pozytywny wynik mammografii \only<2>{($\eM$)}
+\end{itemize}
+Pewna kobieta otrzymała pozytywny wyniki mammografi. Jakie jest prawdopodobieństwo\only<4->{ $P(\eR|\eM)$}, że ma raka?
+\end{block}
+}
+\begin{tikzpicture}[x=0.1cm,y=.5cm]
+\only<5->
+{
+\fill [color2] (0,0) rectangle (1,1);
+\fill [color3] (1,0) rectangle (100, 1);
+\draw (0,0) rectangle (100,1);
+\node at (50,1.5) {$100\%$};
+\node [color2] at ($(2.5,-0.5)$) {$1\%$};
+\node [color3] at ($(1,-0.5)+.5*(99,0)$) {$99\%$};
+}
+\only<6->
+{
+\draw [dashed] (0,0) -- (0,-2);
+\draw [dashed] (1,0) -- (45,-2);
+\fill [color4] (0,-2) rectangle ++($(0,-1)+.8*(45,0)$);
+\draw [color2] (0,-2) rectangle ++(45,-1);
+\node [color2] at ($(0,-1.5)+.5*(45,0)$) {$100\%$};
+\node [color4] at ($(0,-3.5)+.5*.8*(45,0)$) {$80\%$};
+}
+\only<7->
+{
+\draw [dashed] (1,0) -- (55,-2);
+\draw [dashed] (100,0) -- (100,-2);
+\fill [color4] (55,-2) rectangle ++($(0,-1)+.096*(45,0)$);
+\draw [color3] (55,-2) rectangle ++(45,-1);
+\node [color3] at ($(55,-1.5)+.5*(45,0)$) {$100\%$};
+\node [color4] at ($(55,-3.5)+.7*.096*(45,0)$) {$9{,}6\%$};
+}
+\end{tikzpicture}
+\only<1>{\footnotesize Źródło: \url{http://www.yudkowsky.net/rational/bayes}}
+\let\eR\undefined
+\let\enR\undefined
+\let\eM\undefined
+\end{frame}
+\begin{frame}{Prawdopodobieństwo warunkowe}
+\[ P(A|B)=\frac{P(A\cap B)}{P(B)} \qquad P(B)>0 \]
+\only<2>
+{
+\begin{block}{Twierdzenie o prawdopodobieństwie warunkowym}
+Prawdopodobieństwo warunkowe spełnia aksjomaty Kołmogorowa
+\end{block}
+}
+\only<3>
+{
+	\begin{block}{Twierdzenie}
+	\begin{align*}
+		P(A_1 \cap A_2)= & P(A_2|A_1)P(A_1) \\
+		P(A_1 \cap A_2 \cap A_3)=& P(A_3|A_1\cap A_2)P(A_2|A_1)P(A_1) \\
+		P(A_1 \cap A_2 \cap A_3\cap A_4)=& P(A_4|A_1\cap A_2\cap A_3) P(A_3|A_1\cap A_2)P(A_2|A_1)P(A_1) \\
+		\ldots
+	\end{align*}
+	\end{block}
+}
+\only<4-5>
+{
+\begin{block}{\only<4>{Twierdzenie o prawdopodobieństwie całkowitym (zupełnym)}\only<5>{Twierdzenie Bayesa}}
+Niech:
+\begin{itemize}
+\item $A_1, A_2, \ldots \in \mathcal{A}$
+\item $\forall i\neq j\colon A_i\not\equiv A_j$
+\item $A_1\cup A_2\cup \ldots \equiv \Omega$
+\item $\forall i\colon P(A_i)>0$
+\end{itemize}
+wtedy:
+\[
+\only<4>{P(B)=P(B|A_1)P(A_1)+P(B|A_2)P(A_2)+\ldots}
+\only<5>{P(A_i|B)=\frac{P(B|A_i)P(A_i)}{P(B|A_1)P(A_1)+P(B|A_2)P(A_2)+\ldots}}
+\]
+\end{block}
+}
+\end{frame}
+\begin{frame}{Niezależność pary zdarzeń}
+\[ P(A|B)=P(A) \iff P(A\cap B)=P(A)P(B) \]
+\only<2>
+{
+\begin{block}{Twierdzenie}
+Dla dowolnych zdarzeń $A$ i $B$ nad przestrzenią $\Omega$:
+\begin{enumerate}
+\item $A$ i $\Omega$ są niezależne
+\item $A$ i $\emptyset$ są niezależne
+\item $\Omega$ i $\emptyset$ są niezależne
+\item jeżeli $A$ i $B$ są niezależne, to $A$ i $B'$ także są niezależne
+\end{enumerate}
+\end{block}
+}
+\end{frame}
+\begin{frame}{Niezależność większej liczby zdarzeń}
+Zdarzenia ze zbioru co najwyżej przeliczalnego $\set{A}=\{A_1, A_2, \ldots\}$ są (wzajemnie) niezależne wtedy, i tylko wtedy gdy dla dowolnego, skończonego $\set{B}\subseteq \set{A}$ zachodzi:
+\[ \prod_{A_i\in \set{B}} P(A_i)=P\left(\bigcap_{A_i\in \set{B}}A_i\right)\]
+\only<2>
+{
+	\begin{block}{Przypadki szczególne}
+	\begin{itemize}
+	\item niezależność parami
+	\item niezależność trójkami
+	\item \ldots
+	\end{itemize}
+	\end{block}
+}
+\only<3>
+{
+	\begin{block}{Twierdzenie}
+	Dla niezależnych zdarzeń $A, B, C$ zachodzi:
+	\begin{enumerate}
+	\item $A\cup B$ i $C$ są niezależne
+	\item jeżeli $P(C)>0$, to $P(A\cap B|C)=P(A|C)P(B|C)$
+	\end{enumerate}
+	\end{block}
+}
+\end{frame}
+\part{Jak działa filtr antyspamowy, czyli dzień z~życia nauczyciela akademickiego}
+\frame{\partpage}
+\begin{frame}{Filtr antyspamowy}
+\only<1,7>
+{
+	\begin{minipage}{.50\textwidth}
+\begin{block}{List 1}
+Proszę przepisać ocenę.\\
+Student Wytrwały
+\end{block}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\includegraphics[width=\textwidth]{bayes/Sleeping_students.jpg}\\
+\end{minipage}
+\[ P(\cmark | \text{prosić, przepisać, ocena, student})=1 \]
+}
+\only<2,8>
+{
+	\begin{minipage}{.50\textwidth}
+\begin{block}{List 2}
+Proszę wystawić oceny.\\
+Profesor Ważny
+\end{block}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\includegraphics[width=\textwidth]{bayes/scientist-28748_1280.png}\\
+\end{minipage}
+\[ P(\cmark | \text{prosić, wystawić, ocena, profesor})=1 \]
+}
+\only<3,9>
+{
+	\begin{minipage}{.50\textwidth}
+\begin{block}{List 3}
+Proszę o ocenę 3.\\
+Student Panda
+\end{block}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\includegraphics[width=\textwidth]{bayes/Panda_Cub_from_Wolong,_Sichuan,_China.JPG}\\
+\end{minipage}
+
+\[ P(\xmark | \text{prosić, ocena, student})=1 \]
+}
+\only<4,10>
+{
+	\begin{minipage}{.50\textwidth}
+\begin{block}{List 4}
+Proszę przepisać szafę
+\end{block}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\begin{centering}
+\includegraphics[height=.4\textheight]{bayes/Eichenschrank_Oberschwaben.jpg}\\
+\end{centering}
+\end{minipage}
+\[ P(\xmark | \text{prosić, przepisać, szafa})=1 \]
+}
+\only<5,11>
+{
+	\begin{minipage}{.50\textwidth}
+\begin{block}{List 5}
+Wystaw profesora.\\
+Student Tajniak
+\end{block}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+\begin{centering}
+\def\svgwidth{.8\textwidth}
+\input{bayes/Spy_silhouette.pdf_tex}
+\end{centering}
+\end{minipage}
+\[ P(\xmark | \text{wystawić, profesor, student})=1 \]
+}
+
+\only<6,12,22>
+{
+	\begin{minipage}{.45\textwidth}
+	\begin{block}{List 6\only<22>{\cmark}}
+	Wystaw oceny!!!
+	\end{block}
+	\only<-21>
+	{
+	\begin{align*}
+	P(\cmark |& \text{wystawić, ocena})=?\\
+	P(\xmark |& \text{wystawić, ocena})=?
+	\end{align*}
+	}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{.45\textwidth}
+	\begin{block}{List 7\only<22>{\xmark}}
+	Wystaw studenta
+	\end{block}
+	\only<-21>
+	{
+	\begin{align*}
+	P(\cmark |& \text{wystawić, student})=?\\
+	P(\xmark |& \text{wystawić, student})=?
+	\end{align*}
+	}
+	\end{minipage}
+}
+\only<7-21>
+{
+\small
+\begin{tabular}{c|c|cccccccr}
+list & & prosić & przepisać & wystawić & ocena & student & profesor &szafa & \\
+\hline
+\only<-14>
+{
+\only<7-> {1 & \cmark & 1 & 1 & 0 & 1 & 1 & 0 & 0& }
+\only<8->  {\\2 & \cmark & 1 & 0 & 1 & 1 & 0 & 1 & 0& }
+\only<9->  {\\3 & \xmark & 1 & 0 & 0 & 1 & 1 & 0 & 0& }
+\only<10-> {\\4 & \xmark & 1 & 1 & 0 & 0 & 0 & 0 & 1& }
+\only<11-> {\\5 & \xmark & 0 & 0 & 1 & 0 & 1 & 1 & 0& }
+}
+\only<15-> {1, 2 & \cmark& 2 & 1 & 1 & 2 & 1 & 1 & 0&\\
+3, 4, 5& \xmark & 2 & 1 & 1 & 1 & 2 & 1 & 1&}
+\only<12-> {\\\hline
+	      6 & \only<-18>{?}\only<19->{\cmark} 	 & 0 & 0 & 1 & 1 & 0 & 0 & 0&
+	    \\7 & \only<-20>{?}\only<21->{\xmark}	 & 0 & 0 & 1 & 0 & 1 & 0 & 0& }
+\end{tabular}
+\only<13-15>
+{
+\begin{align*}
+P(\cmark |& \text{wystawić, ocena})=\frac{P(\cmark)P(\text{wystawić, ocena}|\cmark)}{P(\text{wystawić, ocena})}
+\only<14->{\\&\sim P(\cmark)P(\text{wystawić, ocena}|\cmark)
+\only<15->{\approx P(\cmark)P(\text{wystawić}|\cmark)P(\text{ocena}|\cmark)}
+} \\
+P(\xmark |& \text{wystawić, ocena})=\frac{P(\xmark)P(\text{wystawić, ocena}|\xmark)}{P(\text{wystawić, ocena})}
+\only<14->{\\&\sim P(\xmark)P(\text{wystawić, ocena}|\xmark)
+\only<15->{\approx P(\xmark)P(\text{wystawić}|\xmark)P(\text{ocena}|\xmark)}
+}
+\end{align*}
+}
+\only<16-19>
+{
+\begin{align*}
+P(\cmark)P(\text{wystawić}|\cmark)P(\text{ocena}|\cmark) = \frac{2}{5}\cdot\only<17->{\frac{1}{2}\cdot\frac{2}{2}=\only<18->{\frac{1}{5}} } \\
+P(\xmark)P(\text{wystawić}|\xmark)P(\text{ocena}|\xmark) = \frac{3}{5}\cdot\only<17->{\frac{1}{3}\cdot\frac{1}{3}=\only<18->{\frac{1}{15}} }
+\end{align*}
+}
+\only<20->
+{
+	\begin{align*}
+	P(\cmark)P(\text{wystawić}|\cmark)P(\text{student}|\cmark) = \ldots\only<21->{=\frac{1}{10}} \\
+	P(\xmark)P(\text{wystawić}|\xmark)P(\text{student}|\xmark) = \ldots\only<21->{=\frac{2}{15}}
+	\end{align*}
+}
+}
+\end{frame}
+\begin{frame}{Credits}
+Rysunki i zdjęcia pochodzą z następujących źródeł:
+\begin{description}
+\item[List 1]  \url{http://commons.wikimedia.org/wiki/File:Sleeping_students.jpg} domena publiczna
+\item[List 2] \url{http://pixabay.com/p-28748/} domena publiczna
+\item[List 3] \url{http://commons.wikimedia.org/wiki/File:Panda_Cub_from_Wolong,_Sichuan,_China.JPG} domena publiczna
+\item[List 4] \url{http://commons.wikimedia.org/wiki/File:Eichenschrank_Oberschwaben.jpg} domena publiczna
+\item[List 5] \url{http://commons.wikimedia.org/wiki/File:Spy_silhouette.svg} CC BY-SA 3.0 by \emph{Itzhak Baum} aka \emph{Setreset}
+\end{description}
+\end{frame}
+\end{document}
+\begin{frame}{Monty Hall}
+\begin{minipage}{.30\textwidth}
+\includegraphics<1>[width=\textwidth]{monty_hall/koza.jpg}
+\includegraphics<2->[width=\textwidth]{monty_hall/stage-406306_1280.jpg}
+\only<3->{\koza[scale=.08]{0.66}}
+\end{minipage}
+\hfill
+\begin{minipage}{.30\textwidth}
+\includegraphics<1>[width=\textwidth]{monty_hall/ferrari.jpg}
+\includegraphics<2-3>[width=\textwidth]{monty_hall/stage-406306_1280.jpg}
+\only<4->{\colorbox{green}{\includegraphics[width=\textwidth]{monty_hall/stage-406306_1280.jpg}}}
+\only<3->{\koza[scale=.08]{0.66}}
+\end{minipage}
+\hfill
+\begin{minipage}{.30\textwidth}
+\includegraphics<1>[width=\textwidth]{monty_hall/koza.jpg}
+\includegraphics<2-4>[width=\textwidth]{monty_hall/stage-406306_1280.jpg}
+\includegraphics<5>[width=\textwidth]{monty_hall/curtain-152112_1280.png}
+\only<3-4>{\koza[scale=.08]{0.66}}
+\only<5->{\koza[scale=.08]{1}}
+\end{minipage}
+\end{frame}
+\begin{frame}{Credits}
+\begin{itemize}
+\item koza: Photographer: Armin Kübelbeck, CC-BY-SA, Wikimedia Commons, \url{http://creativecommons.org/licenses/by-sa/3.0/}, \url{http://commons.wikimedia.org/wiki/File:Hausziege_04.jpg}
+\item ferrari: domena publiczna \url{http://commons.wikimedia.org/wiki/File:Ferrari_California_Paris_August_2010.jpg}
+\item kurtyny: domena publiczna \url{http://pixabay.com/pl/etap-kurtyna-teatr-czerwony-406306/} \url{http://pixabay.com/pl/kurtyna-etap-teatr-filmy-kino-152112/}
+\end{itemize}
+\end{frame}
+
+% \newlength{\koza}
+% \setlength{\koza}{1357pt*\real{.8}}
+% 
+% \begingroup\edef\x
+% {
+% 	\endgroup
+% 	\noexpand\includegraphics[clip, scale=.1, viewport=0 0 {\the\koza} 1108pt]{monty_hall/koza.jpg}
+% 	%\noexpand\includegraphics[clip, scale=.1, viewport={\the\ferrari} 0 3676pt 1108pt]{monty_hall/ferrari.jpg}
+% 	\noexpand\includegraphics[clip, scale=.1, viewport={\the\koza} 0 1357pt 1108pt]{monty_hall/ferrari.jpg}
+% }
+% \x
+%\def\x{\includegraphics[scale=.1,clip,viewport=0 0 }\expandafter\x\the\koza 1108]{monty_hall/koza.jpg}}
+%\setlength{\kozain}{\koza*\ratio{1}{72}}
+%\begin{tikzpicture}
+%\node (koza) {\x};
+%%\node (ferrari) [xshift=\koza]  {\includegraphics[scale=.1,clip,viewport=\ferrari 0 3676 1108]{monty_hall/ferrari.jpg}};
+%\end{tikzpicture}
+

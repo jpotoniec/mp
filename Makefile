@@ -1,7 +1,11 @@
-all: intro.pdf
+PDF=intro.pdf zastosowania.pdf aksjomatyka.pdf warunkowe.pdf
 
-intro.pdf: intro.tex beamercolorthemePUT.sty beamerthemePUT.sty
-	pdflatex intro.tex
+all: $(PDF)
+
+$(PDF): mp.cls beamercolorthemePUT.sty beamerthemePUT.sty
+
+%.pdf: %.tex
+	pdflatex $^
 
 intro.pdf: bayes/Spy_silhouette.pdf
 

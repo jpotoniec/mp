@@ -1,0 +1,94 @@
+\documentclass{mp}
+\subtitle{Zmienne losowe}
+\begin{document}
+\frame{\titlepage}
+\begin{frame}{Zmienna losowa}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\coordinate (A) at (0,0);
+\coordinate (A1) at ($(A)+(.5,.5)$);
+\coordinate (A2) at ($(A)+(-.5,.5)$);
+\coordinate (A3) at ($(A)+(.5,0)$);
+\coordinate (A4) at ($(A)+(-.5,0)$);
+\coordinate (A5) at ($(A)+(0,-.5)$);
+\coordinate (B) at (6,0);
+\coordinate (B1) at ($(B)+(.5,.5)$);
+\coordinate (B2) at ($(B)+(-.5,.5)$);
+\coordinate (B3) at ($(B)+(-.5,-.5)$);
+\coordinate (B4) at ($(B)$);
+\draw[set,color2] (A) circle [x radius=1.5cm,y radius=2cm];
+\foreach \p in {(A1),(A2),(A3),(A4),(A5)}
+	\fill[color2] \p circle (.05);
+\draw[set,color3] (B) circle [x radius=1.5cm,y radius=2cm];
+\foreach \p in {(B1),(B2),(B3),(B4)}
+	\fill[color3] \p circle (.05);
+	%(.5,.5) (2,1) (4,1) (6,0)
+\draw[->,alt={<1>{color=black}{color=gray!50!white}}] (A1) .. controls +(1.5,.5) and +(-2,1) .. (B4);
+\draw[->,alt={<1>{color=black}{color=gray!50!white}}] (A2) .. controls +(1.5,.5) and +(-2,1) .. (B2);
+\draw[->,alt={<1>{color=black}{color=gray!50!white}}] (A3) .. controls +(1.5,.5) and +(-2,0) .. (B3);
+\draw[->,alt={<1>{color=black}{color=gray!50!white}}] (A4) .. controls +(1.5,.5) and +(-2,1) .. (B4);
+\draw[->,alt={<1>{color=black}{color=gray!50!white}}] (A5) .. controls +(1.5,-.5) and +(1,-2) .. (B1);
+\node at ($(3,1.8)$) {\only<1>{$f(\cdot)$}\only<2>{$f[\cdot]$}\only<3>{$f^{-1}[\cdot]$}\only<4->{$X(\cdot)$}};
+\path[name path=p1,rotate=45] (A4) -- ++(3,0);
+\path[name path=p2,rotate=135] (B4) -- ++(3,0);
+\only<2>
+{
+	\draw[name path=a,color4] ($.5*(A1)+.5*(A2)$) circle [x radius=.7,y radius=0.3];
+	\draw[name path=b,rotate=-45,color4] ($.5*(B2)+.5*(B4)$) circle [x radius=.7,y radius=0.3];
+	\draw[name intersections={of=p1 and a,name=i},name intersections={of=p2 and b,name=j},->] (i-1) .. controls +(1.5,.5) and +(-2,1) .. (j-1);
+}
+\only<3>
+{
+	\draw[name path=a,rotate=30,color4] ($.33*(A1)+.33*(A2)+.33*(A4)$) circle [x radius=1,y radius=0.5];
+	\draw[name path=b,rotate=-45,color4] ($.5*(B2)+.5*(B4)$) circle [x radius=.7,y radius=0.3];
+	\draw[name intersections={of=p1 and a,name=i},name intersections={of=p2 and b,name=j},<-] (i-1) .. controls +(1.5,.5) and +(-2,1) .. (j-1);
+}
+\only<4->
+{
+	\node at ($(A)+(0,2.3cm)$) {$\Omega$};
+	\node at ($(B)+(0,2.3cm)$) {$\R$};
+}
+\end{tikzpicture}
+\only<5>
+{
+	\[ \forall x\in\R\colon X^{-1}[(-\infty,x)]\in\mathcal{A}\]	
+}
+\end{center}
+\end{frame}
+\begin{frame}{Przykłady}
+	\begin{center}
+		\begin{tikzpicture}[every token/.style={dice token}]
+			\only<1-2>
+			{
+				\node (d1) [dice,tokens=1] 		{};
+				\node (d2) [dice,tokens=2,right=of d1]  {};
+				\node (d3) [dice,tokens=3,right=of d2]  {};
+				\node (d4) [dice,tokens=4,right=of d3]  {};
+				\node (d5) [dice,tokens=5,right=of d4]  {};
+				\node (d6) [dice,tokens=6,right=of d5]  {};
+				\node (v1) [below=of d1] {\only<1>{1}\only<2>{100}};
+				\node (v2) [below=of d2] {\only<1>{2}\only<2>{200}};
+				\node (v3) [below=of d3] {\only<1>{3}\only<2>{300}};
+				\node (v4) [below=of d4] {\only<1>{4}\only<2>{400}};
+				\node (v5) [below=of d5] {\only<1>{5}\only<2>{500}};
+				\node (v6) [below=of d6] {\only<1>{6}\only<2>{600}};
+				\foreach \x/\y in {d1/v1,d2/v2,d3/v3,d4/v4,d5/v5,d6/v6}
+					\draw[->] (\x.south) -- (\y.north);
+			}
+			\only<3>
+			{
+				\node (d1) [dice,tokens=1] 		{};
+				\node (d3) [dice,tokens=3,right=of d1]  {};
+				\node (d5) [dice,tokens=5,right=of d3]  {};
+				\node (d2) [dice,tokens=2,right=of d5]  {};
+				\node (d4) [dice,tokens=4,right=of d2]  {};
+				\node (d6) [dice,tokens=6,right=of d4]  {};
+				\node (v0) [below=of d3] {0};
+				\node (v1) [below=of d4] {1};
+				\foreach \x/\y in {d1/v0,d2/v1,d3/v0,d4/v1,d5/v0,d6/v1}
+					\draw[->] (\x.south) -- (\y.north);
+			}
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+\end{document}

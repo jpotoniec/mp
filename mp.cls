@@ -26,6 +26,9 @@
 \usetikzlibrary{calc,intersections,through,backgrounds}
 \usetikzlibrary{calc,decorations.pathmorphing,patterns}
 
+%robi ladniejsze strzalki
+\usepgflibrary{arrows.meta}
+
 \colorlet{color1}{black}
 \colorlet{color2}{green!50!black!50}
 \colorlet{color3}{blue!50!black!50}
@@ -38,6 +41,8 @@
 	color4/.style={color=color4},
 	set/.style={very thick, decorate},
 	diagram/.style={rectangle, rounded corners=1.5mm, very thick, draw=cegla, top color=srebro!10!white, bottom color=srebro!10!white},
+	dice/.style={draw=black,thick,rectangle,minimum size=10mm,diagram,node distance=2mm},
+	dice token/.style={top color=black, bottom color=black, semitransparent}
 }
 %http://tex.stackexchange.com/questions/99119/beamer-problematic-use-of-visible-and-only-in-combination-with-tikz-to-draw-a
 \tikzset{
@@ -47,6 +52,11 @@
 			\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
 		},
 }
+
+%http://tex.stackexchange.com/questions/6135/how-to-make-beamer-overlays-with-tikz-node
+\tikzset{onslide/.code args={<#1>#2}{%
+  \only<#1>{\pgfkeysalso{#2}} 
+}}
 
 % % http://tex.stackexchange.com/questions/39296/simulating-hand-drawn-lines
 % \pgfdeclaredecoration{penciline}{initial}{

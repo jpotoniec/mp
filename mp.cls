@@ -18,6 +18,7 @@
 \newcommand{\xmark}{\textcolor{red!80!black!50}{\text{\ding{55}}}}
 
 \newcommand{\R}{\ensuremath\mathbb{R}}
+\newcommand{\N}{\ensuremath\mathbb{N}}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes.misc} 

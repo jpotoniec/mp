@@ -1,4 +1,6 @@
 \documentclass{mp}
+\renewcommand{\d}[1]{\ensuremath\,\text{d}#1}
+\graphicspath{{03_aksjomatyka/}}
 \subtitle{Zmienne losowe}
 \begin{document}
 \frame{\titlepage}
@@ -55,7 +57,7 @@
 }
 \end{center}
 \end{frame}
-\begin{frame}{Przykłady}
+\begin{frame}{Kostki}
 	\begin{center}
 		\begin{tikzpicture}[every token/.style={dice token}]
 			\only<1-2>
@@ -91,4 +93,132 @@
 		\end{tikzpicture}
 	\end{center}
 \end{frame}
+\begin{frame}{Typy zmiennych losowych}
+\begin{center}
+\begin{tikzpicture}
+\node (w) [diagram] {możliwe wartości}
+	child { node (det) [diagram,align=left,below left=of w.center] {typu skokowego\\dyskretne} edge from parent node[left] {$\leq\left|\mathbb{N}\right|$}}
+	child { node (los) [diagram,align=left,below right=of w.center] {typu ciągłego} edge from parent node[left] {$=\left|\R\right|$}};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+\begin{frame}{Rozkład prawdopodobieństwa zmiennej losowej}
+\begin{itemize}
+\item<+-> $ P_X(S)=P(\{\omega: X(\omega)\in S\}) $
+\item<+-> $ P(X<a)=P(\{\omega: X(\omega)<a\}) $
+\item<+-> $ P(X=a)=P(\{\omega: X(\omega)=a\}) $
+\item<+-> $ P(a<X\leq b)=P(\{\omega: a<X(\omega)\leq b\}) $
+\end{itemize}
+\end{frame}
+\newcommand{\dice}[1]{\tikz{\node [dice,tokens=#1] {};}}
+\begin{frame}{Kostki}
+\begin{tabular}{l|c|c|c|c|c|c}
+%& \tikz{\node [dice,tokens=1] {};} & \tikz{\node [dice,tokens=2] {};} & \tikz{\node [dice,tokens=3] {};} & \tikz{\node [dice,tokens=4] {};} & \tikz{\node [dice,tokens=5] {};} & \tikz{\node [dice,tokens=6] {};} \\\
+& \dice{1} & \dice{2} & \dice{3} & \dice{4} & \dice{5}  & \dice{6} \\
+\only<+->{$\Omega$ & $\omega_1$ & $\omega_2$ & $\omega_3$ & $\omega_4$ & $\omega_5$ & $\omega_6$ \\}
+\only<+->{
+$x$ & 1 & 2 & 3 & 4 & 5 & 6 \\}
+\only<+->{$P(X=x)$ & $\frac{1}{6}$ & $\frac{1}{6}$ & $\frac{1}{6}$ & $\frac{1}{6}$ & $\frac{1}{6}$ & $\frac{1}{6}$\\}
+\end{tabular}
+\end{frame}
+\begin{frame}{Dystrybuanta}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=5cm]
+\draw[->] (-3,0)--(9,0);
+\draw[->] (0,-.2)--(0,1.2);
+\foreach \x in {1,2,3,4,5,6}
+	\node at (\x,-.05) {$\x$};
+\foreach \y in {1,2,3,4,5,6}
+	\draw ($(-.1,0)+\y/6*(0,1)$) -- ++(.2,0);
+\foreach \y in {1,2,3,4,5}
+	\node at ($(-.3,0)+\y/6*(0,1)$) {$\frac{\y}{6}$};
+\node at ($(-.3,1)$) {$1$};
+\node at (9,-.05) {$x$};
+\only<2->
+{
+	\begin{scope}[color2]
+\foreach \x in {1,2,3,4,5,6}
+{
+	\fill ($(\x,0)+1/6*(0,1)$) circle (1pt);
+	\draw ($(\x,0)$) circle (1pt);
+	\draw ($(\x,0)+(-1,0)+(1pt,0)$) -- ++($(1,0)-(2pt,0)$);
+}
+\draw (-3,0)--(0,0) (6,0)--(9,0);
+\node at (-.9,1.2) {$P(X=x)$};
+\end{scope}
+}
+\only<3>
+{
+\begin{scope}[color4]
+\draw[thick] (-3,0) -- (1,0);
+\foreach \x in {1,2,3,4,5,6}
+{
+	\draw[thin] ($(\x,0)+\x/6*(0,1)$) circle (1pt);
+	\draw[thick] ($(\x,0)+\x/6*(0,1)+(1pt,0)$) -- ++(1,0);
+}
+\draw[thick] (7,1)--(9,1);
+\node at (0.5,1.2) {$F(x)$};
+\end{scope}
+}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+\begin{frame}{Dystrybuanta formalnie}
+\[ F_X(x)=P(X<x) \qquad x\in\R \]
+\begin{block}{Właściwości}
+\begin{enumerate}
+\item \[ F_X(-\infty)=0 \qquad F_X(\infty)=1 \]
+\item \[ \forall x\in\R\colon F_X(x)\geq0 \]
+\item \[ \forall x_1<x_2\in\R\colon F_X(x_1)\leq F_X(x_2) \]
+\item \[ \forall x_0\in\R\colon \lim_{x\to x_0^{-}} F_X(x)=F_X(x_0) \]
+\end{enumerate}
+\end{block}
+\end{frame}
+\begin{frame}{Zmienne losowe typu skokowego (dyskretne)}
+\begin{align*}
+ P(X\in & S)=1 \qquad S=\{x_1,x_2,\ldots\} \\
+\forall x_i\in & S\colon P(X=x_i)=p_i>0 \\
+\forall x\in &\R\colon F(x)=\sum_{x_i<x} p_i
+\end{align*}
+\end{frame}
+\begin{frame}{Funkcje zmiennej losowej}
+	\[ Y=f(X) \qquad P(Y=y)=P(f(X)=y)=P(X\in f^{-1}(y)) \]
+\end{frame}
+\begin{frame}{Wartość średnia}
+\[ m=\mu=E(X)=EX=\sum_{x_i} x_ip_i=x_1p_1+x_2p_2+\ldots \]
+\only<2-3>
+{
+	\begin{center}
+	\dice{1} \dice{2} \dice{3} \dice{4} \dice{5} \dice{6}\\
+	\only<3->{\dice{1} \dice{2} \dice{3} \dice{6} \dice{6} \dice{6}}
+	\end{center}
+}
+\begin{block}<4->{Twierdzenie}
+Dla dowolnej stałej $a\in\R$, dowolnych zmiennych losowych $X$ i $Y$ oraz zmiennej losowej $A$ takiej, że $P(A=a)=1$ zachodzi:
+\begin{itemize}
+\item<4-> $EA=a$
+\item<5-> $E(aX)=aEX$
+\item<6-> $E(X+a)=EX+a$
+\item<7-> $E(X+Y)=EX+EY$ %dowód wymaga zmiennych losowych dwuwymiarowych
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Momenty zmiennych losowych}
+\begin{block}{Moment rzędu $l$ względem punktu $c$}
+\[ E(X-c)^l=\begin{cases} \sum_{x_i} x_i^lp_i & $X$\text{ typu skokowego} \\
+\int_{-\infty}^\infty x^lf(x)\d{x} & $X$\text{ typu ciągłego}
+\end{cases} \]
+\end{block}
+\end{frame}
+
+\begin{frame}{Wariancja}
+\end{frame}
 \end{document}
+
+\begin{block}<2->{Typu ciągłego}
+\begin{align*}
+\forall u\in\R\colon & f(u)\geq 0 \\
+\forall x\in\R\colon & F(x)=\int_{-\infty}^x f(u)\d{u} \\
+\end{align*}
+\end{block}

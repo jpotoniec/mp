@@ -20,6 +20,11 @@
 \newcommand{\R}{\ensuremath\mathbb{R}}
 \newcommand{\N}{\ensuremath\mathbb{N}}
 
+%http://tex.stackexchange.com/questions/55000/continuing-enumerate-counters-in-beamer
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
 \usepackage{tikz}
 \usetikzlibrary{shapes.misc} 
 \usetikzlibrary{positioning,intersections} 

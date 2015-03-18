@@ -30,11 +30,10 @@ Dla dowolnej stałej $a\in\R$ i dowolnych zmiennych losowych $X$ i $Y$ zachodzi:
 }
 \end{block}
 \end{frame}
-%TODO: skupić się na odchyleniu standardowym, wariancję traktjąc jako artefakt
-\begin{frame}{Wariancja i odchylenie standardowe}
+\begin{frame}{Odchylenie standardowe i wariancja}
 \begin{align*}
- \sigma^2=D^2(X)&=D^2X=E(X-EX)^2 =\sum_{x_i}(x_i-\mu)^2p_i \\ & =
- (x_1-\mu)^2p_1+(x_2-\mu)^2p_2+\ldots
+ \sigma=D(X)&=DX=\sqrt{E(X-EX)^2} =\sqrt{\sum_{x_i}(x_i-\mu)^2p_i} \\ & =
+ \sqrt{(x_1-\mu)^2p_1+(x_2-\mu)^2p_2+\ldots}
 \end{align*}
 \only<2-3>
 {
@@ -46,22 +45,16 @@ Dla dowolnej stałej $a\in\R$ i dowolnych zmiennych losowych $X$ i $Y$ zachodzi:
 \begin{block}<4->{Twierdzenie}
 	Dla dowolnego $a\in\R$ i dowolnej zmiennej losowej $X$
 \begin{enumerate}
-\item<4-> $D^2(X+a)=D^2X $
+\item<4-> $D(X+a)=DX $
 \item<5-> $D^2X=E^2X-EX^2 $
 \item<6-> $(a\neq \mu)\to (D^2X<E(X-a)^2) $
-\item<7-> $P(A=a)=1 \to D^2A=0 $
-\item<8-> $D^2(aX)=a^2D^2(X) $
+\item<7-> $P(A=a)=1 \to DA=0 $
+\item<8-> $D(aX)=aD(X) $
 \end{enumerate}
 \end{block}
 \end{frame}
-\begin{frame}{Nierówność Markowa}
-%to sformułowanie z prawdopodobieństwem jest u A.A.Borowkow
-\[ P(X\geq 0)=1 \to \forall k>0\colon P(X\geq k\mu)\leq \frac{1}{k} \]
-\end{frame}
-\begin{frame}{Nierówność Czebyszewa}
-\[\sigma^2<\infty \to \forall k>0\colon P(\left|X-\mu\right|\geq k\sigma)\leq \frac{1}{k^2} \]
-\end{frame}
 
+%TODO: E(XY) i D^2(X\pm Y) niezależnych zm. losowych
 
 \begin{frame}{Translacja i skalowanie}
 \begin{center}
@@ -118,6 +111,16 @@ Dla dowolnej stałej $a\in\R$ i dowolnych zmiennych losowych $X$ i $Y$ zachodzi:
 \end{tikzpicture}
 \end{center}
 \end{frame}
+
+\begin{frame}{Nierówność Markowa}
+%to sformułowanie z prawdopodobieństwem jest u A.A.Borowkow
+\[ P(X\geq 0)=1 \to \forall k>0\colon P(X\geq k\mu)\leq \frac{1}{k} \]
+\end{frame}
+\begin{frame}{Nierówność Czebyszewa}
+\[\sigma^2<\infty \to \forall k>0\colon P(\left|X-\mu\right|\geq k\sigma)\leq \frac{1}{k^2} \]
+\end{frame}
+
+
 
 \end{document}
 

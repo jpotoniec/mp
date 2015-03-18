@@ -1,6 +1,5 @@
 \documentclass{mp}
-\renewcommand{\d}[1]{\ensuremath\,\text{d}#1}
-\graphicspath{{03_aksjomatyka/}}
+\graphicspath{{05_zmienne/}}
 \subtitle{Zmienne losowe}
 \begin{document}
 \frame{\titlepage}
@@ -110,7 +109,6 @@
 \item<+-> $ P(a<X\leq b)=P(\{\omega: a<X(\omega)\leq b\}) $
 \end{itemize}
 \end{frame}
-\newcommand{\dice}[1]{\tikz{\node [dice,tokens=#1] {};}}
 \begin{frame}{Kostki}
 \begin{tabular}{l|c|c|c|c|c|c}
 %& \tikz{\node [dice,tokens=1] {};} & \tikz{\node [dice,tokens=2] {};} & \tikz{\node [dice,tokens=3] {};} & \tikz{\node [dice,tokens=4] {};} & \tikz{\node [dice,tokens=5] {};} & \tikz{\node [dice,tokens=6] {};} \\\
@@ -181,147 +179,69 @@ $x$ & 1 & 2 & 3 & 4 & 5 & 6 \\}
 \only<3->{\forall x\in &\R\colon F(x)=\sum_{x_i<x} p_i}
 \end{align*}
 \end{frame}
+
 \begin{frame}{Funkcje zmiennej losowej}
 	\[ Y=f(X) \qquad P(Y=y)=P(f(X)=y)=P(X\in f^{-1}(y)) \]
 	\only<2>{\[Y=(X-3)^2 \qquad X=\tikz[baseline]{\node [dice] {?};}\]}
 	% P(Y=0)=P(X=3) P(Y=1)=P(X=4 | X=2) P(Y=4)=P(X=5 | X=1) P(Y=9)=P(X=6)
 \end{frame}
-\begin{frame}{Wartość średnia}
-\[ m=\mu=E(X)=EX=\sum_{x_i} x_ip_i=x_1p_1+x_2p_2+\ldots \]
-\only<2-3>
-{
-	\begin{center}
-	\dice{1} \dice{2} \dice{3} \dice{4} \dice{5} \dice{6}\\
-	\only<3->{\dice{1} \dice{2} \dice{3} \dice{6} \dice{6} \dice{6}}
-	\end{center}
+
+\begin{frame}{Wielowymiarowe zmienne losowe}
+\begin{gather*}
+(X_1, X_2, \ldots, X_n) \qquad X_i\colon \Omega\to\R \\
+\only<2->{F(x_1, x_2, \ldots, x_n)=P(X_1<x_1, X_2<x_2, \ldots, X_n<x_n)\\}
+\end{gather*}
+\only<3->{
+	\begin{align*}
+	Y=f(X_1,\ldots,X_n) \qquad P(Y=y)&=P(f(X,\ldots,X_n)=y)\\&=P((X_1,\ldots,X_n)\in f^{-1}(y))
+	\end{align*}
 }
-\begin{block}<4->{Twierdzenie}
-\only<4>
-{
-	\[\forall a\in\R\colon \left( P(A=a)=1 \to EA=a \right) \]
-}
-\only<5->
-{
-Dla dowolnej stałej $a\in\R$ i dowolnych zmiennych losowych $X$ i $Y$ zachodzi:
-\begin{enumerate}
-\item<5-> $E(aX)=aEX$
-\item<6-> $E(X+a)=EX+a$
-\item<7-> $E(X-\mu)=0$
-\item<8-> $E(X+Y)=EX+EY$ %dowód wymaga zmiennych losowych dwuwymiarowych
-\end{enumerate}
-}
-\end{block}
 \end{frame}
-%TODO: skupić się na odchyleniu standardowym, wariancję traktjąc jako artefakt
-\begin{frame}{Wariancja i odchylenie standardowe}
+\begin{frame}{Dwuwymiarowe zmienne losowe typu skokowego}
+%TODO: poprawić skład
+\begin{gather*}
+ P((X,Y)\in S)=1 \qquad S=\{(x_1,y_1),(x_1,y_2),\ldots,(x_m,y_n),\ldots\} \\
+\only<2->{\forall (x_i,y_j)\in S\colon P(X=x_i,Y=y_j)=p_{i,j}>0 \\}
+\only<3->{\forall x,y\in\R\colon F(x,y)=\sum_{\substack{x_i<x\\y_j<y}} p_{i,j}\\}
+\only<4->{p_{i,\cdot}=\sum_{y_j} p_{i,j} \qquad p_{\cdot,j}=\sum_{x_i} p_{i,j}}
+\end{gather*}
+\end{frame}
+
+\begin{frame}{Kostka}
+	\[ \Omega=\{\tikz[baseline]{\node [dice,minimum size=7mm] {?};}\} \]
+	\[ X=\text{parzyste} \qquad Y=\text{co najmniej 2} \qquad Z=X+Y \]
+	% p00=1/6 p10=0 p01=2/6 p11=1/2
+	% P(Z=0)=1/6+0+2/6=1/2 P(Z=1)=1/2
+\end{frame}
+
+\begin{frame}{Rozkłady warunkowe}
 \begin{align*}
- \sigma^2=D^2(X)&=D^2X=E(X-EX)^2 =\sum_{x_i}(x_i-\mu)^2p_i \\ & =
- (x_1-\mu)^2p_1+(x_2-\mu)^2p_2+\ldots
+P(\textcolor{color2}{A}|\textcolor{color3}{B})=&\frac{P(\textcolor{color2}{A}\cap \textcolor{color3}{B})}{P(\textcolor{color3}{B})} \\
+\only<2->{P(\textcolor{color2}{X<x}|\textcolor{color3}{Y=y})=&\frac{P(\textcolor{color2}{X<x},\textcolor{color3}{Y=y})}{P(\textcolor{color3}{Y=y})}}
 \end{align*}
-\only<2-3>
-{
-	\begin{center}
-	\dice{1} \dice{2} \dice{3} \dice{4} \dice{5} \dice{6}\\
-	\only<3->{\dice{1} \dice{2} \dice{3} \dice{6} \dice{6} \dice{6}}
-	\end{center}
-}
-\begin{block}<4->{Twierdzenie}
-	Dla dowolnego $a\in\R$ i dowolnej zmiennej losowej $X$
-\begin{enumerate}
-\item<4-> $D^2(X+a)=D^2X $
-\item<5-> $D^2X=E^2X-EX^2 $
-\item<6-> $(a\neq \mu)\to (D^2X<E(X-a)^2) $
-\item<7-> $P(A=a)=1 \to D^2A=0 $
-\item<8-> $D^2(aX)=a^2D^2(X) $
-\end{enumerate}
-\end{block}
-\end{frame}
-\begin{frame}{Nierówność Markowa}
-%to sformułowanie z prawdopodobieństwem jest u A.A.Borowkow
-\[ P(X\geq 0)=1 \to \forall k>0\colon P(X\geq k\mu)\leq \frac{1}{k} \]
-\end{frame}
-\begin{frame}{Nierówność Czebyszewa}
-\[\sigma^2<\infty \to \forall k>0\colon P(\left|X-\mu\right|\geq k\sigma)\leq \frac{1}{k^2} \]
 \end{frame}
 
-
-\begin{frame}{Translacja i skalowanie}
-\begin{center}
-\begin{tikzpicture}[x=.5cm,y=5cm]
-\draw [->] (-5,0)--(11,0) node at ++(0,-.05) {$k$};
-\draw [->] (0,-.1)--(0,.6) node at ++(-2,0) {$P(X=k)$};
-\draw (1,.02)-- ++(0,-.04) node at ++(0,-.04) {1};
-\foreach \x in {1,...,10}
-	\draw (\x,.02)--++(0,-.04);
-\draw (.15,.1)-- ++(-.3,0) node at ++(-.4,0) {$0{,}1$};
-\newcommand{\ex}{7.5}
-\newcommand{\dx}{1.37}
-\newcommand{\h}{.3}
-\newcommand{\dist}{5}
-\newcommand{\scale}{.5}
-\begin{scope}[onslide=<-3>{color4},onslide=<4->{color4!25}]
-	\only<2->{\draw (\ex,0)-- ++(0,\h);}
-	\only<3->{\fill[semitransparent] ($(\ex,0)-(\dx,0)$) rectangle ++($2*(\dx,0)+(0,\h)$);}
-\end{scope}
-\only<5>
-{
-\begin{scope}[color4]
-	\draw ($(\ex,0)-(\dist,0)$)-- ++(0,\h);
-	\fill[semitransparent] ($(\ex,0)-(\dx,0)-(\dist,0)$) rectangle ++($2*(\dx,0)+(0,\h)$);
-\end{scope}
-}
-\only<7>
-{
-\begin{scope}[color4]
-	\draw ($\scale*(\ex,0)$)-- ++(0,\h);
-	\fill[semitransparent] ($\scale*(\ex,0)-\scale*(\dx,0)$) rectangle ++($2*\scale*(\dx,0)+(0,\h)$);
-\end{scope}
-}
-%%rozkład bernouliego n=10 p=.6
-%\foreach \x/\p in {0/0.0001,1/0.0016,2/0.0106,3/0.0425,4/0.1115,5/0.2007,6/0.2508,7/0.2150,8/0.1209,9/0.0403,10/0.0060}
-%%rozkład bernouliego n=10 p=.55
-%\foreach \x/\p in {0/0.0003,1/0.0042,2/0.0229,3/0.0746,4/0.1596,5/0.2340,6/0.2384,7/0.1665,8/0.0763,9/0.0207,10/0.0025}
-%rozkład bernouliego n=10 p=.75
-\foreach \x/\p in {0/0.0000,1/0.0000,2/0.0004,3/0.0031,4/0.0162,5/0.0584,6/0.1460,7/0.2503,8/0.2816,9/0.1877,10/0.0563}
-{
-	\fill[alt=<-3>{color2}{color2!50}] (\x,\p) circle (1.5pt);
-	\fill[alt=<4-5>{color2}{invisible}] ($(\x,\p)-(\dist,0)$) circle (1.5pt);
-	\fill[alt=<6-7>{color2}{invisible}] ($\scale*(\x,0)+(0,\p)$) circle (1.5pt);
-%	\fill[color3] ($(\x,\p)-(3,0)$) circle (1pt);
-%	\fill[color4] ($.5*(\x,0)+(0,\p)$) circle (1pt);
-}
-% \draw[thick,color2] plot[domain=-10:-2] (\x,0) plot[domain=-2:2] (\x,{0.11*\x/4+3*0.11/2}) plot[domain=2:4] (\x,{4*0.11/\x}) plot[domain=4:9] (\x,0);
-% \draw[thick,color3] plot[domain=-2:2] ({2*\x},{(0.11*\x/4+3*0.11/2)/2}) plot[domain=2:4] ({2*\x},{(4*0.11/\x)/2});
-% \draw[dashed,color4] (1.02,0) -- ++(0,0.5);
-% \draw[dashed,color4] ($(1.02,0)-(1.58,0)$) -- ++(0,0.5);
-% \draw[dashed,color4] ($(1.02,0)+(1.58,0)$) -- ++(0,0.5);
-%\draw[thick,color3] plot[domain=-10:-2] (2*\x,0) plot[domain=-2:2] (2*\x,{0.11*\x/4+3*0.11/2}) plot[domain=2:4] (2*\x,{4*0.11/\x}) plot[domain=4:9] (2*\x,0);
-%\draw[thick,color4] (-10,0)--(-2,0) plot[domain=-2:2] ({2*\x},{0.11*\x/4+3*0.11/2}) plot[domain=2:4] ({2*\x},{4*0.11/\x}) (4,0)--(9,0);
-\end{tikzpicture}
-\end{center}
+\begin{frame}{Niezależne zmienne losowe}
+\begin{align*}
+\forall x,y\in\R\colon & P(X<x|Y<y)=P(X<x) \\
+\forall x,y\in\R\colon & P(X<x, Y<y)=P(X<x)P(Y<y) \\
+\forall (x_i,y_j)\in S\colon & p_{i,j}=p_{i,\cdot}p_{\cdot,j}\\
+\end{align*}
 \end{frame}
 
 \end{document}
-\begin{frame}{Niezależność zmiennych losowych}
-\begin{align*}
-P(X<x \land Y<y)&=P(\{\omega: X(\omega)<x\}\cap\{\omega: Y(\omega)<y\})\\
-&=P(\{\omega: X(\omega)<x\})\cdot P(\{\omega: Y(\omega)<y\})=P(X<x)P(Y<y) 
-\end{align*}
-\end{frame}
 
-\begin{frame}{Momenty zmiennych losowych}
-\begin{block}{Moment rzędu $l$ względem punktu $c$}
-\[ E(X-c)^l=\begin{cases} \sum_{x_i} x_i^lp_i & $X$\text{ typu skokowego} \\
-\int_{-\infty}^\infty x^lf(x)\d{x} & $X$\text{ typu ciągłego}
-\end{cases} \]
-\end{block}
-\end{frame}
-
-
+\renewcommand{\d}[1]{\ensuremath\,\text{d}#1}
 \begin{block}<2->{Typu ciągłego}
 \begin{align*}
 \forall u\in\R\colon & f(u)\geq 0 \\
 \forall x\in\R\colon & F(x)=\int_{-\infty}^x f(u)\d{u} \\
 \end{align*}
 \end{block}
+
+\begin{frame}{Unormowana zmienna losowa}
+\[ EX=0\qquad DX=1 \]
+\only<2>{\[ X=\frac{Y-EY}{DY} \]}
+\end{frame}
+
 

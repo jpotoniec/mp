@@ -64,6 +64,8 @@
   \only<#1>{\pgfkeysalso{#2}} 
 }}
 
+\newcommand{\dice}[1]{\tikz{\node [dice,tokens=#1] {};}}
+
 % % http://tex.stackexchange.com/questions/39296/simulating-hand-drawn-lines
 % \pgfdeclaredecoration{penciline}{initial}{
 % 	\state{initial}[width=+\pgfdecoratedinputsegmentremainingdistance,auto corner on length=1mm,]{

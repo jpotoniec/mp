@@ -1,0 +1,18 @@
+\documentclass{mp}
+%\graphicspath{{05_zmienne/}}
+\subtitle{Przykładowe rozkłady prawdopodobieństwa}
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Rozkład dwupunktowy}
+\begin{center}
+\begin{tikzpicture}
+\node[dice] (root) {?}
+	child { node [diagram,below left=of root.center] {$X=-2$} edge from parent node[left] {$\leq 2$}}
+	child { node [diagram,below right=of root.center] {$X=3$} edge from parent node[right] {$> 2$}};
+\end{tikzpicture}
+\end{center}
+\[ P(X=-2)=? \qquad P(X=3)=? \]
+\end{frame}
+
+\end{document}

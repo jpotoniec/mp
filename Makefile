@@ -1,4 +1,4 @@
-PDF=01_wstep.pdf 02_zastosowania.pdf 03_aksjomatyka.pdf 04_warunkowe.pdf 05_zmienne.pdf
+PDF=01_wstep.pdf 02_zastosowania.pdf 03_aksjomatyka.pdf 04_warunkowe.pdf 05_zmienne.pdf 06_momenty.pdf 07_rozklady.pdf
 
 all: $(PDF)
 

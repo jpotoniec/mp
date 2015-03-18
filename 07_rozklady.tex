@@ -1,10 +1,12 @@
 \documentclass{mp}
-%\graphicspath{{05_zmienne/}}
+\graphicspath{{07_rozklady/}}
 \subtitle{Przykładowe rozkłady prawdopodobieństwa}
 \begin{document}
 \frame{\titlepage}
 
 \begin{frame}{Rozkład dwupunktowy}
+\only<1-2>
+{
 \begin{center}
 \begin{tikzpicture}
 \node[dice] (root) {?}
@@ -12,7 +14,52 @@
 	child { node [diagram,below right=of root.center] {$X=3$} edge from parent node[right] {$> 2$}};
 \end{tikzpicture}
 \end{center}
-\[ P(X=-2)=? \qquad P(X=3)=? \]
+\[ P(X=-2)=\alert<1>{?} \qquad P(X=3)=\alert<1>{?} \]
+}
+\only<2->
+{
+\begin{block}{}
+\begin{align*}
+P(X=a)=p & \qquad P(X=b)=1-p \\
+EX=\alert<2>{?} & \qquad DX=\alert<2>{?}
+\end{align*}
+\end{block}
+\begin{block}<3->{Rozkład zero-jedynkowy}
+\begin{align*}
+P(X=1)=p & \qquad P(X=0)=1-p \\
+EX=\alert<3>{?} & \qquad DX=\alert<3>{?}
+\end{align*}
+\end{block}
+}
 \end{frame}
 
+\begin{frame}{Rozkład dwumianowy (Bernouliego)}
+\tabcolsep=0cm
+\begin{tabular}{cccccccccc}
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{tail.jpg} &
+\includegraphics[width=.1\textwidth]{tail.jpg} &
+\includegraphics[width=.1\textwidth]{tail.jpg} \\
+$X_1$ & $X_2$ & $X_3$ & $X_4$ & $X_5$ & $X_6$ & $X_7$ & $X_8$ & $X_9$ & $X_{10}$ \\
+\end{tabular}
+\begin{gather*}
+P(X_i=1)=p \qquad P(X_i=0)=1-p \\
+\only<2->{K=X_1+X_2+\ldots+X_n \\}
+\only<3->{
+	P(K=k)=\only<-5>{\alert<4->{?}}\only<6->{{n \choose k}}\only<5->{p^k(1-p)^{n-k}} \qquad k\in\{\only<3>{\alert{?}}\only<4->{0,1,\ldots,n}\}\\
+}
+\only<7->
+{
+	EK=\alert{?}\qquad DK=\alert{?}
+}
+\end{gather*}
+\vfill
+{\tiny Zdjecie monety z \url{http://commons.wikimedia.org/wiki/File:Powstanie_listopadowe_5_z\%C5\%82otych_1831.JPG} by \emph{Niki K} CC BY-SA 3.0}
+\end{frame}
 \end{document}

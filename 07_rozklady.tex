@@ -33,6 +33,24 @@ EX=\alert<3>{?} & \qquad DX=\alert<3>{?}
 }
 \end{frame}
 
+
+\begin{frame}{Rozkład geometryczny}
+\tabcolsep=0cm
+\begin{tabular}{cccccccccc}
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{tail.jpg} &
+\end{tabular}
+\begin{gather*}
+P(K=k)=(1-p)^{k-1}p \qquad k\in\{1,2,\ldots\} \\
+EK=\frac{1}{p} \qquad DK=\frac{\sqrt{1-p}}{p}
+\end{gather*}
+\end{frame}
 \begin{frame}{Rozkład dwumianowy (Bernouliego)}
 \tabcolsep=0cm
 \begin{tabular}{cccccccccc}
@@ -61,5 +79,15 @@ P(X_i=1)=p \qquad P(X_i=0)=1-p \\
 \end{gather*}
 \vfill
 {\tiny Zdjecie monety z \url{http://commons.wikimedia.org/wiki/File:Powstanie_listopadowe_5_z\%C5\%82otych_1831.JPG} by \emph{Niki K} CC BY-SA 3.0}
+\end{frame}
+\begin{frame}{Rozkład Poissona}
+\begin{tikzpicture}
+\foreach \x in {0,...,49}
+	\foreach \y in {0,...,4}
+	\node at ($\x*(.02\textwidth,0)+\y*(0,.02\textwidth)$) {\ifnum \y<3 \includegraphics[width=.019\textwidth]{head.jpg}\else \includegraphics[width=.019\textwidth]{tail.jpg}\fi};
+\end{tikzpicture}
+\begin{gather*}
+P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!} \qquad k\in\{0,1,\ldots\}\quad \lambda\in\mathbb{R}_{+}
+\end{gather*}
 \end{frame}
 \end{document}

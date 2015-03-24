@@ -6,16 +6,16 @@
 
 \usetheme{PUT}
 
-\usepackage{calc}
+\RequirePackage{calc}
 
-\usepackage{diagbox}
+\RequirePackage{diagbox}
 
 \newcommand{\set}[1]{\ensuremath\mathbf{#1}}
 
-\usepackage{xcolor}
+\RequirePackage{xcolor}
 
 %http://tex.stackexchange.com/questions/42619/x-mark-to-match-checkmark
-\usepackage{pifont}
+\RequirePackage{pifont}
 \newcommand{\cmark}{\textcolor{green!80!black!50}{\text{\ding{51}}}}
 \newcommand{\xmark}{\textcolor{red!80!black!50}{\text{\ding{55}}}}
 
@@ -27,7 +27,7 @@
 \newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
 \newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
 
-\usepackage{tikz}
+\RequirePackage{tikz}
 \usetikzlibrary{shapes.misc} 
 \usetikzlibrary{positioning,intersections} 
 \usetikzlibrary{petri} 

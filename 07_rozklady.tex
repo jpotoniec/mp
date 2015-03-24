@@ -87,7 +87,16 @@ P(X_i=1)=p \qquad P(X_i=0)=1-p \\
 	\node at ($\x*(.02\textwidth,0)+\y*(0,.02\textwidth)$) {\ifnum \y<3 \includegraphics[width=.019\textwidth]{head.jpg}\else \includegraphics[width=.019\textwidth]{tail.jpg}\fi};
 \end{tikzpicture}
 \begin{gather*}
-P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!} \qquad k\in\{0,1,\ldots\}\quad \lambda\in\mathbb{R}_{+}
+P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!} \qquad k\in\{0,1,\ldots\}\quad \lambda\in\mathbb{R}_{+} \\
+\only<2->{EX=\lambda\qquad DX=\sqrt{\lambda}}
 \end{gather*}
+\begin{block}<3->{Przybliżenie rozkładu Bernouliego rozkładem Poissona}
+\[ \left( n\geq 50 \land p\leq 0{,}1 \land np\leq 10 \right) \to B(n,p)\approx Pois(np) \]
+\end{block}
+\end{frame}
+\begin{frame}{Tablice rozkładu Poissona}
+\small
+\tabcolsep=0.1cm
+\input{poisson.tex}
 \end{frame}
 \end{document}

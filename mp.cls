@@ -8,6 +8,8 @@
 
 \usepackage{calc}
 
+\usepackage{diagbox}
+
 \newcommand{\set}[1]{\ensuremath\mathbf{#1}}
 
 \usepackage{xcolor}

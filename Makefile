@@ -17,4 +17,9 @@ $(PDF): mp.cls beamercolorthemePUT.sty beamerthemePUT.sty
 clean:
 	rm -f $(PDF) $(PDF:%.pdf=%.aux) $(PDF:%.pdf=%.log) $(PDF:%.pdf=%.nav) $(PDF:%.pdf=%.out) $(PDF:%.pdf=%.snm) $(PDF:%.pdf=%.toc)
 
+%.tex: %.m
+	octave -qf ./$^ > $@
+
+07_rozklady.pdf: poisson.tex
+
 .PHONY: all clean

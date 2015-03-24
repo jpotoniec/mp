@@ -33,6 +33,56 @@ EX=\alert<3>{?} & \qquad DX=\alert<3>{?}
 }
 \end{frame}
 
+\begin{frame}{Rozkład jednostajny dyskretny o parametrach $a$, $b$}
+\begin{center}
+\dice{1} \dice{2} \dice{3} \dice{4} \dice{5} \dice{6}
+\end{center}
+\begin{gather*}
+P(X=k)=\alt<2->{\frac{1}{b-a+1}}{\alert{?}}\qquad k\in \{a,a+1,\ldots,b-1,b\} \\
+\only<2->{EX=\frac{a+b}{2}\qquad DX=\sqrt{\frac{n^2-1}{12}}}
+\end{gather*}
+\end{frame}
+
+\begin{frame}{Oznaczanie pakietów sieciowych}
+\begin{center}
+\begin{tikzpicture}
+\node (src) {\includegraphics[width=.1\textwidth]{server.png}};
+\node (a) [right=of src] {\includegraphics[width=.1\textwidth]{router.png}};
+\node (b1) [above=of src] {\includegraphics[width=.1\textwidth]{router.png}};
+\node (b2) [right=of b1] {\includegraphics[width=.1\textwidth]{router.png}};
+\node (b3) [right=of b2] {\includegraphics[width=.1\textwidth]{router.png}};
+\node (b4) [right=of b3] {\includegraphics[width=.1\textwidth]{router.png}};
+\node (b5) [right=of b4] {\includegraphics[width=.1\textwidth]{router.png}};
+\node (x) [right=of a] {};
+\node (c) [right=of x] {\includegraphics[width=.1\textwidth]{router.png}};
+\node (dst) [right=of c] {\includegraphics[width=.1\textwidth]{server.png}};
+\draw (src.east)--(a.west) (c.east)--(dst.west) (a.east)--(c.west);
+\draw (a.north west)--(b1.south east) (b1.east)--(b2.west) (b2.east)--(b3.west) (b3.east)--(b4.west) (b4.east)--(b5.west) (b5.south west)--(c.north east);
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tabular}{|p{2cm}|p{2cm}|p{1cm}|p{2cm}|}
+\hline
+nadawca & odbiorca & licznik & \textcolor{color2}{router} \\
+\hline
+\multicolumn{4}{|c|}{dane} \\
+\multicolumn{4}{|c|}{\ldots} \\
+\hline
+\end{tabular}
+\end{center}
+\only<2->{\[P(\textcolor{color2}{R}=k)=\frac{1}{n}\]}
+\vfill
+\tiny{Rysunki z domeny publicznej, \url{http://pixbay.com}, użytkownik \emph{Nemo}}
+\end{frame}
+
+% $R$ id routera w nagłówku, $S_i$ prawdopodobieństwo, że $i$-ty router na ścieżce wpisze swój adres do nagłówka
+% \begin{gather*}
+% R=\arg\max_i S_i\\
+% P(S_i=1)=\frac{1}{i} \qquad P(S_i=0)=\frac{i-1}{i} \\
+% P(R=i)=P(S_i=1)\prod_{j\in\{i+1,\ldots,n\}} P(S_j=0)=\\
+% \frac{1}{i}\frac{\prod_{j\in\{i+1,\ldots,n\}}(j-1)}{\prod_{j\in\{i+1,\ldots,n\}}j}=\\
+% \frac{1}{i}\frac{\frac{(n-1)!}{(i-1)!}}{\frac{n!}{i!}}=\frac{1}{n}
+% \end{gather*}
 
 \begin{frame}{Rozkład geometryczny}
 \tabcolsep=0cm

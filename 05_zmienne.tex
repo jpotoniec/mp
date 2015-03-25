@@ -198,13 +198,12 @@ $x$ & 1 & 2 & 3 & 4 & 5 & 6 \\}
 }
 \end{frame}
 \begin{frame}{Dwuwymiarowe zmienne losowe typu skokowego}
-%TODO: poprawić skład
-\begin{gather*}
- P((X,Y)\in S)=1 \qquad S=\{(x_1,y_1),(x_1,y_2),\ldots,(x_m,y_n),\ldots\} \\
-\only<2->{\forall (x_i,y_j)\in S\colon P(X=x_i,Y=y_j)=p_{i,j}>0 \\}
-\only<3->{\forall x,y\in\R\colon F(x,y)=\sum_{\substack{x_i<x\\y_j<y}} p_{i,j}\\}
-\only<4->{p_{i,\cdot}=\sum_{y_j} p_{i,j} \qquad p_{\cdot,j}=\sum_{x_i} p_{i,j}}
-\end{gather*}
+\begin{align*}
+ P((X,Y)\in S)=1 \quad & \quad S=\{(x_1,y_1),(x_1,y_2),\ldots,(x_m,y_n),\ldots\} \\
+\only<2->{\forall (x_i,y_j)\in S\colon & P(X=x_i,Y=y_j)=p_{i,j}>0 \\}
+\only<3->{\forall x,y\in\R\colon & F(x,y)=\sum_{\substack{x_i<x\\y_j<y}} p_{i,j}\\}
+\only<4->{p_{i,\cdot}=\sum_{y_j} p_{i,j} \quad & \quad p_{\cdot,j}=\sum_{x_i} p_{i,j}}
+\end{align*}
 \end{frame}
 
 \begin{frame}{Kostka}

@@ -43,6 +43,26 @@ P(X=k)=\alt<2->{\frac{1}{b-a+1}}{\alert{?}}\qquad k\in \{a,a+1,\ldots,b-1,b\} \\
 \end{gather*}
 \end{frame}
 
+\begin{frame}{Rozkład geometryczny}
+\tabcolsep=0cm
+\begin{tabular}{cccccccccc}
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{head.jpg} &
+\includegraphics[width=.1\textwidth]{tail.jpg} &
+\end{tabular}
+\begin{gather*}
+P(K=k)=(1-p)^{k-1}p \qquad k\in\{1,2,\ldots\} \\
+EK=\frac{1}{p} \qquad DK=\frac{\sqrt{1-p}}{p}
+\end{gather*}
+\vfill
+{\tiny Zdjecie monety z \url{http://commons.wikimedia.org/wiki/File:Powstanie_listopadowe_5_z\%C5\%82otych_1831.JPG} by \emph{Niki K} CC BY-SA 3.0}
+\end{frame}
+
 \begin{frame}{Oznaczanie pakietów sieciowych}
 \begin{center}
 \begin{tikzpicture}
@@ -60,6 +80,8 @@ P(X=k)=\alt<2->{\frac{1}{b-a+1}}{\alert{?}}\qquad k\in \{a,a+1,\ldots,b-1,b\} \\
 \draw (a.north west)--(b1.south east) (b1.east)--(b2.west) (b2.east)--(b3.west) (b3.east)--(b4.west) (b4.east)--(b5.west) (b5.south west)--(c.north east);
 \end{tikzpicture}
 \end{center}
+\only<2>
+{
 \begin{center}
 \begin{tabular}{|p{2cm}|p{2cm}|p{1cm}|p{2cm}|}
 \hline
@@ -70,7 +92,16 @@ nadawca & odbiorca & licznik & \textcolor{color2}{router} \\
 \hline
 \end{tabular}
 \end{center}
+}
 \only<2->{\[P(\textcolor{color2}{R}=k)=\frac{1}{n}\]}
+\only<3->
+{
+	\begin{enumerate}
+		\item<3-> Ile średnio trzeba odebrać pakietów, żeby poznać całą ścieżkę?
+		\item<4-> Niech pakiet ma 64KB danych, a ścieżka 16 routerów. Ile średnio trzeba przesłać danych, żeby poznać całą ścieżkę?
+		\item<4-> Ile pakietów wystarczy odebrać, żeby znać całą ścieżkę z prawdopodobieństwem przynajmniej $0{,}9$?
+	\end{enumerate}
+}
 \vfill
 \tiny{Rysunki z domeny publicznej, \url{http://pixbay.com}, użytkownik \emph{Nemo}}
 \end{frame}
@@ -84,23 +115,21 @@ nadawca & odbiorca & licznik & \textcolor{color2}{router} \\
 % \frac{1}{i}\frac{\frac{(n-1)!}{(i-1)!}}{\frac{n!}{i!}}=\frac{1}{n}
 % \end{gather*}
 
-\begin{frame}{Rozkład geometryczny}
-\tabcolsep=0cm
-\begin{tabular}{cccccccccc}
-\includegraphics[width=.1\textwidth]{head.jpg} &
-\includegraphics[width=.1\textwidth]{head.jpg} &
-\includegraphics[width=.1\textwidth]{head.jpg} &
-\includegraphics[width=.1\textwidth]{head.jpg} &
-\includegraphics[width=.1\textwidth]{head.jpg} &
-\includegraphics[width=.1\textwidth]{head.jpg} &
-\includegraphics[width=.1\textwidth]{head.jpg} &
-\includegraphics[width=.1\textwidth]{tail.jpg} &
-\end{tabular}
-\begin{gather*}
-P(K=k)=(1-p)^{k-1}p \qquad k\in\{1,2,\ldots\} \\
-EK=\frac{1}{p} \qquad DK=\frac{\sqrt{1-p}}{p}
-\end{gather*}
-\end{frame}
+% $X_i$ liczba pakietów, które trzeba odebrać, żeby poznać $i$-ty router, znając $i-1$ routerów
+% X=\sum_{i=1}^n X_i
+% $X_i$ ma rozkład geometryczny o prawdopodobieństwie sukcesu $\frac{n-(i-1)}{n}$ (znaczy, że trafimy na jeden z pozostałych $n-(i-1)$ nieznanych routerów)
+% \[P(X_i=k)=\left(\frac{i-1}{n}\right)^{k-1}\frac{n-(i-1)}{n} \]
+% zatem $EX_i=\frac{n}{n-(i-1)}$
+% EX=\sum_{i=1}^n EX_i=n\sum_{i=1}^n\frac{1}{n-(i-1)}=n\sum_{i=1}^{n}\frac{1}{i}=n(\ln n+\gamma) \qquad \gamma\in\left(0;1\right)
+% $P(X\leq k)\geq 0{,}9$
+% z nier. Markowa: $P(X>k\mu)<\frac{1}{k}$, zatem $P(X\leq k\mu)>1-\frac{1}{k}$, $1-\frac{1}{k}=0{,}9$, zatem $k=10$
+% Czyli wystarczy odebrać 10n(\ln n+1) pakietów. Jeżeli pakiet ma 64KB danych, a ścieżka 16 routerów, wychodzi, że potrzebujemy przesłać ok. 38MB
+%
+% Nierówność Czebyszewa nie zastosuje się łatwo, bo wariancja jest dość upierdliwa w liczeniu:
+% Zmienne $X_i$ są niezależne, zatem $D^2X=\sum_{i=1}^n D^2X_i=\sum_{i=1}^n \frac{1-p_i}{p_i^2}=\sum_{i=1}^n \frac{\frac{i-1}{n}}{\left(\frac{\frac{n-(i-1)}}{n}\right)^2}=
+% \sum_{i=1}^n \frac{i-1}{n}\frac{n^2}{n^2+i^2+1-2i-2n(i-1)}=\sum_{i=1}^n \frac{n(i-1)}{
+
+
 \begin{frame}{Rozkład dwumianowy (Bernouliego)}
 \tabcolsep=0cm
 \begin{tabular}{cccccccccc}
@@ -127,8 +156,6 @@ P(X_i=1)=p \qquad P(X_i=0)=1-p \\
 	EK=\alert{?}\qquad DK=\alert{?}
 }
 \end{gather*}
-\vfill
-{\tiny Zdjecie monety z \url{http://commons.wikimedia.org/wiki/File:Powstanie_listopadowe_5_z\%C5\%82otych_1831.JPG} by \emph{Niki K} CC BY-SA 3.0}
 \end{frame}
 \begin{frame}{Rozkład Poissona}
 \begin{tikzpicture}
@@ -141,7 +168,7 @@ P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!} \qquad k\in\{0,1,\ldots\}\quad \lambda\i
 \only<2->{EX=\lambda\qquad DX=\sqrt{\lambda}}
 \end{gather*}
 \begin{block}<3->{Przybliżenie rozkładu Bernouliego rozkładem Poissona}
-\[ \left( n\geq 50 \land p\leq 0{,}1 \land np\leq 10 \right) \to B(n,p)\approx Pois(np) \]
+\[ \left( n\geq 50 \land p\leq 0{,}1 \land np\leq 10 \right) \to {n \choose k}p^k(1-p)^{n-k}\approx e^{-np}\frac{(np)^k}{k!} \]
 \end{block}
 \end{frame}
 \begin{frame}{Tablice rozkładu Poissona}

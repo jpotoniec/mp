@@ -4,14 +4,16 @@
 \begin{document}
 \frame{\titlepage}
 \begin{frame}{Zjawiska losowe i deterministyczne}
-%TODO: tu rysunki, np. czajnik i kostka
 \begin{center}
 \begin{tikzpicture}[every node/.style={diagram}]
 \node (w) {zbiór warunków}
-	child { node (det) [below left=of w.center] {zjawisko deterministyczne}}
-	child { node (los) [below right=of w.center] {zjawisko losowe}};
+	child { node (det) [below left=of w.center] {\includegraphics[width=.3\textwidth] {Kochendes_wasser02.jpg}}}
+	child { node (los) [below right=of w.center] {\includegraphics[width=.3\textwidth] {head.jpg}}};
 \end{tikzpicture}
 \end{center}
+\vfill
+{\tiny Zdjęcie wody z \url{http://commons.wikimedia.org/wiki/File:Kochendes_wasser02.jpg} by \emph{Markus Schweiss} CC-BY-SA-3.0\\
+Zdjecie monety z \url{http://commons.wikimedia.org/wiki/File:Powstanie_listopadowe_5_z\%C5\%82otych_1831.JPG} by \emph{Niki K} CC BY-SA 3.0}
 \end{frame}
 \begin{frame}{Zdarzenia}
 
@@ -45,17 +47,6 @@ every token/.style={top color=black, bottom color=black, semitransparent}]
 \end{frame}
 
 \begin{frame}{Działania na zdarzeniach}
-%\begin{itemize}
-%\item $A$ pociąga $B$
-%\item $X$ jest sumą zdarzeń $A$ i $B$
-%\item $X$ jest iloczynem zdarzeń $A$ i $B$
-%\item $A$ i $B$ są rozłączne
-%\item $A$ i $A'$ są przeciwstawne
-%\item $A_1$, $A_2$, \ldots tworzą podział przestrzeni $\Omega$
-%\end{itemize}
-%
-%TODO: wypełnienie do zbiorów
-%TODO: te patterny są paskudne!
 \begin{center}
 \begin{tikzpicture}
 \draw [name path=O,set,color1] (0,0)  circle (35mm);
@@ -64,9 +55,8 @@ every token/.style={top color=black, bottom color=black, semitransparent}]
 \draw [name path=B,set,color3,visible on=<2>] (-.75cm,-.75cm) rectangle (.75cm,.75cm) node at (0,0) {$B$};
 \begin{scope}[visible on=<3-4>]
 \draw [name path=B,set,color3] (-.75cm,-.75cm) rectangle (1.25cm,2cm) node at (0,1.5cm) {$B$};
-%TODO: ma jakis dziwny problem i czasem sie nie chce skompilowac
-%\fill [pattern=crosshatch,pattern color=Color4,visible on=<3>,name intersections={of=A and B}] (intersection-1) rectangle (intersection-2);
-%\fill [pattern=crosshatch,pattern color=Color4,visible on=<4>,name intersections={of=A and B,sort by=A}] (-2cm,-1cm) |- (intersection-1) |- (1.25cm,2cm) |- (intersection-2) |- (-2cm,-1cm) -- cycle;
+\fill [pattern=crosshatch,pattern color=color4,visible on=<3>,name intersections={of=A and B}] (intersection-1) rectangle (intersection-2);
+\fill [pattern=crosshatch,pattern color=color4,visible on=<4>,name intersections={of=A and B,sort by=A}] (-2cm,-1cm) |- (intersection-1) |- (1.25cm,2cm) |- (intersection-2) |- (-2cm,-1cm) -- cycle;
 \end{scope}
 \draw [name path=B,set,color3,visible on=<5>] (-.5cm,1.25cm) rectangle ++(2cm,1.75cm) node at (0.75cm,2.3cm) {$B$};
 \node [color3,visible on=<6>] at (0,2.5cm) {$A'$};

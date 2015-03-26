@@ -1,0 +1,53 @@
+\documentclass{mp}
+\graphicspath{{08_montecarlo}}
+\subtitle{Podstawowa metoda Monte Carlo}
+\newcounter{good}
+\begin{document}
+\frame{\titlepage}
+\begin{frame}{Przybliżanie wartości $\pi$}
+\setcounter{good}{0}
+\def\smgend{1}
+\only<3-4>{\def\smgend{40}}
+\only<5>{\def\smgend{400}}
+\only<6>{\def\smgend{4000}}
+\begin{center}
+\begin{tikzpicture}
+\node at (-1.2,-1.2) {\tiny $(-1,-1)$};
+\node at (1.2,1.2) {\tiny $(1,1)$};
+\draw (-1,-1) rectangle (1,1);
+\draw (0,0) circle (1);
+\foreach \n in {1,...,\smgend}
+{
+	\pgfmathparse{rand} \edef\x{\pgfmathresult}
+	\pgfmathparse{rand} \edef\y{\pgfmathresult}
+	\pgfmathparse{sqrt(pow(\x,2)+pow(\y,2))<=1};
+%	\typeout{x=\x\  y=\y\  dst=\pgfmathresult}
+	\ifnum\pgfmathresult=1
+		\fill[color2] (\x,\y) circle (0.7pt);
+		\addtocounter{good}{1}
+	\else
+		\fill[color4] (\x,\y) circle (0.7pt);
+	\fi
+}
+\end{tikzpicture}
+\begin{gather*}
+	Z=\begin{cases} 1 & \sqrt{X^2+Y^2}\leq 1 \\ 0 & \text{wpp} \end{cases} \\
+	\only<2->{P(Z=1)=\alert<2>{?} \\}
+	\only<3->{U=Z_1+Z_2+\ldots+Z_{\smgend} \qquad EU=\alert<3>{?}\\}
+	\only<4->{u=\thegood \qquad \only<5->{\pi\approx\pgfmathparse{\thegood/(\smgend/4.0)}\pgfmathresult}\\}
+\end{gather*}
+\end{center}
+\end{frame}
+\begin{frame}{Oszacowanie jakości przybliżenia}
+\begin{block}{Nierówność Chernoffa dla prób Bernouliego}
+\[\left( X=\sum_{i=1}^n X_i \land 0<\delta<1 \right) \to P(\left|X-\mu\right|\leq\delta\mu)\geq 1- 2e^{-\frac{1}{3}\mu\delta^2} \]
+\end{block}
+\only<2->{Ile należy wylosować punktów, żeby z prawdopodobieństwo otrzymania wyniku różnego o nie więcej niż $0{,}1$ od $\pi$ wynosiło przynajmniej $90\%$?}
+%\begin{gather*}
+%Q=\frac{4}{n}U \qquad EQ=\pi \\
+%P(\left|Q-\pi\right|\leq0{,}1)=P\left(\left|U-\frac{n\pi}{4}\right|\leq \frac{0{,}1}{\pi}\frac{n\pi}{4}\right)=\\
+%P(\left|U-\mu\right|\leq \frac{0{,}1}{\pi}\mu)\geq1-2\exp\left(-\frac{1}{3}\frac{n\pi}{4}\left(\frac{0{,}1}{\pi}\right)^2\right)=0{,}9\\
+%n=1200\pi\ln20\leq 11295
+%\end{gather*}
+\end{frame}
+\end{document}

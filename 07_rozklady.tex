@@ -104,31 +104,35 @@ nadawca & odbiorca & licznik & \textcolor{color2}{router} \\
 }
 \vfill
 \tiny{Rysunki z domeny publicznej, \url{http://pixbay.com}, użytkownik \emph{Nemo}}
+\note<2>
+{
+$R$ id routera w nagłówku, $S_i$ prawdopodobieństwo, że $i$-ty router na ścieżce wpisze swój adres do nagłówka
+\begin{gather*}
+R=\arg\max_i S_i\\
+P(S_i=1)=\frac{1}{i} \qquad P(S_i=0)=\frac{i-1}{i} \\
+P(R=i)=P(S_i=1)\prod_{j\in\{i+1,\ldots,n\}} P(S_j=0)=\\
+\frac{1}{i}\frac{\prod_{j\in\{i+1,\ldots,n\}}(j-1)}{\prod_{j\in\{i+1,\ldots,n\}}j}=\frac{1}{i}\frac{\frac{(n-1)!}{(i-1)!}}{\frac{n!}{i!}}=\frac{1}{n}
+\end{gather*}
+}
+\note<3>
+{
+$X_i$ liczba pakietów, które trzeba odebrać, żeby poznać $i$-ty router, znając $i-1$ routerów
+$X=\sum_{i=1}^n X_i$
+$X_i$ ma rozkład geometryczny o prawdopodobieństwie sukcesu $\frac{n-(i-1)}{n}$ (znaczy, że trafimy na jeden z pozostałych $n-(i-1)$ nieznanych routerów)
+\[P(X_i=k)=\left(\frac{i-1}{n}\right)^{k-1}\frac{n-(i-1)}{n} \]
+zatem $EX_i=\frac{n}{n-(i-1)}$
+\[EX=\sum_{i=1}^n EX_i=n\sum_{i=1}^n\frac{1}{n-(i-1)}=n\sum_{i=1}^{n}\frac{1}{i}=n(\ln n+\gamma) \qquad \gamma\in\left(0;1\right)\]
+}
+\note<4>
+{
+$P(X\leq k)\geq 0{,}9$
+z nier. Markowa: $P(X>k\mu)<\frac{1}{k}$, zatem $P(X\leq k\mu)>1-\frac{1}{k}$, $1-\frac{1}{k}=0{,}9$, zatem $k=10$
+Czyli wystarczy odebrać $10n(\ln n+1)$ pakietów. Jeżeli pakiet ma 64KB danych, a ścieżka 16 routerów, wychodzi, że potrzebujemy przesłać ok. 38MB
+
+Nierówność Czebyszewa nie zastosuje się łatwo, bo wariancja jest dość upierdliwa w liczeniu:
+Zmienne $X_i$ są niezależne, zatem $D^2X=\sum_{i=1}^n D^2X_i=\sum_{i=1}^n \frac{1-p_i}{p_i^2}=\ldots $
+}
 \end{frame}
-
-% $R$ id routera w nagłówku, $S_i$ prawdopodobieństwo, że $i$-ty router na ścieżce wpisze swój adres do nagłówka
-% \begin{gather*}
-% R=\arg\max_i S_i\\
-% P(S_i=1)=\frac{1}{i} \qquad P(S_i=0)=\frac{i-1}{i} \\
-% P(R=i)=P(S_i=1)\prod_{j\in\{i+1,\ldots,n\}} P(S_j=0)=\\
-% \frac{1}{i}\frac{\prod_{j\in\{i+1,\ldots,n\}}(j-1)}{\prod_{j\in\{i+1,\ldots,n\}}j}=\\
-% \frac{1}{i}\frac{\frac{(n-1)!}{(i-1)!}}{\frac{n!}{i!}}=\frac{1}{n}
-% \end{gather*}
-
-% $X_i$ liczba pakietów, które trzeba odebrać, żeby poznać $i$-ty router, znając $i-1$ routerów
-% X=\sum_{i=1}^n X_i
-% $X_i$ ma rozkład geometryczny o prawdopodobieństwie sukcesu $\frac{n-(i-1)}{n}$ (znaczy, że trafimy na jeden z pozostałych $n-(i-1)$ nieznanych routerów)
-% \[P(X_i=k)=\left(\frac{i-1}{n}\right)^{k-1}\frac{n-(i-1)}{n} \]
-% zatem $EX_i=\frac{n}{n-(i-1)}$
-% EX=\sum_{i=1}^n EX_i=n\sum_{i=1}^n\frac{1}{n-(i-1)}=n\sum_{i=1}^{n}\frac{1}{i}=n(\ln n+\gamma) \qquad \gamma\in\left(0;1\right)
-% $P(X\leq k)\geq 0{,}9$
-% z nier. Markowa: $P(X>k\mu)<\frac{1}{k}$, zatem $P(X\leq k\mu)>1-\frac{1}{k}$, $1-\frac{1}{k}=0{,}9$, zatem $k=10$
-% Czyli wystarczy odebrać 10n(\ln n+1) pakietów. Jeżeli pakiet ma 64KB danych, a ścieżka 16 routerów, wychodzi, że potrzebujemy przesłać ok. 38MB
-%
-% Nierówność Czebyszewa nie zastosuje się łatwo, bo wariancja jest dość upierdliwa w liczeniu:
-% Zmienne $X_i$ są niezależne, zatem $D^2X=\sum_{i=1}^n D^2X_i=\sum_{i=1}^n \frac{1-p_i}{p_i^2}=\sum_{i=1}^n \frac{\frac{i-1}{n}}{\left(\frac{\frac{n-(i-1)}}{n}\right)^2}=
-% \sum_{i=1}^n \frac{i-1}{n}\frac{n^2}{n^2+i^2+1-2i-2n(i-1)}=\sum_{i=1}^n \frac{n(i-1)}{
-
 
 \begin{frame}{Rozkład dwumianowy (Bernouliego)}
 \tabcolsep=0cm

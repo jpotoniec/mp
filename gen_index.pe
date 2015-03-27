@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+my $list="";
+
+for my $texfile(@ARGV)
+{
+	open F,"<$texfile";
+	$_=join("",<F>);
+	close F;
+	if(/\\subtitle\{(.*?)\}/)
+	{
+		my $subtitle=$1;
+		my $pdf=$texfile;
+		$pdf=~s/\.tex$/\.pdf/g;
+		my $notes=$texfile;
+		$notes=~s/\.tex$/_notes\.pdf/g;
+		$list.="<li><a href='$pdf'>$subtitle</a>";
+		$list.=" (<a href='$notes'>notatki</a>)" if(-f $notes);
+		$list.="</li>\n";
+	}
+}
+
+print <<EOF;
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<title>Lista wykładów z Metod Probabilistycznych</title>
+</head>
+<body>
+<ol>
+$list
+</ol>
+</body>
+</html>
+EOF

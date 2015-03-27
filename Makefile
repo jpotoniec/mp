@@ -1,9 +1,9 @@
-SLIDES=01_wstep.pdf 02_zastosowania.pdf 03_aksjomatyka.pdf 04_warunkowe.pdf 05_zmienne.pdf 06_momenty.pdf 07_rozklady.pdf 08_montecarlo.pdf
-NOTES_SRC=$(shell grep -l '\\note' $(SLIDES:%.pdf=%.tex))
+SRC=01_wstep.tex 02_zastosowania.tex 03_aksjomatyka.tex 04_warunkowe.tex 05_zmienne.tex 06_momenty.tex 07_rozklady.tex 08_montecarlo.tex
+NOTES_SRC=$(shell grep -l '\\note' $(SRC))
 
-PDF=$(SLIDES) $(NOTES_SRC:%.tex=%_notes.pdf)
+PDF=$(SRC:%.tex=%.pdf) $(NOTES_SRC:%.tex=%_notes.pdf)
 
-all: $(PDF) $(NOTES)
+all: $(PDF)
 
 $(PDF): mp.cls beamercolorthemePUT.sty beamerthemePUT.sty
 
@@ -29,4 +29,10 @@ clean:
 
 07_rozklady.pdf: poisson.tex
 
-.PHONY: all clean
+index.html: gen_index.pe Makefile
+	./gen_index.pe $(SRC) >$@
+
+publish: $(PDF) index.html
+	rsync $(PDF) index.html libra.cs.put.poznan.pl:public_html/mp/
+
+.PHONY: all clean publish

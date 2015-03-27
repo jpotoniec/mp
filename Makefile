@@ -1,12 +1,19 @@
-PDF=01_wstep.pdf 02_zastosowania.pdf 03_aksjomatyka.pdf 04_warunkowe.pdf 05_zmienne.pdf 06_momenty.pdf 07_rozklady.pdf 08_montecarlo.pdf
+SLIDES=01_wstep.pdf 02_zastosowania.pdf 03_aksjomatyka.pdf 04_warunkowe.pdf 05_zmienne.pdf 06_momenty.pdf 07_rozklady.pdf 08_montecarlo.pdf
+NOTES_SRC=$(shell grep -l '\\note' $(SLIDES:%.pdf=%.tex))
 
-all: $(PDF)
+PDF=$(SLIDES) $(NOTES_SRC:%.tex=%_notes.pdf)
+
+all: $(PDF) $(NOTES)
 
 $(PDF): mp.cls beamercolorthemePUT.sty beamerthemePUT.sty
 
 %.pdf: %.tex
 	pdflatex $^
 	pdflatex $^
+
+%_notes.pdf: %.tex
+	pdflatex -jobname $(<:%.tex=%_notes) "\\def\\notatki{}\\input{$<}"
+	pdflatex -jobname $(<:%.tex=%_notes) "\\def\\notatki{}\\input{$<}"
 
 04_warunkowe.pdf: 04_warunkowe/bayes/Spy_silhouette.pdf
 

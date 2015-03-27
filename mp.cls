@@ -1,5 +1,14 @@
 \ProvidesClass{mp}
+
 \LoadClass{beamer}
+
+\ifx\notatki\undefined
+\setbeameroption{hide notes}
+\else
+\usepackage{pgfpages}
+\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+\setbeameroption{show only notes}
+\fi
 
 \RequirePackage{polski}
 \RequirePackage[utf8]{inputenc}

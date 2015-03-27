@@ -39,15 +39,28 @@
 \end{center}
 \end{frame}
 \begin{frame}{Oszacowanie jakości przybliżenia}
-\begin{block}{Nierówność Chernoffa dla prób Bernouliego}
-\[\left( X=\sum_{i=1}^n X_i \land 0<\delta<1 \right) \to P(\left|X-\mu\right|\leq\delta\mu)\geq 1- 2e^{-\frac{1}{3}\mu\delta^2} \]
+\begin{block}{Nierówność Czebyszewa}
+%\[\sigma^2<\infty \to \forall k>0\colon P(\left|X-\mu\right|\geq k\sigma)\leq \frac{1}{k^2} \]
+Niech $\mu,\sigma<\infty$. Dla $\varepsilon\in\R_{+}$ i $k=\frac{\varepsilon}{\sigma}$ zachodzą następujące nierówności:
+\begin{align}
+P(\left|X-\mu\right|\geq k\sigma)\leq & \frac{1}{k^2} \\
+P(\left|X-\mu\right|\leq k\sigma)\geq & 1-\frac{1}{k^2} \\
+P(\left|X-\mu\right|\leq \varepsilon)\geq & 1-\frac{\sigma^2}{\varepsilon^2}
+\end{align}
 \end{block}
+
 \only<2->{Ile należy wylosować punktów, żeby z prawdopodobieństwo otrzymania wyniku różnego o nie więcej niż $0{,}1$ od $\pi$ wynosiło przynajmniej $90\%$?}
-%\begin{gather*}
-%Q=\frac{4}{n}U \qquad EQ=\pi \\
-%P(\left|Q-\pi\right|\leq0{,}1)=P\left(\left|U-\frac{n\pi}{4}\right|\leq \frac{0{,}1}{\pi}\frac{n\pi}{4}\right)=\\
-%P(\left|U-\mu\right|\leq \frac{0{,}1}{\pi}\mu)\geq1-2\exp\left(-\frac{1}{3}\frac{n\pi}{4}\left(\frac{0{,}1}{\pi}\right)^2\right)=0{,}9\\
-%n=1200\pi\ln20\leq 11295
-%\end{gather*}
+
+\note<2>{
+	\begin{gather*}
+	U\sim B(n,\frac{\pi}{4})\quad EU=n\frac{\pi}{4}\quad D^2U=n\frac{\pi(4-\pi)}{16} \\
+	Q=\frac{4}{n}U \quad EQ=\pi \quad D^2Q=\frac{16}{n^2}D^2U=\frac{\pi(4-\pi)}{n} \\
+	\varepsilon=0{,}1 \qquad p_{min}=0{,}9 \\
+	P(\left|Q-EQ\right|\leq \varepsilon)=P(\left|Q-\pi\right|\leq\varepsilon)\geq 1-\frac{\pi(4-\pi)}{\varepsilon^2n} \\
+	1-\frac{\pi(4-\pi)}{\varepsilon^2n}\geq p_{min}\\
+	n\geq\frac{\pi(4-\pi)}{\varepsilon^2(1-p_{min})}\approx 2697
+	\end{gather*}
+}
+
 \end{frame}
 \end{document}

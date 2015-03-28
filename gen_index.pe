@@ -39,6 +39,7 @@ print <<EOF;
 <ol>
 $list
 </ol>
+<p>Repozytorium ze źródłami: <a href="https://github.com/jpotoniec/mp">https://github.com/jpotoniec/mp</a></p>
 </body>
 </html>
 EOF

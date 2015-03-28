@@ -1,0 +1,43 @@
+\documentclass{mp}
+\renewcommand{\d}[1]{\ensuremath\,\text{d}#1}
+\graphicspath{{09_ciagle}}
+\subtitle{Zmienne losowe typu ciągłego}
+\newcounter{good}
+\begin{document}
+\frame{\titlepage}
+\begin{frame}{Zmienna losowa typu ciągłego}
+\[ \forall x\in\R\colon F_X(x)=P(X<x)=\int_{-\infty}^x f(u)\d{u} \]
+\begin{block}<2->{Właśności}
+\begin{itemize}
+\item \[\forall u\in\R\colon f(u)\geq 0\]
+\item \[\int_{-\infty}^\infty f(u)\d{u}=1\]
+\end{itemize}
+\end{block}
+\only<3->
+{
+	\begin{itemize}
+	\item<3-> $P(X=x)=\alert<3>{?}$
+	\item<4-> $P(a\leq X\leq b)=\alert<4>{?}$
+	\end{itemize}
+}
+\end{frame}
+\begin{frame}{Momenty}
+\begin{description}
+\item[wartość średnia] \[ EX=\int_{-\infty}^\infty xf(x)\d{x} \]
+\item<2->[odchylenie standardowe] \[ DX=\sqrt{E(X-EX)^2}\only<3->{=\sqrt{\int_{-\infty}^\infty (x-\mu)^2f(x)\d{x}}} \]
+\end{description}
+\end{frame}
+\begin{frame}{Dwuwymiarowe zmienne losowe typu ciągłego}
+\begin{gather*}
+\forall x,y\in\R\colon F_{X,Y}(x,y)=P(X<x,Y<y)=\int_{-\infty}^x\int_{-\infty}^y f(u,v)\d{v}\d{u} \\
+\only<2->
+{
+	f_X(x)=\int_{-\infty}^\infty f(x,v)\d{v} \qquad F_X(x)=F_{X,Y}(x,\infty) \\
+}
+\only<3->
+{
+	f_Y(y)=\int_{-\infty}^\infty f(u,y)\d{u} \qquad F_Y(y)=F_{X,Y}(\infty,y) \\
+}
+\end{gather*}
+\end{frame}
+\end{document}

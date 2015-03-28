@@ -17,8 +17,13 @@ for my $texfile(@ARGV)
 		$pdf=~s/\.tex$/\.pdf/g;
 		my $notes=$texfile;
 		$notes=~s/\.tex$/_notes\.pdf/g;
+		open(F,"git log -1 --format='%ad' -- '$texfile'|");
+		my $date=<F>;
+		chomp $date;
+		close F;
 		$list.="<li><a href='$pdf'>$subtitle</a>";
 		$list.=" (<a href='$notes'>notatki</a>)" if(-f $notes);
+		$list.=" (data ostatniej modyfikacji głównego pliku źródłowego: $date)";
 		$list.="</li>\n";
 	}
 }

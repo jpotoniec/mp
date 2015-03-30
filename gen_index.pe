@@ -13,18 +13,27 @@ for my $texfile(@ARGV)
 	if(/\\subtitle\{(.*?)\}/)
 	{
 		my $subtitle=$1;
+		my $n=$texfile;
+		$n=~s/^.(\d+)_.*$/$1/g;
 		my $pdf=$texfile;
 		$pdf=~s/\.tex$/\.pdf/g;
 		my $notes=$texfile;
 		$notes=~s/\.tex$/_notes\.pdf/g;
-		open(F,"git log -1 --format='%ad' -- '$texfile'|");
+		open(F,"git log -1 --format='%ad' --date=iso -- '$texfile'|");
 		my $date=<F>;
 		chomp $date;
 		close F;
-		$list.="<li><a href='$pdf'>$subtitle</a>";
-		$list.=" (<a href='$notes'>notatki</a>)" if(-f $notes);
-		$list.=" (data ostatniej modyfikacji głównego pliku źródłowego: $date)";
-		$list.="</li>\n";
+		if(-f $notes)
+		{
+			$notes="<a href='$notes'>notatki</a>";
+		}
+		else
+		{
+			$notes="&nbsp;";
+		}
+		$list.=<<EOF;
+		<tr><td>$n</td><td>$subtitle</td><td><a href="$pdf">slajdy</a></td><td>$notes</td><td>$date</td></tr>
+EOF
 	}
 }
 
@@ -34,11 +43,18 @@ print <<EOF;
 <head>
 <meta charset="utf-8"/>
 <title>Lista wykładów z Metod Probabilistycznych</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
-<ol>
+<table class="table">
+<tr><th>#</th><th>Tytuł</th><th>Slajdy</th><th>Notatki</th><th>Data ostatniej modyfikacji głównego pliku źródłowego</th></tr>
 $list
-</ol>
+</table>
 <p>Repozytorium ze źródłami: <a href="https://github.com/jpotoniec/mp">https://github.com/jpotoniec/mp</a></p>
 </body>
 </html>

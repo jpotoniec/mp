@@ -183,7 +183,14 @@ $x$ & 1 & 2 & 3 & 4 & 5 & 6 \\}
 \begin{frame}{Funkcje zmiennej losowej}
 	\[ Y=f(X) \qquad P(Y=y)=P(f(X)=y)=P(X\in f^{-1}(y)) \]
 	\only<2>{\[Y=(X-3)^2 \qquad X=\tikz[baseline]{\node [dice] {?};}\]}
-	% P(Y=0)=P(X=3) P(Y=1)=P(X=4 | X=2) P(Y=4)=P(X=5 | X=1) P(Y=9)=P(X=6)
+	\note<2>{
+		\begin{gather*}
+		P(Y=0)=P(X=3)\\
+		P(Y=1)=P(X=4 \lor X=2)\\
+		P(Y=4)=P(X=5 \lor X=1)\\
+		P(Y=9)=P(X=6)
+		\end{gather*}
+	}
 \end{frame}
 
 \begin{frame}{Wielowymiarowe zmienne losowe}
@@ -209,8 +216,13 @@ $x$ & 1 & 2 & 3 & 4 & 5 & 6 \\}
 \begin{frame}{Kostka}
 	\[ \Omega=\{\tikz[baseline]{\node [dice,minimum size=7mm] {?};}\} \]
 	\[ X=\text{parzyste} \qquad Y=\text{co najmniej 2} \qquad Z=X+Y \]
-	% p00=1/6 p10=0 p01=2/6 p11=1/2
-	% P(Z=0)=1/6+0+2/6=1/2 P(Z=1)=1/2
+	\note
+	{
+		\begin{gather*}
+		p_{00}=\frac{1}{6} \qquad p_{10}=0 \qquad p_{01}=\frac{2}{6} \qquad p_{11}=\frac{1}{2} \\
+		P(Z=0)=\frac{1}{6}+0+\frac{2}{6}=\frac{1}{2}\qquad P(Z=1)=\frac{1}{2}
+		\end{gather*}
+	}
 \end{frame}
 
 \begin{frame}{Rozkłady warunkowe}

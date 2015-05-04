@@ -30,6 +30,7 @@
 
 \newcommand{\R}{\ensuremath\mathbb{R}}
 \newcommand{\N}{\ensuremath\mathbb{N}}
+\renewcommand{\d}[1]{\ensuremath\,\text{d}#1}
 
 %http://tex.stackexchange.com/questions/55000/continuing-enumerate-counters-in-beamer
 \newcounter{saveenumi}

@@ -2,7 +2,6 @@
 \renewcommand{\d}[1]{\ensuremath\,\text{d}#1}
 \graphicspath{{09_ciagle}}
 \subtitle{Zmienne losowe typu ciągłego}
-\newcounter{good}
 \begin{document}
 \frame{\titlepage}
 \begin{frame}{Zmienna losowa typu ciągłego}
@@ -53,10 +52,44 @@
 \end{gather*}
 \end{minipage}
 \end{frame}
-\begin{frame}{Rozkład normalny (Gaussa)}
-\begin{tikzpicture}
-\draw[domain=-2:2,samples=1000] plot (\x,{exp((-(\x^2))/2)});
+\begin{frame}{Rozkład normalny (Gaussa) $N(\mu,\sigma)$}
+\begin{minipage}{.54\textwidth}
+\begin{tikzpicture}[x=1cm,y=5cm]
+%TODO: fajnie by było to sparametryzować i móc robić różne rozkłady normalne w ten sposób
+\draw[->] (-4,0) -- (4,0) node[right] {$x$};
+\draw[->] (0,-.2) -- (0,1.2) node[above] {$y$};
+\draw (0,1) node[left] {$1$} (-.1,1) -- (.1,1);
+\draw (0,.5) node[left] {$0{,}5$} (-.1,.5) -- (.1,.5);
+\draw (1,0) node[below] {$1$};
+\draw (1,-.02) -- (1,.02);
+\draw[color2,thick,domain=-4:4,samples=1000] plot (\x,{exp((-((\x)^2))/2)/sqrt(2*pi)});
+\draw[color4,visible on=<2->,thick] (-4,0)
+\foreach \n in {-400,...,400}
+{
+	\pgfextra{\pgfmathparse{exp((-((\n/100)^2))/2)/sqrt(2*pi)/100}}
+	-- ++(.01,\pgfmathresult)
+};
+
+\draw[color3,very thick,visible on=<3->] (0,1)--(0,-.1);
+\fill[color3,semitransparent,visible on=<4->] (-1,1) rectangle (1,-.1);
 \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{.45\textwidth}
+\begin{gather*}
+\textcolor{color2}{f(x)}=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(\frac{-(x-\mu)^2}{2\sigma^2}\right) \\
+\only<2->{\textcolor{color4}{F(x)}=\int_{-\infty}^x f(x)\d{x}} \\
+\only<3->{\textcolor{color3}{EX}=\mu} \\
+\only<4->{\textcolor{color3}{DX}=\sigma}
+\end{gather*}
+\end{minipage}
+\end{frame}
+\begin{frame}{Standardowy rozkład normalny $N(0,1)$}
+\small
+\tabcolsep=0.1cm
+\input{gauss.tex}
+\note{Odczytać/obliczyć:
+\[P(X\leq 0{,}83) \qquad P(X\geq 1{,}24) \qquad P(X\leq -0{,}83\]
+}
 \end{frame}
 \begin{frame}{Dwuwymiarowe zmienne losowe typu ciągłego}
 \begin{gather*}
@@ -70,5 +103,10 @@
 	f_Y(y)=\int_{-\infty}^\infty f(u,y)\d{u} \qquad F_Y(y)=F_{X,Y}(\infty,y) \\
 }
 \end{gather*}
+%TODO: to raczej gdzies w 05_zmienne.tex
+%\only<4>
+%{
+%	\alert{Jak obliczyć $P(a\leq X< b,c\leq Y<d)$ mając do dyspozycji wyłącznie dystrybuantę?}
+%}
 \end{frame}
 \end{document}

@@ -3,7 +3,7 @@
 \subtitle{Ciągi zmiennych losowych}
 \begin{document}
 \frame{\titlepage}
-\begin{frame}{Średnia i wariancja}
+\begin{frame}{Średnia i wariancja ciągu $(X_1,X_2,\ldots)$}
 \[ \bm{\mu}=\begin{bmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_n \end{bmatrix} \]
 \[ \Sigma=\begin{bmatrix}
 \cov(X_1,X_1) & \cov(X_1,X_2) & \ldots & \cov(X_1,X_n) \\
@@ -13,7 +13,6 @@
 \end{bmatrix} \]
 \end{frame}
 \begin{frame}{Zbieżność ciągów}
-$(X_1,X_2,\ldots)$ ciąg zmiennych losowych
 \only<+>
 {
 \begin{block}{Zbieżność z prawdopodobieństwem 1 (prawie na pewno)}
@@ -56,11 +55,10 @@ P(\lim_{n\to\infty} X_n=X)=1
 \end{frame}
 \begin{frame}{Prawa wielkich liczb}
 \begin{block}{Założenia}
-$(X_1,X_2,\ldots)$ ciąg niezależnych zmiennych losowych\\
+$(X_1,X_2,\ldots)$ ciąg \alert<1>{niezależnych} zmiennych losowych \only<3->{\alert{o tym samym rozkładzie}}\\
 \begin{gather*}
-EX_i=\mu_i \qquad D^2X_i=\sigma_i^2 \\
-M_n=\frac{1}{n}\sum_{i=1}^n X_i \\
-EM_n=\alert{?} \qquad D^2(M_n)=\alert{?}
+EX_i=\mu_i\only<3->{\alert{=\mu}} \qquad D^2X_i=\sigma_i^2 \\
+M_n=\frac{1}{n}\sum_{i=1}^n X_i \qquad EM_n=\alert<1>{?} \qquad D^2(M_n)=\alert<1>{?}
 \end{gather*}
 \note{\[EM_n=\frac{1}{n}\sum_{i=1}^n \mu_i \qquad D^2(M_n)=\frac{1}{n^2}\sum_{i=1}^n\sigma_i^2\]}
 \end{block}
@@ -79,7 +77,6 @@ EM_n=\alert{?} \qquad D^2(M_n)=\alert{?}
 \only<3>
 {
 \begin{block}{Słabo prawo wielkich liczb Chinczyna}
-$(X_1,X_2,\ldots)$ o tym samym rozkładzie, $EX_i=EM_n=\mu$
 \[ \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|M_n-\mu\right|\geq\varepsilon)=0 \]
 \note
 {
@@ -92,9 +89,24 @@ $(X_1,X_2,\ldots)$ o tym samym rozkładzie, $EX_i=EM_n=\mu$
 \only<4>
 {
 \begin{block}{Mocne prawo wielkich liczb}
-$(X_1,X_2,\ldots)$ o tym samym rozkładzie, $EX_i=EM_n=\mu$
 \[P(\lim_{n\to\infty} M_n=\mu)=1\]
 \note{Nie dowodzimy, dowód jest dość złożony}
+\end{block}
+}
+\end{frame}
+\begin{frame}{Centralne twierdzenia graniczne}
+\begin{block}{Założenia}
+$(X_1,X_2,\ldots)$ ciąg niezależnych zmiennych losowych o tym samym rozkładzie
+\begin{gather*}
+EX_i=\mu \qquad D^2X_i=\sigma^2\neq0 \\
+\only<2->{Y_n=\sum_{i=1}^n X_i \qquad EY_n=\alert<2>{?} \qquad DY_n=\alert<2>{?}}\\
+\only<3->{Z_n=\frac{Y_n-EY_n}{DY_n} \qquad EZ_n=\alert<3>{?} \qquad DZ_n=\alert<3>{?}}
+\end{gather*}
+\end{block}
+\only<4->
+{
+\begin{block}{Twierdzenie Lindenberga-Levy'ego}
+Ciąg $(Z_1,Z_2,\ldots)$ jest zbieżny wg dystrybuanty do $Z\sim N(0,1)$.
 \end{block}
 }
 \end{frame}

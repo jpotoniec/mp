@@ -1,0 +1,41 @@
+\documentclass{mp}
+\graphicspath{{11_prawa_wielkich_liczb}}
+\subtitle{Prawa wielkich liczb}
+\begin{document}
+\frame{\titlepage}
+\begin{frame}{Założenia}
+$(X_1,X_2,\ldots)$ ciąg niezależnych zmiennych losowych\\
+\[EX_i=\mu_i \qquad D^2X_i=\sigma_i^2\] \\
+\pause
+\begin{gather*}
+M_n=\frac{1}{n}\sum_{i=1}^n X_i \\
+EM_n=\alert{?} \qquad D^2(M_n)=\alert{?}
+\end{gather*}
+\note{\[EM_n=\frac{1}{n}\sum_{i=1}^n \mu_i \qquad D^2(M_n)=\frac{1}{n^2}\sum_{i=1}^n\sigma_i^2\]}
+\end{frame}
+\begin{frame}{Słabe prawo wielkich liczb Markowa}
+\[ \lim_{n\to\infty} D^2(M_n)=0 \to \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|M_n-EM_n\right|\geq\varepsilon)=0 \]
+\note
+{
+	Z nierówności Czebyszewa:
+	\[P(\left|M_n-EM_n\right|\geq\varepsilon)\leq \frac{D^2(M_n)}{\varepsilon}\]
+	Przechodząc obustronnie do granicy otrzymujemy, że prawa strona dąży do 0, a ponieważ lewa strona jest nieujemna, więc również musi dążyć do zera.
+}
+\end{frame}
+\begin{frame}{Słabo prawo wielkich liczb Chinczyna}
+$(X_1,X_2,\ldots)$ o tym samym rozkładzie, $EX_i=EM_n=\mu$
+\[ \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|M_n-\mu\right|\geq\varepsilon)=0 \]
+\note
+{
+	Ponieważ zmienne są niezależne i mają identycznye rozkłady, niech $D^2X_i=\sigma^2$, wtedy $D^2M_n=\frac{\sigma^2}{n}$. Z nierówności Czebyszewa
+	\[P(\left|M_n-\mu\right|\geq\varepsilon)\leq \frac{\sigma^2}{n\varepsilon} \]
+	Przechodząc obustronnie do granicy otrzymujemy, że prawa strona dąży do 0, a ponieważ lewa strona jest nieujemna, więc również musi dążyć do zera.
+}
+\end{frame}
+\begin{frame}{Mocne prawo wielkich liczb}
+$(X_1,X_2,\ldots)$ o tym samym rozkładzie, $EX_i=EM_n=\mu$
+\[P(\lim_{n\to\infty} M_n=\mu)=1\]
+\note{Nie dowodzimy, dowód jest dość złożony}
+\end{frame}
+%TODO: flowchart
+\end{document}

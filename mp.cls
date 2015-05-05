@@ -47,6 +47,10 @@
 %robi ladniejsze strzalki
 \usepgflibrary{arrows.meta}
 
+\usepackage{bm}
+\DeclareMathOperator{\cov}{cov}
+\newcommand{\dd}[1]{\partial#1}
+
 \colorlet{color1}{black}
 \colorlet{color2}{green!50!black!50}
 \colorlet{color3}{blue!50!black!50}

@@ -1,0 +1,101 @@
+\documentclass{mp}
+\graphicspath{{11_ciagi}}
+\subtitle{Ciągi zmiennych losowych}
+\begin{document}
+\frame{\titlepage}
+\begin{frame}{Średnia i wariancja}
+\[ \bm{\mu}=\begin{bmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_n \end{bmatrix} \]
+\[ \Sigma=\begin{bmatrix}
+\cov(X_1,X_1) & \cov(X_1,X_2) & \ldots & \cov(X_1,X_n) \\
+\cov(X_2,X_1) & \cov(X_2,X_2) & \ldots & \cov(X_2,X_n) \\
+\vdots & \vdots & \ddots & \vdots \\
+\cov(X_n,X_1) & \cov(X_n,X_2) & \ldots & \cov(X_n,X_n) \\
+\end{bmatrix} \]
+\end{frame}
+\begin{frame}{Zbieżność ciągów}
+$(X_1,X_2,\ldots)$ ciąg zmiennych losowych
+\only<+>
+{
+\begin{block}{Zbieżność z prawdopodobieństwem 1 (prawie na pewno)}
+\begin{gather*}
+P(\{\omega\colon \lim_{n\to\infty}X_n(\omega)=X(\omega)\})=1 \\
+P(\lim_{n\to\infty} X_n=X)=1
+\end{gather*}
+\end{block}
+}
+\only<+>
+{
+\begin{block}{Zbieżność wg prawdopodobieństwa (stochastycznie)}
+\[\forall\varepsilon>0\colon \lim_{n\to\infty}P(\left|X_n-X\right|\geq\varepsilon)=0\]
+\end{block}
+}
+\only<+>
+{
+\begin{block}{Zbieżność wg dystrybuanty}
+\[\forall x\in A\colon \lim_{n\to\infty} F_n(x) =F(x) \]
+\end{block}
+\note{$A$ jest zbiorem, gdzie $F$ jest ciągła}
+}
+\only<+>
+{
+	\begin{block}{Twierdzenie}
+	\begin{enumerate}
+	\item Zbieżność prawie na pewno pociąga za sobą zbieżność wg prawdopodobieństwa.
+	\item Zbieżność wg prawdopodobieństwa pociąga za sobą zbieżność wg dystrybuanty.
+	\end{enumerate}
+	\end{block}
+}
+%nie bardzo wiem po co mi to
+%\only<+>
+%{
+%	\begin{block}{Zbieżność średno z kwadratem}
+%		\[ \lim_{n\to\infty} E(X_n-X)^2=0 \]
+%		\note{Przy zbieżności średio z kwadratem drugi moment zwykły $X_i$ oraz $X$ musi być skończony}
+%	\end{block}
+%}
+\end{frame}
+\begin{frame}{Prawa wielkich liczb}
+\begin{block}{Założenia}
+$(X_1,X_2,\ldots)$ ciąg niezależnych zmiennych losowych\\
+\begin{gather*}
+EX_i=\mu_i \qquad D^2X_i=\sigma_i^2 \\
+M_n=\frac{1}{n}\sum_{i=1}^n X_i \\
+EM_n=\alert{?} \qquad D^2(M_n)=\alert{?}
+\end{gather*}
+\note{\[EM_n=\frac{1}{n}\sum_{i=1}^n \mu_i \qquad D^2(M_n)=\frac{1}{n^2}\sum_{i=1}^n\sigma_i^2\]}
+\end{block}
+\only<2>
+{
+\begin{block}{Słabe prawo wielkich liczb Markowa}
+\[ \lim_{n\to\infty} D^2(M_n)=0 \to \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|M_n-EM_n\right|\geq\varepsilon)=0 \]
+\note
+{
+	Z nierówności Czebyszewa:
+	\[P(\left|M_n-EM_n\right|\geq\varepsilon)\leq \frac{D^2(M_n)}{\varepsilon}\]
+	Przechodząc obustronnie do granicy otrzymujemy, że prawa strona dąży do 0, a ponieważ lewa strona jest nieujemna, więc również musi dążyć do zera.
+}
+\end{block}
+}
+\only<3>
+{
+\begin{block}{Słabo prawo wielkich liczb Chinczyna}
+$(X_1,X_2,\ldots)$ o tym samym rozkładzie, $EX_i=EM_n=\mu$
+\[ \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|M_n-\mu\right|\geq\varepsilon)=0 \]
+\note
+{
+	Ponieważ zmienne są niezależne i mają identycznye rozkłady, niech $D^2X_i=\sigma^2$, wtedy $D^2M_n=\frac{\sigma^2}{n}$. Z nierówności Czebyszewa
+	\[P(\left|M_n-\mu\right|\geq\varepsilon)\leq \frac{\sigma^2}{n\varepsilon} \]
+	Przechodząc obustronnie do granicy otrzymujemy, że prawa strona dąży do 0, a ponieważ lewa strona jest nieujemna, więc również musi dążyć do zera.
+}
+\end{block}
+}
+\only<4>
+{
+\begin{block}{Mocne prawo wielkich liczb}
+$(X_1,X_2,\ldots)$ o tym samym rozkładzie, $EX_i=EM_n=\mu$
+\[P(\lim_{n\to\infty} M_n=\mu)=1\]
+\note{Nie dowodzimy, dowód jest dość złożony}
+\end{block}
+}
+\end{frame}
+\end{document}

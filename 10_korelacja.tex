@@ -92,6 +92,15 @@ E(X|Y=y)=\frac{1}{f_Y(y)}\int_{-\infty}^\infty xf(x,y)\d{x}
 \[ a=\frac{\cov(X,Y)}{D^2X} \qquad b=EY-aEX \]
 \end{block}
 \end{frame}
+\begin{frame}{Średnia i wariancja wektora losowego $(X_1,X_2,\ldots,X_n)$}
+\[ \bm{\mu}=\begin{bmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_n \end{bmatrix} \]
+\[ \Sigma=\begin{bmatrix}
+\cov(X_1,X_1) & \cov(X_1,X_2) & \ldots & \cov(X_1,X_n) \\
+\cov(X_2,X_1) & \cov(X_2,X_2) & \ldots & \cov(X_2,X_n) \\
+\vdots & \vdots & \ddots & \vdots \\
+\cov(X_n,X_1) & \cov(X_n,X_2) & \ldots & \cov(X_n,X_n) \\
+\end{bmatrix} \]
+\end{frame}
 
 
 %\item<+->[wektor wartości średnich] \[\mathbf{\mu}=\begin{pmatrix}\mu_{1,0}\\\mu_{0,1}\end{pmatrix}\only<+->{=\begin{pmatrix}\mu_X\\\mu_Y\end{pmatrix}}\]

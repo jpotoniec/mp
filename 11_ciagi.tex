@@ -3,15 +3,6 @@
 \subtitle{Ciągi zmiennych losowych}
 \begin{document}
 \frame{\titlepage}
-\begin{frame}{Średnia i wariancja ciągu $(X_1,X_2,\ldots)$}
-\[ \bm{\mu}=\begin{bmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_n \end{bmatrix} \]
-\[ \Sigma=\begin{bmatrix}
-\cov(X_1,X_1) & \cov(X_1,X_2) & \ldots & \cov(X_1,X_n) \\
-\cov(X_2,X_1) & \cov(X_2,X_2) & \ldots & \cov(X_2,X_n) \\
-\vdots & \vdots & \ddots & \vdots \\
-\cov(X_n,X_1) & \cov(X_n,X_2) & \ldots & \cov(X_n,X_n) \\
-\end{bmatrix} \]
-\end{frame}
 \begin{frame}{Zbieżność ciągów}
 \only<+>
 {
@@ -54,6 +45,7 @@ P(\lim_{n\to\infty} X_n=X)=1
 %}
 \end{frame}
 \begin{frame}{Prawa wielkich liczb}
+%TODO: jednak niech założenia będą wspólne dla wszystkich, a te zmieniające się fragmenty będą już elementami poszczególnych twierdzeń
 \begin{block}{Założenia}
 $(X_1,X_2,\ldots)$ ciąg \alert<1>{niezależnych} zmiennych losowych \only<3->{\alert{o tym samym rozkładzie}}\\
 \begin{gather*}
@@ -65,7 +57,8 @@ M_n=\frac{1}{n}\sum_{i=1}^n X_i \qquad EM_n=\alert<1>{?} \qquad D^2(M_n)=\alert<
 \only<2>
 {
 \begin{block}{Słabe prawo wielkich liczb Markowa}
-\[ \lim_{n\to\infty} D^2(M_n)=0 \to \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|M_n-EM_n\right|\geq\varepsilon)=0 \]
+%TODO: dziwne, nie mogę się doszukać tego w anglojęzycznym internecie
+\[ \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|M_n-EM_n\right|\geq\varepsilon)=0 \]
 \note
 {
 	Z nierówności Czebyszewa:
@@ -88,6 +81,7 @@ M_n=\frac{1}{n}\sum_{i=1}^n X_i \qquad EM_n=\alert<1>{?} \qquad D^2(M_n)=\alert<
 }
 \only<4>
 {
+	%TODO: na oko to tu brakuje jakiegoś ważnego założenia, bo wychodzi, że to dominuje słabe prawo wielkich liczb Chinczyna
 \begin{block}{Mocne prawo wielkich liczb}
 \[P(\lim_{n\to\infty} M_n=\mu)=1\]
 \note{Nie dowodzimy, dowód jest dość złożony}

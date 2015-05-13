@@ -88,8 +88,8 @@ $(X_1,X_2,\ldots)$ niezależne zmienne losowe
 
 \begin{gather*}
 EX_i=\mu_i<\infty \qquad D^2X_i=\sigma_i^2<\infty \\
-\uncover<2->{Y_n=\frac{X_1+X_2+\ldots+X_n}{n} \\}
-\uncover<3-4>{EY_n=\alt<-3>{\alert{?}}{\frac{\mu_1+\mu_2+\ldots+\mu_n}{n}} \qquad D^2Y_n=\alt<-3>{\alert{?}}{\frac{\sigma_1^2+\sigma_2^2+\ldots+\sigma_n^2}{n^2}}}
+\uncover<2->{Y_n=\frac{(X_1-\mu_1)+(X_2-\mu_2)+\ldots+(X_n-\mu_n)}{n} \\}
+\uncover<3-4>{EY_n=\alt<-3>{\alert{?}}{0} \qquad D^2Y_n=\alt<-3>{\alert{?}}{\frac{\sigma_1^2+\sigma_2^2+\ldots+\sigma_n^2}{n^2}}}
 \end{gather*}
 \end{frame}
 \begin{frame}{Słabe prawa wielkich liczb}
@@ -124,15 +124,15 @@ Zmienne $(X_1, X_2, \ldots)$ mają identyczny rozkład prawdopodobieństwa
 \end{column}
 \end{columns}
 \begin{block}{}
-\[ \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|Y_n-EY_n\right|<\varepsilon)=1 \]
+\[ \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|Y_n-0\right|<\varepsilon)=1 \]
 \end{block}
 \end{frame}
 \begin{frame}{Mocne prawo wielkich liczb Kołmogorowa}
-\[ \sum_{n=1}^\infty \frac{\sigma_n^2}{n^2}<\infty \to P(\lim_{n\to\infty} \left|Y_n-EY_n\right|=0)=1 \]
+\[ \sum_{n=1}^\infty \frac{\sigma_n^2}{n^2}<\infty \to P(\lim_{n\to\infty} Y_n=0)=1 \]
 \end{frame}
 \begin{frame}{Centralne twierdzenia graniczne}
 \begin{block}{Twierdzenie Lindenberga-Levy'ego}
-\[ Z_n=\frac{Y_n-EY_n}{DY_n} \]
+\[ Z_n=\frac{Y_n-0}{DY_n} \]
 Ciąg $(Z_1,Z_2,\ldots)$ jest zbieżny wg dystrybuanty do $Z\sim N(0,1)$.
 \end{block}
 \end{frame}

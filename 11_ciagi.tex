@@ -161,8 +161,21 @@ Zmienne $(X_1, X_2, \ldots)$ mają identyczny rozkład prawdopodobieństwa
 \end{block}
 \end{frame}
 \begin{frame}{Centralne twierdzenia graniczne}
-\begin{block}{Twierdzenie Lindenberga-Levy'ego}
-\[ Z_n=\frac{Y_n-0}{DY_n} \]
+\begin{block}{Założenia}
+$(X_i)$:
+\begin{itemize}
+\item niezależne
+\item identyczne rozkłady
+\item $EX_i=\mu$, $D^2X_i=\sigma^2>0$
+\end{itemize}
+\uncover<2->
+{
+\[ Y_n=\frac{\sum_{i=1}^n X_i}{n} \qquad EY_n=\alert<2>{?} \qquad D^2Y_n=\alert<2>{?} \]
+\note<2>{$EY_n=\mu$, $D^2Y_n=\frac{\sigma^2}{n}$}
+}
+\end{block}
+\begin{block}<3->{Twierdzenie Lindenberga-Levy'ego}
+\[ Z_n=\frac{Y_n-EY_n}{DY_n}=\frac{Y_n-\mu}{\frac{\sigma}{\sqrt{n}}} \]
 Ciąg $(Z_1,Z_2,\ldots)$ jest zbieżny wg dystrybuanty do $Z\sim N(0,1)$.
 \end{block}
 \end{frame}

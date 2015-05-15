@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+my @P;
+my %prev;
+$prev{0}=1;
+for(my $n=1;$n<=100;$n++)
+{
+	my %p;
+	for(my $k=$n;$k<=6*$n;$k++)
+	{
+		$_=0;
+		for(my $i=1;$i<=6;$i++)
+		{
+			$_+=$prev{$k-$i}/6 if defined $prev{$k-$i};
+		}
+		$p{$k}=$_;
+	}
+	%prev=%p;
+	$P[$n]=\%p;
+}
+
+my $slide=0;
+foreach my $n (1,2,3,4,5,10,30,50,100)
+{
+	++$slide;
+	%_=%{$P[$n]};
+	print "\\draw[visible on=<$slide>,color4] (4,.2) node {\$n=$n\$};\n";
+	print "\\fill[visible on=<$slide>,color4] ";
+	foreach(keys %_)
+	{
+		my $x=$_/$n;
+		my $y=$_{$_};
+		print "($x,$y) circle (1pt) ";
+	}
+	print ";\n";
+}

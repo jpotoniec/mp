@@ -179,5 +179,17 @@ $(X_i)$:
 Ciąg $(Z_1,Z_2,\ldots)$ jest zbieżny wg dystrybuanty do $Z\sim N(0,1)$.
 \end{block}
 \end{frame}
+\begin{frame}{Przykład}
+\center
+\begin{tikzpicture}[x=1cm,y=30cm]
+\draw[->] (0,0) -- (0,.2);
+\draw[->] (0,0) -- (7,0);
+\foreach \x in {1,...,6}
+	\draw (\x,.003) -- ++(0,-.006) node[anchor=north] {$\x$};
+\foreach \y in {.01,.05,.1,.15}
+	\draw (.1,\y) -- ++(-.2,0) node[anchor=east] {$\y$};
+\input{ll.tex}
+\end{tikzpicture}
+\end{frame}
 
 \end{document}

@@ -31,7 +31,7 @@ clean:
 
 09_ciagle.pdf: gauss.tex
 
-11_ciagi.pdf: circles.tex
+11_ciagi.pdf: circles.tex ll.tex
 
 %.tex: %.pe
 	./$^ >$@

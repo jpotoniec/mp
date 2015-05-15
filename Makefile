@@ -31,6 +31,11 @@ clean:
 
 09_ciagle.pdf: gauss.tex
 
+11_ciagi.pdf: circles.tex
+
+%.tex: %.pe
+	./$^ >$@
+
 index.html: gen_index.pe Makefile
 	./gen_index.pe $(SRC) >$@
 

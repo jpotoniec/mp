@@ -83,6 +83,35 @@ P(X=0)=1
 %	\end{block}
 %}
 \end{frame}
+\begin{frame}{Inny przykład}
+%przykład za A. A. Borowkow "Rachunek prawdopodobieństwa" str. 78
+\begin{tikzpicture}
+\input{circles.tex}
+\end{tikzpicture}
+\begin{gather*}
+\uncover<2->{ X_i(\omega)=\begin{cases} 2 & \omega\in \text{łuk}(r(n),r(n)+\frac{360^\circ}{n}) \\ 1 & \text{wpp} \end{cases} \qquad r(n)=\sum_{k=1}^n \frac{360^\circ}{k} \\
+ P(X_i=1)=1-\frac{1}{n} \qquad P(X_i=2)=\frac{1}{n} \\}
+\uncover<3->{ X(\omega)=1 \qquad P(X=1)=1}
+\end{gather*}
+\note<1>{
+$\Omega$: okrąg jednostkowy z jednorodnym prawdopodobieństwem
+
+\begin{gather*}
+\forall \varepsilon>0\colon \lim_{n\to\infty} P(\{\omega\colon \left|X_n(\omega)-X(\omega)\right|<\varepsilon\})=1 \iff \\
+\forall \varepsilon>0\colon \lim_{n\to\infty} P(\{\omega\colon \left|X_n(\omega)-X(\omega)\right|\geq\varepsilon\})=0 \iff \\
+\lim_{n\to\infty} P(\{\omega\colon X_n(\omega)=2\})=0 \iff \\
+\lim_{n\to\infty} \frac{1}{n}=0
+\end{gather*}
+Czyli $(X_n)$ jest zbieżne wg prawdpodpobieństwa do $X$.
+
+\begin{gather*}
+P(\{\omega\colon \lim_{n\to\infty} X_n(\omega)=X(\omega)\})=P(\{\omega\colon \lim_{n\to\infty} X_n(\omega)=1\})=\\
+P(\{\omega\colon \forall \varepsilon>0\exists N\forall n>N\colon \left|X_n(\omega)-1\right|<\varepsilon)=
+P(\{\omega\colon \exists N\forall n>N\colon X_n(\omega)=1)=\\
+P(\emptyset)=0
+\end{gather*}
+}
+\end{frame}
 \begin{frame}{Prawa wielkich liczb}
 $(X_1,X_2,\ldots)$ niezależne zmienne losowe
 

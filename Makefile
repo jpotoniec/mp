@@ -1,4 +1,4 @@
-SRC=01_wstep.tex 02_zastosowania.tex 03_aksjomatyka.tex 04_warunkowe.tex 05_zmienne.tex 06_momenty.tex 07_rozklady.tex 08_montecarlo.tex 09_ciagle.tex 10_korelacja.tex 11_ciagi.tex cwiczenia.tex
+SRC=01_wstep.tex 02_zastosowania.tex 03_aksjomatyka.tex 04_warunkowe.tex 05_zmienne.tex 06_momenty.tex 07_rozklady.tex 08_montecarlo.tex 09_ciagle.tex 10_korelacja.tex 11_ciagi.tex cwiczenia.tex 12_procesy.tex
 NOTES_SRC=$(shell grep -l '\\note' $(SRC))
 
 PDF=$(SRC:%.tex=%.pdf) $(NOTES_SRC:%.tex=%_notes.pdf)
@@ -33,8 +33,13 @@ clean:
 
 11_ciagi.pdf: circles.tex ll.tex
 
+12_procesy.pdf: 12_procesy/thinx.tex
+
 %.tex: %.pe
 	./$^ >$@
+
+12_procesy/thinx.tex: 12_procesy/thinx.pe 12_procesy/thinx-weekly.csv
+	./12_procesy/thinx.pe <12_procesy/thinx-weekly.csv >12_procesy/thinx.tex
 
 index.html: gen_index.pe Makefile
 	./gen_index.pe $(SRC) >$@

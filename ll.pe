@@ -23,11 +23,13 @@ for(my $n=1;$n<=100;$n++)
 }
 
 my $slide=0;
+my $sigma=1.71;
+my $mu=3.5;
 foreach my $n (1,2,3,4,5,10,30,50,100)
 {
 	++$slide;
 	%_=%{$P[$n]};
-	print "\\draw[visible on=<$slide>,color4] (4,.2) node {\$n=$n\$};\n";
+	print "\\draw[visible on=<$slide>,color4] (4,.2) node {\$Y_{$n}\$};\n";
 	print "\\fill[visible on=<$slide>,color4] ";
 	foreach(keys %_)
 	{
@@ -36,4 +38,12 @@ foreach my $n (1,2,3,4,5,10,30,50,100)
 		print "($x,$y) circle (1pt) ";
 	}
 	print ";\n";
+#	print "\\fill[visible on=<$slide>,color3] ";
+#	foreach(keys %_)
+#	{
+#		my $x=($_/$n-$mu)/($sigma/sqrt($n));
+#		my $y=$_{$_};
+#		print "($x,$y) circle (1pt) " if($x>=-1 && $x<=6);
+#	}
+#	print ";\n";
 }

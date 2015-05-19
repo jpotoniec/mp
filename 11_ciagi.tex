@@ -182,8 +182,8 @@ Ciąg $(Z_1,Z_2,\ldots)$ jest zbieżny wg dystrybuanty do $Z\sim N(0,1)$.
 \begin{frame}{Przykład}
 \center
 \begin{tikzpicture}[x=1cm,y=30cm]
-\draw[->] (0,0) -- (0,.2);
-\draw[->] (0,0) -- (7,0);
+\draw[->] (0,0) -- (0,.2) node[anchor=east] {$p_i$};
+\draw[->] (0,0) -- (7,0) node[anchor=south] {$y_i$};
 \foreach \x in {1,...,6}
 	\draw (\x,.003) -- ++(0,-.006) node[anchor=north] {$\x$};
 \foreach \y in {.01,.05,.1,.15}

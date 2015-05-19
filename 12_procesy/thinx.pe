@@ -1,0 +1,86 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+sub draw
+{
+	$_="";
+	for(my $x=0;$x<=$#_;$x++)
+	{
+		$_.=" -- " if($x>0);
+		$_.="($x,$_[$x]) circle (.3pt) ";
+	}
+	return $_;
+}
+
+<STDIN>;
+<STDIN>;
+my $first_hour;
+my $x=0;
+my $slide=0;
+my $max=0;
+my @hours;
+my @data;
+my @indata;
+my @outdata;
+while(<STDIN>)
+{
+	next if(/^#/);
+	chomp;
+# '1' '2015-05-11 13:00,05-11' '1,0,0' '62823152462' '52529884628' '64207810749' '54499564135' 
+#magic: X,0,Z, X=1 oznacza, ze po godzinie jest po przecinku doklejone id dnia, Z=1 oznacza zmiane doby
+	my ($id, $timestamp, $magic, $out, $in, $out_max, $in_max)=split /;/,$_;
+	($_,my $hour,my $dayid)=split /[ ,]/,$timestamp;
+	$first_hour=$hour unless defined $first_hour;
+	if($first_hour eq $hour)
+	{
+		$x=0;
+		$slide++;
+	}
+	push @hours, $hour if($slide==1);
+	$in/=100*1024**3;
+	$out/=100*1024**3;
+	my $traffic=$out+$in;
+	$data[$slide-1][$x]=$traffic;
+	$indata[$slide-1][$x]=$in;
+	$outdata[$slide-1][$x]=$out;
+	$max=$traffic if $max<$traffic;
+	$x++;
+}
+print ";\n";
+print "\\draw[->] (0,0) -- (0,".($max*1.1).") node[anchor=east] {\\footnotesize Gbps};\n";
+print "\\draw (-2pt,.5) -- ++(4pt,0) node[anchor=east] {50};\n";
+print "\\draw (-2pt,1) -- ++(4pt,0) node[anchor=east] {100};\n";
+print "\\draw (-2pt,1.5) -- ++(4pt,0) node[anchor=east] {150};\n";
+print "\\draw (-2pt,2) -- ++(4pt,0) node[anchor=east] {200};\n";
+print "\\draw[->] (0,0) -- (75,0) node[anchor=north] {\\footnotesize \\textsc{cest}};\n";
+for(my $x=0;$x<=$#hours;$x++)
+{
+	my ($h,$m)=split ':',$hours[$x];
+	if($m==0)
+	{
+		print "\\draw ($x,-2pt) -- ++ (0,4pt)";
+		print "node[anchor=north] {$h}" if($h%6==0);
+		print ";\n";
+	}
+}
+$slide=1;
+print "\\draw[color3,visible on=<$slide->] ".draw(@{$data[0]}).";\n";
+$slide++;
+print "\\draw[color3,visible on=<$slide->] ".draw(@{$data[1]}).";\n";
+$slide++;
+for(my $i=2;$i<=$#data;$i++)
+{
+	print "\\draw[color3,visible on=<$slide->] ".draw(@{$data[$i]}).";\n";
+}
+$slide++;
+print "\\fill[color4,visible on=<$slide>] ";
+for(@data)
+{
+	@_=@{$_};
+	print "(20,".$_[20].") circle (1.1pt) ";
+}
+print ";\n";
+$slide++;
+print "\\draw[color4,thick,visible on=<$slide>] ".draw(@{$data[0]}).";\n";

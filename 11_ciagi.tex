@@ -4,7 +4,7 @@
 \begin{document}
 \frame{\titlepage}
 \begin{frame}{Zbieżność ciągów}
-\only<+>
+\only<1>
 {
 \begin{block}{Zbieżność z prawdopodobieństwem 1 (prawie na pewno)}
 \begin{gather*}
@@ -13,20 +13,59 @@ P(\lim_{n\to\infty} X_n=X)=1
 \end{gather*}
 \end{block}
 }
-\only<+>
+\only<2>
 {
 \begin{block}{Zbieżność wg prawdopodobieństwa (stochastycznie)}
-\[\forall\varepsilon>0\colon \lim_{n\to\infty}P(\left|X_n-X\right|\geq\varepsilon)=0\]
+\[\forall\varepsilon>0\colon \lim_{n\to\infty}P(\left|X_n-X\right|<\varepsilon)=1\]
 \end{block}
 }
-\only<+>
+\only<3>
 {
 \begin{block}{Zbieżność wg dystrybuanty}
 \[\forall x\in A\colon \lim_{n\to\infty} F_n(x) =F(x) \]
 \end{block}
 \note{$A$ jest zbiorem, gdzie $F$ jest ciągła}
 }
-\only<+>
+\only<1-3>
+{
+\begin{block}{Przykład}
+\begin{gather*}
+\Omega=\left<0;1\right> \\
+X_n(\omega)=\begin{cases} 1 & \omega\in\left<0,\frac{1}{n}\right)\\0 & \omega\in\left<\frac{1}{n},1\right> \end{cases} \qquad P(X_n=1)=\frac{1}{n}\\
+P(X=0)=1
+\end{gather*}
+\note<1>
+{
+	Szukamy zbioru $A=\{\omega\colon \lim_{n\to\infty} X_n(\omega)=0\}$.
+	Rozpatrzmy ciąg $(X_n(\omega))$ dla dowolnego ustalonego $\omega$.
+	Z definicji granicy ciągu $\lim_{n\to\infty} X_n(\omega)=0$ wtedy i tylko wtedy gdy \[\forall \varepsilon>0\exists N\in\N \forall n>N\colon \left|a_n-0\right|<\varepsilon\]
+	Musimy ustalić od którego momentu $X_n(\omega)<\varepsilon$, to znaczy $X_n(\omega)=0$:
+	\[ X_n(\omega)=0 \iff \omega\geq\frac{1}{n} \iff n\geq\frac{1}{\omega} \iff N=\lceil\frac{1}{\omega}\rceil \]
+	pod warunkiem, że $\omega\neq 0$.
+	Dla $\omega=0$ nie jesteśmy w stanie znaleźć odpowiedniego $N$, a zatem $A=\left(0,1\right>=\Omega\backslash\{0\}$.
+}
+\note<2>
+{
+	\[ \forall \varepsilon>0\colon \lim_{n\to\infty} P\left(\{\omega\colon \left|X_n(\omega)-X(\omega)\right|\right<\varepsilon)=1 \]
+	Ponieważ zmienne $X_n$ są binarne, a $X=0$, to jest to równoważne poniższemu stwierdzeniu
+	\begin{gather*}
+	 \lim_{n\to\infty} P\left(\{\omega\colon X_n(\omega)=0\}\right)=1 \\
+	\end{gather*}
+	Z definicji $P(X_n=0)=1-\frac{1}{n}$, a ponieważ $\lim_{n\to\infty} \left(1-\frac{1}{n}\right)=1$, to $(X_n)$ jest zbieżny jak powinien.
+}
+\note<3>
+{
+	\[ F_n(x)=\begin{cases} 0 & x\leq 0 \\ 1-\frac{1}{n} & 0<x\leq 1 \\ 1 & x>1 \end{cases} \qquad F(x)=\begin{cases} 0 & x\leq 0 \\ 1 & x>0 \end{cases} \]
+	Rozpatrujemy $\lim_{n\to\infty} F_n(x)=F(x)$ dla dowolnego $x\in\R\backslash\{0\}$ (w zerze $F(x)$ jest nieciągła).
+	\begin{enumerate}
+	\item Dla $x<0$: $\lim_{n\to\infty} 0=0$, a więc zachodzi.
+	\item Dla $x>1$: $\lim_{n\to\infty} 1=1$, a więc zachodzi.
+	\item Dla $0<x\leq 1$: $\lim_{n\to\infty} 1-\frac{1}{n}=1$, a więc również zachodzi.
+	\end{enumerate}
+}
+\end{block}
+}
+\only<4>
 {
 	\begin{block}{Twierdzenie}
 	\begin{enumerate}
@@ -44,14 +83,47 @@ P(\lim_{n\to\infty} X_n=X)=1
 %	\end{block}
 %}
 \end{frame}
+\begin{frame}{Inny przykład}
+%przykład za A. A. Borowkow "Rachunek prawdopodobieństwa" str. 78
+\begin{tikzpicture}
+\input{circles.tex}
+\end{tikzpicture}
+\begin{gather*}
+\uncover<2->{ X_i(\omega)=\begin{cases} 2 & \omega\in \text{łuk}(r(n),r(n)+\frac{360^\circ}{n}) \\ 1 & \text{wpp} \end{cases} \qquad r(n)=\sum_{k=1}^n \frac{360^\circ}{k} \\
+ P(X_i=1)=1-\frac{1}{n} \qquad P(X_i=2)=\frac{1}{n} \\}
+\uncover<3->{ X(\omega)=1 \qquad P(X=1)=1}
+\end{gather*}
+\note<1>{
+$\Omega$: okrąg jednostkowy z jednorodnym prawdopodobieństwem
+
+\begin{gather*}
+\forall \varepsilon>0\colon \lim_{n\to\infty} P(\{\omega\colon \left|X_n(\omega)-X(\omega)\right|<\varepsilon\})=1 \iff \\
+\forall \varepsilon>0\colon \lim_{n\to\infty} P(\{\omega\colon \left|X_n(\omega)-X(\omega)\right|\geq\varepsilon\})=0 \iff \\
+\lim_{n\to\infty} P(\{\omega\colon X_n(\omega)=2\})=0 \iff \\
+\lim_{n\to\infty} \frac{1}{n}=0
+\end{gather*}
+Czyli $(X_n)$ jest zbieżne wg prawdpodpobieństwa do $X$.
+
+\begin{gather*}
+P(\{\omega\colon \lim_{n\to\infty} X_n(\omega)=X(\omega)\})=P(\{\omega\colon \lim_{n\to\infty} X_n(\omega)=1\})=\\
+P(\{\omega\colon \forall \varepsilon>0\exists N\forall n>N\colon \left|X_n(\omega)-1\right|<\varepsilon)=
+P(\{\omega\colon \exists N\forall n>N\colon X_n(\omega)=1)=\\
+P(\emptyset)=0
+\end{gather*}
+}
+\end{frame}
 \begin{frame}{Prawa wielkich liczb}
 $(X_1,X_2,\ldots)$ niezależne zmienne losowe
 
 \begin{gather*}
 EX_i=\mu_i<\infty \qquad D^2X_i=\sigma_i^2<\infty \\
-\uncover<2->{Y_n=\frac{X_1+X_2+\ldots+X_n}{n} \\}
-\uncover<3-4>{EY_n=\alt<-3>{\alert{?}}{\frac{\mu_1+\mu_2+\ldots+\mu_n}{n}} \qquad D^2Y_n=\alt<-3>{\alert{?}}{\frac{\sigma_1^2+\sigma_2^2+\ldots+\sigma_n^2}{n^2}}}
+\uncover<2->{Y_n=\frac{(X_1-\mu_1)+(X_2-\mu_2)+\ldots+(X_n-\mu_n)}{n} \\}
+\uncover<3-4>{EY_n=\alt<-3>{\alert{?}}{0} \qquad D^2Y_n=\alt<-3>{\alert{?}}{\frac{\sigma_1^2+\sigma_2^2+\ldots+\sigma_n^2}{n^2}}}
 \end{gather*}
+\end{frame}
+
+\begin{frame}{Mocne prawo wielkich liczb Kołmogorowa}
+\[ \sum_{n=1}^\infty \frac{\sigma_n^2}{n^2}<\infty \to P(\lim_{n\to\infty} Y_n=0)=1 \]
 \end{frame}
 \begin{frame}{Słabe prawa wielkich liczb}
 \begin{columns}[T]
@@ -85,17 +157,39 @@ Zmienne $(X_1, X_2, \ldots)$ mają identyczny rozkład prawdopodobieństwa
 \end{column}
 \end{columns}
 \begin{block}{}
-\[ \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|Y_n-EY_n\right|<\varepsilon)=1 \]
+\[ \forall \varepsilon>0\colon \lim_{n\to\infty} P(\left|Y_n-0\right|<\varepsilon)=1 \]
 \end{block}
-\end{frame}
-\begin{frame}{Mocne prawo wielkich liczb Kołmogorowa}
-\[ \sum_{n=1}^\infty \frac{\sigma_n^2}{n^2}<\infty \to P(\lim_{n\to\infty} \left|Y_n-EY_n\right|=0)=1 \]
 \end{frame}
 \begin{frame}{Centralne twierdzenia graniczne}
-\begin{block}{Twierdzenie Lindenberga-Levy'ego}
-\[ Z_n=\frac{Y_n-EY_n}{DY_n} \]
+\begin{block}{Założenia}
+$(X_i)$:
+\begin{itemize}
+\item niezależne
+\item identyczne rozkłady
+\item $EX_i=\mu$, $D^2X_i=\sigma^2>0$
+\end{itemize}
+\uncover<2->
+{
+\[ Y_n=\frac{\sum_{i=1}^n X_i}{n} \qquad EY_n=\alert<2>{?} \qquad D^2Y_n=\alert<2>{?} \]
+\note<2>{$EY_n=\mu$, $D^2Y_n=\frac{\sigma^2}{n}$}
+}
+\end{block}
+\begin{block}<3->{Twierdzenie Lindenberga-Levy'ego}
+\[ Z_n=\frac{Y_n-EY_n}{DY_n}=\frac{Y_n-\mu}{\frac{\sigma}{\sqrt{n}}} \]
 Ciąg $(Z_1,Z_2,\ldots)$ jest zbieżny wg dystrybuanty do $Z\sim N(0,1)$.
 \end{block}
+\end{frame}
+\begin{frame}{Przykład}
+\center
+\begin{tikzpicture}[x=1cm,y=30cm]
+\draw[->] (0,0) -- (0,.2) node[anchor=east] {$p_i$};
+\draw[->] (0,0) -- (7,0) node[anchor=south] {$y_i$};
+\foreach \x in {1,...,6}
+	\draw (\x,.003) -- ++(0,-.006) node[anchor=north] {$\x$};
+\foreach \y in {.01,.05,.1,.15}
+	\draw (.1,\y) -- ++(-.2,0) node[anchor=east] {$\y$};
+\input{ll.tex}
+\end{tikzpicture}
 \end{frame}
 
 \end{document}

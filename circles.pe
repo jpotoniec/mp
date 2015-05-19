@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+my $sum=0;
+for(my $n=1;$n<=30;$n++)
+{
+	my $x=int(($n-1)%10);
+	my $y=-int(($n-1)/10);
+	my $angle=360.0/$n;
+	print <<EOF;
+\\draw[color2] ($x,$y) circle (.4cm) node {\$X_{$n}\$};
+\\draw[color4,thick] ($x,$y) ++($sum:.4cm) arc [radius=.4cm,start angle=$sum, delta angle=$angle];
+EOF
+	$sum+=$angle;
+}

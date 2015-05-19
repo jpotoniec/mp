@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{polski}
 \usepackage{amsmath,amssymb}
-\usepackage{geometry}
+\usepackage[margin=2cm]{geometry}
 \usepackage{tikz}
 \pagestyle{empty}
 \linespread{1.3}
@@ -173,4 +173,105 @@ płynie z kadzi warzelnej (punkt $X$) do pojemnika fermentacyjnego (punkt $Y$)
 
 \end{enumerate}
 \end{enumerate}
+
+\clearpage
+\section{Zmienne losowe dyskretne jednowymiarowe}
+\begin{enumerate}
+\item Prawdopodobieństwo trafienia do celu w jednym strzale jest równie $\frac{1}{5}$. Niech $X$ przyjmuje wartość 1 jeżeli udało się trafić i 0 w przeciwnym przypadku.
+\begin{enumerate}
+\item Podaj rozkład zmiennej losowej $X$. \ans{$P(X=1)=p\quad P(X=0)=1-p$}
+\item Oblicz średnią liczbę celnych strzałów. \ans{$EX=p=0{,}2$}
+\item Oblicz odchylenie standardowe zmiennej losowej $X$. \ans{$DX=\sqrt{p(1-p)}=0{,}4$}
+\item Podaj najbardziej prawdopodobną wartość zmiennej losowej $X$. \ans{$0$}
+\end{enumerate}
+\item Prawdopodobieństwo trafienia do celu w jednym strzale jest równie $\frac{1}{5}$. Niech $X$ oznacza liczbę strzałów celnych w wykonanej serii 5 niezależnych strzałów. 
+\begin{enumerate}
+\item Podaj rozkład zmiennej losowej $X$. \ans{$P(X=k)={5 \choose k}\frac{4^{5-k}}{5^5}$}
+\item Oblicz prawdopodobieństwo, że liczba strzałów celnych będzie nie mniejsza niż 2. \ans{$P(X\geq 2)=1-P(X=0)-P(X=1)=1-\frac{4^5}{5^5}-5\cdot\frac{4^4}{5^5}=\frac{821}{3125}\approx0{,}263$}
+\item Oblicz średnią liczbę celnych strzałów. \ans{$EX=np=1$}
+\item Oblicz odchylenie standardowe zmiennej losowej $X$. \ans{$DX=\sqrt{np(1-p)}=\sqrt{\frac{4}{5}}$}
+\item Podaj najbardziej prawdopodobną liczbę celnych strzałów. \ans{$\lfloor(n+1)p\rfloor=1$}
+\end{enumerate}
+\item Linia 64 jeżdżąca na trasie Literacka--Kacza jest obsługiwana przez 7 autobusów, które psują się przypadkowo i niezależnie od siebie. Każdy autobus może w ciągu całego dnia zepsuć się z~prawdopodobieństwem $0{,}25$. Niech $X$ oznacza liczbę autobusów, które w ciągu dnia uległy awarii i musiały zjechać do zajezdni.
+\begin{enumerate}
+\item Podaj rozkład zmiennej losowej $X$.
+\item Oblicz prawdopodobieństwo, że w ciągu całego dnia zepsują się przynajmniej 3 autobusy.
+\item Oblicz średnią liczbę zepsutych autobusów.
+\item Oblicz odchylenie standardowe zmiennej losowej $X$.
+\item Podaj najbardziej prawdopodobną liczbę zepsutych autobusów. \ans{$(n+1)p-1=1, (n+1)p=2$}
+\end{enumerate}
+\item W Minas Tirith gromadzą zapasy na wypadek oblężenia. Jeżeli mięso,
+pakowane w beczki, jest źle wysuszone może się zepsuć. Prawdopodobieństwo, że
+tak się stanie wynosi $0{,}0045$ niezależnie dla każdej beczki. W~piwnicach zgromadzono 1000 beczek z mięsem,
+niech $X$ oznacza liczbę beczek z zepsutym mięsem.  \begin{enumerate}
+\item Podaj rozkład zmiennej losowej $X$. \ans{$P(X=k)={1000\choose k}p^k(1-p)^{1000-k}\approx\frac{\lambda^k}{k!}e^{-\lambda} \quad \lambda=1000\cdot0{,}0045=4{,}5$}
+\item Oblicz prawdopodobieństwo, że zepsuje się nie więcej niż 5 beczek. \ans{$P(X\leq 5)=0{,}70290$}
+\item Oblicz średnią liczbę zepsutych beczek. \ans{$EX=4{,}5$}
+\item Oblicz odchylenie standardowe zmiennej losowej $X$. \ans{$DX=\sqrt{4{,}5}$}
+\end{enumerate}
+\item Hobbici znani są ze swojej intensywnej i obfitej korespondencji. W Michael
+Delving mieszka 500 hobbitów, a~w~ciągu jednego dnia do urzędu pocztowego
+przychodzi $X$ hobbitów. Hobbici do urzędu pocztowego przychodzą niezależnie od
+siebie i~z~równym prawdopodobieństwem $p$, a~każdego dnia jest ich tam
+\emph{średnio} 75. Załóż, że zmienna losowa $X$ ma rozkład dwumianowy.
+\begin{enumerate}
+\item Oblicz wartość prawdopodobieństwa $p$ przyjścia do urzędu przez pojedynczego hobbita.
+\item Podaj  (w formie funkcji prawdopodobieństwa) rozkład prawdopodobieństwa zmiennej losowej $X$.
+\item Ile różnych wartości może przyjąć dystrybuanta zmiennej losowej $X$? Odpowiedź uzasadnij.
+\item Jaką wartość przyjmie dystrybuanta zmiennej losowej $X$ w punkcie 1000?
+\item Oblicz prawdopodobieństwo, że przez cały dzień do urzędu nikt nie przyjdzie.
+\item Podaj wartość $EX$.
+\item Oblicz odchylenie standardowe zmiennej losowej $X$.
+\item Oblicz najbardziej prawdopodobną liczbę hobbitów, którzy przyjdą w ciągu dnia do urzędu.
+\end{enumerate}
+\clearpage
+\item Bilbo bierze udział w grze, w której punkty zdobywa się za trafianie kamykami do celu. Każdemu zawodnikowi przysługuje maksymalnie pięć rzutów, przy czym:
+\begin{itemize}
+\item na początku każdy zawodnik ma jeden punkt;
+\item każdy trafiony rzut powoduje podwojenie liczby posiadanych punktów;
+\item rzut nietrafiony oznacza koniec gry dla danego zawodnika.
+\end{itemize}
+Prawdopodobieństwo, że Bilbo w pojedynczym rzucie trafi do celu wynosi $0{,}7$. Niech $X$ będzie zmienną losową oznaczającą liczbę punktów zdobytych przez
+Bilba.
+\begin{enumerate}
+\item Podaj funkcję prawdopodobieństwa zmiennej losowej $X$.
+\item Oblicz dystrybuantę zmiennej losowej $X$.
+\item Oblicz $EX$.
+\item Oblicz wariancję zmiennej losowej $X$.
+\item Oblicz $P(5\leq X\leq 30)$.
+\end{enumerate}
+\item W piwnicach Brandy Hallu zgromadzono 500 butelek soków na zimę.
+Niestety, z poprzednich lat wiadomo, że każda butelka ma $0{,}5\%$ szans nie dotrwać zimy: spleśnieje, skwaśnieje itp.
+Niech $X$ będzie zmienną losową oznaczającą liczbę zepsutych butelek soku.
+Niech $Y$ będzie zmienną losową oznaczającą liczbę zdatnych do spożycia butelek soku, to znaczy $X+Y=500$.
+
+\begin{enumerate}
+\item Podaj funkcję prawdopodobieństwa zmiennej losowej $X$.
+\item Podaj wartość średnią i odchylenie standardowe zmiennej losowej $X$.
+\item Podaj funkcję prawdopodobieństwa zmiennej losowej $Y$.
+\item Podaj wartość średnią i odchylenie standardowe zmiennej losowej $Y$.
+\item Podaj najbardziej prawdopodobną liczbę zepsutych butelek.
+\item Oblicz prawdopodobieństwo, że liczba przynajmniej 496 butelek soku będzie się nadawało do spożycia.
+\item Oblicz prawdopodobieństwo, że liczba zepsutych butelek będzie różniła się od oczekiwanej liczby zepsutych butelek o mniej niż odchylenie standardowe.
+\item Oszacuj (z dokładnością do $0{,}1$) prawdopodobieństwo, że liczba butelek nadających się do spożycia przekroczy 300. Odpowiedź uzasadnij.
+\end{enumerate}
+\item W piwnicy Bamfurlong znajduje się 10 słoików szczególnie cennej konfitury ze świecących gigantycznych pieczarek.
+Właściciel przechowuje je na Święto Zimowe, ale nie wie, że ze względu na bliskość rzeki, każdy słoik ma 20\% szans spleśnieć do tego czasu!
+Niech $X$ będzie zmienną losową oznaczającą liczbę słoików, które nie zapleśniały do Święta.
+Niech $Y$ będzie zmienną losową oznaczającą liczbę słoików, które spleśniały.
+Inaczej: $X+Y=10$.
+
+\begin{enumerate}
+\item Podaj funkcję prawdopodobieństwa zmiennej losowej $X$.
+\item Podaj wartość średnią i odchylenie standardowe zmiennej losowej $X$.
+\item Podaj funkcję prawdopodobieństwa zmiennej losowej $Y$.
+\item Podaj wartość średnią i odchylenie standardowe zmiennej losowej $Y$.
+\item Podaj najbardziej prawdopodobną liczbę zepsutych słoików.
+\item Oblicz prawdopodobieństwo, że przynajmniej 8 słoików będzie się nadawało do spożycia.
+\item Oblicz prawdopodobieństwo, że liczba zepsutych słoików będzie różniła się od oczekiwanej liczby zepsutych słoików o mniej niż odchylenie standardowe.
+\end{enumerate}
+
+\end{enumerate}
+
+
 \end{document}

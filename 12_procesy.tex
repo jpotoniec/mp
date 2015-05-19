@@ -1,0 +1,31 @@
+\documentclass{mp}
+\graphicspath{{12_procesy}}
+\subtitle{Procesy losowe}
+\begin{document}
+\frame{\titlepage}
+\begin{frame}{Sumaryczny ruch w punkcie wymiany ruchu \emph{Thinx}}
+\uncover<3->{\[\{X_t(\omega)\colon t\in T, \omega\in\Omega\} \quad T\subseteq \R \quad \uncover<4-5>{\only<4>{\alert{t=const}}\only<5>{\alert{\omega=const}}}\]}
+\center
+\begin{tikzpicture}[x=.1cm,y=2cm]
+\input{12_procesy/thinx.tex}
+\end{tikzpicture}
+
+{\tiny Dane pochodzą z \url{http://www.thinx.pl/siec/statystyki_ruchu}}
+\note<1>
+{
+	Dla ustalonego $t$: wartość procesu losowego \\
+	Dla ustalonego $\omega$: realizacja procesu losowego \\
+	Jeżeli $\left|T\right|\leq\aleph_0$, to powstaje ciąg lub wektor. Dla skupienia uwagi $T$ jest przedziałem.
+}
+\end{frame}
+\begin{frame}{Rozkład procesu losowego}
+%troche z tego jest na poczatku rozdzialu 12-tego u Borowkowa, troche jest w notatkach od profa, a troche wypracowalem sam na podstawie definicji funkcji mierzalnej
+\begin{gather*}
+\uncover<+->{(\Omega,\mathcal{A}_\Omega,P) \qquad \{X(t,\omega)\colon t\in T, \omega\in\Omega\} \\}
+\uncover<+->{\delta\colon \Omega\to \Omega' \qquad \delta(\omega)=X(\cdot,\omega) \\}
+\uncover<+->{\mathcal{A}_{\Omega'}=\{A\subseteq \Omega' \colon \uncover<+->{\delta^{-1}(A)=\{\omega\in\Omega\colon X(\cdot,\omega)\in A\}\in\mathcal{A}_\Omega} \} \\}
+\uncover<+->{P'\colon \mathcal{A}_{\Omega'}\to \left<0,1\right> \qquad \forall A\in \mathcal{A}_{\Omega'}\colon P'(A)=P(\delta^{-1}(A)) \\}
+\uncover<+->{(\Omega',\mathcal{A}_{\Omega'},\alert{P'})}
+\end{gather*}
+\end{frame}
+\end{document}

@@ -1,0 +1,45 @@
+\documentclass{mp}
+\usetikzlibrary{shadings} 
+\graphicspath{{14_proces_poissona}}
+\subtitle{Proces Poissona}
+\begin{document}
+\frame{\titlepage}
+\begin{frame}{Proces sygnałowy}
+\begin{gather*}
+\{X_t, \left<0,\infty\right)\} \qquad X_t\in\{0,1,\ldots\} \\
+\forall t_1<t_2: X_{t_2}-X_{t_1}\in\{0,1,\ldots\}
+\end{gather*}
+\note{$X_t$ jest liczbą zdarzeń losowych w przedziale czasu $\left<0,t\right)$}
+\end{frame}
+\begin{frame}{Stacjonarny proces Poissona}
+\begin{block}{Założenia}
+\begin{enumerate}
+\item<+-> proces sygnałowy $\{X_t,t\in\left<0,\infty\right)\}$
+\item<+-> przyrosty niezależne
+\item<+-> przyrosty stacjonarne
+\item<+-> 
+\[ \lim_{\tau\to 0} \frac{P(X_{t+\tau}-X_t=1)}{\tau}=\lambda >0 \qquad \lim_{\tau\to 0} \frac{P(X_{t+\tau}-X_{t}>1)}{\tau}=0 \]
+\item<+-> $P(X_0=0)=1$
+\end{enumerate}
+\end{block}
+\uncover<+->
+{
+\begin{block}{Twierdzenie}
+\[ P(X_t=k)=\frac{(\lambda t)^k}{k!}e^{-\lambda t} \qquad k\in\{0,1,\ldots\} \]
+\end{block}
+}
+\note<1>{$\lambda$ to średnia liczba zgłoszeń obsługiwanych w jednostce czasu.}
+\end{frame}
+\begin{frame}{Odstęp między zgłoszeniami}
+\[ \left( \forall t\colon X_{t+\alert{U}}-X_t=1 \right) \to P(U<u)=\alert{?} \]
+\note{
+	\begin{gather*}
+	P(U<u)=P(X_{t+u}-X_t\geq 1)=1-P(X_u=0)=1-e^{-\lambda u}
+	\end{gather*}
+}
+\end{frame}
+\begin{frame}{Rozkład stacjonarny}
+\[ \forall k\colon \lim_{t\to\infty} P(X_t=k)=P(\alert{X}=k) \]
+\end{frame}
+\end{document}
+

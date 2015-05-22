@@ -1,0 +1,35 @@
+\documentclass{mp}
+\graphicspath{{13_lancuchy_markowa}}
+\subtitle{Łańcuchy Markowa}
+\begin{document}
+\frame{\titlepage}
+\begin{frame}{Łańcuch Markowa}
+\[ \{X_t,T\} \]
+\begin{itemize}
+\item $T\subseteq \N$
+\item $P(X_t\in\{x_0,x_1,\ldots\})=1$
+\item $\{X_t\}$ jest procesem Markowa
+\item \[\forall x_i,x_j,t\colon P(X_t=x_j|X_{t-1}=x_i)=P_{i,j}\]
+\end{itemize}
+\end{frame}
+\begin{frame}{Macierz przejść}
+\begin{gather*}
+\bm{P}=\begin{bmatrix} 
+P_{0,0} & P_{0,1} & \ldots & P_{0,j} & \ldots \\
+P_{1,0} & P_{1,1} & \ldots & P_{1,j} & \ldots \\
+\vdots & \vdots & \ddots & \vdots & \ddots \\
+P_{i,0} & P_{i,1} & \ldots & P_{i,j} & \ldots \\
+\vdots & \vdots & \ddots & \vdots & \ddots \\
+\end{bmatrix} \\
+\bm{P(X_t)}=\begin{bmatrix} P(X_t=a_1) & P(X_t=a_2) & \ldots & P(X_t=a_j) & \ldots \end{bmatrix} \\
+\uncover<2->{\bm{P(X_t)}\bm{P}=\alert<2>{?}\\}
+\uncover<3->{\bm{P(X_t)}\bm{P^k}=\alert<3>{?}}
+\end{gather*}
+\note<2>{
+	Ile wynoszą sumy w wierszach w macierzy? \\
+	$\bm{P(X_t)}\bm{P}=\bm{P(X_{t+1})}$}
+\end{frame}
+\begin{frame}{Przykład}
+%TODO: chciałbym tutaj coś podobnego do rysunku 7.1 u Mitzenmachera
+\end{frame}
+\end{document}

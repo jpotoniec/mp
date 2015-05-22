@@ -1,4 +1,5 @@
 \documentclass{mp}
+\usetikzlibrary{shadings}
 \graphicspath{{12_procesy}}
 \subtitle{Procesy losowe}
 \begin{document}
@@ -36,20 +37,92 @@
 \end{gather*}
 \uncover<+->
 {
-	%http://en.wikipedia.org/wiki/Kolmogorov_extension_theorem
-	%TODO: ustalić pełną nazwę twierdzenia po polsku -- jest u Borowkowa zdaje sie
-\begin{block}{Twierdzenie (wniosek z twierdzenia Kołmogorowa)}
+	%Borowkow, str. 189 i dodatek 2 + notatki
+\begin{block}{Twierdzenie (wniosek z twierdzenia Kołmogorowa o~rozkładach zgodnych)}
 Znajomość wszystkich $n$-wymiarowych rozkładów dla dowolnego, skończonego $n$ potrzeba i wystarcza do pełnego scharakteryzowania procesu losowego.
 \end{block}
 }
 \end{frame}
-\begin{frame}{Momenty procesu losowego}
-\begin{description}<+->
-\item[wartość średnia] \[ \mu(t)=E\left[X(t)\right] \]
-\item[odchylenie standardowe] \[ \sigma(t)=D(X(t))=\sqrt{E\left[(X(t)-\mu(t))^2\right]} \]
-\item[funkcja autokorelacji] \[R_{XX}(t_1,t_2)=E\left[(X(t_1)-\mu(t_1))(X(t_2)-\mu(t_2))\right] \]
-\item[współczynnik autokorelacji] \[r_{XX}(t_1,t_2)=\frac{R_{XX}(t_1,t_2)}{\sigma(t_1)\sigma(t_2)} \]
-\item[$n$-wymiarowa funkcja korelacyjna]
+\begin{frame}{Momenty jednowymiarowe}
+\[ \uncover<2->{\mu(t)=E\left(X_t\right)} \qquad \uncover<3->{\sigma(t)=D(X_t)=\sqrt{E\left((X_t-\mu(t))^2\right)}} \]
+\center
+\begin{tikzpicture}[x=.1cm,y=2cm]
+\input{12_procesy/mean.tex}
+\end{tikzpicture}
+\end{frame}
+\begin{frame}{Momenty dwuwymiarowe}
+\note<1>{$R_{XX}$ funkcja autokorelacji; $r_{XX}$ unormowana funkcja autokorelacji albo współczynnik korelacji}
+\[R_{XX}(t_1,t_2)=E\left[(X_{t_1}-\mu(t_1))(X_{t_2}-\mu(t_2))\right] \qquad r_{XX}(t_1,t_2)=\frac{R_{XX}(t_1,t_2)}{\sigma(t_1)\sigma(t_2)} \]
+\center
+\begin{tikzpicture}[x=.07cm,y=.07cm]
+\input{12_procesy/corr.tex}
+\end{tikzpicture}
+\end{frame}
+\begin{frame}{Wektory procesów losowych}
+\[ \left[X_t,Y_t\right] \]
+\begin{description}
+\item<2->[funkcja korelacji wzajemnej] \[ R_{XY}(t_1,t_2)=E\left[(X_{t_1}-\mu_X(t_1))(Y_{t_2}-\mu_Y(t_2))\right] \]
+\item<3->[macierz korelacyjna] \[ \begin{bmatrix} R_{XX}(t_1,t_2) & R_{XY}(t_1,t_2) \\ R_{YX}(t_1,t_2) & R_{YY}(t_1,t_2) \end{bmatrix} \]
 \end{description}
+\end{frame}
+\begin{frame}{Proces stacjonarny w węższym sensie}
+\begin{block}{Określenie}
+\only<-5>
+{
+Jeżeli dla dowolnych:
+\begin{itemize}
+\item<1-> $n\in\N$
+\item<2-> $t_1,t_2,\ldots,t_n\in T$
+\item<3-> $\tau\in\R\colon (t_1+\tau),(t_2+\tau),\ldots,(t_n+\tau)\in T$
+\item<4-> $x_1,x_2,\ldots,x_n\in \R$
+\end{itemize}
+}
+\uncover<5->{\[ F(x_1,t_1; x_2,t_2; \ldots, x_n,t_n)=F(x_1,t_1+\tau; x_2,t_2+\tau; \ldots; x_n,t_n+\tau) \]}
+\end{block}
+\only<6->
+{
+\begin{block}{Wnioski}
+\begin{gather*}
+\uncover<6->{\forall x\in\R \forall t\in T: F(x,t)=F(x)\\}
+\uncover<7->{\mu(t)=\mu=const \qquad \sigma(t)=\sigma=const\\}
+\uncover<8->{\forall x_1,x_2\in\R \forall t,t+\tau\in T\colon \uncover<9->{F(x_1,t; x_2,t+\tau)=F(x_1,0; x_2,\tau)=F(x_1,x_2,\tau)}\\}
+\uncover<10->{\forall t,t+\tau\in T\colon R_{XX}(t,t+\tau)=R_{XX}(0,\tau)=R_{XX}(\tau)}
+\end{gather*}
+\end{block}
+}
+\end{frame}
+\begin{frame}{Proces stacjonarny w szerszym sensie}
+\begin{block}{Określenie}
+\begin{gather*}
+ \mu(t)=const<\infty \qquad \sigma(t)=const<\infty \\
+ \forall t_1,t_2\in T\colon R(t_1,t_2)=R(t_2-t_1)<\infty
+\end{gather*}
+\end{block}
+\begin{block}{Twierdzenie}
+Proces stacjonarny w węższym sensie, dla którego $E(X^2_t)<\infty$, jest stacjonarny w szerszym sensie.
+\end{block}
+\end{frame}
+\begin{frame}{Proces o przyrostach stacjonarnych}
+\[ Y^\tau_t=X_{t+\tau}-X_t \qquad t\in\{t\in T\colon t+\tau\in T\} \]
+\uncover<2>{Dla dowolnego $\tau\in\R$, $\{Y^\tau_t\}$ jest stacjonarny w węższym sensie.}
+%TODO: przykład
+\end{frame}
+\begin{frame}{Proces o przyrostach niezależnych}
+\begin{gather*}
+\forall n\in \N\, \forall t_1<t_2<\ldots<t_n\in T\colon\\
+X_{t_1},X_{t_2}-X_{t_1},\ldots,X_{t_n}-X_{t_{n-1}} \text{ są niezależne}
+\end{gather*}
+%TODO: przykład
+\end{frame}
+\begin{frame}{Proces Markowa}
+\begin{block}{Określenie}
+\begin{gather*}
+\forall n\in \N\, \forall t_1<t_2<\ldots<t_n\in T\, \forall x_1,x_2,\ldots,x_n\in\R \colon\\
+P(X_{t_n}<x_n|X_{t_{n-1}}=x_{n-1},\ldots,X_{t_1}=x_1) = P(X_{t_n}<x_n|X_{t_{n-1}}=x_{n-1})
+\end{gather*}
+\end{block}
+\begin{block}{Twierdzenie}
+Jeżeli $\{X_t\}$ jest procesem o przyrostach niezależnych i $\exists c\in\R\colon P(X_{\min T}=c)=1$, to $\{X_t\}$ jest procesem Markowa.
+\end{block}
 \end{frame}
 \end{document}

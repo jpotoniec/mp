@@ -2,6 +2,7 @@
 
 use warnings;
 use strict;
+use Math::Trig;
 
 sub draw
 {
@@ -14,73 +15,272 @@ sub draw
 	return $_;
 }
 
-<STDIN>;
-<STDIN>;
-my $first_hour;
-my $x=0;
-my $slide=0;
-my $max=0;
-my @hours;
-my @data;
-my @indata;
-my @outdata;
-while(<STDIN>)
+sub load
 {
-	next if(/^#/);
-	chomp;
+	<STDIN>;
+	<STDIN>;
+	my $first_hour;
+	my $x=0;
+	my $slide=0;
+	my $max=0;
+	my @hours;
+	my @data;
+	my @indata;
+	my @outdata;
+	while(<STDIN>)
+	{
+		next if(/^#/);
+		chomp;
 # '1' '2015-05-11 13:00,05-11' '1,0,0' '62823152462' '52529884628' '64207810749' '54499564135' 
 #magic: X,0,Z, X=1 oznacza, ze po godzinie jest po przecinku doklejone id dnia, Z=1 oznacza zmiane doby
-	my ($id, $timestamp, $magic, $out, $in, $out_max, $in_max)=split /;/,$_;
-	($_,my $hour,my $dayid)=split /[ ,]/,$timestamp;
-	$first_hour=$hour unless defined $first_hour;
-	if($first_hour eq $hour)
-	{
-		$x=0;
-		$slide++;
+		my ($id, $timestamp, $magic, $out, $in, $out_max, $in_max)=split /;/,$_;
+		($_,my $hour,my $dayid)=split /[ ,]/,$timestamp;
+		$first_hour=$hour unless defined $first_hour;
+		if($first_hour eq $hour)
+		{
+			$x=0;
+			$slide++;
+		}
+		push @hours, $hour if($slide==1);
+		$in/=100*1024**3;
+		$out/=100*1024**3;
+		my $traffic=$out+$in;
+		$data[$slide-1][$x]=$traffic;
+		$indata[$slide-1][$x]=$in;
+		$outdata[$slide-1][$x]=$out;
+		$max=$traffic if $max<$traffic;
+		$x++;
 	}
-	push @hours, $hour if($slide==1);
-	$in/=100*1024**3;
-	$out/=100*1024**3;
-	my $traffic=$out+$in;
-	$data[$slide-1][$x]=$traffic;
-	$indata[$slide-1][$x]=$in;
-	$outdata[$slide-1][$x]=$out;
-	$max=$traffic if $max<$traffic;
-	$x++;
-}
-print ";\n";
-print "\\draw[->] (0,0) -- (0,".($max*1.1).") node[anchor=east] {\\footnotesize Gbps};\n";
-print "\\draw (-2pt,.5) -- ++(4pt,0) node[anchor=east] {50};\n";
-print "\\draw (-2pt,1) -- ++(4pt,0) node[anchor=east] {100};\n";
-print "\\draw (-2pt,1.5) -- ++(4pt,0) node[anchor=east] {150};\n";
-print "\\draw (-2pt,2) -- ++(4pt,0) node[anchor=east] {200};\n";
-print "\\draw[->] (0,0) -- (75,0) node[anchor=north] {\\footnotesize \\textsc{cest}};\n";
-for(my $x=0;$x<=$#hours;$x++)
-{
-	my ($h,$m)=split ':',$hours[$x];
-	if($m==0)
+	my @means;
+	my @stddevs;
+	for(my $i=0;$i<=$#hours;$i++)
 	{
-		print "\\draw ($x,-2pt) -- ++ (0,4pt)";
-		print "node[anchor=north] {$h}" if($h%6==0);
-		print ";\n";
+		my $m=0;
+		my $m2=0;
+		for(my $j=0;$j<=$#data;$j++)
+		{
+			$m+=$data[$j][$i];
+			$m2+=($data[$j][$i])**2;
+		}
+		$m/=($#data+1);
+		$m2/=($#data+1);
+		my $stddev=sqrt($m2-$m**2);
+		$means[$i]=$m;
+		$stddevs[$i]=$stddev;
 	}
+	return (
+		data=>\@data,
+		indata=>\@indata,
+		outdata=>\@outdata,
+		hours=>\@hours,
+		max=>$max,
+		means=>\@means,
+		stddevs=>\@stddevs
+	);
 }
-$slide=1;
-print "\\draw[color3,visible on=<$slide->] ".draw(@{$data[0]}).";\n";
-$slide++;
-print "\\draw[color3,visible on=<$slide->] ".draw(@{$data[1]}).";\n";
-$slide++;
-for(my $i=2;$i<=$#data;$i++)
+
+sub coords
 {
-	print "\\draw[color3,visible on=<$slide->] ".draw(@{$data[$i]}).";\n";
+	(%_)=@_;
+	my $max=$_{max};
+	my @hours=@{$_{hours}};
+
+	my $result="";
+	#$result.=";\n";
+	$result.="\\draw[->] (0,0) -- (0,".($max*1.1).") node[anchor=east] {\\footnotesize Gbps};\n";
+	$result.="\\draw (-2pt,.5) -- ++(4pt,0) node[anchor=east] {50};\n";
+	$result.="\\draw (-2pt,1) -- ++(4pt,0) node[anchor=east] {100};\n";
+	$result.="\\draw (-2pt,1.5) -- ++(4pt,0) node[anchor=east] {150};\n";
+	$result.="\\draw (-2pt,2) -- ++(4pt,0) node[anchor=east] {200};\n";
+	$result.="\\draw[->] (0,0) -- (75,0) node[anchor=north] {\\footnotesize \\textsc{cest}};\n";
+	for(my $x=0;$x<=$#hours;$x++)
+	{
+		my ($h,$m)=split ':',$hours[$x];
+		if($m==0)
+		{
+			$result.="\\draw ($x,-2pt) -- ++ (0,4pt)";
+			$result.="node[anchor=north] {$h}" if($h%6==0);
+			$result.=";\n";
+		}
+	}
+	return $result;
 }
-$slide++;
-print "\\fill[color4,visible on=<$slide>] ";
-for(@data)
+
+sub realizations
 {
-	@_=@{$_};
-	print "(20,".$_[20].") circle (1.1pt) ";
+	(%_)=@_;
+	my $max=$_{max};
+	my @data=@{$_{data}};
+	my $slide=1;
+	my $result="";
+
+	#$result.=";\n";
+	$result.=coords(@_);
+	$slide=1;
+	$result.="\\draw[color3,visible on=<$slide->] ".draw(@{$data[0]}).";\n";
+	$slide++;
+	$result.="\\draw[color3,visible on=<$slide->] ".draw(@{$data[1]}).";\n";
+	$slide++;
+	for(my $i=2;$i<=$#data;$i++)
+	{
+		$result.="\\draw[color3,visible on=<$slide->] ".draw(@{$data[$i]}).";\n";
+	}
+	$slide++;
+	$result.="\\fill[color4,visible on=<$slide>] ";
+	for(@data)
+	{
+		@_=@{$_};
+		$result.="(20,".$_[20].") circle (1.1pt) ";
+	}
+	$result.=";\n";
+	$slide++;
+	$result.="\\draw[color4,thick,visible on=<$slide>] ".draw(@{$data[0]}).";\n";
+	return $result;
 }
-print ";\n";
-$slide++;
-print "\\draw[color4,thick,visible on=<$slide>] ".draw(@{$data[0]}).";\n";
+
+sub corr
+{
+	(%_)=@_;
+	my @data=@{$_{data}};
+	my @hours=@{$_{hours}};
+	my @means=@{$_{means}};
+	my @stddevs=@{$_{stddevs}};
+	my @corr;
+	my $n=$#data+1;
+
+	for(my $t1=0;$t1<=$#hours;$t1++)
+	{
+		for(my $t2=0;$t2<=$#hours;$t2++)
+		{
+			$_=0;
+			for(my $i=0;$i<$n;$i++)
+			{
+				$_+=$data[$i][$t1]*$data[$i][$t2];
+			}
+			$_/=$n;
+			$_=($_-$means[$t1]*$means[$t2])/($stddevs[$t1]*$stddevs[$t2]);
+			$corr[$t1][$t2]=$_;
+			$corr[$t2][$t1]=$_;
+		}
+	}
+
+	my $result="";
+
+	for(my $t1=2;$t1<=$#hours;$t1+=2)
+	{
+		my $t1a=$t1-2;
+		my $t1b=$t1;
+		for(my $t2=2;$t2<=$#hours;$t2+=2)
+		{
+			my $t2a=$t2-2;
+			my $t2b=$t2;
+			my $ll=int(100*abs($corr[$t1a][$t2a]));
+			my $ul=int(100*abs($corr[$t1a][$t2b]));
+			my $lr=int(100*abs($corr[$t1b][$t2a]));
+			my $ur=int(100*abs($corr[$t1b][$t2b]));
+			$result.="\\shade[lower left=color2!$ll,upper left=color2!$ul,lower right=color2!$lr,upper right=color2!$ur] ($t1a,$t2a) rectangle ($t1b,$t2b);\n";
+			#$result.="\\fill[color2,opacity=".(abs($corr[$t1][$t2]))."] ($t1a,$t2a) -- ($t1b,$t2a) -- ($t1b,$t2b) -- ($t1a,$t2b) -- cycle;\n";
+		}
+	}
+
+	$result.="\\draw[->] (0,0) -- (75,0) node[anchor=north] {\\footnotesize \\textsc{cest}};\n";
+	$result.="\\draw[->] (0,0) -- (0,75) node[anchor=east] {\\footnotesize \\textsc{cest}};\n";
+	for(my $x=0;$x<=$#hours;$x++)
+	{
+		my ($h,$m)=split ':',$hours[$x];
+		if($m==0)
+		{
+			$result.="\\draw ($x,-2pt) -- ++ (0,4pt)";
+			$result.="node[anchor=north] {$h}" if($h%6==0);
+			$result.=";\n";
+			$result.="\\draw (-2pt,$x) -- ++ (4pt,0)";
+			$result.="node[anchor=east] {$h}" if($h%6==0);
+			$result.=";\n";
+		}
+	}
+
+	return $result;
+}
+
+sub mean
+{
+	(%_)=@_;
+	my @data=@{$_{data}};
+	my @hours=@{$_{hours}};
+	my $result=coords(@_);
+	my @process;
+	my $n=50;
+	my @means=@{$_{means}};
+	my @stddevs=@{$_{stddevs}};
+	for(my $i=0;$i<=$#hours;$i++)
+	{
+		my $m=$means[$i];
+		my $stddev=$stddevs[$i];
+		my $prev=0;
+		for(my $y=$m-3*$stddev,my $pos=0;$y<=$m+3*$stddev;$y+=(6*$stddev)/(4*$n))
+		{
+			my $y0=($y-$m)/$stddev;
+			my $pdf=exp(-$y0**2/2);
+			if(abs($prev-$pdf)>=1/$n)
+			{
+				$process[$i][$pos]={y=>$y,pdf=>$pdf};
+				$pos++;
+				$prev=$pdf;
+			}
+		}
+	}
+	my $result_stddev="";
+	for(my $x=1;$x<=$#hours;$x++)
+	{
+		my $x1=$x-1;
+		my $x2=$x;
+		@_=@{$process[$x1]};
+		for(my $j=1;$j<$#_;$j++)
+		{
+			my $y1a=$process[$x1][$j-1]->{y};
+			my $y1b=$process[$x1][$j]->{y};
+			my $y2a=$process[$x2][$j-1]->{y};
+			my $y2b=$process[$x2][$j]->{y};
+			my $op=$process[$x1][$j]->{pdf};
+			$result.="\\fill[color2,opacity=$op] ($x1,$y1a) -- ($x1,$y1b) -- ($x2,$y2b) -- ($x2,$y2a) -- cycle; % j=$j\n";
+		}
+		$result.="\\draw[color4,thick,visible on=<2->] ($x1,$means[$x1]) -- ($x2,$means[$x2]); % mean\n";
+		{
+			my $y1a=$means[$x1]-$stddevs[$x1];
+			my $y1b=$means[$x1]+$stddevs[$x1];
+			my $y2a=$means[$x2]-$stddevs[$x2];
+			my $y2b=$means[$x2]+$stddevs[$x2];
+			#$result_stddev.="\\fill ($x1,$y1a) -- ($x1,$y1b) -- ($x2,$y2b) -- ($x2,$y2a) -- cycle; % stddev\n";
+			$result_stddev.="\\draw ($x1,$y1a)  -- ($x2,$y2a); \\draw ($x1,$y1b)-- ($x2,$y2b) -- cycle; % stddev\n";
+		}
+	}
+#		$result.="\\draw[color2,opacity=0] ($i,".($m-3*$stddev).");\n";
+#			$result.="($i,$y);\n";
+#			$result.="\\draw[color2,opacity=$pdf] ($i,$y) -- ";
+#		$result.="($i,".($m+3*$stddev).");\n";
+	return <<EOF;
+	$result
+	\\draw[color4,visible on=<2->] ($#hours,$means[$#hours]) node[anchor=west] {\\footnotesize \$\\mu(t)\$};
+	\\begin{scope}[alt=<3->{opacity=.5}{invisible},color3,thick]
+	$result_stddev
+	\\end{scope}
+	\\draw[color3,visible on=<3->] ($#hours,$means[$#hours]+$stddevs[$#hours]) node[anchor=west] {\\footnotesize \$\\mu(t)+\\sigma(t)\$};
+	\\draw[color3,visible on=<3->] ($#hours,$means[$#hours]-$stddevs[$#hours]) node[anchor=west] {\\footnotesize \$\\mu(t)-\\sigma(t)\$};
+EOF
+}
+
+die unless $#ARGV>=2;
+
+my %data=load();
+
+open F,">",$ARGV[0];
+print F realizations(%data);
+close F;
+
+open F,">",$ARGV[1];
+print F mean(%data);
+close F;
+
+open F,">",$ARGV[2];
+print F corr(%data);
+close F;

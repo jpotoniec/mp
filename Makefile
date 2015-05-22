@@ -33,13 +33,13 @@ clean:
 
 11_ciagi.pdf: circles.tex ll.tex
 
-12_procesy.pdf: 12_procesy/thinx.tex
+12_procesy.pdf: 12_procesy/thinx.tex 12_procesy/mean.tex 12_procesy/corr.tex
 
 %.tex: %.pe
 	./$^ >$@
 
-12_procesy/thinx.tex: 12_procesy/thinx.pe 12_procesy/thinx-weekly.csv
-	./12_procesy/thinx.pe <12_procesy/thinx-weekly.csv >12_procesy/thinx.tex
+12_procesy/thinx.tex 12_procesy/mean.tex 12_procesy/corr.tex: 12_procesy/thinx.pe 12_procesy/thinx-weekly.csv
+	./12_procesy/thinx.pe <12_procesy/thinx-weekly.csv 12_procesy/thinx.tex 12_procesy/mean.tex 12_procesy/corr.tex
 
 index.html: gen_index.pe Makefile
 	./gen_index.pe $(SRC) >$@

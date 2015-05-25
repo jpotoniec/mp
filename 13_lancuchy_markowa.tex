@@ -110,4 +110,66 @@ $\alert<4>{\bm{P}^{10}}$ & 0 & 1 & 2 & 3 & 4 & 5\\
 \end{columns}
 }
 \end{frame}
+\begin{frame}{Klasyfikacja stanów}
+\note<1>{
+	$r_{i,j}^t$ prawdopodobieństwo, że przejdziemy z $x_i$ do $x_j$ w dokładnie $t$ krokach.
+	Nie tworzy zmiennej losowej, bo nie musi się sumować do 1. \\
+	$h_{i,j}$ to średni czas przejścia $i\to j$. \\
+	Do stanu powracającego łańcuch wraca nieskończenie wiele razy \\
+	Stany zerowe powracające nie mogą występować w łańcuchach skończonych.
+}
+\begin{gather*}
+ r_{i,j}^t=P\left(X_t=x_j, X_{t-1}\neq x_j, X_{t-2}\neq x_j, \ldots, X_1\neq x_j,  | X_0=x_i\right) \\
+ h_{i,j}=\sum_{t\in \{1,2,\ldots\}} tr_{i,j}^t
+\end{gather*}
+\begin{description}
+\item[dodatni powracający] \[\sum_{t\in \{1,2,\ldots\}} r_{i,i}^t =1 \land h_{i,i}<\infty\]
+\item[zerowy powracający] \[\sum_{t\in \{1,2,\ldots\}} r_{i,i}^t =1 \land h_{i,i}=\infty\]
+\item[przejściowy] \[\sum_{t\in \{1,2,\ldots\}} r_{i,i}^t <1 \]
+\end{description}
+\end{frame}
+\begin{frame}{Przykład}
+\center
+\begin{tikzpicture}
+\node (n1) [state] {1};
+\node (n2) [state,right=of n1] {2};
+\node (n3) [state,right=of n2] {3};
+\node (dots1) [right=of n3] {\ldots};
+\node (abovedots1) [above=of dots1] {};
+\node (nn) [state,right=of dots1] {n};
+\node (dots2) [right=of nn] {\ldots};
+
+
+\path[->] (n1) edge[bend left] node[above] {$\frac{1}{2}$} (n2);
+\path[->] (n1) edge[loop above] node[above] {$\frac{1}{2}$} (n1);
+\path[->] (n2) edge[bend left] node[above] {$\frac{2}{3}$} (n3);
+\path[->] (n2) edge[bend left] node[below] {$\frac{1}{3}$} (n1);
+\path[->] (n3) edge[bend left] node[below] {$\frac{1}{4}$} (n1);
+\path[->] (n3) edge[bend left] node[above] {$\frac{3}{4}$} (dots1);
+\path[->] (dots1) edge[bend left] node[above] {$\frac{n-1}{n}$} (nn);
+\path[->] (nn) edge[bend left] node[above] {$\frac{n}{n+1}$} (dots2);
+\path[->] (nn) edge[bend left] node[below] {$\frac{1}{n+1}$} (n1);
+\end{tikzpicture}
+\note<1>
+{
+\begin{gather*}
+r_{1,1}^t=\prod_{j=1}^{t-1} \frac{j}{j+1}\cdot\frac{1}{t+1}=\frac{1}{2}\cdot\frac{2}{3}\cdot\ldots\cdot\frac{t-1}{t}\cdot\frac{1}{t+1}=\frac{1}{t(t+1)} \\
+\sum_{t=1}^\infty \frac{1}{t(t+1)}=\lim_{n\to\infty} \frac{n}{n+1}=1 \\
+h_{i,i}=\sum_{t=1}^\infty \frac{t}{t(t+1)}=\sum_{t=1}^\infty \frac{1}{t+1}=\infty
+\end{gather*}
+}
+\begin{gather*}
+\uncover<2->{r_{1,1}^t=\alert<2>{?} \\}
+\uncover<3->{\sum_{t=1}^\infty r_{1,1}^t=\alert<3>{?} \\}
+\uncover<4->{h_{1,1}^t=\alert<4>{?}}
+\end{gather*}
+\end{frame}
+
+%\begin{block}{Stan okresowy $x_j$}
+%\begin{gather*}
+% \exists \Delta\in\{2,3,\ldots\} \forall t,t+s\in T\colon \\ \left( P(X_{t+s}=x_j|X_t=x_j)=0 \iff s\mod\Delta\neq 0\right) 
+%\end{gather*}
+%\end{block}
+
+
 \end{document}

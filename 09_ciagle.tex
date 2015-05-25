@@ -52,6 +52,36 @@
 \end{gather*}
 \end{minipage}
 \end{frame}
+\begin{frame}{Rozkład wykładniczy o parametrze $\lambda$}
+\note{Ciągły odpowiednik rozkładu geometrycznego. Czas pomiędzy zdarzeniami zachodzącymi niezależnie, ze stałą prędkością.}
+\begin{columns}[T]
+\begin{column}{.5\textwidth}
+\begin{tikzpicture}[x=1cm,y=2cm]
+\draw[->] (-1,0) -- (4,0) node[right] {$x$};
+\draw[->] (0,-.5) -- (0,2) node[above] {$y$};
+\draw (0,1) node[left] {$1$} (-.1,1) -- (.1,1);
+\draw (0,.5) node[left] {$0{,}5$} (-.1,.5) -- (.1,.5);
+\draw (1,0) node[below] {$1$};
+
+\draw[color2,thick] (-1,0) -- (0,0);
+\draw[color2,thick,domain=0:4,samples=1000] plot (\x,{1.5*exp(-1.5*\x)});
+\draw[color4,thick,domain=0:4,samples=1000,visible on=<2->] plot (\x,{1-exp(-1.5*\x)});
+\draw[color4,thick,visible on=<2->] (-1,0) -- (0,0);
+\draw[color3,thick,visible on=<3->] (.67,-.25) -- (.67,1.75);
+\fill[color3,semitransparent,visible on=<4->] (0,-.25) rectangle (1.33,1.75);
+\end{tikzpicture}
+\end{column}
+\begin{column}{.49\textwidth}
+\begin{gather*}
+\textcolor{color2}{f(x)}=\begin{cases} \lambda e^{-\lambda x} & x\in\left<0,\infty\right) \\ 0 & \text{wpp} \end{cases}\\
+\only<2->{\textcolor{color4}{F(x)}=\alert<2>{?}} \\
+\only<3->{\textcolor{color3}{EX}=\frac{1}{\lambda}}\\
+\only<4->{\textcolor{color3}{DX}=\frac{1}{\lambda}} \\
+\only<5->{P(X>a+b|X>a)=P(X>b)}
+\end{gather*}
+\end{column}
+\end{columns}
+\end{frame}
 \begin{frame}{Rozkład normalny (Gaussa) $N(\mu,\sigma)$}
 \begin{minipage}{.54\textwidth}
 \begin{tikzpicture}[x=1cm,y=5cm]

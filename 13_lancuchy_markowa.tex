@@ -7,8 +7,8 @@
 \begin{frame}{Łańcuch Markowa}
 \[ \{X_t,T\} \]
 \begin{itemize}
-\item $T=\{0,1,\ldots,n\}$ lub $T=\{0,1,\ldots,n,\ldots\}$
-\item $P(X_t\in\{x_0,x_1,\ldots\})=1$
+\item $T=\{0,1,2,\ldots\}$
+\item $P(X_t\in\{x_0,x_1,\ldots,x_n,\ldots\})=1$
 \item $\{X_t\}$ jest procesem Markowa
 \item \[\forall x_i,x_j,t\colon P(X_t=x_j|X_{t-1}=x_i)=P_{i,j}\]
 \end{itemize}
@@ -120,15 +120,19 @@ $\alert<4>{\bm{P}^{10}}$ & 0 & 1 & 2 & 3 & 4 & 5\\
 }
 \begin{gather*}
  r_{i,j}^t=P\left(X_t=x_j, X_{t-1}\neq x_j, X_{t-2}\neq x_j, \ldots, X_1\neq x_j,  | X_0=x_i\right) \\
- h_{i,j}=\sum_{t\in \{1,2,\ldots\}} tr_{i,j}^t
+ h_{i,j}=\sum_{t=1}^\infty tr_{i,j}^t
 \end{gather*}
+\only<2>
+{
 \begin{description}
-\item[dodatni powracający] \[\sum_{t\in \{1,2,\ldots\}} r_{i,i}^t =1 \land h_{i,i}<\infty\]
-\item[zerowy powracający] \[\sum_{t\in \{1,2,\ldots\}} r_{i,i}^t =1 \land h_{i,i}=\infty\]
-\item[przejściowy] \[\sum_{t\in \{1,2,\ldots\}} r_{i,i}^t <1 \]
+\item[dodatni powracający] \[\sum_{t=1}^\infty r_{i,i}^t =1 \land h_{i,i}<\infty\]
+\item[zerowy powracający] \[\sum_{t=1}^\infty r_{i,i}^t =1 \land h_{i,i}=\infty\]
+\item[przejściowy] \[\sum_{t=1}^\infty r_{i,i}^t <1 \]
 \end{description}
-\end{frame}
-\begin{frame}{Przykład}
+}
+\only<3->
+{
+\begin{block}{Przykład}
 \center
 \begin{tikzpicture}
 \node (n1) [state] {1};
@@ -141,7 +145,7 @@ $\alert<4>{\bm{P}^{10}}$ & 0 & 1 & 2 & 3 & 4 & 5\\
 
 
 \path[->] (n1) edge[bend left] node[above] {$\frac{1}{2}$} (n2);
-\path[->] (n1) edge[loop above] node[above] {$\frac{1}{2}$} (n1);
+\path[->] (n1) edge[loop below] node[below] {$\frac{1}{2}$} (n1);
 \path[->] (n2) edge[bend left] node[above] {$\frac{2}{3}$} (n3);
 \path[->] (n2) edge[bend left] node[below] {$\frac{1}{3}$} (n1);
 \path[->] (n3) edge[bend left] node[below] {$\frac{1}{4}$} (n1);
@@ -150,7 +154,7 @@ $\alert<4>{\bm{P}^{10}}$ & 0 & 1 & 2 & 3 & 4 & 5\\
 \path[->] (nn) edge[bend left] node[above] {$\frac{n}{n+1}$} (dots2);
 \path[->] (nn) edge[bend left] node[below] {$\frac{1}{n+1}$} (n1);
 \end{tikzpicture}
-\note<1>
+\note<3>
 {
 \begin{gather*}
 r_{1,1}^t=\prod_{j=1}^{t-1} \frac{j}{j+1}\cdot\frac{1}{t+1}=\frac{1}{2}\cdot\frac{2}{3}\cdot\ldots\cdot\frac{t-1}{t}\cdot\frac{1}{t+1}=\frac{1}{t(t+1)} \\
@@ -159,17 +163,142 @@ h_{i,i}=\sum_{t=1}^\infty \frac{t}{t(t+1)}=\sum_{t=1}^\infty \frac{1}{t+1}=\inft
 \end{gather*}
 }
 \begin{gather*}
-\uncover<2->{r_{1,1}^t=\alert<2>{?} \\}
-\uncover<3->{\sum_{t=1}^\infty r_{1,1}^t=\alert<3>{?} \\}
-\uncover<4->{h_{1,1}^t=\alert<4>{?}}
+\uncover<4->{r_{1,1}^t=\alert<4>{?} \qquad}
+\uncover<5->{\sum_{t=1}^\infty r_{1,1}^t=\alert<5>{?} \qquad}
+\uncover<6->{h_{1,1}^t=\alert<6>{?}}
 \end{gather*}
+\end{block}
+}
 \end{frame}
+\begin{frame}{Okresowość łańcucha}
+\note<1>{Łańcuch jest okresowy jeżeli którykolwiek ze stanów jest okresowy}
+\begin{block}{Stan okresowy $x_j$}
+\begin{gather*}
+ \exists \Delta\in\{2,3,\ldots\} \forall t,t+s\in T\colon \\ \left( P(X_{t+s}=x_j|X_t=x_j)=0 \iff s\mod\Delta\neq 0\right) 
+\end{gather*}
+\end{block}
+\only<2>{\alert{Czy łańcuch z poprzedniego slajdu jest okresowy?}}
+\only<3>
+{
+\begin{block}{Inny przykład}
+\begin{tikzpicture}
+\node (n1) [state] {0};
+\node (n2) [state,right=of n1] {1};
+\node (n3) [state,right=of n2] {2};
+\node (dots1) [right=of n3] {\ldots};
+\node (abovedots1) [above=of dots1] {};
+\node (nn) [state,right=of dots1] {n};
+\node (dots2) [right=of nn] {\ldots};
 
-%\begin{block}{Stan okresowy $x_j$}
-%\begin{gather*}
-% \exists \Delta\in\{2,3,\ldots\} \forall t,t+s\in T\colon \\ \left( P(X_{t+s}=x_j|X_t=x_j)=0 \iff s\mod\Delta\neq 0\right) 
-%\end{gather*}
-%\end{block}
+\path[->] (n1) edge[bend left] node[above] {$1$} (n2);
+\path[->] (n2) edge[bend left] node[above] {$\frac{1}{2}$} (n3);
+\path[->] (n3) edge[bend left] node[above] {$\frac{2}{3}$} (dots1);
+\path[->] (dots1) edge[bend left] node[above] {$\frac{n-1}{n}$} (nn);
+\path[->] (nn) edge[bend left] node[above] {$\frac{n}{n+1}$} (dots2);
+
+\path[->] (n2) edge[bend left] node[below] {$\frac{1}{2}$} (n1);
+\path[->] (n3) edge[bend left] node[below] {$\frac{1}{3}$} (n2);
+\path[->] (dots1) edge[bend left] node[below] {$\frac{1}{4}$} (n3);
+\path[->] (nn) edge[bend left] node[below] {$\frac{1}{n+1}$} (dots1);
+\path[->] (dots2) edge[bend left] node[below] {$\frac{1}{n+2}$} (nn);
 
 
+
+% \path[->] (n1) edge[bend left] node[above] {$1$} (n2);
+% \path[->] (n2) edge[bend left] node[above] {$\frac{1}{2}$} (n3);
+% \path[->] (n2) edge[bend left] node[below] {$\frac{1}{2}$} (n1);
+% \path[->] (n3) edge[bend left] node[below] {$\frac{1}{2}$} (n2);
+% \path[->] (n3) edge[bend left] node[above] {$\frac{1}{2}$} (dots1);
+% \path[->] (dots1) edge[bend left] node[below] {$\frac{1}{2}$} (n3);
+% \path[->] (dots1) edge[bend left] node[above] {$\frac{1}{2}$} (nn);
+% \path[->] (dots2) edge[bend left] node[below] {$\frac{1}{2}$} (nn);
+% \path[->] (nn) edge[bend left] node[above] {$\frac{1}{2}$} (dots2);
+% \path[->] (nn) edge[bend left] node[below] {$\frac{1}{2}$} (dots1);
+
+\end{tikzpicture}
+\end{block}
+}
+\end{frame}
+\begin{frame}{Rozkład stacjonarny $\bm{\pi}$}
+\note<1>{$\bm{\pi}$ ma być rozkładem prawdopodobieństwa, więc nieujemne i sumować się do 1.}
+\[ \bm{\pi}\bm{P}=\bm{\pi} \]
+\uncover<2->
+{
+\begin{block}{Wniosek}
+\begin{enumerate}
+\item Jeżeli dla pewnego $N\in T$ zachodzi $\forall x_i\colon P(X_N=x_i)=\pi_i$, to
+\[ \forall n>N\forall x_i\colon P(X_n=x_i)=\pi_i \]
+\uncover<3->{\item Jeżeli $\forall x_i\colon P(X_0=x_i)=\pi_i$, to $\{X_t\}$ jest stacjonarny w węższym sensie.}
+\end{enumerate}
+}
+\end{block}
+\end{frame}
+\begin{frame}{Nieredukowalność}
+%na podstawie P:TE Theorem 6.4.5
+\note<1>{Jeżeli łańcuch nie jest nieredukowalny, to można zastosować twierdzenie o rozkładaniu (ang. \emph{Decomposition theorem}) i rozłożyć go na odrębne, nieredukowalne fragmenty plus stany przejściowe, które w analizie stacjonarności nie mają znaczenia.}
+\begin{block}{Określenie}
+\[ \forall x_i,x_j \exists t\in T \colon (\bm{P}^t)_{i,j}>0 \]
+\end{block}
+\only<2-5>
+{
+	\note<5>{$\{1,2\}$ są nieredukowalne i dodatnie powracające, $\{3,4\}$ są przejściowe, a $\{5, \ldots\}$ są nieredukowalne, ale zerowo powracające. $\{3,4\}$ mają zerowe rozkłady stacjonarne, obliczenie rozkładu stacjonarnego $\{1,2\}$ nie zależy od rozkładów stacjonarnych $\{5,\ldots\}$ (i vice-versa).}
+\begin{block}{Oblicz rozkład stacjonarny}
+\begin{tikzpicture}
+\node (empty) {};
+\node (n1) [state,left=of empty] {1};
+\node (n2) [state,below=of n1] {2};
+
+\path[->] (n1) edge[loop above] node[above] {$0{,}1$} (n1);
+\path[->] (n1) edge[bend left] node[right] {$0{,}9$} (n2);
+\path[->] (n2) edge[bend left] node[left] {$0{,}9$} (n1);
+\path[->] (n2) edge[loop below] node[below] {$0{,}1$} (n2);
+
+\begin{scope}[visible on=<3->]
+\node (n3) [state,right=of empty] {3};
+\node (n4) [state,below=of n3] {4};
+\path[->] (n3) edge[loop above] node[above] {$0{,}1$} (n3);
+\path[->] (n3) edge[bend left] node[right] {\alt<-3>{$0{,}9$}{\alert<4>{$0{,}8$}}} (n4);
+\path[->] (n4) edge[bend left] node[left] {\alt<-4>{$0{,}9$}{\alert<5>{$0{,}8$}}} (n3);
+\path[->] (n4) edge[loop below] node[below] {$0{,}1$} (n4);
+\path[->,visible on=<4->] (n3) edge[bend right] node[above] {\alert<4>{$0{,}1$}} (n1);
+\end{scope}
+\begin{scope}[visible on=<5->]
+\node (n5) [state,right=of n4] {5};
+\node (n6) [state,right=of n5] {6};
+\node (dots1) [right=of n6] {\ldots};
+\node (nn) [state,above=of dots1] {$n+4$};
+\node (dots2) [above=of n5] {\ldots};
+
+\path[->] (n4) edge[bend right] node[below] {$0{,}1$} (n5);
+\path[->] (n5) edge[loop below] node[below] {$\frac{1}{2}$} (n5);
+\path[->] (n5) edge[bend right] node[below] {$\frac{1}{2}$} (n6);
+\path[->] (n6) edge[bend right] node[below] {$\frac{2}{3}$} (dots1);
+\path[->] (n6) edge[bend right] node[above] {$\frac{1}{3}$} (n5);
+\path[->] (dots1) edge[bend right] node[left] {$\frac{n-1}{n}$} (nn);
+\path[->] (nn) edge[bend right] node[above] {$\frac{n}{n+1}$} (dots2);
+\path[->] (nn) edge[bend right] node[above] {$\frac{1}{n+1}$} (n5);
+\end{scope}
+\end{tikzpicture}
+\end{block}
+}
+\only<6->
+{
+	%Twierdzenie 7.11 u Mitzenmachera
+	\note<6>{$\pi_i$ nie zależą od $x_j$, po prostu są równe niezależnie od wybranej wartości $j$.}
+\begin{block}{Twierdzenie}
+Jeżeli $\{X_t\}$ jest nieredukowalny, nieokresowy i wszstkie jego stany są dodatnie powracające, to \[\forall x_i,x_j\colon \pi_i=\lim_{t\to\infty} (\bm{P}^t)_{i,j}=\frac{1}{h_{i,i}} \]
+\end{block}
+}
+\end{frame}
+\begin{frame}{Uśrednianie po czasie}
+%Example 7.2.2 w "Probability: theory and examples" R. Durret
+\begin{block}{Twierdzenie ergodyczne}
+Jeżeli $\{X_t\}$ jest nieredukowalny i ma rozkład stacjonarny, to dla dowolnej funkcji $f(X)$:
+\[ \sum_{x_i} \left|f(x_i)\right|\pi_i<\infty \to P\left(\{\omega\colon \lim_{n\to\infty} \frac{1}{n}\sum_{t=0}^n f(X_t(\omega))=\sum_{x_i}f(x_i)\pi_i\}\right)=1\]
+\end{block}
+\begin{block}{Wniosek}
+Dla stacjonarnego łańcucha Markowa o skończonej wartości średniej i wariancji oraz jego realizacji $(x_1,x_2,\ldots,x_n)$:
+\[EX\approx \frac{1}{n}\sum_{t=0}^n x_t \qquad DX^2\approx \frac{1}{n}\sum_{t=0}^n x_t^2-E^2X \]
+\end{block}
+\end{frame}
 \end{document}

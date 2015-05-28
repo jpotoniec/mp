@@ -30,7 +30,46 @@ P_{i,0} & P_{i,1} & \ldots & P_{i,j} & \ldots \\
 	Ile wynoszą sumy w wierszach w macierzy? \\
 	$\bm{P(X_t)}\bm{P}=\bm{P(X_{t+1})}$}
 \end{frame}
-\begin{frame}{Przykład: krótka kolejka}
+\begin{frame}{Kolejka w routerze}
+\center
+\begin{tikzpicture}[
+	packet1/.style={draw=black,fill=color2},
+	packet2/.style={draw=black,fill=color3},
+	packet3/.style={draw=black,fill=color4},
+	]
+\node (router) {\includegraphics[width=2cm]{13_lancuchy_markowa/router.png}};
+\node (s1) [draw,thick,color2,above left=of router] {\includegraphics[width=1.5cm]{13_lancuchy_markowa/server.png}};
+\node (s2) [draw,thick,color3,below left=of router] {\includegraphics[width=1.5cm]{13_lancuchy_markowa/server.png}};
+\node (s3) [draw,thick,color4,right=of router] {\includegraphics[width=1.5cm]{13_lancuchy_markowa/server.png}};
+\draw (s1) -- (router);
+\draw (s2) -- (router);
+\draw (s3) -- (router);
+\filldraw[visible on=<1>,packet1] ($.5*(router)+.5*(s1)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[visible on=<2>,packet1] ($(router)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[visible on=<3>,packet1] ($.5*(router)+.5*(s2)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\begin{scope}[visible on=<4>]
+\filldraw[packet1] ($.5*(router)+.5*(s1)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[packet1] ($.4*(router)+.6*(s1)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[packet2] ($.5*(router)+.5*(s2)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[packet2] ($.4*(router)+.6*(s2)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[packet3] ($.5*(router)+.5*(s3)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[packet3] ($.4*(router)+.6*(s3)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\end{scope}
+\begin{scope}[visible on=<5-6>]
+\filldraw[packet1] ($(router)+(-.4cm,0)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[packet1] ($(router)+(-.2cm,0)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[packet2] ($(router)+(0,0)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[packet2] ($(router)+(.2cm,0)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\filldraw[packet3] ($(router)+(.4cm,0)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\begin{scope}[visible on=<6>]
+\node (trash) [below=of router] {\includegraphics[width=1.5cm]{13_lancuchy_markowa/garbage.png}};
+\filldraw[packet3] ($(trash)+(0,.5cm)+(-.25cm,-.25cm)$) rectangle ++(.5cm,.5cm);
+\end{scope}
+\end{scope}
+\end{tikzpicture}
+\tiny{Rysunki z domeny publicznej, \url{http://pixbay.com}, użytkownik \emph{Nemo}}
+\end{frame}
+\begin{frame}{Kolejka w routerze formalnie}
 \only<-4>
 {
 \center
@@ -300,5 +339,65 @@ Jeżeli $\{X_t\}$ jest nieredukowalny i ma rozkład stacjonarny, to dla dowolnej
 Dla stacjonarnego łańcucha Markowa o skończonej wartości średniej i wariancji oraz jego realizacji $(x_1,x_2,\ldots,x_n)$:
 \[EX\approx \frac{1}{n}\sum_{t=0}^n x_t \qquad DX^2\approx \frac{1}{n}\sum_{t=0}^n x_t^2-E^2X \]
 \end{block}
+\end{frame}
+\begin{frame}{Długa kolejka}
+\only<1>
+{
+\includegraphics[width=\textwidth]{13_lancuchy_markowa/Kolejka.jpeg}
+
+{\tiny \url{http://commons.wikimedia.org/wiki/File:Kolejka.jpeg} domena publiczna}
+}
+\only<2->
+{
+	\begin{block}{Dyskretna kolejka \texttt{M|M|1}}
+	\center
+		\begin{tikzpicture}[every state/.style={circle}]
+		\node (n0) [state] {0};
+	\node (n1) [state,right=of n0] {1};
+	\node (n2) [state,right=of n1] {2};
+	\node (dots1) [right=of n2] {\ldots};
+	\node (nn) [state,right=of dots1] {n};
+	\node (dots2) [right=of nn] {\ldots};
+	\foreach \src/\dst in {n0/n1,n1/n2,n2/dots1,dots1/nn,nn/dots2}
+	{
+		\path[->] (\src) edge[bend left] node[above] {$\lambda$} (\dst);
+		\path[->] (\dst) edge[bend left] node[below] {$\mu$} (\src);
+	}
+	\path[->] (n0) edge[loop above] node[above] {$1-\lambda$} (n0);
+	\foreach \n in {n1,n2,nn}
+	\path[->] (\n) edge[loop above] node[above] {$1-\mu-\lambda$} (\n);
+	\end{tikzpicture}
+	\end{block}
+\uncover<3->
+{
+\begin{block}{Problemy}
+\begin{enumerate}
+\item $\bm{\pi}=\alert<3>{?}$
+\item<4-> Niech $P(X_0)=\bm{\pi}$. $EX=\alert<4>{?}$
+\item<5-> W przeciągu 10000000 kwantów czasu naliczono średnio 5 klientów w~kolejce. \alert<5>{Co z tego?}
+\item<6-> Ile średnio czasu \alert<6>{czeka pojedynczy klient} jeżeli obsługujemy FIFO?
+\end{enumerate}
+\end{block}
+}
+\note<1>
+{
+	$\bm{\pi}$ liczymy z definicji, wychodzi $\pi_n=\varrho^n(1-\varrho)$, gdzie $\varrho=\frac{\lambda}{\mu}<1$.
+	Skoro $P(X_t=n)=\varrho^n(1-\varrho)$ dla $n\in\N_0$, to $P(X_t+1=n)=\varrho^{n-1}(1-\varrho)$ dla $n\in\N_+$, a zatem $X_t+1$ ma rozkład geometryczny o parametrze $1-\varrho$ i w takim razie $E(X_t+1)=\frac{1}{1-\varrho}$.
+
+	Odwołujemy się do twierdzenia ergodycznego i przybliżamy $EX_t=5$, a w takim razie $\varrho=1-\frac{1}{5+1}=\frac{5}{6}$.
+}
+\note<6>
+{
+	$W$ -- czas od momentu wejścia do systemu do momentu wyjścia, $X$ -- liczba klientów w systemie w momencie wejścia
+	\[EW=\sum_{k=0}^\infty E(W|X=k)P(X=k)=\sum_{k=0}^\infty E(W|X=k)\pi_k \]
+	Obsługiwany klient w każdym kwancie czasu z prawdopodobieństwem $\mu$ kończy być obsługiwany i opuszcza system, a z prawdopodobieństwem $1-\mu$ nadal jest obsługiwany. Zatem:
+	\[ P(W=t|X=0)=(1-\mu)^{t-1}\mu \]
+	czyli $W|X=0$ ma rozkład geometryczny z parametrem $\mu$, a~w~takim razie $E(W|X=0)=\frac{1}{\mu}$.
+	Jeżeli w systemie jest $k$ klientów, a każdy jest obsługiwany niezależnie, to nowy klient musi przeczekać tych $k$ klientów i samemu zostać obsłużonym. Zatem $E(W|X=0)=\frac{k+1}{\mu}$ i:
+	\[EW=\sum_{k=0}^\infty \frac{k+1}{\mu}\pi_k=\frac{1}{\mu}\left(\sum_{k=0}^\infty k\pi_k + \sum_{k=0}^\infty \pi_k\right) \]
+	Pierwszy składnik sumy to wartość średnia liczby klientów w systemie ($EX$), a drugi składnik sumy z definicji jest równy 1, zatem
+	\[EW=\frac{EX+1}{\mu}=\frac{\frac{\varrho}{1-\varrho}+1}{\mu}=\frac{1}{(1-\varrho)\mu}=\frac{1}{\mu-\lambda} \]
+}
+}
 \end{frame}
 \end{document}

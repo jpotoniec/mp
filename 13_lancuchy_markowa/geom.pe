@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+use POSIX qw/ceil/;
+
+my $n=10000000;
+my $rho=1-1/(5+1);
+my $mu=.1;
+my $lambda=$rho*$mu;
+my $p=1-$lambda/$mu;
+my $sum=0;
+#my $state=ceil(log(1-rand(1))/log($p));	# F(geom)>=rand(1)
+my $state=0;	#rozkład poczatkowy nie ma znaczenia, bo przy takiej próbce i tak szybko dojdzie do rozkładu stacjonarnego
+my $up=0;
+my $down=0;
+print "mu=$mu lambda=$lambda rho=$rho\n";
+for(my $i=0;$i<$n;$i++)
+{
+#	print $state." ";
+	$sum+=$state;
+	my $x=rand(1);
+	if($x<=$lambda)
+	{
+		$state++;
+		$up++;
+	}
+	else
+	{
+		if($state>0 && $x<=$mu+$lambda)
+		{
+			$state--;
+			$down++;
+		}
+	}
+}
+my $avg=$sum/$n;
+print "\n$avg $up $down\n";
+#print "mu~".($down/$n)." lambda~".($up/$n)." rho~".($up/$down)."\n";

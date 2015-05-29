@@ -46,17 +46,17 @@ Znajomość wszystkich $n$-wymiarowych rozkładów dla dowolnego, skończonego $
 \begin{frame}{Momenty jednowymiarowe}
 \[ \uncover<2->{\mu(t)=E\left(X_t\right)} \qquad \uncover<3->{\sigma(t)=D(X_t)=\sqrt{E\left((X_t-\mu(t))^2\right)}} \]
 \center
-\begin{tikzpicture}[x=.1cm,y=2cm]
-\input{12_procesy/mean.tex}
-\end{tikzpicture}
+\begin{overprint}
+\onslide<1> \only<1>{\includegraphics[width=\textwidth]{12_procesy/mean-0.png}}
+\onslide<2> \only<2>{\includegraphics[width=\textwidth]{12_procesy/mean-1.png}}
+\onslide<3> \only<3>{\includegraphics[width=\textwidth]{12_procesy/mean-2.png}}
+\end{overprint}
 \end{frame}
 \begin{frame}{Momenty dwuwymiarowe}
 \note<1>{$R_{XX}$ funkcja autokorelacji; $r_{XX}$ unormowana funkcja autokorelacji albo współczynnik korelacji}
 \[R_{XX}(t_1,t_2)=E\left[(X_{t_1}-\mu(t_1))(X_{t_2}-\mu(t_2))\right] \qquad r_{XX}(t_1,t_2)=\frac{R_{XX}(t_1,t_2)}{\sigma(t_1)\sigma(t_2)} \]
 \center
-\begin{tikzpicture}[x=.07cm,y=.07cm]
-\input{12_procesy/corr.tex}
-\end{tikzpicture}
+\includegraphics[width=.5\textwidth]{12_procesy/corr.png}
 \end{frame}
 \begin{frame}{Wektory procesów losowych}
 \[ \left[X_t,Y_t\right] \]

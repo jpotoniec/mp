@@ -33,7 +33,13 @@ clean:
 
 11_ciagi.pdf: circles.tex ll.tex
 
-12_procesy.pdf: 12_procesy/thinx.tex 12_procesy/mean.tex 12_procesy/corr.tex
+%.image.pdf: %.image.tex %.tex
+	pdflatex -output-directory "$(dir $@)" "$<"
+
+%.png: %.image.pdf
+	./convert.sh "$^" "$@"
+
+12_procesy.pdf: 12_procesy/thinx.tex 12_procesy/mean.png 12_procesy/corr.png
 
 %.tex: %.pe
 	./$^ >$@

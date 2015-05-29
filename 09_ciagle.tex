@@ -27,7 +27,15 @@
 \end{description}
 \end{frame}
 \begin{frame}{Rozkład jednostajny o parametrach $a<b$}
-\begin{minipage}{.6\textwidth}
+\only<1>{
+	\includegraphics[width=\textwidth]{09_ciagle/bus_stop.jpg}
+
+	{\tiny \url{https://www.flickr.com/photos/hdz/11728759956/} CC-BY-SA 2.0}
+}
+\only<2->
+{
+	\begin{columns}[T]
+\begin{column}{.6\textwidth}
 \begin{tikzpicture}[x=1cm,y=2cm]
 \draw[->] (-3,0) -- (4,0) node[right] {$x$};
 \draw[->] (0,-.5) -- (0,2) node[above] {$y$};
@@ -38,19 +46,21 @@
 \draw (0,1) node[left] {$1$};
 \draw (-.1,1) -- (.1,1);
 \draw[color2,thick] (-3,0) -- (-1,0) (-1,.33)--(2,.33) (2,0)--(4,0);
-\draw[color4,thick,visible on=<2>] (-3,0) -- (-1,0) (-1,0)--(2,1) (2,1)--(4,1);
-\draw[color3,thick,visible on=<3->] (0.5,1.5)--(0.5,-.5);
-\fill[color3,semitransparent,visible on=<4->] (-0.366,1.5) rectangle (1.366,-.5);
+\draw[color4,thick,visible on=<3>] (-3,0) -- (-1,0) (-1,0)--(2,1) (2,1)--(4,1);
+\draw[color3,thick,visible on=<4->] (0.5,1.5)--(0.5,-.5);
+\fill[color3,semitransparent,visible on=<5->] (-0.366,1.5) rectangle (1.366,-.5);
 \end{tikzpicture}
-\end{minipage}
-\begin{minipage}{.39\textwidth}
+\end{column}
+\begin{column}{.39\textwidth}
 \begin{gather*}
 \textcolor{color2}{f(x)}=\begin{cases} \frac{1}{b-a} \qquad x\in\left<a,b\right> \\ 0 \qquad \text{wpp}\end{cases} \\
-\only<2->{\textcolor{color4}{F(x)}=\alert<2>{?}} \\
-\only<3->{\textcolor{color3}{EX}=\alert<3>{?}}\\
-\only<4->{\textcolor{color3}{DX}=\alert<4>{?}}
+\only<3->{\textcolor{color4}{F(x)}=\alert<3>{?}} \\
+\only<4->{\textcolor{color3}{EX}=\alert<4>{?}}\\
+\only<5->{\textcolor{color3}{DX}=\alert<5>{?}}
 \end{gather*}
-\end{minipage}
+\end{column}
+\end{columns}
+}
 \end{frame}
 \begin{frame}{Rozkład wykładniczy o parametrze $\lambda$}
 \note{Ciągły odpowiednik rozkładu geometrycznego. Czas pomiędzy zdarzeniami zachodzącymi niezależnie, ze stałą prędkością.}

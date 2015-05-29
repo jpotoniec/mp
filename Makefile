@@ -38,6 +38,7 @@ clean:
 
 %.png: %.image.pdf
 	./convert.sh "$^" "$@"
+	touch "$@"	#moze byc tak, ze powstana pliki %-liczba.png, ale wtedy i tak chcemy miec plik %.png, zeby make nie wariowalo
 
 12_procesy.pdf: 12_procesy/thinx.tex 12_procesy/mean.png 12_procesy/corr.png
 

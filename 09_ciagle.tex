@@ -63,7 +63,33 @@
 }
 \end{frame}
 \begin{frame}{Rozkład wykładniczy o parametrze $\lambda$}
-\note{Ciągły odpowiednik rozkładu geometrycznego. Czas pomiędzy zdarzeniami zachodzącymi niezależnie, ze stałą prędkością.}
+\only<1>
+{
+	\def\lambdaval{4}
+	\note<1>{Maile przychodzą ze średnią częstotliwością $\lambda=4$}	%miałem tu \lambdaval, ale nie działało
+	\center
+	\begin{tikzpicture}[x=1.2cm]
+	\draw [thick,->] (-.5,0) -- (8.5,0);
+	\foreach \h [evaluate=\h as \x using \h-8] in {8,9,...,16}
+	{
+		\draw [thick] (\x,-.05) -- ++(0,.1) node[anchor=north] {$\h^{00}$};
+	}
+	\foreach \n [remember=\pgfmathresult as \prevt (initially 0)] in {1,...,50}
+	{
+		\pgfmathparse{-ln(1-rnd)/\lambdaval+\prevt}
+		\pgfmathtruncatemacro{\h}{\pgfmathresult+.5}
+		\ifnum \h>7
+			\breakforeach
+		\fi
+		\node at (\pgfmathresult,.25) {\includegraphics[width=.5cm]{09_ciagle/envelope-35393_640.png}};
+	}
+	\end{tikzpicture}
+	\vfill
+	{\tiny{Rysunek koperty z domeny publicznej, \url{http://pixbay.com}, użytkownik \emph{Nemo}}}
+}
+\only<2->
+{
+\note<2>{Ciągły odpowiednik rozkładu geometrycznego. Czas pomiędzy zdarzeniami zachodzącymi niezależnie, ze stałą prędkością $\lambda$.}
 \begin{columns}[T]
 \begin{column}{.5\textwidth}
 \begin{tikzpicture}[x=1cm,y=2cm]
@@ -71,7 +97,7 @@
 \draw[->] (0,-.5) -- (0,2) node[above] {$y$};
 \draw (0,1) node[left] {$1$} (-.1,1) -- (.1,1);
 \draw (0,.5) node[left] {$0{,}5$} (-.1,.5) -- (.1,.5);
-\draw (1,0) node[below] {$1$};
+\draw (1,0) node[below] {$1$} (1,-.05) -- ++(0,.1);
 
 \draw[color2,thick] (-1,0) -- (0,0);
 \draw[color2,thick,domain=0:4,samples=1000] plot (\x,{1.5*exp(-1.5*\x)});
@@ -91,11 +117,12 @@
 \end{gather*}
 \end{column}
 \end{columns}
+}
 \end{frame}
 \begin{frame}{Rozkład normalny (Gaussa) $N(\mu,\sigma)$}
 \begin{minipage}{.54\textwidth}
 \begin{tikzpicture}[x=1cm,y=5cm]
-%TODO: fajnie by było to sparametryzować i móc robić różne rozkłady normalne w ten sposób
+%TODO: fajnie by było to sparametryzować i móc robić różne rozkłady normalne w ten sposób
 \draw[->] (-4,0) -- (4,0) node[right] {$x$};
 \draw[->] (0,-.2) -- (0,1.2) node[above] {$y$};
 \draw (0,1) node[left] {$1$} (-.1,1) -- (.1,1);

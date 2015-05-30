@@ -65,23 +65,23 @@ E(X|Y=y)=\frac{1}{f_Y(y)}\int_{-\infty}^\infty xf(x,y)\d{x}
 \end{frame}
 
 \begin{frame}{Krzywe regresji}
+\note<1>{Jeżeli zmienne są niezależne, to $E(Y|X=x)=EY$. Dla zmiennych dyskretnych może wyjść śmieszna sieczka, bo $P(X=x)=0$ całkiem często.}
 \begin{block}{Regresja I rodzaju}
-\[ r(x)=E(Y|X=x)  \]
-\note{Jeżeli zmienne są niezależne, to $E(Y|X=x)=EY$. Dla zmiennych dyskretnych może wyjść śmieszna sieczka.}
+\[ r_1(x)=E(Y|X=x)  \]
 \end{block}
 \pause
 \begin{block}{Regresja II rodzaju}
-\[ r(x)=ax+b \qquad E\left[Y-r(X)\right]^2\to\min \]
-\note
+\[ r_2(x)=ax+b \qquad E\left[Y-r_2(X)\right]^2\to\min \]
+\note<2>
 {
+	\footnotesize
 	\begin{gather*}
 	f(a,b)=E(Y-(aX+b))^2\to\min \implies f'(a,b)=\bm{0} \\
 	f(a,b)=E(Y^2+(aX+b)^2-2Y(aX+b))\\
 	f(a,b)=E(Y^2+a^2X^2+2abX+b^2-2aXY-2bY)\\
 	f(a,b)=EY^2+a^2EX^2+2abEX+b^2-2aEXY-2bEY \\
+	\frac{\dd{f(a,b)}}{\dd{b}}=2aEX+2b-2EY=0 \to b=EY-aEX \\
 	\frac{\dd{f(a,b)}}{\dd{a}}=2aEX^2+2bEX-2EXY=0 \\
-	\frac{\dd{f(a,b)}}{\dd{b}}=2aEX+2b-2EY=0 \\
-	b=EY-aEX \\
 	aEX^2+bEX-EXY=0 \\
 	aEX^2+(EY-aEX)EX-EXY=0 \\
 	aEX^2+EXEY-aE^2X-EXY=0 \\

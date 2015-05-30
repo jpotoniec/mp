@@ -4,6 +4,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage[margin=2cm]{geometry}
 \usepackage{tikz}
+\usepackage{diagbox}
 \pagestyle{empty}
 \linespread{1.3}
 \newcommand{\ans}[1]{}
@@ -13,7 +14,7 @@
 \item Na ile sposobów można ustawić 5 osób w kolejce? \ans{$5!$}
 \item Ile słów pięcioliterowych (nawet tych bezsensownych) można utworzyć z liter \emph{A, B, C}? \ans{$3^5=243$}
 \item Dane są dwa pojemniki. W pierwszym z nich znajduje się 11 kul: 7 białych i 4 czarne. W~drugim pojemniku jest 6 kul: 3 białe i 3 czarne. Z każdego pojemnika losujemy po dwie kule.
-Rozpatrz poniższe pytania w dwóch wariantach: wszystkie kule w danym kolorze są identyczne oraz gdy kule są rozróżnialne (np. numerowane).
+Rozpatrz poniższe pytania w dwóch wariantach: wszystkie kule w danym kolorze są identyczne oraz gdy kule są rozróżnialne (np. numerowane).
 \begin{enumerate}
 \item Ile jest możliwych układów? \ans{${11 \choose 2}{6 \choose 2}=825$}
 \item Ile jest układów składających się wyłącznie z kul czarnych? \ans{${4 \choose 2}{3 \choose 2}=18$}
@@ -270,8 +271,119 @@ Inaczej: $X+Y=10$.
 \item Oblicz prawdopodobieństwo, że przynajmniej 8 słoików będzie się nadawało do spożycia.
 \item Oblicz prawdopodobieństwo, że liczba zepsutych słoików będzie różniła się od oczekiwanej liczby zepsutych słoików o mniej niż odchylenie standardowe.
 \end{enumerate}
+\end{enumerate}
+
+\clearpage
+\section{Zmienne losowe typu ciągłego i zmienne losowe wielowymiarowe}
+\begin{enumerate}
+\item Rozważmy funkcję \[f(x)=\begin{cases} Ax^{-4} & \left|x\right|\geq 1 \\ 0 & \text{wpp} \end{cases} \]
+\begin{enumerate}
+\item Dla jakiej wartości stałej $A$ ta funkcja jest gęstością prawdopodobieństwa pewnej zmiennej losowej $X$? \ans{$\frac{3}{2}$}
+\item Oblicz dystrybuantę zmiennej losowej $X$. \ans{\[\begin{cases}-\frac{x^{-3}}{2} & x\leq-1\\\frac{1}{2} & -1<x\leq1\\1-\frac{x^{-3}}{2} & x>1 \end{cases}\]}
+\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość większą niż 2. \ans{$\frac{1}{16}$}
+\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość równą 2. \ans{$0$}
+\item Oblicz wartość średnią. \ans{$0$}
+\item Oblicz wariancję. \ans{$3$}
+\end{enumerate}
+\item Autobusy linii 64 przyjeżdżają punktualnie co 20 minut na przystanek. Olga nie zna ich rozkładu jazdy, przychodzi więc na przystanek w całkowicie losowym momencie: jak jej się wyjdzie z domu. Niech $T$ oznacza czas oczekiwania Olgi na autobus.
+\begin{enumerate}
+\item Podaj rozkład zmiennej losowej $T$. \ans{$f(t)=\begin{cases}\frac{1}{20} & 0\leq t\leq 20 \\ 0 & \text{wpp} \end{cases}$}
+\item Oblicz prawdopodobieństwo, że Olga będzie czekała mniej niż 5 minut. \ans{$P(T<5)=F(5)=0{,}25$}
+\item Oblicz średni czas oczekiwania na autobus. \ans{$ET=10$}
+\item Oblicz odchylenie standardowe zmiennej losowej $X$. \ans{$DT=\sqrt{\frac{400}{12}}$}
+\end{enumerate}
+\item Prawdopodobieństwo, że aparat fotograficzny nie zepsuje się w ciągu pierwszych pięciu miesięcy użytkowania wynosi $0{,}9$. Niech $X$ oznacza liczbę miesięcy bezawaryjnej pracy aparatu. Zakładamy, że zmienna $X$ ma rozkład wykładniczy.
+\begin{enumerate}
+\item Oblicz parametry tego rozkładu. \ans{$P(X>5)=\exp(-\frac{5}{\lambda}) \quad \lambda=-\frac{5}{\ln 0{,}9}$}
+\item Oblicz prawdopodobieństwo bezawaryjnej pracy aparatu w ciągu 24 miesięcy. \ans{$P(X>24)=1-F(24)$}
+\item Oblicz prawdopodobieństwo awarii aparatu w ciągu 36 miesięcy, jeżeli wiadomo, że przepracował bez awarii już 12 miesięcy. \ans{$P(X<36|X>12)=P(X<36-12)=F(24)$}
+\end{enumerate}
+\item W Minas Tirith gromadzą zapasy na wypadek oblężenia. Losowo wybrany worek zawiera $X$ kg mąki, gdzie $X$ jest zmienną losową o rozkładzie $N(20,2)$.
+\begin{enumerate}
+\item Utwórz zmienną losową $Y$ będącą standaryzowaną postacią zmiennej losowej $X$. \ans{$Y=\frac{X-20}{2}$}
+\item Wyraź dystrybuantę zmiennej $X$ w zależności od dystrybuanty zmiennej $Y$. \ans{$F_X(x)=F_Y(\frac{x-20}{2})$}
+\item Oblicz wartość średnią i odchylenie standardowe zmiennej losowej $Y$.
+\item Oblicz prawdopodobieństwo, że w worku jest mniej niż 18 kg mąki. \ans{$P(X<18)=F_X(18)=F_Y(-1)=1-F_Y(1)=1-0{,}8413\approx 0{,}16$}
+\item Oblicz prawdopodobieństwo, że w worku jest więcej niż $21{,}5$ kg mąki. \ans{$P(X>21{,}5)=1-F_X(21{,}5)=1-F_Y(0{,}75)=1-0{,}7734\approx 0{,}23$}
+\item Oblicz prawdopodobieństwo, że ilość mąki w worku różni się od wartości oczekiwanej o nie więcej niż 1 kg. \ans{$P(19<X<21)=F_X(21)-F_X(19)=F_Y(0{,}5)-F_Y(-0{,}5)=2F_Y(0{,}5)-1=2\cdot0{,}6915-1=0{,}38$}
+\end{enumerate}
+\item Z talii 52 kart wylosowano jedną kartę. Niech zmienna losowa $X$ przyjmuje wartość odpowiadającą liczbie wylosowanych waletów, zaś $Y$ odpowiadającą liczbie wylosowanych trefli.
+\begin{enumerate}
+\item Wyznacz rozkłady zmiennych losowych $X$ oraz $Y$. \ans{$P(X=0)=\frac{48}{52} P(X=1)=\frac{4}{52} P(Y=1)=\frac{13}{52} P(Y=0)=\frac{39}{52}$}
+\item Wyznacz rozkład zmiennej losowej $(X,Y)$. \ans{$P(0,0)=\frac{36}{52} P(1,0)=\frac{3}{52} P(0,1)=\frac{12}{52} P(1,1)=\frac{1}{52}$}
+\item Oblicz dystrybuantę zmiennej losowej $(X,Y)$. \ans{\[F(u,v)=\begin{cases} 
+	0 & u\leq 0 \lor v\leq 0 \\ 
+	\frac{36}{52} & 0<u\leq 1 \land 0<v\leq 1 \\
+	\frac{39}{52} & u>1 \land 0<v\leq 1 \\
+	\frac{48}{52} & 0<u\leq 1 \land v>1 \\
+	1 & u>1 \land v>1
+	\end{cases}\]}
+\item Czy zmienne losowej $X$ i $Y$ są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. \ans{Tak}
+\item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$. \ans{$EXY=\frac{1}{52}$}
+%\item Wiadomo, że wylosowano trefla. Oblicz prawdopodobieństwo, że jest to walet posługując się warunkowym rozkładem prawdopodobieństwa. \ans{$P(X=1|Y=1)=\frac{\frac{1}{52}}{\frac{13}{52}}=\frac{1}{13}$}
+\end{enumerate}
+\item Z talii 52 kart wylosowano jedną kartę. Niech zmienna losowa $X$ przyjmuje wartość odpowiadającą liczbie wylosowanych dam trefl, zaś $Y$ odpowiadającą liczbie wylosowanych trefli.
+\begin{enumerate}
+\item Wyznacz rozkłady zmiennych losowych $X$ oraz $Y$. \ans{$P(X=0)=\frac{51}{52} P(X=1)=\frac{1}{52} P(Y=1)=\frac{13}{52} P(Y=0)=\frac{39}{52}$}
+\item Wyznacz rozkład zmiennej losowej $(X,Y)$. \ans{$P(0,0)=\frac{39}{52} P(1,0)=0 P(0,1)=\frac{12}{52} P(1,1)=\frac{1}{52}$}
+\item Oblicz dystrybuantę zmiennej losowej $(X,Y)$.
+\item Czy zmienne losowej $X$ i $Y$ są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. \ans{Nie, $0=P(1,0)\neq P(X=1)P(Y=0)=\frac{39}{52^2}$}
+\item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$. \ans{$EXY=\frac{1}{52}$}
+%\item Wiadomo, że wylosowano trefla. Oblicz prawdopodobieństwo, że nie jest to dama posługując się warunkowym rozkładem prawdopodobieństwa. \ans{$P(X=0|Y=1)=\frac{\frac{12}{52}}{\frac{13}{52}}=\frac{12}{13}$}
+\end{enumerate}
+\item Dana jest funkcja $f(x,y)$ określona poniższym wzorem:
+\[ f(x,y)=\begin{cases} cxy & 0\leq x \leq 4 \land 0\leq y\leq 2 \\ 0 & \text{wpp}\end{cases} \]
+\begin{enumerate}
+\item Wyznacz stałą $c$ taką, żeby $f(x,y)$ była funkcją gęstości prawdopodobieństwa pewnej zmiennej losowej $(X,Y)$. \ans{$c=\frac{1}{16}$}
+\item Wyznacz gęstości prawdopodobieństwa rozkładów brzegowych. \ans{$f_X(u)=\frac{u}{8} f_Y(v)=\frac{v}{2}$}
+\item Wyznacz dystrybuantę zmiennej losowej $(X,Y)$. \ans{\[F(u,v)=\begin{cases}
+	0 & u\leq 0 \lor v\leq 0 \\
+	\frac{u^2v^2}{64} & 0<u\leq 4 \land 0<v\leq 2 \\
+	\frac{u^2}{16} & 0<u\leq 4 \land v>2 \\
+	\frac{v^2}{4} & u> 4 \land 0<v\leq 2 \\
+	1 & u>4\land v>2
+	\end{cases}\]}
+\item Wiadomo, że realizacja zmiennej losowej $Y$ zawiera się w przedziale $(1,2)$. Jakie jest prawdopodobieństwo, że wtedy realizacja zmiennej losowej $X$ zawiera się w przedziale $(0,2)$?
+\ans{$P(0<X<2|1<Y<2)=\frac{P(0<X<2,1<Y<2)}{P(1<Y<2)}=\frac{F(2,2)-F(2,1)-F(0,2)+F(0,1)}{F_Y(2)-F_Y(1)}=\frac{\frac{1}{4}-\frac{1}{16}-0+0}{1-\frac{1}{4}}=\frac{3}{16}\frac{4}{3}=\frac{1}{4}$}
+\end{enumerate}
+\item Doświadczenie polega na dwukrotnym rzucie kostką sześciościenną. Niech zmienna $X$ odpowiada liczbie rzutów, w~których wyrzucono parzystą liczbę oczek, natomiast zmienna $Y$ liczbie rzutów, w których wyrzucono co najmniej 5 oczek.
+\begin{enumerate}
+\item Podaj brzegowe rozkłady prawdopodobieństwa zmiennych losowych $X$ oraz $Y$.
+\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$.
+\item Zbadaj, czy zmienne losowe $X$ oraz $Y$ są niezależne.
+\item Wiadomo, że dwukrotnie wyrzucono parzystą liczbę oczek. Jakie jest prawdopodobieństwo, że były to dwie szóstki? Odpowiedź przedstaw wykorzystując rozkład prawdopodobieństwa zmiennej losowej $(X,Y)$.
+\end{enumerate}
+\item Produkcja piwa składa się m.in. z zaszczepienia brzeczki piwnej odpowiednią liczbą komórek drożdżowych. Jednym z typowych źródeł drożdży jest zebranie ich z dna pojemnika, w którym odbywała się poprzednia fermentacja (zebranie tzw. gęstwy drożdżowej). Zdarza się, że trzeba zebrać gęstwę pewien czas przed przygotowaniem następnej partii brzeczki piwnej. Niestety, drożdże w trakcie przechowywania obumierają.
+
+W laboratorium pewnego browaru przeprowadzono 50 eksperymentów, badających
+procent przeżywalności drożdży w zależności od czasu ich przechowywania. W
+poniższej tabeli w kolumnach podano wartości zmiennej losowej $X$,
+odpowiadającej liczbie dni, przez które gęstwa drożdżowa była przechowywana,
+natomiast w~wierszach podane są wartości zmiennej losowej $Y$, przedstawiającej
+procent żywych komórek drożdżowych w gęstwie. W komórkach podane są liczby
+eksperymentów, w których uzyskano daną parę warości $(X,Y)$.
+
+\begin{tabular}{r|rrrr|r}
+\diagbox{Y}{X} & 3 & 7 & 14 & 21 & $\sum$ \\
+\hline
+95 	& 8 & 1 & 0 & 0 & 9\\
+85 	& 1 & 8 & 1 & 0 & 10 \\
+70 	& 1 & 4 & 8 & 4 & 17 \\
+40 	& 2 & 2 & 4 & 6 & 14 \\
+\hline
+$\sum$ 	& 12 & 15 & 13 & 10 & 50\\
+\end{tabular}
+
+\begin{enumerate}
+\item Podaj (w formie tabeli dwudzielczej) rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$ wraz z~rozkładami brzegowymi.
+\item Oblicz wartości średnie i wariancje zmiennych losowych jednowymiarowych $X$ oraz $Y$. \ans{$EX=10{,}66 EY=69{,}1 DX=6{,}51 DY=20{,}21$}
+\item Oblicz współczynnik korelacji zmiennej losowej $(X,Y)$. Uzasadnij za pomocą obliczonego współczynnika, czy można spodziewać się zachodzenia związku liniowego między zmiennymi $X$ oraz $Y$? \ans{$cov(X,Y)=-74{,}21, \varrho=-0{,}56$}
+\item Wykorzystaj regresję liniową do wyjaśnienia zmiennej losowej $Y$ w kategoriach zmiennej losowej $X$, tzn. oblicz współczynniki równania $Y=aX+b$. \ans{$a=-1{,}83 b=88{,}61$}
+\item Jakiej przeżywalności drożdży należy się spodziewać po 10 dniach przechowywania gęstwy, a jakiej po 180 dniach? Wykorzystaj model obliczony w poprzednim punkcie i przedyskutuj sensowność otrzymanych wyników. \ans{$y(10)=70, y(180)<0$}
+\end{enumerate}
 
 \end{enumerate}
+
 
 
 \end{document}

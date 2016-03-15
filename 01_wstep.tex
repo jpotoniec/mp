@@ -1,4 +1,6 @@
 \documentclass{mp}
+\usepackage{array} %dla poziomego wyrownania (m) w tabeli
+\usepackage{hyperref}
 \graphicspath{{01_wstep/}}
 \subtitle{Uwagi organizacyjne}
 \begin{document}
@@ -40,10 +42,16 @@ $\left(90; \infty\right)$ & 5,0 \\
 \end{frame}
 \begin{frame}{Konkurs!}
 	\centering
-	\url{http://shire.cs.put.poznan.pl/ruletka}
+	\begin{tabular}{m{.3\textwidth}m{.7\textwidth}}
+		\includegraphics[width=.3\textwidth]{01_wstep/F-Secure_logo_package/Primary_Purple_RGB-01.jpg} &
+		F-Secure Cyber Security Services Poland \\
+	\end{tabular}
+	\pause
+	\centering
+		\url{http://shire.cs.put.poznan.pl/ruletka} \\
 	\pause
 	\begin{block}{Nagroda}
-		$5,0$ z egzaminu za przedstawienie powtarzalnej metody zdobycia 10 mln punktów.
+		5,0 z egzaminu za przedstawienie powtarzalnej metody zdobycia 10 mln punktów.
 		\begin{itemize}
 			\item Maksymalnie dwoje autorów dla jednej metody.
 			\item Trzeba na ostatnim wykładzie tę metodę przedstawić.
@@ -52,6 +60,7 @@ $\left(90; \infty\right)$ & 5,0 \\
 			\item \alert{Nie chodzi o DoS!}
 		\end{itemize}
 	\end{block}
+	\note<1>{F-Secure rekrutuje. Konsultanci bezpieczeństwa: \url{jaroslaw.kaminski@f-secure.com}. Programiści (głównie Python i C\#): \url{leszek.tasiemski@f-secure.com}}
 \end{frame}
 \begin{frame}{Obecność}
 \begin{block}{Regulamin studiów, rozdział II, par.8 pkt. 2}

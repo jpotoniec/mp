@@ -72,6 +72,12 @@ Pewna kobieta otrzymała pozytywny wyniki mammografi. Jakie jest prawdopodobień
 \let\eR\undefined
 \let\enR\undefined
 \let\eM\undefined
+\note<7>{
+	\begin{gather*}
+		P(M)=P(M|R)P(R)+P(M|R')P(R')=\frac{8}{10}\frac{1}{100}+\frac{96}{1000}\frac{99}{100}=\frac{10304}{100000} \\
+		P(R|M)=\frac{P(R\cap M)}{P(M)}=\frac{P(M|R)P(R)}{P(M)}=\frac{8}{10}\frac{1}{100}\frac{100000}{10304}=\frac{800}{10304}\approx 7{,}76\%
+	\end{gather*}
+}
 \end{frame}
 \part{Formalizm matematyczny}
 \frame{\partpage}

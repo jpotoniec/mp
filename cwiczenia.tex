@@ -7,7 +7,12 @@
 \usepackage{diagbox}
 \pagestyle{empty}
 \linespread{1.3}
+\newcommand{\abs}[1]{\left|#1\right|}
+\ifx\odp\undefined
 \newcommand{\ans}[1]{}
+\else
+\newcommand{\ans}[1]{\emph{Odpowiedź:} #1}
+\fi
 \begin{document}
 \section{Przestrzeń probabilistyczna}
 \begin{enumerate}

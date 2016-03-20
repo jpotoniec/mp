@@ -1,7 +1,7 @@
 SRC=01_wstep.tex 02_zastosowania.tex 03_aksjomatyka.tex 04_warunkowe.tex 05_zmienne.tex 06_momenty.tex 07_rozklady.tex 08_montecarlo.tex 09_ciagle.tex 10_korelacja.tex 11_ciagi.tex cwiczenia.tex 12_procesy.tex 13_lancuchy_markowa.tex 14_proces_poissona.tex cwiczenia.tex
 NOTES_SRC=$(shell grep -l '\\note' $(SRC))
 
-PDF=$(SRC:%.tex=%.pdf) $(NOTES_SRC:%.tex=%_notes.pdf)
+PDF=$(SRC:%.tex=%.pdf) $(NOTES_SRC:%.tex=%_notes.pdf) cwiczenia_odp.pdf
 
 all: $(PDF)
 
@@ -14,6 +14,9 @@ $(PDF): mp.cls beamercolorthemePUT.sty beamerthemePUT.sty
 %_notes.pdf: %.tex
 	pdflatex -jobname $(<:%.tex=%_notes) "\\def\\notatki{}\\input{$<}"
 	pdflatex -jobname $(<:%.tex=%_notes) "\\def\\notatki{}\\input{$<}"
+
+cwiczenia_odp.pdf: cwiczenia.tex
+	pdflatex -jobname $(<:%.tex=%_odp) "\\def\\odp{}\\input{$<}"
 
 04_warunkowe.pdf: 04_warunkowe/bayes/Spy_silhouette.pdf
 

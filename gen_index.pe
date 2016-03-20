@@ -37,6 +37,15 @@ EOF
 	}
 }
 
+
+open(F,"git log -1 --format='%ad' --date=iso -- 'cwiczenia.tex'|");
+my $date=<F>;
+chomp $date;
+close F;
+$list.=<<EOF;
+<tr><td>&nbsp;</td><td>Materiały do ćwiczeń</td><td><a href="cwiczenia.pdf">zadania</a></td><td>&nbsp;</td><td>$date</td></tr>
+EOF
+
 print <<EOF;
 <!DOCTYPE html>
 <html lang="pl">

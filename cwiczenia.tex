@@ -43,15 +43,6 @@ W obu przestrzeniach opisać następujące zdarzenia:
 \item[B] całkowite obciążenie wynosi nie więcej niż 200 kg;
 \item[C] całkowite obciążenie przekracza 250 kg;
 \end{description}
-\item  Drewniane pale mają losową długość $L$ nie przekraczającą 12 m. Pale są przeznaczone do wbijania w ziemię, której skalna warstwa stanowiąca opór znajduje się na losowej głębokości $H$, nie większej niż 10 m. Zaproponować przestrzeń zdarzeń elementarnych dla tak opisanego doświadczenia. Zdefiniować przez odpowiednie zdarzenia elementarne następujące doświadczenia:
-\begin{description}
-\item[A] długość losowo wybranego pala będzie większa od głębokości skalnej warstwy;
-\item[B] głębkość skalnej warstwy przekroczy 8 metrów;
-\item[C] długość losowo wybranego pala przekroczy 8 metrów;
-\item[D] $B\cap C$
-\item[E] $B\cup C$
-\item[F] $(B\cup C)\cap A'$
-\end{description}
 \item Na 10 kartkach napisano liczby od 1 do 10 i wrzucono do pudełka. Losujemy w sposób przypadkowy dwie kartki. Niech $A$ odpowiada zdarzeniu \emph{wylosowanie kartki z numerem 1}, a $B$ zdarzeniu \emph{wylosowanie pary liczb, których suma jest większa od 4}. Zakładamy, że wylosowanie każdej z kartek jest równoprawdopodobne.
 \begin{enumerate}
 \item Przedstaw przestrzeń zdarzeń elementarnych. Podaj jej rozmiar. \ans{$\Omega=\{\omega_{\{i,j\}}|i,j\in\{1,\ldots,10\} \land i\neq j\}, \left|\Omega\right|={10 \choose 2}=45$}
@@ -67,6 +58,15 @@ W obu przestrzeniach opisać następujące zdarzenia:
 \item Zdefiniuj zdarzenie $A$ jako zbiór zdarzeń elementarnych. \ans{$A=\{\omega_1$\}}%
 \item Oblicz prawdpodobieństwo $P(A)$, dbając o to by jasno przedstawić tok rozumowania. \ans{$P(A)=\frac{1}{100}$}%
 \end{enumerate}%
+\item  Drewniane pale mają losową długość $L$ nie przekraczającą 12 m. Pale są przeznaczone do wbijania w ziemię, której skalna warstwa stanowiąca opór znajduje się na losowej głębokości $H$, nie większej niż 10 m. Zaproponować przestrzeń zdarzeń elementarnych dla tak opisanego doświadczenia. Zdefiniować przez odpowiednie zdarzenia elementarne następujące doświadczenia:
+\begin{description}
+\item[A] długość losowo wybranego pala będzie większa od głębokości skalnej warstwy;
+\item[B] głębkość skalnej warstwy przekroczy 8 metrów;
+\item[C] długość losowo wybranego pala przekroczy 8 metrów;
+\item[D] $B\cap C$
+\item[E] $B\cup C$
+\item[F] $(B\cup C)\cap A'$
+\end{description}
 \item W gospodzie \emph{Pod Zielonym Smokiem} oferują sześć różnych dań obiadowych. Pięciu klientów wchodzi jeden po drugim do gospody
 i~niezależnie od siebie zamawia posiłek. Niech zdarzenie $A$ odpowiada sytuacji, w~której pierwsze danie z menu zamówi dokładnie jedna osoba.%
 \begin{enumerate}%
@@ -76,10 +76,6 @@ i~niezależnie od siebie zamawia posiłek. Niech zdarzenie $A$ odpowiada sytuacj
 \item Zdefiniuj zdarzenie $A$ jako zbiór zdarzeń elementarnych. \ans{$A=\{\omega_{i_1,\ldots,i_5}|\exists j: i_j=1 \land \forall k\neq j: i_k\neq 1\}$, $\left|A\right|=5\cdot5^4$}%
 \item Oblicz prawdpodobieństwo $P(A)$, dbając o to by jasno przedstawić tok rozumowania. \ans{$P(A)=\frac{5^5}{6^5}=\frac{5}{6}^5\approx 0{,}40$}%
 \end{enumerate}%
-\end{enumerate}
-\clearpage
-\section{Przestrzeń probabilistyczna -- zadania dodatkowe}
-\begin{enumerate}
 \item Oblicz, ile jest liczb naturalnych sześciocyfrowych, w zapisie których występuje dokładnie trzy razy cyfra 0 i dokładnie raz występuje cyfra 5. \ans{${8\choose 2}3\frac{5!}{3!}+8\cdot\left(\frac{5!}{3!2!}+\frac{5!}{3!}\right)=1920$}
 \item Partia towaru składa się ze 100 elementów, wśród których 5 jest wadliwych. Poddajemy kontroli 50 elementów. Partię przyjmujemy, jeśli wśród kontrolowanych elementów jest nie więcej niż jeden wadliwy. Niech zdarzenie $A$ odpowiada przyjęciu partii.
 \begin{enumerate}%
@@ -131,10 +127,6 @@ Obliczyć prawdopodobieństwo przekazania sygnału:
 \item przy połączeniu szeregowym trzech przekaźników;
 \item przy połączeniu równoległym trzech przekaźników;
 \end{enumerate}
-\end{enumerate}
-\clearpage
-\section{Prawdopodobieństwo warunkowe i niezależność zdarzeń -- zadania dodatkowe}
-\begin{enumerate}
 \item Telegraficzne przekazywanie informacji odbywa się metodą nadawania
 sygnałów kropka-kreska. Statystyczne właściwości zakłóceń są takie, że błędy
 następują przeciętnie w 2 przypadkach na 5 przy nadawaniu sygnału kropka i w 1
@@ -171,13 +163,94 @@ płynie z kadzi warzelnej (punkt $X$) do pojemnika fermentacyjnego (punkt $Y$)
 		\omega_{0111},\omega_{0110},\omega_{0101}
 	\}$}
 	\item Oblicz prawdpodobieństwo $P(A)$, dbając o to by jasno przedstawić tok rozumowania. \ans{$P(A)=0{,}9^4+4\cdot0{,}9^3\cdot0{,}1+4\cdot0{,}9^2\cdot0{,}1^2=0{,}9801=(0{,}9+0{,}9-0{,}9^2)^2$, np. $P(\omega_{1111})=P(A_1)P(A_2)P(A_3)P(A_4)$}
-
 \end{enumerate}
+\clearpage
+\item Merry wybrał się do Starego Lasu zbierać pewne rośliny o wielce pożądanych właściwościach na nadchodzącą Sobótkę.
+Niestety, Merry nie jest zbyt biegły w rozpoznawaniu roślin.
+Jedyne co wie, to że ma zbierać lejkowate kwiaty w jednym z trzech kolorów: białe, różowe lub niebieskie.
+Czego Merry'emu nie powiedziano to, że wśród białych kwiatów tylko $30\%$ posiada pożądane właściwości, wśród różowych $55\%$, a wśród niebieskich
+aż $90\%$.
+Wracając do domu Merry zauważył, że wśród kwiatów, które zebrał liczba białych do liczby różowych ma się jak $3:2$, a~liczba różowych do
+liczby niebieskich jak $2:1$. Merry dla zabawy zamknął oczy i na chybił-trafił wybrał jeden z~zebranych kwiatów.
+ 
+\begin{enumerate}
+	\item Jakie jest prawdopodobieństwo, że wybrany kwiat jest niebieski?
+	\item Jakie jest prawdopodobieństwo, że wybrany kwiat jest biały lub różowy?
+	\item Jakie jest prawdopodobieństwo, że wybrany kwiat ma pożądane właściwości, jeżeli wiadomo, że jest niebieski?
+	\item Jakie jest prawdopodobieństwo, że wybrany kwiat jednocześnie ma pożądane właściwości i jest niebieski?
+	\item Jakie jest prawdopodobieństwo, że wybrany kwiat ma pożądane właściwości, jeżeli nie wiadomo jaki ma kolor?
+	\item Co by było gdyby Merry nie wiedział, jakiego koloru wylosował kwiat, ale wiedział, że wybrany kwiat nie ma pożądanych
+		właściwości: jakie byłoby wtedy prawdopodobieństwo, że kwiat będzie biały lub niebieski?
+\end{enumerate}
+
+
+%\item
+%Krasnoludowie w Morii prowadzą okresowy przegląd wagoników używanych do przewozu urobku z kopalni do huty.
+%Frar jako mniej doświadczony został przydzielony do sprawdzenia wagoników jako pierwszy.
+%Spośród 100 wagoników, 70 z nich uznał jako sprawne, 20 jako niesprawne, a co do 10 nie był pewien.
+%Jego starszy kolega Gamil ocenił, że Frar pomylił się w jednym przypadku na 10 przy wagonikach sprawnych i w 2 przypadkach na 10 przy wagonikach niesprawnych.
+%Wśród wagoników, których Frar nie potrafił zdiagnozować, Gamil uznał 4 za sprawne, a 6 za niesprawne.
+%Na końcu przyszedł ich przełożony Nali, całkowicie losowo wybrał jeden wagonik i zdiagnozował go jako sprawny.
+%\begin{enumerate}
+%\item  Zdefiniuj przestrzeń zdarzeń elementarnych dla doświadczenia polegającego na ocenie tego wagonika przez Frara i Gamila. 
+%\item  Jaki jest rozmiar przestrzeni zdarzeń elementarnych? 
+%\item  Czy w tej przestrzeni wszystkie zdarzenia elementarne są równoprawdopodobne? 
+%\item  Nazwij i zdefiniuj jako zbiory zdarzeń elementarnych następujące zdarzenia opisane słownie: 
+%\begin{itemize}
+%\item wagonik został uznany za sprawny przez Frara;
+%\item wagonik został uznany za niesprawny przez Frara;
+%\item Frar nie potrafił ocenić wagonika;
+%\item wagonik został uznany za sprawny przez Gamila;
+%\item wagonik został uznany za niesprawny przez Gamila.
+%\end{itemize}
+%\item  Jakie jest prawdopodobieństwo, że wybrany wagonik został uznany za sprawny przez Frara?  
+%\item  Jakie jest prawdopodobieństwo, że wybrany wagonik został uznany za sprawny przez obu krasnoludów? 
+%\item  Jakie jest prawdopodobieństwo, że wybrany wagonik został uznany za sprawny przez Gamila? 
+%\item  Jakie jest prawdopodobieństwo, że wagonik został uznany za sprawny przez Frara, jeżeli wiadomo, że został uznany za dobry przez Gamila? 
+%\item  Czy zdarzenia: \emph{Frar nie potrafił ocenić wagonika} oraz \emph{wagonik został uznany za sprawny przez Gamila} są zdarzeniami niezależnymi? 
+%\end{enumerate}
+\item Kuce w Oatbarton od czasu do czasu zapadają na Straszną Chorobę Kuców.
+Na szczęście zmyślni, hobbicy farmerzy wymyślili sposób na wykrywanie choroby we wczesnym stadium i izolowanie chorych zwierząt.
+Niestety, sposób nie jest idealny: prawdopodobieństwo, że zwierzę zostatnie uznane za chore, wynosi odpowiednio $0,85$ dla zwierzęcia chorego i $0,07$ dla zwierzęcia zdrowego.
+Z danych historycznych wiadomo, że prawdopodobieństwo zapadnięcia na Straszną Chorobę Kuców wynosi $0,2$ dla każdego kuca.
+Rozpatrujemy doświadczenie polegające na badaniu kuca Ostrouchego.
+
+\begin{enumerate}
+\item Zdefiniuj przestrzeń zdarzeń elementarnych. 
+\item Jaki jest rozmiar przestrzeni zdarzeń elementarnych? 
+\item Czy w tej przestrzeni wszystkie zdarzenia elementarne są równoprawdopodobne? Odpowiedź uzasadnij. 
+\item Nazwij i zdefiniuj jako zbiory zdarzeń elementarnych następujące zdarzenia opisane słownie: 
+\begin{itemize}
+\item Ostrouchy jest chory.
+\item Ostrouchy jest zdrowy.
+\item Test wskazał, że Ostrouchy jest chory.
+\item Test wskazał, że Ostrouchy jest zdrowy.
+\end{itemize}
+Wykorzystaj tak przypisane nazwy w dalszych obliczeniach!
+\item Bez przeprowadzania testu, jakie jest prawdopodobieństwo, że Ostrouchy jest zdrowy? 
+\item Jakie jest prawdopodobieństwo, że jednocześnie Ostrouchy jest zdrowy i test wskazał, że Ostrouchy jest zdrowy? 
+\item Jakie jest prawdopodobieństwo, że test wskaże, że Ostrouchy jest zdrowy? 
+\item Jakie jest prawdopodobieństwo, że Ostrouchy jest zdrowy, jeżeli test wskazał, że Ostrouchy jest zdrowy? 
+\item Czy zdarzenia: \emph{Ostrouchy jest zdrowy} oraz \emph{test wskazał, że Ostrouchy jest zdrowy} są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. 
+\end{enumerate}
+
 \end{enumerate}
 
 \clearpage
-\section{Zmienne losowe dyskretne jednowymiarowe}
+\section{Zmienne losowe jednowymiarowe}
 \begin{enumerate}
+\item Rozważamy doświadczenie polegające na jednokrotnym rzucie uczciwą kostką sześciościenną
+\begin{enumerate}
+\item Zaproponuj zmienną losową $X$ odpowiednią do tego doświadczenia. \ans{$X\colon\Omega\to\{1,\ldots,6\}$}
+\item Podaj rozkład prawdopodobieństwa zmiennej losowej $X$. \ans{$P(X=i)=\frac{1}{6}$}
+\item Podaj dystrybuantę zmiennej losowej $X$ i narysuj jej wykres.
+\item Oblicz $P(X<4)$ korzystając z rozkładu prawdopodobieństwa. \ans{$P(X<4)=P(X=1)+P(X=2)+P(X=3)$}
+\item Oblicz $P(X<4)$ korzystając z dystrybuanty. \ans{$P(X<4)=F_X(4)$}
+\item Oblicz $P(X>2)$ korzystając z rozkładu prawdopodobieństwa. \ans{$P(X>2)=P(X=3)+\ldots+P(X=6)$}
+\item Oblicz $P(X>2)$ korzystając z dystrybuanty. \ans{$P(X>2)=1-P(X\leq 2)=1-P(X<3)=1-F(3)$}
+\item Oblicz wartość średnią. \ans{$EX=\frac{21}{6}=3{,}5$}
+\item Oblicz wariancję. \ans{$D^2X=\frac{1}{6}((-2{,}5)^2+(-1{,}5)^2+(-0{,}5)^2+2{,}5^2+1{,}5^2+0{,}5^2)$}
+\end{enumerate}
 \item Prawdopodobieństwo trafienia do celu w jednym strzale jest równie $\frac{1}{5}$. Niech $X$ przyjmuje wartość 1 jeżeli udało się trafić i 0 w przeciwnym przypadku.
 \begin{enumerate}
 \item Podaj rozkład zmiennej losowej $X$. \ans{$P(X=1)=p\quad P(X=0)=1-p$}
@@ -185,6 +258,77 @@ płynie z kadzi warzelnej (punkt $X$) do pojemnika fermentacyjnego (punkt $Y$)
 \item Oblicz odchylenie standardowe zmiennej losowej $X$. \ans{$DX=\sqrt{p(1-p)}=0{,}4$}
 \item Podaj najbardziej prawdopodobną wartość zmiennej losowej $X$. \ans{$0$}
 \end{enumerate}
+\item Rozważamy doświadczenie polegające na obserwacji sumy oczek na dwóch uczciwych kostkach sześciościennych
+\begin{enumerate}
+\item Zaproponuj zmienną losową $X$ odpowiednią do tego doświadczenia. \ans{$X\colon\Omega\to\{1,\ldots,12\}$}
+\item Podaj rozkład prawdopodobieństwa zmiennej losowej $X$. \ans{$(1,2,3,4,5,6,5,4,3,2,1)/36$}
+\item Podaj dystrybuantę zmiennej losowej $X$ i narysuj jej wykres.
+\item Oblicz $P(X>5)$ korzystając z dystrybuanty.
+\item Oblicz wartość średnią. \ans{$7$}
+\item Oblicz odchylenie standardowe. \ans{$\sqrt{D^2X}=\sqrt{54{,}83-49}=2{,}42$}
+\end{enumerate}
+\item Bilbo bierze udział w grze, w której punkty zdobywa się za trafianie kamykami do celu. Każdemu zawodnikowi przysługuje maksymalnie pięć rzutów, przy czym:
+\begin{itemize}
+\item na początku każdy zawodnik ma jeden punkt;
+\item każdy trafiony rzut powoduje podwojenie liczby posiadanych punktów;
+\item rzut nietrafiony oznacza koniec gry dla danego zawodnika.
+\end{itemize}
+Prawdopodobieństwo, że Bilbo w pojedynczym rzucie trafi do celu wynosi $0{,}7$. Niech $X$ będzie zmienną losową oznaczającą liczbę punktów zdobytych przez
+Bilba.
+\begin{enumerate}
+\item Podaj funkcję prawdopodobieństwa zmiennej losowej $X$.
+\item Oblicz dystrybuantę zmiennej losowej $X$.
+\item Oblicz $EX$.
+\item Oblicz wariancję zmiennej losowej $X$.
+\item Oblicz $P(5\leq X\leq 30)$.
+\end{enumerate}
+\item Rozważmy funkcję \[f(x)=\begin{cases} 0 & x<0 \\ e^{-x} & x\geq 0\end{cases} \]
+\begin{enumerate}
+\item Udowodnij, że jest to funkcja gęstości prawdopodobieństwa pewnej zmiennej losowej $X$. \ans{nieujemna, $\int_{-\infty}^\infty f(x)dx=0+\int_0^\infty f(x)dx=1$}
+\item Oblicz dystrybuantę zmiennej losowej $X$ i narysuj jej wykres.
+\item Oblicz $P(X<\frac{1}{2})$
+\item Oblicz $P(1\leq X<2)$
+\item Oblicz wartość średnią
+\end{enumerate}
+\item Rozważmy funkcję \[f(x)=\begin{cases} Ax^{-4} & \left|x\right|\geq 1 \\ 0 & \text{wpp} \end{cases} \]
+\begin{enumerate}
+\item Dla jakiej wartości stałej $A$ ta funkcja jest gęstością prawdopodobieństwa pewnej zmiennej losowej $X$? \ans{$\frac{3}{2}$}
+\item Oblicz dystrybuantę zmiennej losowej $X$ i narysuj jej wykres. \ans{\[\begin{cases}-\frac{x^{-3}}{2} & x\leq-1\\\frac{1}{2} & -1<x\leq1\\1-\frac{x^{-3}}{2} & x>1 \end{cases}\]}
+\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość większą niż 2. \ans{$\frac{1}{16}$}
+\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość równą 2. \ans{$0$}
+\item Oblicz wartość średnią. \ans{$0$}
+\item Oblicz wariancję. \ans{$3$}
+\end{enumerate}
+\item Dana jest następująca gra: gracz rzuca uczciwą kostką sześciościenną tak długo, dopóki nie wyrzuci piątki bądź
+szóstki, ale więcej niż trzy razy. Jeżeli uda mu się wyrzucić założoną liczbę oczek w $k$-tym rzucie, wygrywa $5-k$
+zł, w przeciwnym razie nie wygrywa nic. Niech zmienna losowa $X$ odpowiada wysokości wygranej. Podaj, dbając
+by przedstawić tok rozumowania:
+\begin{enumerate}
+\item funkcję prawdopodobieństwa zmiennej losowej $X$;
+\item dystrybuatnę zmiennej losowej $X$;
+\item prawdopodobieństwo, że gracz wygra nie mniej niż 3, a nie więcej niż 4 zł;
+\item średnią wartość wygranej;
+\item odchylenie standardowe zmiennej losowej $X$.
+\end{enumerate}
+\item Linia technologiczna składająca samochody składa 5 sztuk w ciągu godziny. Przy okazji składania każdego
+z samochodów istnieje prawdopodobieństwo $0{,}1$, że maszyna montująca drzwi kierowcy ulegnie rozregulowaniu
+i będzie rysować lakier. Co gorsza, rozregulowanie jest trwałe w tym sensie, że dopóki technik nie wyreguluje
+maszyny wszystkie montowane drzwi będą rysowane. W związku z kryzysem firma postanowiła wprowadzić
+oszczędności i technik regulujący maszyny dokonuje kontroli tylko raz na godzinę. Porysowanie lakieru na jednych
+drzwiach to koszt 600 zł. Niech zmienna $X$ odpowiada kwocie, która firma straciła w ciągu godziny w wyniku
+porysowania lakieru przez maszynę montującą drzwi. Podaj, dbając by przedstawić tok rozumowania:
+\begin{enumerate}
+\item funkcję prawdopodobieństwa zmiennej losowej $X$;
+\item dystrybuatnę zmiennej losowej $X$;
+\item średnią stratę;
+\item odchylenie standardowe zmiennej losowej $X$;
+\item prawdopodobieństwo, że firma straci przynajmniej 1000 zł w ciągu godziny
+\end{enumerate}
+\end{enumerate}
+
+\clearpage
+\section{Dyskretne rozkłady prawdopodobieństwa}
+\begin{enumerate}
 \item Prawdopodobieństwo trafienia do celu w jednym strzale jest równie $\frac{1}{5}$. Niech $X$ oznacza liczbę strzałów celnych w wykonanej serii 5 niezależnych strzałów. 
 \begin{enumerate}
 \item Podaj rozkład zmiennej losowej $X$. \ans{$P(X=k)={5 \choose k}\frac{4^{5-k}}{5^5}$}
@@ -225,22 +369,18 @@ siebie i~z~równym prawdopodobieństwem $p$, a~każdego dnia jest ich tam
 \item Oblicz odchylenie standardowe zmiennej losowej $X$.
 \item Oblicz najbardziej prawdopodobną liczbę hobbitów, którzy przyjdą w ciągu dnia do urzędu.
 \end{enumerate}
-\clearpage
-\item Bilbo bierze udział w grze, w której punkty zdobywa się za trafianie kamykami do celu. Każdemu zawodnikowi przysługuje maksymalnie pięć rzutów, przy czym:
-\begin{itemize}
-\item na początku każdy zawodnik ma jeden punkt;
-\item każdy trafiony rzut powoduje podwojenie liczby posiadanych punktów;
-\item rzut nietrafiony oznacza koniec gry dla danego zawodnika.
-\end{itemize}
-Prawdopodobieństwo, że Bilbo w pojedynczym rzucie trafi do celu wynosi $0{,}7$. Niech $X$ będzie zmienną losową oznaczającą liczbę punktów zdobytych przez
-Bilba.
+\item Słoń Nino przechodzi przez skład porcelany zawierający 4~regały, z~których każdy zawiera talerze warte 3000 zł.
+	Każdy z regałów może zostać przewrócony przez Nina z~prawdopodobieństwem $0{,}2$.
+	Niech zmienna $X$ oznacza wartość uszkodzonych talerzy (zakładając, że przerwócenie regału powoduje uszkodzenie się wszystkich zawartych na nim talerzy).
+Podaj, dbając by przedstawić tok rozumowania:
 \begin{enumerate}
-\item Podaj funkcję prawdopodobieństwa zmiennej losowej $X$.
-\item Oblicz dystrybuantę zmiennej losowej $X$.
-\item Oblicz $EX$.
-\item Oblicz wariancję zmiennej losowej $X$.
-\item Oblicz $P(5\leq X\leq 30)$.
+\item funkcję prawdopodobieństwa zmiennej losowej $X$;
+\item dystrybuatnę zmiennej losowej $X$;
+\item prawdopodobieństwo, że słoń stłucze talerzy za co najmniej $5{,}5$ tys. zł.
+\item średnią wartość straty;
+\item odchylenie standardowe zmiennej losowej $X$.
 \end{enumerate}
+\newpage
 \item W piwnicach Brandy Hallu zgromadzono 500 butelek soków na zimę.
 Niestety, z poprzednich lat wiadomo, że każda butelka ma $0{,}5\%$ szans nie dotrwać zimy: spleśnieje, skwaśnieje itp.
 Niech $X$ będzie zmienną losową oznaczającą liczbę zepsutych butelek soku.
@@ -271,26 +411,49 @@ Inaczej: $X+Y=10$.
 \item Oblicz prawdopodobieństwo, że przynajmniej 8 słoików będzie się nadawało do spożycia.
 \item Oblicz prawdopodobieństwo, że liczba zepsutych słoików będzie różniła się od oczekiwanej liczby zepsutych słoików o mniej niż odchylenie standardowe.
 \end{enumerate}
+
+
 \end{enumerate}
+\vfill
+{
+	\footnotesize
+\noindent\begin{tabular}{|r|r|r|r|r|r|r||r|r|r|r|r|r|r|}
+\hline
+\multicolumn{14}{|c|}{Rozkład Poissona} \\
+\diagbox{$\lambda$}{$k$} & \textbf{0}	& \textbf{1}	& \textbf{2}	& \textbf{3}	& \textbf{4}	& \textbf{5} & \diagbox{$\lambda$}{$k$} & \textbf{0}	& \textbf{1}	& \textbf{2}	& \textbf{3}	& \textbf{4}	& \textbf{5}\\
+\hline
+\textbf{0,5}	& 0,6065	& 0,3033	& 0,0758	& 0,0126	& 0,0016	& 0,0002 &	\textbf{5,5}	& 0,0041	& 0,0225	& 0,0618	& 0,1133	& 0,1558	& 0,1714 \\
+\hline                                                                                                          
+\textbf{1,0}	& 0,3679	& 0,3679	& 0,1839	& 0,0613	& 0,0153	& 0,0031 &	\textbf{6,0}	& 0,0025	& 0,0149	& 0,0446	& 0,0892	& 0,1339	& 0,1606 \\
+\hline                                                                                                          
+\textbf{1,5}	& 0,2231	& 0,3347	& 0,2510	& 0,1255	& 0,0471	& 0,0141 &	\textbf{6,5}	& 0,0015	& 0,0098	& 0,0318	& 0,0688	& 0,1118	& 0,1454 \\
+\hline                                                                                                          
+\textbf{2,0}	& 0,1353	& 0,2707	& 0,2707	& 0,1804	& 0,0902	& 0,0361 &	\textbf{7,0}	& 0,0009	& 0,0064	& 0,0223	& 0,0521	& 0,0912	& 0,1277 \\
+\hline                                                                                                          
+\textbf{2,5}	& 0,0821	& 0,2052	& 0,2565	& 0,2138	& 0,1336	& 0,0668 &	\textbf{7,5}	& 0,0006	& 0,0041	& 0,0156	& 0,0389	& 0,0729	& 0,1094 \\
+\hline                                                                                                          
+\textbf{3,0}	& 0,0498	& 0,1494	& 0,2240	& 0,2240	& 0,1680	& 0,1008 &	\textbf{8,0}	& 0,0003	& 0,0027	& 0,0107	& 0,0286	& 0,0573	& 0,0916 \\
+\hline                                                                                                          
+\textbf{3,5}	& 0,0302	& 0,1057	& 0,1850	& 0,2158	& 0,1888	& 0,1322 &	\textbf{8,5}	& 0,0002	& 0,0017	& 0,0074	& 0,0208	& 0,0443	& 0,0752 \\
+\hline                                                                                                         
+\textbf{4,0}	& 0,0183	& 0,0733	& 0,1465	& 0,1954	& 0,1954	& 0,1563 &	\textbf{9,0}	& 0,0001	& 0,0011	& 0,0050	& 0,0150	& 0,0337	& 0,0607 \\
+\hline                                                                                                         
+\textbf{4,5}	& 0,0111	& 0,0500	& 0,1125	& 0,1687	& 0,1898	& 0,1708 &	\textbf{9,5}	& 0,0001	& 0,0007	& 0,0034	& 0,0107	& 0,0254	& 0,0483 \\
+\hline                                                                                                        
+\textbf{5,0}	& 0,0067	& 0,0337	& 0,0842	& 0,1404	& 0,1755	& 0,1755 &	\textbf{10,0}	& 0,0000	& 0,0005	& 0,0023	& 0,0076	& 0,0189	& 0,0378 \\
+\hline
+\end{tabular}
+}
 
 \clearpage
-\section{Zmienne losowe typu ciągłego i zmienne losowe wielowymiarowe}
+\section{Zmienne losowe typu ciągłego}
 \begin{enumerate}
-\item Rozważmy funkcję \[f(x)=\begin{cases} Ax^{-4} & \left|x\right|\geq 1 \\ 0 & \text{wpp} \end{cases} \]
-\begin{enumerate}
-\item Dla jakiej wartości stałej $A$ ta funkcja jest gęstością prawdopodobieństwa pewnej zmiennej losowej $X$? \ans{$\frac{3}{2}$}
-\item Oblicz dystrybuantę zmiennej losowej $X$. \ans{\[\begin{cases}-\frac{x^{-3}}{2} & x\leq-1\\\frac{1}{2} & -1<x\leq1\\1-\frac{x^{-3}}{2} & x>1 \end{cases}\]}
-\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość większą niż 2. \ans{$\frac{1}{16}$}
-\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość równą 2. \ans{$0$}
-\item Oblicz wartość średnią. \ans{$0$}
-\item Oblicz wariancję. \ans{$3$}
-\end{enumerate}
 \item Autobusy linii 64 przyjeżdżają punktualnie co 20 minut na przystanek. Olga nie zna ich rozkładu jazdy, przychodzi więc na przystanek w całkowicie losowym momencie: jak jej się wyjdzie z domu. Niech $T$ oznacza czas oczekiwania Olgi na autobus.
 \begin{enumerate}
 \item Podaj rozkład zmiennej losowej $T$. \ans{$f(t)=\begin{cases}\frac{1}{20} & 0\leq t\leq 20 \\ 0 & \text{wpp} \end{cases}$}
 \item Oblicz prawdopodobieństwo, że Olga będzie czekała mniej niż 5 minut. \ans{$P(T<5)=F(5)=0{,}25$}
 \item Oblicz średni czas oczekiwania na autobus. \ans{$ET=10$}
-\item Oblicz odchylenie standardowe zmiennej losowej $X$. \ans{$DT=\sqrt{\frac{400}{12}}$}
+\item Oblicz odchylenie standardowe zmiennej losowej $T$. \ans{$DT=\sqrt{\frac{400}{12}}$}
 \end{enumerate}
 \item Prawdopodobieństwo, że aparat fotograficzny nie zepsuje się w ciągu pierwszych pięciu miesięcy użytkowania wynosi $0{,}9$. Niech $X$ oznacza liczbę miesięcy bezawaryjnej pracy aparatu. Zakładamy, że zmienna $X$ ma rozkład wykładniczy.
 \begin{enumerate}
@@ -305,8 +468,107 @@ Inaczej: $X+Y=10$.
 \item Oblicz wartość średnią i odchylenie standardowe zmiennej losowej $Y$.
 \item Oblicz prawdopodobieństwo, że w worku jest mniej niż 18 kg mąki. \ans{$P(X<18)=F_X(18)=F_Y(-1)=1-F_Y(1)=1-0{,}8413\approx 0{,}16$}
 \item Oblicz prawdopodobieństwo, że w worku jest więcej niż $21{,}5$ kg mąki. \ans{$P(X>21{,}5)=1-F_X(21{,}5)=1-F_Y(0{,}75)=1-0{,}7734\approx 0{,}23$}
-\item Oblicz prawdopodobieństwo, że ilość mąki w worku różni się od wartości oczekiwanej o nie więcej niż 1 kg. \ans{$P(19<X<21)=F_X(21)-F_X(19)=F_Y(0{,}5)-F_Y(-0{,}5)=2F_Y(0{,}5)-1=2\cdot0{,}6915-1=0{,}38$}
+\item Oblicz prawdopodobieństwo, że ilość mąki w worku różni się od wartości oczekiwanej o nie więcej niż 1~kg. \ans{$P(19<X<21)=F_X(21)-F_X(19)=F_Y(0{,}5)-F_Y(-0{,}5)=2F_Y(0{,}5)-1=2\cdot0{,}6915-1=0{,}38$}
 \end{enumerate}
+\item Pociągi Kolei Wielkopolskich odjeżdżają w~kierunku Wągrowca co 60 min. Niestety, nastąpiła zmiana rozkładu, strona
+internetowa padła, telefony nie działają, a~plakaty z~rozkładem porwał wiatr. Zakładając, że rozkład czasu przybycia pasażera na stację jest
+jednostajny, a pociągi jeżdżą punktualnie, obliczyć:
+\begin{enumerate}
+	\item prawdopodobieństwo, że czas oczekiwania na pociąg przekroczy 10 min, ale będzie nie większe niż 55 min;
+	\item średni czas oczekiwania na pociąg.
+\end{enumerate}
+\item Zakładając, że wysokość losowo wybranego psa rasy Husky pochodzi z~rozkładu normalnego o średniej $53{,}5$ cm i odchyleniu standardowym $1{,}5$ cm (inaczej: $N(53{,}5;1{,}5)$), oblicz jakie jest prawdodpodobieństwo, że taki pies ma wysokość powyżej $56$ cm.
+\item Taczki wyprodukowane w zakładzie Hamfasta psują się średnio po trzech latach użytkowania.
+Fredegar zakupił jedną z taczek, niech $X$ będzie zmienną losową o rozkładzie wykładniczym, reprezentującą czas w~latach bezawaryjnej pracy taczki Fredegara.
+
+\begin{enumerate}
+\item Podaj wartość średnią i odchylenie standardowe zmiennej losowej $X$.
+\item Podaj dystrybuantę zmiennej losowej $X$.
+\item Oblicz prawdopodobieństwo, że taczka zepsuje się przed upływem dwóch lat. 
+\item Oblicz prawdopodobieństwo, że taczka będzie pracowała bez awarii co najmniej 6 lat, jeżeli wiadomo, że jest używana już od trzech lat.
+\end{enumerate}
+\item W hobbickiej wsi Oatbarton znajduje się wielki spichlerz na owies, w~którym okoliczni farmerzy gromadzą swoje plony.
+Masa w tonach $X$ owsa zgromadzonego w spichlerzu bezpośrednio po zbiorach ma rozkład normalny $N(100, 20)$.
+Spichlerz ma pojemność 130 ton, a~roczne potrzeby wsi wynoszą 85 ton.
+
+W poniższych zadaniach wyniki podawaj z dokładnością do przynajmniej dwóch miejsc po przecinku.
+\begin{enumerate}
+\item Podaj $EX$ oraz $DX$.
+\item Niech $Y$ będzie standaryzowaną postacią zmiennej losowej $X$. Podaj $EY$ oraz $DY$.
+\item Oblicz prawdopodobieństwo, że hobbici wyprodukują dokładnie 100 ton owsa.
+\item Oblicz prawdopodobieństwo, że hobbici wychodują najwyżej tyle owsa ile są w stanie zmagazynować.
+\item Oblicz prawdopodobieństwo, że hobbici nie wyprodukują dostatecznie dużo owsa i będą musieli go dokupić.
+\item Oblicz prawdopodobieńśtwo, że masa owsa wyprodukowanego przez hobbitów będzie się różnić od wartości oczekiwanej o nie więcej niż pół odchylenia standardowego.
+\item Oblicz prawdopodobieńśtwo, że masa owsa wyprodukowanego przez hobbitów będzie się różnić od wartości oczekiwanej o nie więcej niż dwie wariancje.
+\end{enumerate}
+
+\item W Bucklandzie na jesieni przygotowują sery na zimę. W każdym ze 100 magazynów
+zgromadzonych jest po 1000 serów. Prawdopodobieństwo zepsucia się pojedynczego
+krążka sera wynosi $4\cdot 10^{-3}$ i~nie zależy od pozostałych serów. Niech
+$i=1,2,\ldots,100$ oznacza numer magazynu i niech zmienna losowa $X_i$ oznacza
+liczbę zepsutych serów składowanych w $i$-tym magazynie. Ponadto, niech zmienna
+losowa $Y=X_1+X_2+\ldots+X_{100}$ odpowiada sumarycznej liczbie zepsutych serów
+we wszystkich magazynach. Załóż, że:
+\begin{itemize}
+\item wszystkie zmienne $X_i$ mają taki sam rozkład;
+\item zmienne $X_i$ są niezależne;
+\item zmienna $Y$ ma rozkład normalny o wartości średniej 100 razy większej niż wartość średnia dowolnej ze zmiennych $X_i$;
+\item zmienna $Y$ ma rozkład normalny o wariancji 100 razy większej niż wariancja dowolnej ze zmiennych $X_i$.
+\end{itemize}
+
+\begin{enumerate}
+\item Podaj  (w formie funkcji prawdopodobieństwa) rozkład prawdopodobieństwa zmiennej losowej $X_1$.
+\item Oblicz (z dokładnością do dwóch miejsc po przecinku) prawdopodobieństwo, że w magazynie nr 10 zepsują się mniej niż trzy sery.
+\item Podaj średnią liczbę zepsutych serów w magazynie nr 15.
+\item Podaj wartości $EY$ oraz $DY$.
+\item Utwórz zmienną losową $Z$ będącą standaryzowaną postacią zmiennej losowej $Y$.
+\item Oblicz (z dokładnością do dwóch miejsc po przecinku) prawdopodobieństwo, że w Bucklandzie zepsują się więcej niż 424 sery.
+\end{enumerate}
+
+
+\begin{tabular}{|r|r|r||r|r|r|}
+\hline
+\multicolumn{6}{|c|}{Rozkład normalny} \\
+	& \textbf{0}	& \textbf{0,05}	& 	& \textbf{0}	& \textbf{0,05}\\
+\hline
+\textbf{0,0}	& 0,500	& 0,520	& \textbf{1,6}	& 0,945	& 0,951 \\
+\hline
+\textbf{0,1}	& 0,540	& 0,560	& \textbf{1,7}	& 0,955	& 0,960 \\
+\hline
+\textbf{0,2}	& 0,579	& 0,599	& \textbf{1,8}	& 0,964	& 0,968 \\
+\hline
+\textbf{0,3}	& 0,618	& 0,637	& \textbf{1,9}	& 0,971	& 0,974 \\
+\hline
+\textbf{0,4}	& 0,655	& 0,674	& \textbf{2,0}	& 0,977	& 0,980 \\
+\hline
+\textbf{0,5}	& 0,691	& 0,709	& \textbf{2,1}	& 0,982	& 0,984 \\
+\hline
+\textbf{0,6}	& 0,726	& 0,742	& \textbf{2,2}	& 0,986	& 0,988 \\
+\hline
+\textbf{0,7}	& 0,758	& 0,773	& \textbf{2,3}	& 0,989	& 0,991 \\
+\hline
+\textbf{0,8}	& 0,788	& 0,802	& \textbf{2,4}	& 0,992	& 0,993 \\
+\hline
+\textbf{0,9}	& 0,816	& 0,829	& \textbf{2,5}	& 0,994	& 0,995 \\
+\hline
+\textbf{1,0}	& 0,841	& 0,853	& \textbf{2,6}	& 0,995	& 0,996 \\
+\hline
+\textbf{1,1}	& 0,864	& 0,875	& \textbf{2,7}	& 0,997	& 0,997 \\
+\hline
+\textbf{1,2}	& 0,885	& 0,894	& \textbf{2,8}	& 0,997	& 0,998 \\
+\hline
+\textbf{1,3}	& 0,903	& 0,911	& \textbf{2,9}	& 0,998	& 0,998 \\
+\hline
+\textbf{1,4}	& 0,919	& 0,926	& \textbf{3,0}	& 0,999	& 0,999 \\
+\hline
+\textbf{1,5}	& 0,933	& 0,939	& \textbf{3,1}	& 0,999	& 0,999 \\
+\hline
+\end{tabular}
+\end{enumerate}
+
+\clearpage
+\section{Zmienne losowe dwuwymiarowe}
+\begin{enumerate}
 \item Z talii 52 kart wylosowano jedną kartę. Niech zmienna losowa $X$ przyjmuje wartość odpowiadającą liczbie wylosowanych waletów, zaś $Y$ odpowiadającą liczbie wylosowanych trefli.
 \begin{enumerate}
 \item Wyznacz rozkłady zmiennych losowych $X$ oraz $Y$. \ans{$P(X=0)=\frac{48}{52} P(X=1)=\frac{4}{52} P(Y=1)=\frac{13}{52} P(Y=0)=\frac{39}{52}$}
@@ -331,6 +593,35 @@ Inaczej: $X+Y=10$.
 \item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$. \ans{$EXY=\frac{1}{52}$}
 %\item Wiadomo, że wylosowano trefla. Oblicz prawdopodobieństwo, że nie jest to dama posługując się warunkowym rozkładem prawdopodobieństwa. \ans{$P(X=0|Y=1)=\frac{\frac{12}{52}}{\frac{13}{52}}=\frac{12}{13}$}
 \end{enumerate}
+\item Doświadczenie polega na dwukrotnym rzucie kostką sześciościenną. Niech zmienna $X$ odpowiada liczbie rzutów, w~których wyrzucono parzystą liczbę oczek, natomiast zmienna $Y$ liczbie rzutów, w których wyrzucono co najmniej 5 oczek.
+\begin{enumerate}
+\item Podaj brzegowe rozkłady prawdopodobieństwa zmiennych losowych $X$ oraz $Y$.
+\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$.
+\item Zbadaj, czy zmienne losowe $X$ oraz $Y$ są niezależne.
+\item Wiadomo, że dwukrotnie wyrzucono parzystą liczbę oczek. Jakie jest prawdopodobieństwo, że były to dwie szóstki? Odpowiedź przedstaw wykorzystując rozkład prawdopodobieństwa zmiennej losowej $(X,Y)$.
+\end{enumerate}
+\item Pippin rzucił trzykrotnie sześciościenną, uczciwą kostką do gry. Niech zmienna $X$ odpowiada liczbie rzutów, w~których udało mu się wyrzucić mniej niż pięć
+oczek, natomiast zmienna $Y$ liczbie rzutów, w których udało mu się wyrzucić przynajmniej dwa oczka.
+\begin{enumerate}
+\item Podaj brzegowe rozkłady prawdopodobieństwa zmiennych losowych $X$ oraz $Y$.
+\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$.
+\item Zbadaj, czy zmienne losowe $X$ oraz $Y$ są zależne.
+\item Oblicz moment zwykły mieszany rzędu 2+1 zmiennej losowej $(X,Y)$.
+\end{enumerate}
+\item Hobbici w skórzanym woreczku mają 7 kartek zapisanych atramentami w dwóch różnych kolorach: czerwonym i zielonym.
+Na każdej z kartek jest inna cyfra od 1 do 7, przy czym cyfry 1, 2, 3, 6, 7 są zapisane kolorem czerwonym, a cyfry 4, 5 kolorem zielonym.
+Pippin losuje ze zwracaniem z woreczka dwie kartki.
+Niech $X$ będzie zmienną losową odpowiadającą liczbie wylosowanych kartek, na których była napisana parzysta liczba, natomiast $Y$ zmienną losową odpowiadającą liczbie kartek zapisanych czerwonym atramentem.
+
+\begin{enumerate}
+\item Podaj rozkład brzegowy zmiennej $X$.
+\item Podaj rozkład brzegowy zmiennej $Y$.
+\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej $(X,Y)$.
+\item Zbadaj, czy zmienne losowej $X$ oraz $Y$ są niezależne.
+\item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$.
+\end{enumerate}
+
+\clearpage
 \item Dana jest funkcja $f(x,y)$ określona poniższym wzorem:
 \[ f(x,y)=\begin{cases} cxy & 0\leq x \leq 4 \land 0\leq y\leq 2 \\ 0 & \text{wpp}\end{cases} \]
 \begin{enumerate}
@@ -346,13 +637,10 @@ Inaczej: $X+Y=10$.
 \item Wiadomo, że realizacja zmiennej losowej $Y$ zawiera się w przedziale $(1,2)$. Jakie jest prawdopodobieństwo, że wtedy realizacja zmiennej losowej $X$ zawiera się w przedziale $(0,2)$?
 \ans{$P(0<X<2|1<Y<2)=\frac{P(0<X<2,1<Y<2)}{P(1<Y<2)}=\frac{F(2,2)-F(2,1)-F(0,2)+F(0,1)}{F_Y(2)-F_Y(1)}=\frac{\frac{1}{4}-\frac{1}{16}-0+0}{1-\frac{1}{4}}=\frac{3}{16}\frac{4}{3}=\frac{1}{4}$}
 \end{enumerate}
-\item Doświadczenie polega na dwukrotnym rzucie kostką sześciościenną. Niech zmienna $X$ odpowiada liczbie rzutów, w~których wyrzucono parzystą liczbę oczek, natomiast zmienna $Y$ liczbie rzutów, w których wyrzucono co najmniej 5 oczek.
-\begin{enumerate}
-\item Podaj brzegowe rozkłady prawdopodobieństwa zmiennych losowych $X$ oraz $Y$.
-\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$.
-\item Zbadaj, czy zmienne losowe $X$ oraz $Y$ są niezależne.
-\item Wiadomo, że dwukrotnie wyrzucono parzystą liczbę oczek. Jakie jest prawdopodobieństwo, że były to dwie szóstki? Odpowiedź przedstaw wykorzystując rozkład prawdopodobieństwa zmiennej losowej $(X,Y)$.
 \end{enumerate}
+\clearpage
+\section{Regresja liniowa}
+\begin{enumerate}
 \item Produkcja piwa składa się m.in. z zaszczepienia brzeczki piwnej odpowiednią liczbą komórek drożdżowych. Jednym z typowych źródeł drożdży jest zebranie ich z dna pojemnika, w którym odbywała się poprzednia fermentacja (zebranie tzw. gęstwy drożdżowej). Zdarza się, że trzeba zebrać gęstwę pewien czas przed przygotowaniem następnej partii brzeczki piwnej. Niestety, drożdże w trakcie przechowywania obumierają.
 
 W laboratorium pewnego browaru przeprowadzono 50 eksperymentów, badających
@@ -380,6 +668,36 @@ $\sum$ 	& 12 & 15 & 13 & 10 & 50\\
 \item Oblicz współczynnik korelacji zmiennej losowej $(X,Y)$. Uzasadnij za pomocą obliczonego współczynnika, czy można spodziewać się zachodzenia związku liniowego między zmiennymi $X$ oraz $Y$? \ans{$cov(X,Y)=-74{,}21, \varrho=-0{,}56$}
 \item Wykorzystaj regresję liniową do wyjaśnienia zmiennej losowej $Y$ w kategoriach zmiennej losowej $X$, tzn. oblicz współczynniki równania $Y=aX+b$. \ans{$a=-1{,}83 b=88{,}61$}
 \item Jakiej przeżywalności drożdży należy się spodziewać po 10 dniach przechowywania gęstwy, a jakiej po 180 dniach? Wykorzystaj model obliczony w poprzednim punkcie i przedyskutuj sensowność otrzymanych wyników. \ans{$y(10)=70, y(180)<0$}
+\end{enumerate}
+
+\item W Minas Tirith dysponują setką piwnic, w~których przechowują żywność na
+wypadek oblężenia. W~każdej z piwnic jest 1000 beczek z solonym mięsem.
+Piwnice rozmieszczone są na poziomach od 0 do 3. Niech zmienna losowa $X$
+oznacza poziom, na którym znajduje się piwnica, a $Y$ liczbę beczek z zepsutym
+jedzeniem wykrytych podczas dorocznej kontroli. W tabeli poniżej znajduje się
+rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$.
+
+\begin{tabular}{|r|r|r|r|}
+\hline
+\diagbox{$X$}{$Y$} & \textbf{0} & \textbf{1} & \textbf{2} \\
+\hline
+\textbf{0} & 0 & 0,05 & 0,2 \\
+\hline
+\textbf{1} & 0,05 & 0,15 & 0,05\\
+\hline
+\textbf{2} & 0,15 & 0,1 & 0 \\
+\hline
+\textbf{3} & 0,2 & 0,05 & 0\\
+\hline
+\end{tabular}
+
+\begin{enumerate}
+\item Oblicz wartości średnie i wariancje zmiennych losowych jednowymiarowych $X$ oraz $Y$.
+\item Oblicz moment zwykły mieszany rzędu $1+1$ zmiennej losowej $(X,Y)$.
+\item Oblicz współczynnik korelacji zmiennej losowej $(X,Y)$. Uzasadnij za pomocą obliczonego współczynnika, czy można spodziewać się zachodzenia związku liniowego między zmiennymi $X$ oraz $Y$?
+\item Wykorzystaj regresję liniową i oblicz współczynniki równania $Y=aX+b$.
+\item Ilu beczek z zepsutym mięsem należałoby się spodziewać w piwnicach Białej Wieży położonej na siódmy poziomie miasta? Wykorzystaj model obliczony w poprzednim punkcie i przedyskutuj sensowność otrzymanych wyników.
+\item Oblicz prawdopodobieństwo, że w piwnicy będą dwie beczki z zepsutym jedzeniem, jeżeli wiadomo, że piwnica znajduje się na pierwszym poziomie.
 \end{enumerate}
 
 \end{enumerate}

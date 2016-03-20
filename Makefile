@@ -48,7 +48,7 @@ clean:
 12_procesy/thinx.tex 12_procesy/mean.tex 12_procesy/corr.tex: 12_procesy/thinx.pe 12_procesy/thinx-weekly.csv
 	./12_procesy/thinx.pe <12_procesy/thinx-weekly.csv 12_procesy/thinx.tex 12_procesy/mean.tex 12_procesy/corr.tex
 
-index.html: gen_index.pe Makefile
+index.html: gen_index.pe Makefile $(SRC)
 	./gen_index.pe $(SRC) >$@
 
 publish: $(PDF) index.html

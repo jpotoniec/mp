@@ -707,6 +707,120 @@ rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$.
 
 \end{enumerate}
 
+\clearpage
+\section{Zmienne losowe dyskretne}
+\begin{enumerate}
+\item Rozważamy doświadczenie polegające na jednokrotnym rzucie uczciwą kostką sześciościenną
+\begin{enumerate}
+\item Zaproponuj zmienną losową $X$ odpowiednią do tego doświadczenia. \ans{$X\colon\Omega\to\{1,\ldots,6\}$}
+\item Podaj rozkład prawdopodobieństwa zmiennej losowej $X$. \ans{$P(X=i)=\frac{1}{6}$}
+\item Podaj dystrybuantę zmiennej losowej $X$ i narysuj jej wykres.
+\item Oblicz $P(X<4)$ korzystając z rozkładu prawdopodobieństwa. \ans{$P(X<4)=P(X=1)+P(X=2)+P(X=3)$}
+\item Oblicz $P(X<4)$ korzystając z dystrybuanty. \ans{$P(X<4)=F_X(4)$}
+\item Oblicz $P(X>2)$ korzystając z rozkładu prawdopodobieństwa. \ans{$P(X>2)=P(X=3)+\ldots+P(X=6)$}
+\item Oblicz $P(X>2)$ korzystając z dystrybuanty. \ans{$P(X>2)=1-P(X\leq 2)=1-P(X<3)=1-F(3)$}
+\item Oblicz wartość średnią. \ans{$EX=\frac{21}{6}=3{,}5$}
+\item Oblicz wariancję. \ans{$D^2X=\frac{1}{6}((-2{,}5)^2+(-1{,}5)^2+(-0{,}5)^2+2{,}5^2+1{,}5^2+0{,}5^2)$}
+\end{enumerate}
+\item Prawdopodobieństwo trafienia do celu w jednym strzale jest równie $\frac{1}{5}$. Niech $X$ przyjmuje wartość 1 jeżeli udało się trafić i 0 w przeciwnym przypadku.
+\begin{enumerate}
+\item Podaj rozkład zmiennej losowej $X$. \ans{$P(X=1)=p\quad P(X=0)=1-p$}
+\item Oblicz średnią liczbę celnych strzałów. \ans{$EX=p=0{,}2$}
+\item Oblicz odchylenie standardowe zmiennej losowej $X$. \ans{$DX=\sqrt{p(1-p)}=0{,}4$}
+\item Podaj najbardziej prawdopodobną wartość zmiennej losowej $X$. \ans{$0$}
+\end{enumerate}
+\item Rozważamy doświadczenie polegające na obserwacji sumy oczek na dwóch uczciwych kostkach sześciościennych
+\begin{enumerate}
+\item Zaproponuj zmienną losową $X$ odpowiednią do tego doświadczenia. \ans{$X\colon\Omega\to\{1,\ldots,12\}$}
+\item Podaj rozkład prawdopodobieństwa zmiennej losowej $X$. \ans{$(1,2,3,4,5,6,5,4,3,2,1)/36$}
+\item Podaj dystrybuantę zmiennej losowej $X$ i narysuj jej wykres.
+\item Oblicz $P(X>5)$ korzystając z dystrybuanty.
+\item Oblicz wartość średnią. \ans{$7$}
+\item Oblicz odchylenie standardowe. \ans{$\sqrt{D^2X}=\sqrt{54{,}83-49}=2{,}42$}
+\end{enumerate}
+\item Bilbo bierze udział w grze, w której punkty zdobywa się za trafianie kamykami do celu. Każdemu zawodnikowi przysługuje maksymalnie pięć rzutów, przy czym:
+\begin{itemize}
+\item na początku każdy zawodnik ma jeden punkt;
+\item każdy trafiony rzut powoduje podwojenie liczby posiadanych punktów;
+\item rzut nietrafiony oznacza koniec gry dla danego zawodnika.
+\end{itemize}
+Prawdopodobieństwo, że Bilbo w pojedynczym rzucie trafi do celu wynosi $0{,}7$. Niech $X$ będzie zmienną losową oznaczającą liczbę punktów zdobytych przez
+Bilba.
+\begin{enumerate}
+\item Podaj funkcję prawdopodobieństwa zmiennej losowej $X$.
+\item Oblicz dystrybuantę zmiennej losowej $X$.
+\item Oblicz $EX$.
+\item Oblicz wariancję zmiennej losowej $X$.
+\item Oblicz $P(5\leq X\leq 30)$.
+\end{enumerate}
+\item Z talii 52 kart wylosowano jedną kartę. Niech zmienna losowa $X$ przyjmuje wartość odpowiadającą liczbie wylosowanych waletów, zaś $Y$ odpowiadającą liczbie wylosowanych trefli.
+\begin{enumerate}
+\item Wyznacz rozkłady zmiennych losowych $X$ oraz $Y$. \ans{$P(X=0)=\frac{48}{52} P(X=1)=\frac{4}{52} P(Y=1)=\frac{13}{52} P(Y=0)=\frac{39}{52}$}
+\item Wyznacz rozkład zmiennej losowej $(X,Y)$. \ans{$P(0,0)=\frac{36}{52} P(1,0)=\frac{3}{52} P(0,1)=\frac{12}{52} P(1,1)=\frac{1}{52}$}
+\item Oblicz dystrybuantę zmiennej losowej $(X,Y)$. \ans{\[F(u,v)=\begin{cases} 
+	0 & u\leq 0 \lor v\leq 0 \\ 
+	\frac{36}{52} & 0<u\leq 1 \land 0<v\leq 1 \\
+	\frac{39}{52} & u>1 \land 0<v\leq 1 \\
+	\frac{48}{52} & 0<u\leq 1 \land v>1 \\
+	1 & u>1 \land v>1
+	\end{cases}\]}
+\item Czy zmienne losowej $X$ i $Y$ są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. \ans{Tak}
+\item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$. \ans{$EXY=\frac{1}{52}$}
+\end{enumerate}
 
+\clearpage
+\item Z talii 52 kart wylosowano jedną kartę. Niech zmienna losowa $X$ przyjmuje wartość odpowiadającą liczbie wylosowanych dam trefl, zaś $Y$ odpowiadającą liczbie wylosowanych trefli.
+\begin{enumerate}
+\item Wyznacz rozkłady zmiennych losowych $X$ oraz $Y$. \ans{$P(X=0)=\frac{51}{52} P(X=1)=\frac{1}{52} P(Y=1)=\frac{13}{52} P(Y=0)=\frac{39}{52}$}
+\item Wyznacz rozkład zmiennej losowej $(X,Y)$. \ans{$P(0,0)=\frac{39}{52} P(1,0)=0 P(0,1)=\frac{12}{52} P(1,1)=\frac{1}{52}$}
+\item Oblicz dystrybuantę zmiennej losowej $(X,Y)$.
+\item Czy zmienne losowej $X$ i $Y$ są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. \ans{Nie, $0=P(1,0)\neq P(X=1)P(Y=0)=\frac{39}{52^2}$}
+\item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$. \ans{$EXY=\frac{1}{52}$}
+%\item Wiadomo, że wylosowano trefla. Oblicz prawdopodobieństwo, że nie jest to dama posługując się warunkowym rozkładem prawdopodobieństwa. \ans{$P(X=0|Y=1)=\frac{\frac{12}{52}}{\frac{13}{52}}=\frac{12}{13}$}
+\end{enumerate}
+\item Doświadczenie polega na dwukrotnym rzucie kostką sześciościenną. Niech zmienna $X$ odpowiada liczbie rzutów, w~których wyrzucono parzystą liczbę oczek, natomiast zmienna $Y$ liczbie rzutów, w których wyrzucono co najmniej 5 oczek.
+\begin{enumerate}
+\item Podaj brzegowe rozkłady prawdopodobieństwa zmiennych losowych $X$ oraz $Y$.
+\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$.
+\item Zbadaj, czy zmienne losowe $X$ oraz $Y$ są niezależne.
+\item Wiadomo, że dwukrotnie wyrzucono parzystą liczbę oczek. Jakie jest prawdopodobieństwo, że były to dwie szóstki? Odpowiedź przedstaw wykorzystując rozkład prawdopodobieństwa zmiennej losowej $(X,Y)$.
+\end{enumerate}
 
+\item Dana jest następująca gra: gracz rzuca uczciwą kostką sześciościenną tak długo, dopóki nie wyrzuci piątki bądź
+szóstki, ale nie więcej niż trzy razy. Jeżeli uda mu się wyrzucić założoną liczbę oczek w $k$-tym rzucie, wygrywa $5-k$
+zł, w przeciwnym razie nie wygrywa nic. Niech zmienna losowa $X$ odpowiada wysokości wygranej. Podaj, dbając
+by przedstawić tok rozumowania:
+\begin{enumerate}
+\item funkcję prawdopodobieństwa zmiennej losowej $X$;
+\item dystrybuatnę zmiennej losowej $X$;
+\item prawdopodobieństwo, że gracz wygra nie mniej niż 3, a nie więcej niż 4 zł;
+\item średnią wartość wygranej;
+\item odchylenie standardowe zmiennej losowej $X$.
+\end{enumerate}
+\item Linia technologiczna składająca samochody składa 5 sztuk w ciągu godziny. Przy okazji składania każdego
+z samochodów istnieje prawdopodobieństwo $0{,}1$, że maszyna montująca drzwi kierowcy ulegnie rozregulowaniu
+i będzie rysować lakier. Co gorsza, rozregulowanie jest trwałe w tym sensie, że dopóki technik nie wyreguluje
+maszyny wszystkie montowane drzwi będą rysowane. W związku z kryzysem firma postanowiła wprowadzić
+oszczędności i technik regulujący maszyny dokonuje kontroli tylko raz na godzinę. Porysowanie lakieru na jednych
+drzwiach to koszt 600 zł. Niech zmienna $X$ odpowiada kwocie, która firma straciła w ciągu godziny w wyniku
+porysowania lakieru przez maszynę montującą drzwi. Podaj, dbając by przedstawić tok rozumowania:
+\begin{enumerate}
+\item funkcję prawdopodobieństwa zmiennej losowej $X$;
+\item dystrybuatnę zmiennej losowej $X$;
+\item średnią stratę;
+\item odchylenie standardowe zmiennej losowej $X$;
+\item prawdopodobieństwo, że firma straci przynajmniej 1000 zł w ciągu godziny
+\end{enumerate}
+
+\item Hobbici w skórzanym woreczku mają 7 kartek zapisanych atramentami w dwóch różnych kolorach: czerwonym i zielonym.
+Na każdej z kartek jest inna cyfra od 1 do 7, przy czym cyfry 1, 2, 3, 6, 7 są zapisane kolorem czerwonym, a cyfry 4, 5 kolorem zielonym.
+Pippin losuje ze zwracaniem z woreczka dwie kartki.
+Niech $X$ będzie zmienną losową odpowiadającą liczbie wylosowanych kartek, na których była napisana parzysta liczba, natomiast $Y$ zmienną losową odpowiadającą liczbie kartek zapisanych czerwonym atramentem.
+\begin{enumerate}
+\item Podaj rozkład brzegowy zmiennej $X$.
+\item Podaj rozkład brzegowy zmiennej $Y$.
+\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej $(X,Y)$.
+\item Zbadaj, czy zmienne losowej $X$ oraz $Y$ są niezależne.
+\end{enumerate}
+\end{enumerate}
 \end{document}

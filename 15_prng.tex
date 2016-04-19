@@ -269,6 +269,45 @@ LCG ma okres $m$ wtedy i tylko wtedy gdy jednocześnie:
 }
 \end{frame}
 
+\begin{frame}{Łamanie LCG}
+\only<1,14>
+{
+\begin{description}
+\item[wyjście LCG] \alert<14>{17, 15, 76, 38,} 63, 70, 59, 30, 64, 80
+\item[zadanie] $m=?$, $a=?$, $c=?$
+\end{description}
+}
+\only<2->
+{
+\begin{align*}
+\only<2-5>{x_2 = & (ax_1+c)\mod m \\}
+\only<3-5>{x_3 = & (ax_2+c)\mod m=\alt<-3>{\alert<3>{\ldots}}{(a^2x_1+(a+1)c)\mod m}\\}
+\only<4-5>{x_4 = & (ax_3+c)\mod m=\alt<-4>{\alert{\ldots}}{(a^3x_1+(a^2+a+1)c)\mod m}\\}
+\only<5-11>{x_n = & \alt<-5>{\alert{\ldots}}{(a^{n-1}x_1+(a^{n-2}+\ldots+1)c)\mod m}\\}
+\only<6-11>{x_{n+1}-x_n = & \alt<-6>{\alert{\ldots}}{a^{n-1}(x_2-x_1) \mod m=a^{n-1}\alert<7>{\delta}\mod m \\}}
+\only<7-11>{x_{n+2}-x_n = & \alt<-7>{\alert{\ldots}}{a^{n-1}(a+1)\delta\mod m} \\}
+\only<8->{s= & (x_4-x_2)(x_2-x_1)=\alert<8>{\ldots} \\
+t= & (x_3-x_2)(x_3-x_1)=\alert<8>{\ldots} \\
+}
+\only<9->{s-t\mod m = & \alert<9>{\ldots} \\}
+\only<10->{u=& (x_3-x_2)^2=\alert<10>{\ldots} \\
+v=& (x_4-x_3)(x_2-x_1)=\alert<10>{\ldots} \\
+\only<11->{u-v\mod m = & \alert<11>{\ldots} \\}
+\only<12->{\nwd(s-t, u-v)= & \alt<-12>{\alert<12>{\ldots}}{km}}
+}
+\end{align*}
+\only<14>{.}
+}
+\note<4>
+{
+\begin{gather*}
+%AW, SNAP. Kod podpowiada, zeby wziac liczby od 2 do 5, ale teraz juz mi sie nie chce
+s=(38-15)\cdot(15-17)=-46 \qquad t=(76-15)\cdot(76-17)=3599 \qquad s-t=-3645 \\
+u=(76-15)^2=3721 \qquad v=(38-76)\cdot(15-17)=76 \qquad u-v=3645
+\end{gather*}
+}
+\end{frame}
+
 \begin{frame}{Niezależność w LCG}
 \begin{block}{Ciąg liczb losowych}
 \[ (X_1, X_2, \ldots) \]

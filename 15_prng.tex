@@ -161,28 +161,32 @@ $6$ & $0{,}083$ & \alert{$0{,}160$} \\
 \end{description}
 \pause
 \begin{lstlisting}[language=Java,linebackgroundcolor={\btLstHL{3}}]
-r = new Random();
-for(int i=0;i<200000*17;i++)
-    tab[i] = r.nextInt() % 17;
+r = new Random(1);
+for(int i=0;i<200000*11;i++)
+    tab[i] = r.nextInt() % 11;
 \end{lstlisting}
 \pause
 \begin{center}
-\includegraphics[width=.6\textwidth]{15_prng/lcg_mod_17_hist.pdf}
+\includegraphics[width=.6\textwidth]{15_prng/lcg_mod_11_hist.pdf}
 \end{center}
 \end{frame}
 \begin{frame}[fragile]{Przypadek szczególny: skrócony rozkład równomierny}
 \begin{lstlisting}[language=Java,linebackgroundcolor={\btLstHL{3}}]
-r = new Random();
-for(int i=0;i<200000*17;) {
-    tab[i] = r.nextInt() & 0b11111;
-    if(tab[i]<17) i++;
+r = new Random(1);
+for(int i=0;i<200000*11;) {
+    tab[i] = r.nextInt() & 0b1111;
+    if(tab[i]<11) i++;
 }
 \end{lstlisting}
 \pause
 \vspace{-8mm}
 \begin{center}
-\includegraphics[width=.7\textwidth]{15_prng/lcg_mod_32_hist.pdf}
+\includegraphics[width=.7\textwidth]{15_prng/lcg_mod_11_cut_hist.pdf}
 \end{center}
+\end{frame}
+\begin{frame}{To samo z bliska}
+\centering
+\includegraphics[width=\textwidth]{15_prng/lcg_mod_11_comp.pdf}
 \end{frame}
 \begin{frame}{Ciąg liczb losowych}
 \[ (X_1, X_2, \ldots) \]

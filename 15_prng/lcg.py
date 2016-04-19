@@ -57,24 +57,27 @@ def hist(data):
     return result
 
 def cut(data):
-    k = 5000
-    n = 23
+    k = 200000
+    n = 17
     data1 = [v%n for v in data[0:k*n]]
-    m = max(hist(data1).values())
+    h = hist(data1)
+    m = max(h.values())
     plt.hist(data1, n, histtype='stepfilled')
     plt.ylim(ymax=m*1.1)
-    plt.title("mod {0}, ${1}\cdot {0}={2}$ wartości".format(n, k, k*n))
+    plt.title("mod {0}, ${1}\cdot {0}={2}$ wartości, min={3}, max={4}".format(n, k, k*n, min(h.values()), max(h.values())))
     plt.xlabel("$X_i$")
     plt.ylabel("Liczba wystąpień")
     plt.savefig("lcg_mod_{}_hist.pdf".format(n))
     plt.close()
 
     l = 32
-    data2 = [v%l for v in data if v%l<n][0:k*n]
-    m = max(hist(data2).values())
-    plt.hist(data2, 23, histtype='stepfilled')
+    data2 = [v&0b11111 for v in data if (v&0b11111)<n][0:k*n]
+    assert len(data2) == k*n, "Za krótkie data!"
+    h = hist(data2)
+    m = max(h.values())
+    plt.hist(data2, n, histtype='stepfilled')
     plt.ylim(ymax=m*1.1)
-    plt.title("mod {0} ucięte, ${1}\cdot {3}={2}$ wartości".format(l, k, k*n, n))
+    plt.title("mod {0} ucięte, ${1}\cdot {3}={2}$ wartości, min={4}, max={5}".format(l, k, k*n, n, min(h.values()), max(h.values())))
     plt.xlabel("$X_i$")
     plt.ylabel("Liczba wystąpień")
     plt.savefig("lcg_mod_{}_hist.pdf".format(l))
@@ -85,8 +88,10 @@ def cut(data):
 def main():
     data = test_lcg(LCG(1229, 1, 2048, 1), 5)
     print(data[1:20])
-    java_lcg = LCG(0x5DEECE66D, 0xB, (1 << 48) - 1, 1)
-    data = [java_lcg() for i in range(0, 20000)]
+#parametry z Javy, modulus jest o jeden wiekszy niz w kodzie Java, bo tam jest maska
+    java_lcg = LCG(0x5DEECE66D, 0xB, (1 << 48), 1)
+#to przesuniecie o 16 to dlatego, ze tamten generator tez tak robi
+    data = [java_lcg()>>16 for i in range(0, 10000000)]
     cut(data)
 
     data = test_lcg(LCG(65538, 2, math.factorial(7), 1), 5)

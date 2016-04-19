@@ -36,6 +36,11 @@ clean:
 
 11_ciagi.pdf: circles.tex ll.tex
 
+15_prng.pdf: 15_prng/lcg_mod_17_hist.pdf
+
+15_prng/lcg_mod_17_hist.pdf: 15_prng/lcg.py
+	(cd 15_prng; ./lcg.py)
+
 %.image.pdf: %.image.tex %.tex
 	pdflatex -output-directory "$(dir $@)" "$<"
 

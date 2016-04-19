@@ -84,7 +84,7 @@
 \[ Y=F^{-1}(X) \]
 \pause
 \[Y\sim Exp(0{,}5) \qquad x=0{,}1563 \]
-\note{\[F(y)=1-e^{-\lambda y} \qquad y=
+\note<1>{\[F(y)=1-e^{-\lambda y} \qquad y=
 \frac{\ln(1-F(y)}{-\lambda}=
 \frac{\ln(1-0{,}1563}{-0{,5}}\approx 0{,}34\]}
 \end{frame}
@@ -187,6 +187,28 @@ for(int i=0;i<200000*11;) {
 \begin{frame}{To samo z bliska}
 \centering
 \includegraphics[width=\textwidth]{15_prng/lcg_mod_11_comp.pdf}
+\end{frame}
+\begin{frame}{Analiza algorytmu}
+\begin{description}
+\item[wejście] $X_i\sim\mathcal{U}(0,2^n-1)\quad X_i$ niezależne
+\item[wyjście] $(Y_1, Y_2, \ldots, Y_l)$\qquad $Y_j\sim\mathcal{U}(0,k-1)\quad 2^{n-1}<k\leq 2^n-1$
+\end{description}
+\pause
+\alert{Ile potrzebujemy liczb na wejściu, żeby wygenerować $l$ liczb na wyjściu?}
+\note<2>
+{
+\tiny
+Żeby wygenerować jedną liczbę potrzebujemy $N$ liczb z wejścia, gdzie $N$ ma rozkład geometryczny (pobieramy $X$y do pierwszego sukcesu) z $p=\frac{k}{2^n}$.
+Żeby wygenerować $l$ takich liczb, musimy zsumować $l$ zmiennych o takim rozkładzie: $W=N_1+N_2+\ldots+N_l$.
+Te zmienne są niezależne, ponieważ $X$y są niezależne.
+$EN_i=\frac{1}{p}=\frac{2^n}{k}$, $D^2N_i=\frac{1}{p^2}-\frac{1}{p}=\frac{2^n(2^n-k)}{k^2}$
+Z niezależności $EN=l\frac{2^n}{k}$ i $D^2N=l\frac{2^n(2^n-k)}{k^2}$.
+Nierówność Czebyszewa:
+\[ P(N-EN\geq \varepsilon) \leq P(\left|N-EN\right|\geq \varepsilon)\leq \frac{D^2N}{\varepsilon^2} \]
+Niech $\varepsilon=l\varrho$ i $k=2^{n-1}$ (najgorszy możliwy przypadek):
+\[ P(N-EN\geq \varepsilon) = P(N\geq l(\frac{2^n}{k}+\varrho)) = P(N\geq l(2+\varrho)) \leq \frac{l2^n2^{n-1}}{2^{2(n-1)}l^2\varrho^2}=\frac{2}{l\varrho^2}  \]
+Niech $\varrho=8$ i wtedy $P(N\geq 10l)\leq \frac{1}{32l}$
+}
 \end{frame}
 \begin{frame}{Ciąg liczb losowych}
 \[ (X_1, X_2, \ldots) \]

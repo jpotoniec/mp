@@ -161,7 +161,7 @@ $6$ & $0{,}083$ & \alert{$0{,}160$} \\
 \end{description}
 \pause
 \begin{lstlisting}[language=Java,linebackgroundcolor={\btLstHL{3}}]
-r = new Random();
+r = new Random(1);
 for(int i=0;i<200000*17;i++)
     tab[i] = r.nextInt() % 17;
 \end{lstlisting}
@@ -172,7 +172,7 @@ for(int i=0;i<200000*17;i++)
 \end{frame}
 \begin{frame}[fragile]{Przypadek szczególny: skrócony rozkład równomierny}
 \begin{lstlisting}[language=Java,linebackgroundcolor={\btLstHL{3}}]
-r = new Random();
+r = new Random(1);
 for(int i=0;i<200000*17;) {
     tab[i] = r.nextInt() & 0b11111;
     if(tab[i]<17) i++;

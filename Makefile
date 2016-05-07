@@ -39,24 +39,29 @@ clean:
 15_prng.pdf: 15_prng/lcg_mod_17_hist.pdf
 
 15_prng/lcg_mod_17_hist.pdf: 15_prng/lcg.py
+	chmod +x ./15_prng/lcg.py
 	(cd 15_prng; ./lcg.py)
 
 %.image.pdf: %.image.tex %.tex
 	pdflatex -output-directory "$(dir $@)" "$<"
 
 %.png: %.image.pdf
+	chmod +x convert.sh
 	./convert.sh "$^" "$@"
 	touch "$@"	#moze byc tak, ze powstana pliki %-liczba.png, ale wtedy i tak chcemy miec plik %.png, zeby make nie wariowalo
 
 12_procesy.pdf: 12_procesy/thinx.tex 12_procesy/mean.png 12_procesy/corr.png
 
 %.tex: %.pe
+	chmod +x $^
 	./$^ >$@
 
 12_procesy/thinx.tex 12_procesy/mean.tex 12_procesy/corr.tex: 12_procesy/thinx.pe 12_procesy/thinx-weekly.csv
+	chmod +x ./12_procesy/thinx.pe
 	./12_procesy/thinx.pe <12_procesy/thinx-weekly.csv 12_procesy/thinx.tex 12_procesy/mean.tex 12_procesy/corr.tex
 
 index.html: gen_index.pe Makefile $(SRC)
+	chmod +x gen_index.pe
 	./gen_index.pe $(SRC) >$@
 
 publish: $(PDF) index.html

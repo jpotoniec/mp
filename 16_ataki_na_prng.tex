@@ -8,6 +8,23 @@
 
 \begin{document}
 \frame{\titlepage}
+
+\begin{frame}{Problem ataku na generator liczb losowych}
+Mając dane:
+\begin{itemize}
+\item typ generatora (np. LCG, Xorshift)
+\item $n$ kolejnych liczb z wyjścia: $(x_1, x_2, \ldots, x_n)$
+\end{itemize}
+przewidzieć kolejną wartość $x_{n+1}$.
+\end{frame}
+
+\begin{frame}{Atak na Xorshift}
+
+\alert{Trywialny!}
+\note<1>{Wystarczy sprawdzić wszystkie możliwości dla zadanej pary $x_1, x_2$. Jest ich dostatecznie mało.}
+\end{frame}
+
+
 \begin{frame}{Odwrotność modulo}
 \begin{description}
 \item[odwrotność] \[ x\cdot \alert{x^{-1}} = 1 \qquad x^{-1}\in\R \]
@@ -97,6 +114,7 @@ v=& (x_4-x_3)(x_2-x_1)=\alert<9>{\ldots} \\
 }
 \end{align*}
 \end{frame}
+
 %\only<14>{.}
 %}
 %\note<4>
@@ -115,4 +133,5 @@ v=& (x_4-x_3)(x_2-x_1)=\alert<9>{\ldots} \\
 %\end{gather*}
 %}
 %\end{frame}
+
 \end{document}

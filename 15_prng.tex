@@ -298,22 +298,128 @@ $p$ & $q$ & $p\xor q$ \\
 
 \vspace{1cm}
 \begin{onlyenv}<3->
+\begin{columns}[T]
+\begin{column}{.49\textwidth}
+\vspace{.5cm}
 \begin{tabular}{c|c|cccc}
 $x$ & 9 & 1 & 0 & 0 & 1 \\
-$y$ & 7 & 0 & 1 & 1 & 1 \\
+$y$ & 5 & 0 & 1 & 0 & 1 \\
 \hline
-$x\xor y$ & \alt<5->{10}{\alert{\ldots}} 
+$x\xor y$ & \alt<5->{12}{\alert{\ldots}} 
 &
-\alt<-3>{\alert{\ldots}}{1 & 0 & 1 & 0}
+\alt<-3>{\alert{\ldots}}{1 & 1 & 0 & 0}
 \end{tabular}
+\end{column}
+\begin{column}{.49\textwidth}
+\only<6->
+{
+\begin{align*}
+x = & [1, 0, 0, 1] \\
+y = & [0, 1, 0, 1] \\
+\alert{x+y} = & [1, 1, 0, 0]
+\end{align*}
+}
+\end{column}
+\end{columns}
 \end{onlyenv}
 \end{frame}
 
-\begin{frame}{Shift}
-\begin{tabular}{c|c|cccc}
-$y$ & 9 & 1 & 0 & 0 & 1 \\
-$y<<1$ & \alt<3->{2}{\ldots} & \alt<2->{0 & 0 & 1 & \alert{0}}{\alert{\ldots}} \\
+\begin{frame}{SHL}
+\centering
+\begin{tabular}{l|c|cccc}
+\texttt{y} & 9 & 1 & 0 & 0 & 1 \\
+\texttt{y<<1} & \alt<3->{2}{\ldots} & \alt<2->{0 & 0 & 1 & \alert<2>{0}}{\alert{\ldots}} \\
+%\only<4->{$y>>1$ & \alt<6->{4}{\ldots} & \alt<5->{\alert<5>{0} & 1 & 0 & 0}{\alert{\ldots}}} \\
 \end{tabular}
+
+\begin{onlyenv}<4->
+\begin{align*}
+y = & [1, 0, 0, 1] = [y_3, y_2, y_1, y_0] \\
+yL = & [0, 0, 1, 0] = [y_2, y_1, y_0, 0] \\
+\end{align*}
+\end{onlyenv}
+\begin{onlyenv}<5->
+\begin{align*}
+L = & 
+\alt<6->
+{
+\begin{bmatrix} 
+0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+\end{bmatrix} \\
+}
+{
+\begin{bmatrix} 
+\alert{?} & \alert{?} & \alert{?} & \alert{?} \\
+\alert{?} & \alert{?} & \alert{?} & \alert{?} \\
+\alert{?} & \alert{?} & \alert{?} & \alert{?} \\
+\alert{?} & \alert{?} & \alert{?} & \alert{?} \\
+\end{bmatrix} \\
+}
+\begin{bmatrix} y_3 & y_2 & y_1 & y_0 \end{bmatrix} & \begin{bmatrix} y_2 & y_1 & y_0 & 0 \end{bmatrix} \\
+\end{align*}
+\end{onlyenv}
+\end{frame}
+
+\begin{frame}{SHR}
+\centering
+\begin{tabular}{l|c|cccc}
+\texttt{y} & 9 & 1 & 0 & 0 & 1 \\
+\texttt{y>>1} & \alt<3->{4}{\ldots} & \alt<2->{\alert<2>{0} & 1 & 0 & 0}{\alert{\ldots}} \\
+\end{tabular}
+
+\begin{onlyenv}<4->
+\begin{align*}
+y = & [1, 0, 0, 1] = [y_3, y_2, y_1, y_0] \\
+yR = & [0, 1, 0, 0] = [0, y_3, y_2, y_1] \\
+\end{align*}
+\end{onlyenv}
+\begin{onlyenv}<5->
+\begin{align*}
+R = & 
+\alt<6->
+{
+\begin{bmatrix} 
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 \\
+\end{bmatrix} \\
+}
+{
+\begin{bmatrix} 
+\alert{?} & \alert{?} & \alert{?} & \alert{?} \\
+\alert{?} & \alert{?} & \alert{?} & \alert{?} \\
+\alert{?} & \alert{?} & \alert{?} & \alert{?} \\
+\alert{?} & \alert{?} & \alert{?} & \alert{?} \\
+\end{bmatrix} \\
+}
+\begin{bmatrix} y_3 & y_2 & y_1 & y_0 \end{bmatrix} & \begin{bmatrix} 0 & y_3 & y_2 & y_1 \end{bmatrix} \\
+\end{align*}
+\end{onlyenv}
+\end{frame}
+
+\begin{frame}{Wielokrotne przesunięcia}
+$$
+R = \begin{bmatrix} 
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 \\
+\end{bmatrix} 
+\qquad
+L = \begin{bmatrix} 
+0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+\end{bmatrix}
+$$
+\texttt{y>>n = ((y>>1)>>1)>>\ldots>>1} $=y\cdot R\cdot R\cdot\ldots\cdot R=yR^n$ \\
+\texttt{y<<n = ((y<<1)<<1)<<\ldots<<1} $=y\cdot L\cdot L\cdot\ldots\cdot L=yL^n$ \\
+$R=L^T$
 \end{frame}
 
 \begin{frame}{Xorshift}

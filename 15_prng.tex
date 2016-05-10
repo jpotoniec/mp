@@ -5,6 +5,7 @@
 \subtitle{Generatory liczb pseudolosowych}
 \usepackage{listings}
 
+\newcommand{\xor}{\oplus}
 
 \usepackage{lstlinebgrd} % see http://www.ctan.org/pkg/lstaddons
 
@@ -284,6 +285,44 @@ LCG ma okres $m$ wtedy i tylko wtedy gdy jednocześnie:
 \[ P(X_{n+m}=7|X_n=7) = \alert{\ldots} \]
 \end{frame}
 
+\begin{frame}{XOR}
+\centering
+\begin{tabular}{cc|c}
+$p$ & $q$ & $p\xor q$ \\
+\hline
+0 & 0 & \uncover<2->{0} \\
+0 & 1 & \uncover<2->{1} \\
+1 & 0 & \uncover<2->{1} \\
+1 & 1 & \uncover<2->{0} \\
+\end{tabular}
+
+\vspace{1cm}
+\begin{onlyenv}<3->
+\begin{tabular}{c|c|cccc}
+$x$ & 9 & 1 & 0 & 0 & 1 \\
+$y$ & 7 & 0 & 1 & 1 & 1 \\
+\hline
+$x\xor y$ & \alt<5->{10}{\alert{\ldots}} 
+&
+\alt<-3>{\alert{\ldots}}{1 & 0 & 1 & 0}
+\end{tabular}
+\end{onlyenv}
+\end{frame}
+
+\begin{frame}{Shift}
+\begin{tabular}{c|c|cccc}
+$y$ & 9 & 1 & 0 & 0 & 1 \\
+$y<<1$ & \alt<3->{2}{\ldots} & \alt<2->{0 & 0 & 1 & \alert{0}}{\alert{\ldots}} \\
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Xorshift}
+\begin{align*}
+X_0 = & \text{seed} \\
+U = & X_{n}
+X_{n+1} = & (aX_n+c) \mod m
+\end{align*}
+\end{frame}
 
 \begin{frame}{Bibliografia}
 \begin{enumerate}

@@ -6,6 +6,8 @@
 \usepackage{listings}
 \usepackage{alltt}
 
+\usepackage{tikzsymbols}
+
 \newcommand{\xor}{\oplus}
 \renewcommand{\vec}[1]{\mathbf{#1}}
 
@@ -287,6 +289,44 @@ LCG ma okres $m$ wtedy i tylko wtedy gdy jednocześnie:
 \[ P(X_{n+m}=7|X_n=7) = \alert{\ldots} \]
 \end{frame}
 
+
+\begin{frame}{Multiply-with-carry}
+\begin{align*}
+(X_0, C_0) = & \text{seed} \\
+\only<2->{\alert{\to}\,}X_{n+1} = & aX_n+C_n\mod b \\
+C_{n+1} = & \left\lfloor\frac{aX_n+C_n}{b}\right\rfloor \\
+\end{align*}
+\begin{block}<3->{Uwaga}
+seed \emph{nie} może być $(0, 0)$ ani $(a-1, b-1)$
+\end{block}
+\end{frame}
+
+\begin{frame}{Dobór parametrów MWC}
+\note<1>
+{
+$k$ jest rzędem $b$ w grupie $\Z_m$. $(C_n,X_n)$ ma pełen okres wtw $k=ab-2$.
+Niestety, nie wynikają z tego żadne porządne własności $X_n$.
+Przykładowo, dla $a=12$, $b=29$ rząd jest 173
+}
+\begin{block}{Twierdzenie (o rozkładzie)}
+Niech $k\in\{2,3,\ldots, ab\}$ będzie najmniejszą liczbą taką, że 
+\[b^k\mod (ab-1)=1\] 
+Jeżeli $k=ab-2$, to MWC ma okres $k$ (maksymalny możliwy) i $aX_n+C_n\sim\mathcal{U}(1, ab-1)$.
+\end{block}
+\pause
+\begin{block}{Wniosek o $X_n$}
+\centering
+\Sadey[5]
+\end{block}
+\note<2>{Empiryczna obserwacja na bazie parametrów $(6,10)$, $(6, 78)$ i $(10, 162)$: rozkład jest delikatnie nierównomierny, wartości od $1$ do $b-2$ pojawiają się z prawdopodobieństwem $\frac{a}{ab-2}$, natomiast $0$ i $b-1$ z prawdopodobieństwem $\frac{a-1}{ab-2}$.
+}
+\end{frame}
+
+\begin{frame}{Implementacja}
+%\begin{listing}
+%\end{listing}
+\end{frame}
+
 \begin{frame}{Przypomnienie wiadomości o macierzach}
 %TODO
 \end{frame}
@@ -466,6 +506,13 @@ int32_t xorshift(int32_t seed)
 }
 \end{lstlisting}
 \end{frame}
+%TODO sprawdzic praktycznie, bez tego sie nie odwaze tego pokazac.
+%TODO np wydaje mi sie, ze potegowanie musi byc nad cialem macierzy binarnych
+%\begin{frame}{Długość okresu generatora Xorshift}
+%\begin{block}{Twierdzenie (o okresie)}
+%Żeby generator \emph{Xorshift} na $m$ bitach mógł osiągnąć wszystkie wartości potrzeba i wystarcza, żeby $T^{2^m}=T$ i jednocześnie $T^k\neq T$ dla dowolnego $k\in\{2,\ldots,
+%\end{block}
+%\end{frame}
 \begin{frame}{32-bitowy oraz 64-bitowy Xorshift}
 \begin{block}{Twierdzenie (o długości)}
 32-bitowy Xorshift ($m=32$) oraz 64-bitowy Xorshift ($m=64$) o pełnym okresie wymaga przynajmniej trzech przesunięć ($l\geq 3$) 
@@ -502,6 +549,7 @@ Istnieje dokładnie 81 trójek $(a,b,c)$ zapewniających pełen okres dla $m=32$
 \vfill
 {\footnotesize G. Marsaglia \emph{Xorshift RNGs} w: \emph{Journal of Statistical Software} 8(14)}
 \end{frame}
+
 \begin{frame}{Bibliografia}
 \begin{enumerate}
 \item ,,The Art of Computer Programming'' (Vol. 2) D. Knuth, rozdział III

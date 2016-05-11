@@ -3,8 +3,11 @@
 \DontPrintSemicolon
 \graphicspath{{15_prng}}
 \subtitle{Generatory liczb pseudolosowych}
-\usepackage{listings}
+
 \usepackage{alltt}
+
+\usepackage{listings}
+\lstdefinelanguage{C99}[]{C}{morekeywords={uint64\_t, uint32\_t, uint16\_t}}
 
 \usepackage{tikzsymbols}
 
@@ -311,20 +314,42 @@ Przykładowo, dla $a=12$, $b=29$ rząd jest 173
 \begin{block}{Twierdzenie (o rozkładzie)}
 Niech $k\in\{2,3,\ldots, ab\}$ będzie najmniejszą liczbą taką, że 
 \[b^k\mod (ab-1)=1\] 
-Jeżeli $k=ab-2$, to MWC ma okres $k$ (maksymalny możliwy) i $aX_n+C_n\sim\mathcal{U}(1, ab-1)$.
+Jeżeli $k=ab-2$, to MWC ma okres $k$ (maksymalny możliwy) i $aX_n+C_n\sim\mathcal{U}(1, ab-2)$.
 \end{block}
 \pause
-\begin{block}{Wniosek o $X_n$}
-\centering
-\Sadey[5]
-\end{block}
-\note<2>{Empiryczna obserwacja na bazie parametrów $(6,10)$, $(6, 78)$ i $(10, 162)$: rozkład jest delikatnie nierównomierny, wartości od $1$ do $b-2$ pojawiają się z prawdopodobieństwem $\frac{a}{ab-2}$, natomiast $0$ i $b-1$ z prawdopodobieństwem $\frac{a-1}{ab-2}$.
+\alert{Jaki rozkład ma zmienna $X_n$, jeżeli parametry zapewniają pełen okres?}
+%\begin{block}{Wniosek o $X_n$}
+%\centering
+%\Sadey[5]
+%\end{block}
+\note<2>{
+Skoro $aX_n+C_n\sim\mathcal{U}(1, ab-2)$, to $X_{n+1}=(aX_n+C_n)\mod b$ nie może mieć rozkładu jednostajnego, ponieważ zbiór możliwych wartości dla $aX_n+C_n$, tzn. $\{1,2,\ldots,ab-1\}$, ma $ab-2$ elementy, a więc liczbę niepodzielną bez reszty przez $b$.
+W zbiorze brakuje elementu o reszcie $0$ (elementu $0$) i elementu o reszcie $b-1$, tzn. $ab-1$.
+Inaczej: każda możliwa reszta występuje w zbiorze $a$ krotnie, natomiast $0$ i $b-1$ występują w nim $a-1$ krotnie.
+
+Empiryczna obserwacja na bazie parametrów $(6,10)$, $(6, 78)$ i $(10, 162)$: rozkład jest delikatnie nierównomierny, wartości od $1$ do $b-2$ pojawiają się z prawdopodobieństwem $\frac{a}{ab-2}$, natomiast $0$ i $b-1$ z prawdopodobieństwem $\frac{a-1}{ab-2}$.
 }
 \end{frame}
 
-\begin{frame}{Implementacja}
-%\begin{listing}
-%\end{listing}
+\begin{frame}[fragile]{Implementacja}
+\begin{lstlisting}[language=C99]
+//seed
+uint16_t c=10;
+uint16_t x=123;
+
+uint16_t next()
+{
+        uint32_t t=a*x+c;
+        c = t>>16;
+        x = t&0xFFFF;
+        return x;
+}
+\end{lstlisting}
+\pause %
+\begin{block}{Przykre twierdzenie}
+Generator MWC dla którego $b=2^{2u}$ \emph{nie} może mieć pełnego okresu.
+\end{block}
+%TODO dlaczego?
 \end{frame}
 
 \begin{frame}{Przypomnienie wiadomości o macierzach}
@@ -496,8 +521,8 @@ y=y^(y<<17);
 \end{block}
 \end{frame}
 \begin{frame}[fragile]{Implementacja}
-\begin{lstlisting}[language=C++]
-int32_t xorshift(int32_t seed)
+\begin{lstlisting}[language=C99]
+uint32_t xorshift(uint32_t seed)
 {
  seed^=seed<<2;
  seed^=seed>>7;
@@ -549,7 +574,46 @@ Istnieje dokładnie 81 trójek $(a,b,c)$ zapewniających pełen okres dla $m=32$
 \vfill
 {\footnotesize G. Marsaglia \emph{Xorshift RNGs} w: \emph{Journal of Statistical Software} 8(14)}
 \end{frame}
+\begin{frame}{KISS: Keep it simple, stupid!}
+\begin{align*}
+X_{n+1} = & \left(69069 X_n + 12345\right) \mod 2^{32} \\
+Y_{n+1} = & Y_n(I+L^{13})(I+R^{17})(I+L^5) \\
+C_{n+1} = & \left\lfloor \frac{698769069Z_n+C_n}{2^{32}}\right\rfloor \\
+Z_{n+1} = & \left(698769069Z_n+C_n\right) \mod 2^{32} \\
+ & \alert{X_{n+1}+Y_{n+1}+Z_{n+1}}
+\end{align*}
+\pause
+\begin{block}{Hipoteza (G. Marsaglia)}
+Okres generatora KISS jest dłuższy niż $2^{124}$
+\end{block}
+\note<2>
+{
+Wydaje mi się, że rozumowanie jest następujące: jeżeli generatory są niezależne, to możemy pomnożyć ich okresy. LCG i Xorshift mają po $2^{32}$, MWC ma (w wariancie optymistycznym, nie sprawdzałem czy tak jest w rzeczywistości) $698769069\cdot 2^{32}\cdot\frac{1}{2}-2\approx 2^{60}$, zatem cały generator ma okres $2^{32}\cdot 2^{32}\cdot 2^{60}=2^{124}$. $\frac{1}{2}$ bierze się z problemów z $b=2^{32}$.
+}
+\end{frame}
+\begin{frame}[fragile]{Implementacja KISS}
+\small
+\begin{lstlisting}[language=C99]
+//seed
+uint32_t x=123456789, y=362436000;
+uint32_t z=521288629, c=7654321;
 
+uint32_t KISS()
+{
+        x=69069*x+13245;
+
+        y^=y<<13;
+        y^=y>>17;
+        y^=y<<5;
+
+        uint64_t t=698769069;
+        t=t*z+c;
+        c=t>>32;
+
+        return x+y+z;
+}
+\end{lstlisting}
+\end{frame}
 \begin{frame}{Bibliografia}
 \begin{enumerate}
 \item ,,The Art of Computer Programming'' (Vol. 2) D. Knuth, rozdział III

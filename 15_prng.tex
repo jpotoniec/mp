@@ -4,6 +4,9 @@
 \graphicspath{{15_prng}}
 \subtitle{Generatory liczb pseudolosowych}
 
+\SetKwProg{Fn}{Function}{}{end}
+\SetKwInput{Assert}{assert}
+
 \usepackage{alltt}
 
 \usepackage{listings}
@@ -696,6 +699,93 @@ $\vec{A}, \vec{b}, \vec{c}, u, s, t, l, r, m$ to zdefiniowane stałe, $w$ to lic
 \item \url{https://en.wikipedia.org/w/index.php?title=Mersenne\_Twister&oldid=708041651\#Python\_implementation}
 \item \url{https://hg.python.org/cpython/file/tip/Modules/_randommodule.c}, funkcja \texttt{genrand\_int32}
 \end{itemize}
+\end{frame}
+\begin{frame}{Fortuna}
+\begin{block}{Stan}
+\begin{description}
+\item[$C$] 128 bitowy licznik, monotoniczny
+\item[$K$] 256 bitowy klucz, ciąg pseudolosowy
+\end{description}
+\end{block}
+\begin{algorithm}[H]
+\pause
+\SetKwFunction{FortunaGenerate}{Generate}
+\Fn{\FortunaGenerate{$n$}}
+{
+\Assert{$0\leq n\leq 2^{20}$}
+$result \leftarrow []$ \;
+\For{$k\leftarrow 1$ \KwTo $\lceil\frac{n}{16}\rceil$}
+{
+$result\leftarrow result\ ||\ \text{AES}(K, C)$ \;
+$C\leftarrow C+1$ \;
+}
+$K\leftarrow \text{AES}(K, C)\ ||\ \text{AES}(K, C+1)$ \;
+$C\leftarrow C+2$ \;
+\Return{$result$} \;
+}
+\end{algorithm}
+\note{Potrzebujemy regularnie wymieniać klucz, inaczej pojawią się statystycznie rozpoznawalne różnice, bo AES nie powtórzy bloku. Stąd ograniczenie do $2^{20}$.}
+\end{frame}
+\begin{frame}{Reseedowanie Fortuny}
+\begin{block}{Dane}
+\begin{description}
+\item[$RC$] 32-bitowy licznik, początkowo $0$
+\item[$P_0, \ldots, P_{31}$] pule entropii
+\end{description}
+\end{block}
+\begin{algorithm}[H]
+\SetKwFunction{FortunaReseed}{Reseed}
+\Fn{\FortunaReseed{}}
+{
+$RC \leftarrow RC + 1$ \;
+$s \leftarrow []$ \;
+\For{$i\leftarrow 0$ \KwTo $31$}
+{
+\If{$2^i$ dzieli $RC$}
+{
+$s \leftarrow s\ ||\ \text{SHA}_{256}(P_i)$ \;
+$P_i\leftarrow \emptyset$ \;
+}
+}
+$K \leftarrow \text{SHA}_{256}(K\ ||\ s)$ \;
+}
+\end{algorithm}
+\end{frame}
+\begin{frame}{Fortuna z automatycznym reseedowaniem}
+\begin{algorithm}[H]
+\SetKwFunction{FortunaFullRandom}{FullRandom}
+\Fn{\FortunaFullRandom{$n$}}
+{
+\If{w $P_0$ spodziewamy się dostatecznie dużo entropii i od ostatniego reseedowania upłynęło co najmniej 100 ms}
+{
+\FortunaReseed{} \;
+$C\leftarrow C+1$ \;
+}
+\lIf{$C>0$}{\Return{\FortunaGenerate{$n$}}}
+\lElse{\Return{błąd}}
+}
+\end{algorithm}
+\note<1>{$100 ms\cdot 2^{32}\approx 13 lat$, więc tak łatwo nie wyczerpiemy zapasów}
+\end{frame}
+\begin{frame}{Źródła entropii}
+\begin{itemize}
+\item<+-> czas pomiędzy naciśnięciami klawiszy na klawiaturze, ruchami myszy
+\item<+-> czas pomiędzy przybyciem pakietów sieciowych
+\item<+-> czas pomiędzy przerwaniami sprzętowymi
+\item<+-> precyzyjnie mierzony czas wykonania krótkiego, deterministycznego kodu (demon \emph{haveged})
+\item<+-> generatory sprzętowe
+\begin{itemize}
+\item<+-> szumy termiczne
+\item<+-> szum radiowy
+\item<+-> rozpad promieniotwórczy
+\item<+-> instrukcja \texttt{\textsc{rdseed}} (Intel)
+\end{itemize}
+\end{itemize}
+\pause
+\begin{block}{Ciekawostka}
+\texttt{\textsc{rdrand}} = algorytm zbliżony do Fortuny
+\end{block}
+\note<1>{\url{https://software.intel.com/en-us/articles/intel-digital-random-number-generator-drng-software-implementation-guide}}
 \end{frame}
 \begin{frame}{Dobre praktyki}
 \begin{itemize}

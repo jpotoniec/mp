@@ -642,6 +642,38 @@ uint32_t KISS()
 }
 \end{lstlisting}
 \end{frame}
+\begin{frame}{Dobre praktyki}
+\begin{itemize}
+\item Stosuj dobre generatory
+\pause
+\item W zastosowaniach mission-critical, stosuj generatory kryptograficznie bezpieczne
+\pause
+\item Rozgrzewaj generator
+\pause
+\item Wykorzystuj tylko mały fragment okresu generatora
+\pause
+\item Zapewnij dostatecznie dużą przestrzeń seedów
+\only<5>
+{
+\begin{block}{Rzeczywisty problem z Florydy}
+Ile jest możliwych wyborów 80 ławników z listy 200 kandydatów?
+Czy ta liczba mieści się w 32-bitach? A 64-bitach?
+\end{block}
+}
+\note<1>{\texttt{log2(nchoosek(200,80))=190}}
+\pause
+\item Dbaj o dobry wybór seeda
+\only<6>
+{
+\begin{block}{Symulacja na klastrze}
+Zlecamy 100 symulacji opartych na RNG do wykonania na klastrze, identyczne zadania.
+Co się stanie jeżeli użyjemy \texttt{time()} jako seed?
+\end{block}
+}
+\pause
+\item W razie wątpliwości zajrzyj do E. Barker, J. Kelsey \emph{Recommendation for Random Number Generation Using Deterministic Random Bit Generators} (\emph{NIST Special Publication 800-90A})
+\end{itemize}
+\end{frame}
 \begin{frame}{Bibliografia}
 \begin{enumerate}
 \item ,,The Art of Computer Programming'' (Vol. 2) D. Knuth, rozdział III

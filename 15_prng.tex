@@ -307,7 +307,7 @@ seed \emph{nie} może być $(0, 0)$ ani $(a-1, b-1)$
 \begin{frame}{Dobór parametrów MWC}
 \note<1>
 {
-$k$ jest rzędem $b$ w grupie $\Z_m$. $(C_n,X_n)$ ma pełen okres wtw $k=ab-2$.
+$k$ jest rzędem $b$ w grupie $\mathbb{Z}_m$. $(C_n,X_n)$ ma pełen okres wtw $k=ab-2$.
 Niestety, nie wynikają z tego żadne porządne własności $X_n$.
 Przykładowo, dla $a=12$, $b=29$ rząd jest 173
 }
@@ -326,6 +326,7 @@ Jeżeli $k=ab-2$, to MWC ma okres $k$ (maksymalny możliwy) i $aX_n+C_n\sim\math
 Skoro $aX_n+C_n\sim\mathcal{U}(1, ab-2)$, to $X_{n+1}=(aX_n+C_n)\mod b$ nie może mieć rozkładu jednostajnego, ponieważ zbiór możliwych wartości dla $aX_n+C_n$, tzn. $\{1,2,\ldots,ab-1\}$, ma $ab-2$ elementy, a więc liczbę niepodzielną bez reszty przez $b$.
 W zbiorze brakuje elementu o reszcie $0$ (elementu $0$) i elementu o reszcie $b-1$, tzn. $ab-1$.
 Inaczej: każda możliwa reszta występuje w zbiorze $a$ krotnie, natomiast $0$ i $b-1$ występują w nim $a-1$ krotnie.
+Dla dużego $a$ z praktycznego punktu widzenia rozbieżność jest pomijalnie mała.
 
 Empiryczna obserwacja na bazie parametrów $(6,10)$, $(6, 78)$ i $(10, 162)$: rozkład jest delikatnie nierównomierny, wartości od $1$ do $b-2$ pojawiają się z prawdopodobieństwem $\frac{a}{ab-2}$, natomiast $0$ i $b-1$ z prawdopodobieństwem $\frac{a-1}{ab-2}$.
 }
@@ -580,7 +581,7 @@ X_{n+1} = & \left(69069 X_n + 12345\right) \mod 2^{32} \\
 Y_{n+1} = & Y_n(I+L^{13})(I+R^{17})(I+L^5) \\
 C_{n+1} = & \left\lfloor \frac{698769069Z_n+C_n}{2^{32}}\right\rfloor \\
 Z_{n+1} = & \left(698769069Z_n+C_n\right) \mod 2^{32} \\
- & \alert{X_{n+1}+Y_{n+1}+Z_{n+1}}
+ & \alert{\left(X_{n+1}+Y_{n+1}+Z_{n+1}\right) \mod 2^{32}}
 \end{align*}
 \pause
 \begin{block}{Hipoteza (G. Marsaglia)}
@@ -589,6 +590,33 @@ Okres generatora KISS jest dłuższy niż $2^{124}$
 \note<2>
 {
 Wydaje mi się, że rozumowanie jest następujące: jeżeli generatory są niezależne, to możemy pomnożyć ich okresy. LCG i Xorshift mają po $2^{32}$, MWC ma (w wariancie optymistycznym, nie sprawdzałem czy tak jest w rzeczywistości) $698769069\cdot 2^{32}\cdot\frac{1}{2}-2\approx 2^{60}$, zatem cały generator ma okres $2^{32}\cdot 2^{32}\cdot 2^{60}=2^{124}$. $\frac{1}{2}$ bierze się z problemów z $b=2^{32}$.
+}
+\pause
+\begin{block}{Twierdzenie}
+Generator KISS ma rozkład równomierny.
+\end{block}
+\note<3>
+{
+\scriptsize
+Dowód mojego autorstwa.
+Rozpatrzmy dwie niezależne zmienne losowe $X, Y$ takie, że $X,Y \sim \mathcal{U}(0,2^{32}-1)$.
+Niech $W=X+Y$, rozpatrujemy dwa przypadki:
+\begin{enumerate}
+\item $0\leq k< 2^{32}$
+\[ P(W=k)=\sum_{x=0}^k P(X=x)P(Y=k-x) = \sum_{x=0}^k \frac{1}{2^{64}} = \frac{k+1}{2^{64}} \]
+\item $2^{32}\leq k<2^64$, niech $k=2^{32}+l$ i wtedy $0\leq l<2^{32}$.
+Chcemy sumować w taki sposób, żeby $0\leq x<2^{32}$ i $0\leq k-x<2^{32}$, rozwiązując nierówności otrzymujemy $x\in\{l+1,\ldots,2^{32}-1\}$
+\[ 
+\begin{split}
+P(W=k)=\sum_{x=l+1}^{2^{32}-1} P(X=x)P(Y=k-x) = \frac{2^{32}-1-(l+1)+1}{2^64}= \\
+\frac{1}{2^{32}}-\frac{(l+1)}{2^{64}}=\frac{1}{2^{32}}-P(W=l) 
+\end{split}
+\]
+\end{enumerate}
+Następnie rozpatrzmy $U=(X+Y)\mod 2^{32}$.
+\[ P(U=k)=P(W=k)+P(W=k+2^{32})=P(W=k)+\frac{1}{2^{32}}-P(W=k)=\frac{1}{2^{32}} \]
+W takim razie $U\sim\mathcal{U}(0,2^{32}-1)$.
+Podstawiając $U$ jako $X$ otrzymujemy wnik dla sumy trzech zmiennych, czyli to, co dzieje się w KISS.
 }
 \end{frame}
 \begin{frame}[fragile]{Implementacja KISS}

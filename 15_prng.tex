@@ -13,6 +13,7 @@
 
 \newcommand{\xor}{\oplus}
 \renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\diag}[1]{\vec{D_{#1}}}
 
 \usepackage{lstlinebgrd} % see http://www.ctan.org/pkg/lstaddons
 
@@ -641,6 +642,60 @@ uint32_t KISS()
         return x+y+z;
 }
 \end{lstlisting}
+\end{frame}
+\begin{frame}{Mersenne twister}
+\begin{block}{Oznaczenia}
+\[ \vec{I}_r =  \overbrace{\begin{bmatrix} 
+1 & 0 & \ldots & 0 \\
+0 & 1 & \ldots & 0 \\
+\hdotsfor{4} \\
+0 & 0 & \ldots & 1 \\
+\end{bmatrix}}^{r} 
+\qquad
+\diag{b} = \begin{bmatrix}
+b_k & 0 & \ldots & 0 \\
+0 & b_{k-1} & \ldots & 0 \\
+\hdotsfor{4} \\
+0 & 0 & \ldots & b_0
+\end{bmatrix}
+\]
+\end{block}
+\pause
+\begin{block}{Postać ogólna}
+\begin{align*}
+\vec{X_{k+n}} = & \left(\vec{X_{k+m}} + \vec{X_{k+1}}\begin{bmatrix} 0 & 0 \\ 0 & \vec{I}_r \end{bmatrix}\vec{A} + \vec{X_k}\begin{bmatrix} \vec{I}_{w-r} & 0 \\ 0 & 0 \end{bmatrix}\vec{A}\right)\vec{T} \\
+\vec{T} = & \vec{R}^u(\vec{L}^s\diag{b})(\vec{L}^t\diag{c})\vec{R}^l
+\end{align*}
+$\vec{A}, \vec{b}, \vec{c}, u, s, t, l, r, m$ to zdefiniowane stałe, $w$ to liczba bitów
+\end{block}
+\pause
+\begin{tikzpicture}[overlay]
+\draw[red,very thick] (current page.south west) -- (current page.north east);
+\draw[red,very thick] (current page.north west) -- (current page.south east);
+\end{tikzpicture}
+\end{frame}
+\begin{frame}{MT19937}
+\begin{itemize}
+\item Wyjątkowo długi okres $2^{19937}-1$ dla 32 bitowej wersji
+\pause
+\item Bardzo popularny, domyślny dla Pythona i PHP
+\pause
+\item Podobny do Xorshift
+\pause
+\item Odwracalny
+\pause
+\item Wyjściem jest cały stan
+\pause
+\item Używa jednocześnie 624 liczb
+\pause
+\item Implementacje często generują seed z jednej liczby
+\end{itemize}
+\end{frame}
+\begin{frame}{Zajrzyjmy do kodu!}
+\begin{itemize}
+\item \url{https://en.wikipedia.org/w/index.php?title=Mersenne\_Twister&oldid=708041651\#Python\_implementation}
+\item \url{https://hg.python.org/cpython/file/tip/Modules/_randommodule.c}, funkcja \texttt{genrand\_int32}
+\end{itemize}
 \end{frame}
 \begin{frame}{Dobre praktyki}
 \begin{itemize}

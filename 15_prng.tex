@@ -822,6 +822,97 @@ Co się stanie jeżeli użyjemy \texttt{time()} jako seed?
 \item W razie wątpliwości zajrzyj do E. Barker, J. Kelsey \emph{Recommendation for Random Number Generation Using Deterministic Random Bit Generators} (\emph{NIST Special Publication 800-90A})
 \end{itemize}
 \end{frame}
+\begin{frame}{Prosty test losowości: Yahtzee}
+\centering
+{
+\tikz{\node [dice] {?};} \tikz{\node [dice] {?};} \tikz{\node [dice] {?};} \tikz{\node [dice] {?};} \tikz{\node [dice] {?};}\\
+\vspace{.5cm}
+\pause
+\dice{1} \dice{1} \dice{1} \dice{1} \dice{1} \\
+\dice{2} \dice{2} \dice{2} \dice{2} \dice{2} \\
+\dice{3} \dice{3} \dice{3} \dice{3} \dice{3} \\
+\dice{4} \dice{4} \dice{4} \dice{4} \dice{4} \\
+\dice{5} \dice{5} \dice{5} \dice{5} \dice{5} \\
+\dice{6} \dice{6} \dice{6} \dice{6} \dice{6} \\
+}
+\end{frame}
+\begin{frame}{Model testu}
+\begin{align*}
+X_i \sim & \mathcal{U}(1,6), \text{niezależne} \\
+\only<2->{K_i = & \begin{cases} 1 & X_{5i-4}=X_{5i-3}=X_{5i-2}=X_{5i-1}=X_{5i} \\ 0 & \text{else} \end{cases} \\}
+\only<3->{K = & K_1+K_1+\ldots+K_n \sim \alt<-3>{\alert{?}}{\mathcal{B}\left(n, \frac{6}{6^5}\right)}} \\
+\only<5->{\mathcal{B}\left(n, \frac{6}{6^5}\right) \approx & \alt<-5>{\alert{?}}{
+Poiss\left(\frac{n}{6^4}\right) \stackrel{\lambda\to\infty}{\approx} 
+\alt<-6>{\alert{?}}{\mathcal{N}\left(\frac{n}{6^4}, \sqrt{\frac{n}{6^4}}\right)}
+}
+} \\
+\only<7->{K \sim & \mathcal{N}\left(\frac{n}{6^4}, \sqrt{\frac{n}{6^4}}\right) }
+\end{align*}
+\end{frame}
+\begin{frame}{Przeprowadzenie testu}
+\[ K \sim \mathcal{N}\left(\frac{n}{6^4}, \sqrt{\frac{n}{6^4}}\right) \]
+\centering
+\begin{tikzpicture}[x=1cm,y=5cm]
+\fill[color4,thick,domain=-2:2,samples=50] plot (\x,{exp((-((\x)^2))/2)/sqrt(2*pi)}) |- (-2,0);
+\draw[->] (-4,0) -- (4,0) node[right] {$k$};
+\draw[dashed, ] (0,.5) -- (0,-.05) node[below] {$\frac{n}{6^4}$};
+\draw[color2,thick,domain=-4:4,samples=50] plot (\x,{exp((-((\x)^2))/2)/sqrt(2*pi)});
+\draw (2,-.02) -- (2,.02) node[below] {$+\delta$};
+\draw (-2,-.02) -- (-2,.02) node[below] {$-\delta$};
+\end{tikzpicture}
+\begin{gather*}
+P\left(\frac{n}{6^4}-\delta\leq K\leq \frac{n}{6^4}+\delta\right)=0{,}95 \\
+\delta = \alert{?}
+\end{gather*}
+\note<1>
+{
+\begin{gather*}
+P(\frac{n}{6^4}-\delta\leq K\leq \frac{n}{6^4}+\delta)=
+P(\frac{-\delta}{\sigma}\leq \frac{K-\mu}{\sigma} \leq \frac{\delta}{\sigma}) =
+\Phi(\frac{\delta}{\sigma})-\Phi(-\frac{\delta}{\sigma})=2\Phi(\frac{\delta}{\sigma})-1 \\
+2\Phi(\frac{\delta}{\sigma})-1=0{,}95 \\
+\Phi(\frac{\delta}{\sigma})=0{,}975 \\
+\delta=\sigma \Phi^{-1}(0{,}975) = \sqrt{\frac{n}{6^4}}\cdot 1{,}96 = 0{,}054\sqrt{n} \\
+\end{gather*}
+Dla $n=10^9$, $\delta\approx 1708$, zatem spodziewamy się wyniku pomiędzy $76988$, a $77333$.
+}
+\end{frame}
+\begin{frame}{Wyniki eksperymentalne, $n=10^9$}
+
+{\small\url{https://github.com/jpotoniec/mp/blob/master/15_prng/yahtzee.cpp} \\}
+\[\delta = \sqrt{\frac{n}{6^4}}\cdot 1{,}96 \approx 1722 \]
+\begin{tabular}{lrc}
+generator & odchylenie \\
+\hline
+Dilbert & 999228395 & \xmark \\
+\pause
+LCG(1229,1,2048) & 771605 & \xmark \\
+\pause
+\texttt{rand()} modulo & 938 & \cmark \\
+\pause
+\texttt{rand()} z odrzucaniem & 2383 & \xmark \\
+\pause
+MT19937 & 22 & \cmark \\
+\pause
+Xorshift(2,7,9) & 327 & \cmark \\
+\pause
+Xorshift(2,7,--) & 771605 & \xmark
+\end{tabular}
+\pause
+\begin{block}{Uwaga}
+To jest nadmierne uproszczenie!
+\end{block}
+\end{frame}
+\begin{frame}{Zestawy testów}
+\begin{description}
+\item[Szklana Pułapka]
+\url{http://stat.fsu.edu/pub/diehard/}
+\item[Szklana Pułapka 2]
+{\small \url{https://www.phy.duke.edu/~rgb/General/dieharder.php}}
+\item[TestU01]
+\url{http://simul.iro.umontreal.ca/testu01/tu01.html}
+\end{description}
+\end{frame}
 \begin{frame}{Bibliografia}
 \begin{enumerate}
 \item ,,The Art of Computer Programming'' (Vol. 2) D. Knuth, rozdział III

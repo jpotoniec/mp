@@ -74,6 +74,12 @@
 
 \begin{document}
 \frame{\titlepage}
+\begin{frame}{Agenta}
+\tableofcontents
+\end{frame}
+
+\section{Wprowadzenie}
+
 \begin{frame}{9}
 \includegraphics[width=\textwidth]{15_prng/dilbert.png}
 \vfill
@@ -229,6 +235,9 @@ Niech $\varrho=8$ i wtedy $P(N\geq 10l)\leq \frac{1}{32l}$
 \item $X_i$ są niezależne
 \end{enumerate}
 \end{frame}
+
+\section{Linear Congruential Generator}
+
 \begin{frame}{Linear Congruential Generator (LCG)}
 \begin{align*}
 X_0 = & \text{seed} \\
@@ -296,6 +305,7 @@ LCG ma okres $m$ wtedy i tylko wtedy gdy jednocześnie:
 \[ P(X_{n+m}=7|X_n=7) = \alert{\ldots} \]
 \end{frame}
 
+\section{Multiply-with-carry}
 
 \begin{frame}{Multiply-with-carry}
 \begin{align*}
@@ -357,9 +367,7 @@ Generator MWC dla którego $b=2^{2u}$ \emph{nie} może mieć pełnego okresu.
 %TODO dlaczego?
 \end{frame}
 
-\begin{frame}{Przypomnienie wiadomości o macierzach}
-%TODO
-\end{frame}
+\section{Xorshift}
 
 \begin{frame}{XOR}
 \centering
@@ -579,6 +587,9 @@ Istnieje dokładnie 81 trójek $(a,b,c)$ zapewniających pełen okres dla $m=32$
 \vfill
 {\footnotesize G. Marsaglia \emph{Xorshift RNGs} w: \emph{Journal of Statistical Software} 8(14)}
 \end{frame}
+
+\section{KISS: Keep it simple, stupid!}
+
 \begin{frame}{KISS: Keep it simple, stupid!}
 \begin{align*}
 X_{n+1} = & \left(69069 X_n + 12345\right) \mod 2^{32} \\
@@ -646,6 +657,9 @@ uint32_t KISS()
 }
 \end{lstlisting}
 \end{frame}
+
+\section{Mersenne twister}
+
 \begin{frame}{Mersenne twister}
 \begin{block}{Oznaczenia}
 \[ \vec{I}_r =  \overbrace{\begin{bmatrix} 
@@ -702,6 +716,7 @@ $\vec{A}, \vec{b}, \vec{c}, u, s, t, l, r, m$ to zdefiniowane stałe, $w$ to lic
 \end{itemize}
 \end{frame}
 
+\subsection{Odtwarzanie stanu}
 
 \begin{frame}{Atak na MT}
 \texttt{y4 = y3 \^{} y3 >> 18} \\
@@ -840,6 +855,8 @@ b = 2636928640 = 10011101 00101100 01010110 10000000 \\
 {\small \url{https://github.com/jpotoniec/mp/blob/master/15_prng/mt_attack.py}}
 \end{frame}
 
+\section{Fortuna}
+
 \begin{frame}{Fortuna}
 \begin{block}{Stan}
 \begin{description}
@@ -922,7 +939,7 @@ $C\leftarrow C+1$ \;
 \end{itemize}
 \item<+-> Lotto
 \begin{itemize}
-\item<+-> w wielu krajach
+\item<+-> w wielu krajach, np. \url{http://cryptoexperts.github.io/million-dollar-curve/}
 \end{itemize}
 \end{itemize}
 \begin{block}<+->{Ciekawostka}
@@ -930,38 +947,9 @@ $C\leftarrow C+1$ \;
 \end{block}
 \note<1>{\url{https://software.intel.com/en-us/articles/intel-digital-random-number-generator-drng-software-implementation-guide}}
 \end{frame}
-\begin{frame}{Dobre praktyki}
-\begin{itemize}
-\item Stosuj dobre generatory
-\pause
-\item W zastosowaniach mission-critical, stosuj generatory kryptograficznie bezpieczne
-\pause
-\item Rozgrzewaj generator
-\pause
-\item Wykorzystuj tylko mały fragment okresu generatora
-\pause
-\item Zapewnij dostatecznie dużą przestrzeń seedów
-\only<5>
-{
-\begin{block}{Rzeczywisty problem z Florydy}
-Ile jest możliwych wyborów 80 ławników z listy 200 kandydatów?
-Czy ta liczba mieści się w 32-bitach? A 64-bitach?
-\end{block}
-}
-\note<1>{\texttt{log2(nchoosek(200,80))=190}}
-\pause
-\item Dbaj o dobry wybór seeda
-\only<6>
-{
-\begin{block}{Symulacja na klastrze}
-Zlecamy 100 symulacji opartych na RNG do wykonania na klastrze, identyczne zadania.
-Co się stanie jeżeli użyjemy \texttt{time()} jako seed?
-\end{block}
-}
-\pause
-\item W razie wątpliwości zajrzyj do E. Barker, J. Kelsey \emph{Recommendation for Random Number Generation Using Deterministic Random Bit Generators} (\emph{NIST Special Publication 800-90A})
-\end{itemize}
-\end{frame}
+
+\section{Testowanie generatorów}
+
 \begin{frame}{Prosty test losowości: Yahtzee}
 \centering
 {
@@ -1053,6 +1041,42 @@ To jest nadmierne uproszczenie!
 \url{http://simul.iro.umontreal.ca/testu01/tu01.html}
 \end{description}
 \end{frame}
+
+\section{Podsumowanie}
+
+\begin{frame}{Dobre praktyki}
+\begin{itemize}
+\item Stosuj dobre generatory
+\pause
+\item W zastosowaniach mission-critical, stosuj generatory kryptograficznie bezpieczne
+\pause
+\item Rozgrzewaj generator
+\pause
+\item Wykorzystuj tylko mały fragment okresu generatora
+\pause
+\item Zapewnij dostatecznie dużą przestrzeń seedów
+\only<5>
+{
+\begin{block}{Rzeczywisty problem z Florydy}
+Ile jest możliwych wyborów 80 ławników z listy 200 kandydatów?
+Czy ta liczba mieści się w 32-bitach? A 64-bitach?
+\end{block}
+}
+\note<1>{\texttt{log2(nchoosek(200,80))=190}}
+\pause
+\item Dbaj o dobry wybór seeda
+\only<6>
+{
+\begin{block}{Symulacja na klastrze}
+Zlecamy 100 symulacji opartych na RNG do wykonania na klastrze, identyczne zadania.
+Co się stanie jeżeli użyjemy \texttt{time()} jako seed?
+\end{block}
+}
+\pause
+\item W razie wątpliwości zajrzyj do E. Barker, J. Kelsey \emph{Recommendation for Random Number Generation Using Deterministic Random Bit Generators} (\emph{NIST Special Publication 800-90A})
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}{Bibliografia}
 \begin{enumerate}

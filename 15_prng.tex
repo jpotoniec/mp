@@ -666,7 +666,8 @@ b_k & 0 & \ldots & 0 \\
 \pause
 \begin{block}{Postać ogólna}
 \begin{align*}
-\vec{X_{k+n}} = & \left(\vec{X_{k+m}} + \vec{X_{k+1}}\begin{bmatrix} 0 & 0 \\ 0 & \vec{I}_r \end{bmatrix}\vec{A} + \vec{X_k}\begin{bmatrix} \vec{I}_{w-r} & 0 \\ 0 & 0 \end{bmatrix}\vec{A}\right)\vec{T} \\
+\vec{X_{k+n}} = & \vec{X_{k+m}} + \vec{X_{k+1}}\begin{bmatrix} 0 & 0 \\ 0 & \vec{I}_r \end{bmatrix}\vec{A} + \vec{X_k}\begin{bmatrix} \vec{I}_{w-r} & 0 \\ 0 & 0 \end{bmatrix}\vec{A} \\
+\alert{\rightarrow} \vec{Y_{k+n}} = & \vec{X_{k+n}}\vec{T} \\
 \vec{T} = & \vec{R}^u(\vec{L}^s\diag{b})(\vec{L}^t\diag{c})\vec{R}^l
 \end{align*}
 $\vec{A}, \vec{b}, \vec{c}, u, s, t, l, r, m$ to zdefiniowane stałe, $w$ to liczba bitów
@@ -700,6 +701,145 @@ $\vec{A}, \vec{b}, \vec{c}, u, s, t, l, r, m$ to zdefiniowane stałe, $w$ to lic
 \item \url{https://hg.python.org/cpython/file/tip/Modules/_randommodule.c}, funkcja \texttt{genrand\_int32}
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}{Atak na MT}
+\texttt{y4 = y3 \^{} y3 >> 18} \\
+\pause
+\setlength\tabcolsep{3pt}
+\small
+\begin{tabular}{l||c|c|c|c|p{1.3cm}|p{1.3cm}|c|p{1.3cm}|p{1.3cm}|}
+\hline
+\texttt{y3} & $y_{31}$ & $y_{30}$ & \ldots & $y_{14}$ & $y_{13}$ & $y_{12}$ & \ldots & $y_1$ & $y_0$ \\
+\hline
+\pause
+\texttt{y3>>18} & 0 & 0 & \ldots & 0 & $y_{31}$ & $y_{30}$ & \ldots & $y_{19}$ & $y_{18}$ 
+\\
+\hline
+\pause
+\texttt{y4=y3\^{}(y3>>18)} & $y_{31}$ & $y_{30}$ & \ldots & $y_{14}$ & $y_{31}\xor y_{13}$ & $y_{30}\xor y_{12}$ & \ldots & $y_{19}\xor y_1$ & $y_{18}\xor y_0$ \\
+\hline
+\hline
+\pause
+\texttt{y4>>18}  & 0 & 0 & \ldots & 0 & $y_{31}$ & $y_{30}$ & \ldots & $y_{19}$ & $y_{18}$  \\
+\hline
+\pause
+\texttt{y4\^{}(y4>>18)} & $y_{31}$ & $y_{30}$ & \ldots & $y_{14}$ & $y_{31}\xor y_{31}\xor y_{13}$ & $y_{30}\xor y_{30}\xor y_{12}$ & \ldots & $y_{19}\xor y_{19}\xor y_1$ & $y_{18}\xor y_{18}\xor y_0$ \\
+\hline
+\pause
+\texttt{y3=y4\^{}(y4>>18)} & $y_{31}$ & $y_{30}$ & \ldots & $y_{14}$ & $y_{13}$ & $y_{12}$ & \ldots & $y_1$ & $y_0$ \\
+\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Atak na MT}
+\texttt{y3 = y2 \^{} ((y2 << 15) \& 4022730752)} \\
+c = 4022730752 = 11101111 11000110 00000000 00000000 \\
+%\pause
+\setlength\tabcolsep{3pt}
+\small
+\begin{tabular}{l||p{1.3cm}|p{1.3cm}|c|p{1.3cm}|p{1.3cm}|c|c|c|c|}
+\hline
+\texttt{y2} & $y_{31}$ & $y_{30}$ & \ldots & $y_{16}$ & $y_{15}$ & $y_{14}$ & \ldots & $y_1$ & $y_0$ \\
+\hline
+\texttt{y2<<15} & $y_{16}$ & $y_{15}$ & \ldots & $y_{1}$ & $y_{0}$ & 0 & \ldots & 0 & 0 \\
+\hline
+\pause
+\texttt{c} & 1 & 1 & \ldots & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+\pause
+\texttt{(y2<<15)\&c} & $y_{16}$ & $y_{15}$ & \ldots & $y_{1}$ & 0 & 0 & 0 & 0 & 0 \\
+\hline
+\pause
+\texttt{y3} & $y_{31}\xor y_{16}$ & $y_{30}\xor y_{15}$ & \ldots & $y_{16}$ & $y_{15}$ & $y_{14}$ & \ldots & $y_1$ & $y_0$ \\
+\hline
+\hline
+\pause
+\texttt{y3<<15} & $y_{16}$ & $y_{15}$ & \ldots & $y_1$ & $y_0$ & 0 & 0 & 0 & 0 \\
+\hline
+\pause
+\texttt{(y3<<15)\&c} & $y_{16}$ & $y_{15}$ & \ldots & $y_1$ & $0$ & 0 & 0 & 0 & 0 \\
+\hline
+\pause
+\texttt{y3\^{}(y3<<15)\&c} & $y_{31}$ & $y_{30}$ & \ldots & $y_{16}$ & $y_{15}$ & $y_{14}$ & \ldots & $y_1$ & $y_0$ \\
+\hline
+\end{tabular}
+\end{frame}
+
+%http://tex.stackexchange.com/questions/145462/beamer-pause-behaves-differently-inside-tabular-using-different-setbeamercover
+%To uncover a table rowwise, you should use \pause, not after, but before a \\.
+\begin{frame}{Atak na MT}
+\texttt{y2 = y1 \^{} ((y1 << 7) \& 2636928640)} \\
+b = 2636928640 = 10011101 00101100 01010110 10000000 \\
+%\pause
+\setlength\tabcolsep{3pt}
+\small
+\begin{tabular}{p{3cm}||c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\texttt{y1} & $y_{31}$ & $y_{30}$ & \ldots & $y_{13}$ & \ldots & $y_{8}$ & $y_{7}$ & $y_{6}$ & \ldots & $y_1$ & $y_0$ \pause\\
+\hline
+\texttt{y1<<7} & $y_{24}$ & $y_{23}$ & \ldots & $y_6$ & \ldots & $y_{1}$ & $y_{0}$ & 0 & 0 & 0 & 0 \pause\\
+\hline
+\texttt{b} & 1 & 0 & \ldots & 0 & \ldots & 0 & 1 & 0 & 0 & 0 & 0 \pause\\
+\hline
+\texttt{(y1<<7)\&b} & $y_{24}$ & 0 & \ldots & 0 & \ldots & 0 & $y_{0}$ & 0 & 0 & 0 & 0 \pause\\
+\hline
+\texttt{y2} & $y_{31}\xor y_{24}$ & $y_{30}$ & \ldots & $y_{13}$ & \ldots & $y_8$ & $y_7\xor y_{0}$ & $y_{6}$ & \ldots & $y_1$ & $y_0$ \pause\\
+\hline
+\hline
+\texttt{z=y2\&0x7F} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & $y_{6}$ & \ldots & $y_1$ & $y_0$ \pause\\
+\hline
+\texttt{z<<7} & 0 & 0 & 0 & $y_{6}$ & \ldots & $y_1$ & $y_0$ & 0 & 0 & 0 & 0 \pause\\
+\hline
+\texttt{w=(y2\^{}((z<<7)\&b))}
+\texttt{\^{}(0x7F<<7)} & 0 & 0 & 0 & $y_{13}$ & \ldots & $y_8$ & $y_7$ & 0 & 0 & 0 & 0 \pause\\
+\hline
+\texttt{v=(y2\^{}((w<<7)\&b))} 
+\texttt{\^{}(0x7F<<14)} & \multicolumn{11}{c|}{odzyskujemy $y_{20}$ do $y_{14}$\pause} \\
+\hline
+\texttt{u=y2\^{}((v<<7)\&b)}
+\texttt{\^{}(0x7F<<21)} & \multicolumn{11}{c|}{odzyskujemy $y_{27}$ do $y_{21}$\pause} \\
+\hline
+\texttt{t=y2\^{}((u<<7)\&b)}
+\texttt{\^{}(0x7F<<28)} & \multicolumn{11}{c|}{odzyskujemy $y_{31}$ do $y_{28}$\pause} \\
+\hline
+\texttt{y1=t|u|v|w|z} & $y_{31}$ & $y_{30}$ & \ldots & $y_{13}$ & \ldots & $y_{8}$ & $y_{7}$ & $y_{6}$ & \ldots & $y_1$ & $y_0$ \\
+\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Atak na MT}
+\texttt{y1 = y \^{} (y>>11)} \\
+\texttt{m = 0xFFE00000} \\
+\setlength\tabcolsep{3pt}
+\small
+\begin{tabular}{l||c|c|c|c|p{.8cm}|c|p{.8cm}|p{.8cm}|c|p{.8cm}|p{.8cm}|}
+\hline
+\texttt{y} & $y_{31}$ & $y_{30}$ & \ldots & $y_{21}$ & $y_{20}$ & \ldots & $y_{10}$ & $y_9$ & \ldots & $y_1$ & $y_0$ \pause\\
+\hline
+\texttt{y>>11} & 0 & 0 & \ldots & 0 & $y_{31}$ & \ldots & $y_{21}$ & $y_{20}$ & \ldots & $y_{12}$ & $y_{11}$ \pause\\
+\hline
+\texttt{y1} & $y_{31}$ & $y_{30}$ & \ldots & $y_{21}$ & $y_{20}\xor y_{31}$ & \ldots & $y_{10}\xor y_{21}$ & $y_9\xor y_{20}$ & \ldots & $y_1\xor y_{12}$ & $y_0\xor y_{11}$ \pause\\
+\hline
+\hline
+\texttt{x=y1\&(0x7FF<<21)} & $y_{31}$ & $y_{30}$ & \ldots & $y_{21}$ & 0 & 0 & 0 & 0 & 0 & 0 & 0 \pause\\
+\hline
+\texttt{x>>11} & 0 & 0 & 0 & 0 & $y_{31}$ & \ldots & $y_{21}$ & 0 & 0 & 0 & 0  \pause\\
+\hline
+\texttt{w=y1\^{}(x>>11)} & $y_{31}$ & $y_{30}$ & \ldots & $y_{21}$ & $y_{20}$ & \ldots & $y_{10}$ & $y_9\xor y_{20}$ & \ldots & $y_1\xor y_{12}$ & $y_0\xor y_{11}$ \pause\\
+\hline
+\texttt{v=(w>>11)\&0x3FF} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & $y_{20}$ & \ldots & $y_{12}$ &
+ $y_{11}$ \pause\\
+\hline
+\texttt{y=w\^{}v} & $y_{31}$ & $y_{30}$ & \ldots & $y_{21}$ & $y_{20}$ & \ldots & $y_{10}$ & $y_9$ & \ldots & $y_1$ & $y_0$ \pause\\
+\hline
+\end{tabular}
+\end{frame}
+\begin{frame}{Atak na generator w Pythonie}
+
+{\small \url{https://github.com/jpotoniec/mp/blob/master/15_prng/mt_attack.py}}
+\end{frame}
+
 \begin{frame}{Fortuna}
 \begin{block}{Stan}
 \begin{description}
@@ -913,6 +1053,7 @@ To jest nadmierne uproszczenie!
 \url{http://simul.iro.umontreal.ca/testu01/tu01.html}
 \end{description}
 \end{frame}
+
 \begin{frame}{Bibliografia}
 \begin{enumerate}
 \item ,,The Art of Computer Programming'' (Vol. 2) D. Knuth, rozdział III

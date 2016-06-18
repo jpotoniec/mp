@@ -820,4 +820,104 @@ Niech $X$ będzie zmienną losową odpowiadającą liczbie wylosowanych kartek, 
 \item Zbadaj, czy zmienne losowej $X$ oraz $Y$ są niezależne.
 \end{enumerate}
 \end{enumerate}
+
+\clearpage
+\section{Powtórka}
+\begin{enumerate}
+\item Hobbici w skórzanym woreczku mają 7 kartek zapisanych atramentami w dwóch różnych kolorach: czerwonym i zielonym.
+Na każdej z kartek jest inna cyfra od 1 do 7, przy czym cyfry 1, 2, 3, 6, 7 są zapisane kolorem czerwonym, a cyfry 4, 5 kolorem zielonym.
+Pippin losuje ze zwracaniem z woreczka dwie kartki.
+Niech $X$ będzie zmienną losową odpowiadającą liczbie wylosowanych kartek, na których była napisana parzysta liczba, natomiast $Y$ zmienną losową odpowiadającą liczbie kartek zapisanych czerwonym atramentem.
+\begin{enumerate}
+\item Podaj rozkład brzegowy zmiennej $X$.
+\item Podaj rozkład brzegowy zmiennej $Y$.
+\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej $(X,Y)$.
+\item Zbadaj, czy zmienne losowej $X$ oraz $Y$ są niezależne.
+\end{enumerate}
+\item Pippin rzucił trzykrotnie sześciościenną, uczciwą kostką do gry. Niech zmienna $X$ odpowiada liczbie rzutów, w~których udało mu się wyrzucić mniej niż pięć
+oczek, natomiast zmienna $Y$ liczbie rzutów, w których udało mu się wyrzucić przynajmniej dwa oczka.
+\begin{enumerate}
+\item Podaj brzegowe rozkłady prawdopodobieństwa zmiennych losowych $X$ oraz $Y$.
+\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$.
+\item Zbadaj, czy zmienne losowe $X$ oraz $Y$ są zależne.
+\end{enumerate}
+\item W Bucklandzie na jesieni przygotowują sery na zimę. W każdym ze 100 magazynów
+zgromadzonych jest po 1000 serów. Prawdopodobieństwo zepsucia się pojedynczego
+krążka sera wynosi $4\cdot 10^{-3}$ i~nie zależy od pozostałych serów. Niech
+$i=1,2,\ldots,100$ oznacza numer magazynu i niech zmienna losowa $X_i$ oznacza
+liczbę zepsutych serów składowanych w $i$-tym magazynie. Ponadto, niech zmienna
+losowa $Y=X_1+X_2+\ldots+X_{100}$ odpowiada sumarycznej liczbie zepsutych serów
+we wszystkich magazynach. Załóż, że:
+\begin{itemize}
+\item wszystkie zmienne $X_i$ mają taki sam rozkład;
+\item zmienne $X_i$ są niezależne;
+\item zmienna $Y$ ma rozkład normalny o wartości średniej 100 razy większej niż wartość średnia dowolnej ze zmiennych $X_i$;
+\item zmienna $Y$ ma rozkład normalny o wariancji 100 razy większej niż wariancja dowolnej ze zmiennych $X_i$.
+\end{itemize}
+
+\begin{enumerate}
+\item Podaj  (w formie funkcji prawdopodobieństwa) rozkład prawdopodobieństwa zmiennej losowej $X_1$.
+\item Oblicz (z dokładnością do dwóch miejsc po przecinku) prawdopodobieństwo, że w magazynie nr 10 zepsują się mniej niż trzy sery.
+\item Podaj średnią liczbę zepsutych serów w magazynie nr 15.
+\item Podaj wartości $EY$ oraz $DY$.
+\item Utwórz zmienną losową $Z$ będącą standaryzowaną postacią zmiennej losowej $Y$.
+\item Oblicz (z dokładnością do dwóch miejsc po przecinku) prawdopodobieństwo, że w Bucklandzie zepsują się więcej niż 424 sery.
+\end{enumerate}
+
+\item Stary Tom, kiedy nikt nie widzi, udaje się w przebraniu do jednego z kasyn w Bree na kilka partii pewnej gry losowej.
+W jego sakiewce znajduje się 100 koron.
+Tom jest bardzo przewidywalnym graczem: zawsze gra dokładnie 15 gier i wychodzi.
+W każdej z~gier Tom ma szansę wygranej $p=0{,}25$.
+Niech $X$ będzie zmienną losową oznaczającą liczbę gier, w~których Tom wygrał.
+Każda gra kosztuje 5 koron, w przypadku przegranej Tom nie otrzymuje nic, a w przypadku wygranej otrzymuje 10 koron.
+W związku z tym Tom może maksymalnie stracić 75 koron, a zyskać również maksymalnie 75 koron.
+Niech $Y$ będzie zmienną losową oznaczającą ile koron znajduje się w sakiewce Toma po wyjściu z kasyna.
+
+\begin{enumerate}
+	\item Podaj funkcję prawdopodobieństwa zmiennej losowej $X$.
+	\item Oblicz wartość średnią i odchylenie standardowe zmiennej losowej $X$.
+	\item Podaj funkcję prawdopodobieństwa zmiennej losowej $Y$.
+	\item Oblicz wartość średnią i odchylenie standardowe zmiennej losowej $Y$.
+	\item Oblicz z dokładnością do co najmniej dwóch miejsc po przecinku prawdopodobieństwo, że Tom wyjdzie z~mniej niż 45 koronami.
+	\item Jaka jest najbardziej prawdopodobna kwota, która znajduje się w sakiewce Toma przy wyjściu? Uwaga: jeżeli jest więcej
+		niż jedna taka kwota, to podaj wszystkie.
+\end{enumerate}
+
+\item Sam Gamgee i Tom Cotton w ramach wieczornych rozrywek grają w kości.
+Każda z kostek ma 10 ścian ponumerowanych liczbami od 1 do 10.
+Każdy z hobbitów ma po 3 kostki, każda w nieco innym kolorze, przy czym kostki Sama są niebieskie, a Toma żółte.
+Pojedyncza partia polega na wykonaniu jednoczesnego rzutu wszystkimi kostkami przez obu hobbitów.
+Niech zdarzenie A polega na wyrzuceniu przez Sama pary liczb (to znaczy na dwóch kostkach jest taka sama wartość, a na trzeciej inna), a przez Toma układu $(6,7,8)$ (to znaczy na którejś z kostek jest 6, na innej 7, a na trzeciej 8).
+\begin{enumerate}
+\item Zdefiniuj przestrzeń zdarzeń elementarnych.
+\item Jaki jest rozmiar przestrzeni zdarzeń elementarnych?
+\item Przestaw zdarzenie A jako zbiór zdarzeń elementarnych.
+\item Oblicz prawdopodobieństwo A.
+\item Czy zdarzenia \emph{Sam wyrzucił parę} oraz \emph{Tom wyrzucił układ $(6,7,8)$} są zdarzeniami niezależnymi? Odpowiedź uzasadnij.
+\end{enumerate}
+
+\item Pippin zaangażował się w grę hazardową, która składa się z trzech rund.
+W każdej rundzie Pippin może wygrać z prawdopodobieństwem $0{,}55$ i podwoić liczbę posiadanych monet albo przegrać i stracić $\frac{3}{4}$ pieniędzy.
+Początkowo Pippin ma 64 monety.
+Niech $W$ będzie zmienną losową oznaczającą liczbę wygranych przez Pippina rund, a $X$ zmienną losową oznaczającą liczbę monet posiadanych przez Pippina po zakończeniu gry.
+\begin{enumerate}
+\item Podaj rozkład prawdopodobieństwa zmiennej losowej $W$.
+\item Oblicz wartość średnią zmiennej losowej $W$.
+\item Oblicz odchylenie standardowe zmiennej losowej $W$.
+\item Podaj wzór matematyczny łączący $X$ i $W$.
+\item Podaj rozkład prawdopodobieństwa zmiennej losowej $X$.
+\end{enumerate}
+
+\item Grupa 20 hobbitów dzieli się do gry w piłkę losowo na zespół czerwony i zespół zielony, każdy z nich po dziesięciu hobbitów.
+Wśród tych 20 hobbitów, czworo z nich jest bardzo dobrych w tej grze, trzynaścioro dobrych, a trzech przeciętnych.
+Niech zdarzenie $A$ odpowiada sytuacji, w której w zespole czerwonym są trzej bardzo dobrzy gracze i tylko jeden przeciętny, a zdarzenie $B$ sytuacji, w której w zespole zielonym jest siedmiu graczy dobrych.
+\begin{enumerate}
+\item Zdefiniuj przestrzeń zdarzeń elementarnych.
+\item Jaki jest rozmiar przestrzeni zdarzeń elementarnych?
+%\item Czy w tej przestrzeni wszystkie zdarzenia elementarne są równoprawdopodobne? (1 punkt)
+\item Przestaw zdarzenie $A$ jako zbiór zdarzeń elementarnych.
+\item Oblicz prawdopodobieństwo $A$.
+\item Czy zdarzenia $A$ i $B$ są zdarzeniami niezależnymi? Odpowiedź uzasadnij odpowiednim rachunkiem.
+\end{enumerate}
+\end{enumerate}
 \end{document}

@@ -18,16 +18,6 @@
 \begin{enumerate}
 \item Na ile sposobów można ustawić 5 osób w kolejce? \ans{$5!$}
 \item Ile słów pięcioliterowych (nawet tych bezsensownych) można utworzyć z liter \emph{A, B, C}? \ans{$3^5=243$}
-\item Dane są dwa pojemniki. W pierwszym z nich znajduje się 11 kul: 7 białych i 4 czarne. W~drugim pojemniku jest 6 kul: 3 białe i 3 czarne. Z każdego pojemnika losujemy po dwie kule.
-Rozpatrz poniższe pytania w dwóch wariantach: wszystkie kule w danym kolorze są identyczne oraz gdy kule są rozróżnialne (np. numerowane).
-\begin{enumerate}
-\item Ile jest możliwych układów? \ans{${11 \choose 2}{6 \choose 2}=825$}
-\item Ile jest układów składających się wyłącznie z kul czarnych? \ans{${4 \choose 2}{3 \choose 2}=18$}
-\item Ile jest układów składających się wyłącznie z kul białych? \ans{${7 \choose 2}{3 \choose 2}=63$}
-\item Ile jest układów składających się z pary białej i pary czarnej? \ans{${7\choose 2}{3 \choose 2}+{4 \choose 2}{3 \choose 2}+7\cdot4\cdot3\cdot3=333$}
-\item Ile jest układów składających się z jednej kuli białej i trzech czarnych? \ans{$7\cdot4\cdot{3\choose 2}+3\cdot3\cdot{4\choose 2}=138$}
-\item Ile jest układów składających się z jednej kuli czarnej i trzech białych?  \ans{$4\cdot7\cdot{3\choose 2}+3\cdot3\cdot{7\choose 2}=273$}
-\end{enumerate}
 \item Z partii towaru zawierającej sztuki dobre i niedobre losujemy 3 sztuki (\emph{próba}). Niech $A$ oznacza zdarzenie: \emph{dokładnie jedna sztuka dobra w próbie}, $B$ zdarzenie: \emph{co najwyżej jedna sztuka dobra w próbie}, $C$ zdarzenie: \emph{co najmniej jedna sztuka dobra w próbie}. Opisz słownie następujące zdarzenia:
 \begin{enumerate}
 \item $A'$, $B'$, $C'$
@@ -63,15 +53,6 @@ W obu przestrzeniach opisać następujące zdarzenia:
 \item Zdefiniuj zdarzenie $A$ jako zbiór zdarzeń elementarnych. \ans{$A=\{\omega_1$\}}%
 \item Oblicz prawdpodobieństwo $P(A)$, dbając o to by jasno przedstawić tok rozumowania. \ans{$P(A)=\frac{1}{100}$}%
 \end{enumerate}%
-\item  Drewniane pale mają losową długość $L$ nie przekraczającą 12 m. Pale są przeznaczone do wbijania w ziemię, której skalna warstwa stanowiąca opór znajduje się na losowej głębokości $H$, nie większej niż 10 m. Zaproponować przestrzeń zdarzeń elementarnych dla tak opisanego doświadczenia. Zdefiniować przez odpowiednie zdarzenia elementarne następujące doświadczenia:
-\begin{description}
-\item[A] długość losowo wybranego pala będzie większa od głębokości skalnej warstwy;
-\item[B] głębkość skalnej warstwy przekroczy 8 metrów;
-\item[C] długość losowo wybranego pala przekroczy 8 metrów;
-\item[D] $B\cap C$
-\item[E] $B\cup C$
-\item[F] $(B\cup C)\cap A'$
-\end{description}
 \item W gospodzie \emph{Pod Zielonym Smokiem} oferują sześć różnych dań obiadowych. Pięciu klientów wchodzi jeden po drugim do gospody
 i~niezależnie od siebie zamawia posiłek. Niech zdarzenie $A$ odpowiada sytuacji, w~której pierwsze danie z menu zamówi dokładnie jedna osoba.%
 \begin{enumerate}%
@@ -82,6 +63,15 @@ i~niezależnie od siebie zamawia posiłek. Niech zdarzenie $A$ odpowiada sytuacj
 \item Oblicz prawdpodobieństwo $P(A)$, dbając o to by jasno przedstawić tok rozumowania. \ans{$P(A)=\frac{5^5}{6^5}=\frac{5}{6}^5\approx 0{,}40$}%
 \end{enumerate}%
 \item Oblicz, ile jest liczb naturalnych sześciocyfrowych, w zapisie których występuje dokładnie trzy razy cyfra 0 i dokładnie raz występuje cyfra 5. \ans{${8\choose 2}3\frac{5!}{3!}+8\cdot\left(\frac{5!}{3!2!}+\frac{5!}{3!}\right)=1920$}
+\item  Drewniane pale mają losową długość $L$ nie przekraczającą 12 m. Pale są przeznaczone do wbijania w ziemię, której skalna warstwa stanowiąca opór znajduje się na losowej głębokości $H$, nie większej niż 10 m. Zaproponować przestrzeń zdarzeń elementarnych dla tak opisanego doświadczenia. Zdefiniować przez odpowiednie zdarzenia elementarne następujące doświadczenia:
+\begin{description}
+\item[A] długość losowo wybranego pala będzie większa od głębokości skalnej warstwy;
+\item[B] głębkość skalnej warstwy przekroczy 8 metrów;
+\item[C] długość losowo wybranego pala przekroczy 8 metrów;
+\item[D] $B\cap C$
+\item[E] $B\cup C$
+\item[F] $(B\cup C)\cap A'$
+\end{description}
 \item Partia towaru składa się ze 100 elementów, wśród których 5 jest wadliwych. Poddajemy kontroli 50 elementów. Partię przyjmujemy, jeśli wśród kontrolowanych elementów jest nie więcej niż jeden wadliwy. Niech zdarzenie $A$ odpowiada przyjęciu partii.
 \begin{enumerate}%
 \item Przedstaw przestrzeń zdarzeń elementarnych. \ans{$\Omega=\{\omega_J|\left|J\right|=50 \land J\subset\{1,2,\ldots,100\}\}$}%
@@ -106,6 +96,16 @@ i~niezależnie od siebie zamawia posiłek. Niech zdarzenie $A$ odpowiada sytuacj
 \item Zdefiniuj zdarzenie $A$ jako zbiór zdarzeń elementarnych. \ans{$A=\{\omega_J|\left|J\cap \{1,2,\ldots,6\}\right|=3\}, \left|A\right|={6\choose 3}{14\choose 2}=1820$}%
 \item Oblicz prawdpodobieństwo $P(A)$, dbając o to by jasno przedstawić tok rozumowania. \ans{$P(A)=0{,}12$}%
 \end{enumerate}%
+\item Dane są dwa pojemniki. W pierwszym z nich znajduje się 11 kul: 7 białych i 4 czarne. W~drugim pojemniku jest 6 kul: 3 białe i 3 czarne. Z każdego pojemnika losujemy po dwie kule.
+Rozpatrz poniższe pytania w dwóch wariantach: wszystkie kule w danym kolorze są identyczne oraz gdy kule są rozróżnialne (np. numerowane).
+\begin{enumerate}
+\item Ile jest możliwych układów? \ans{${11 \choose 2}{6 \choose 2}=825$}
+\item Ile jest układów składających się wyłącznie z kul czarnych? \ans{${4 \choose 2}{3 \choose 2}=18$}
+\item Ile jest układów składających się wyłącznie z kul białych? \ans{${7 \choose 2}{3 \choose 2}=63$}
+\item Ile jest układów składających się z pary białej i pary czarnej? \ans{${7\choose 2}{3 \choose 2}+{4 \choose 2}{3 \choose 2}+7\cdot4\cdot3\cdot3=333$}
+\item Ile jest układów składających się z jednej kuli białej i trzech czarnych? \ans{$7\cdot4\cdot{3\choose 2}+3\cdot3\cdot{4\choose 2}=138$}
+\item Ile jest układów składających się z jednej kuli czarnej i trzech białych?  \ans{$4\cdot7\cdot{3\choose 2}+3\cdot3\cdot{7\choose 2}=273$}
+\end{enumerate}
 \end{enumerate}%
 \clearpage
 \section{Prawdopodobieństwo warunkowe i niezależność zdarzeń}

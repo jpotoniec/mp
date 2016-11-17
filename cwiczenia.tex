@@ -920,4 +920,29 @@ Niech zdarzenie $A$ odpowiada sytuacji, w której w zespole czerwonym są trzej 
 \item Czy zdarzenia $A$ i $B$ są zdarzeniami niezależnymi? Odpowiedź uzasadnij odpowiednim rachunkiem.
 \end{enumerate}
 \end{enumerate}
+
+\clearpage
+\section{Dowody}
+Udowodnij, że:
+\begin{enumerate}
+\item zdarzenie pewne i dowolne zdarzenie $A$ są niezależne;
+\item zdarzenie niemożliwe i dowolne zdarzenie $A$ są niezależne;
+\item zdarzenie pewne i niemożliwe są niezależne;
+\item jeżeli zdarzenia $A$ i $B$ są niezależne, to zdarzenia $A$ i $B'$ są niezależne;\ans{$P(A\cap B')=P(A\cap[\Omega\backslash B])=P([A\cap \Omega]\backslash[A\cap B])=P(A\backslash[A\cap B])=P(A)-P(A\cap B)=P(A)-P(A)P(B)=P(A)(1-P(B))=P(A)P(B')$}
+\item jeżeli zdarzenia $A$, $B$ i $C$ są niezależne, to zdarzenia $A\cup B$ i $C$ są niezależne;\ans{$P([A\cup B]\cap C)=P([A\cap C]\cup[B\cap C])=P(A\cap C)+P(B\cap C)-P(A\cap B\cap C)=P(A)P(C)+P(B)P(C)-P(A)P(B)P(C)=P(C)(P(A)+P(B)-P(A)P(B))=P(C)P(A\cup B)$}
+\item prawdopodobieństwo warunkowe spełnia pierwszy aksjomat;
+\item prawdopodobieństwo warunkowe spełnia drugi aksjomat;
+\item prawdopodobieństwo warunkowe spełnia trzeci aksjomat;
+\item zachodzi twierdzenie o prawdopodobieństwie całkowitym: \[P(B)=\sum_{i=1}^\infty P(B|A_i)P(A_i) \]
+\item zachodzi twierdzenie Bayesa \[P(A_i|B)=\frac{P(A_i)P(B|A_i)}{\sum_{j=1}^\infty P(A_j)P(B|A_j)} \]
+\item jeżeli zdarzenia $A$, $B$ i $C$ są niezależne oraz $C$ nie jest zdarzeniem niemożliwym, to \[P(A\cap B|C)=P(A|C)P(B|C)\]
+\item dla dowolnej zmiennej losowej $X$ i dowolnej stałej $c$ \[D^2(X+c)=D^2(X)\]
+\item dla dowolnej zmiennej losowej $X$ \[D^2(X)=E(X^2)-E^2(X)\]
+\item dla dowolnej zmiennej losowej $X$ i dowolnej stałej $c$ różnej od $EX$ zachodzi \[D^2(X)<E(X-c)^2\]
+\item dla dowolnej zmiennej losowej $X$ zmienna losowa $Y$ dana poniższym wzorem jest unormowana \[Y=\frac{X-E(X)}{D(X)}\]
+\item wartość średnia iloczynu dowolnej, skończonej liczby niezależnych zmiennych losowych o skończonych wartościach średnich jest równa iloczynowi wartości średnich tych zmiennych (indukcyjnie, oddzielnie dla zmiennych każdego typu);
+\item wariancja sumy dowolnej skończonej liczby niezależnych zmiennych losowych o skończonych wariancjach jest równa sumie wariancji tych zmiennych (indukcyjnie);
+\item wartość średnia i wariancja zmiennej losowej $Y=X_1+\ldots+X_n$ są dane poniższym wzorem, gdzie $X_i$ są niezależnymi zmiennymi o rozkładzie zero-jedynkowym z parametrem $p$
+\[E(Y)=np \qquad D^2(Y)=np(1-p) \]
+\end{enumerate}
 \end{document}

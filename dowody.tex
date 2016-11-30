@@ -1,0 +1,51 @@
+\documentclass{mwart}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\title{Dowody wybranych twierdzeń}
+
+\newtheorem*{theorem}{Twierdzenie}
+
+
+\begin{document}
+\section*{Twierdzenie Bayesa}
+\begin{theorem}
+Jeżeli zdarzenia $A_1, A_2, \ldots$ tworzą podział przestrzeni $\Omega$, $P(A_i)>0$ dla wszystkich $i=1,2,\ldots$ oraz $B\subseteq\Omega$ jest zdarzeniem, dla którego $P(B)>0$, to słuszny jest następujący wzór:
+\[ P(A_i|B) = \frac{P(A_i)\cdot P(B|A_i)}{\sum_{j=1}^\infty \left[ P(A_j)\cdot P(B|A_j)\right]} \qquad \text{dla wszystkich } i=1,2,\ldots \]
+\end{theorem}
+
+\begin{proof}
+Ropczynamy od prawej strony i systematycznie ją przekształcając dążymy do uzyskania lewej strony.
+\[ \frac{P(A_i)\cdot P(B|A_i)}{\sum_{j=1}^\infty \left[ P(A_j)\cdot P(B|A_j)\right]} \]
+Przekształcamy prawdopobieństwo warunkowe z definicji: 
+\[ \frac{P(A_i)\cdot \frac{P(B\cap A_i)}{P(A_i)}}{\sum_{j=1}^\infty \left[ P(A_j)\cdot \frac{P(B\cap A_j)}{P(A_j)}\right]}
+\]
+Skracamy ułamki:
+\[
+ \frac{P(B\cap A_i)}{\sum_{j=1}^\infty P(B\cap A_j)}
+\]
+Skoro zdarzenia $A_j$ stanowią podział przestrzeni, to znaczy, że są rozłączne, a~w~takim razie iloczyny $B\cap A_j$ również są rozłączne, a zatem korzystając z~III~aksjomatu Kołmogorowa możemy przepisać w mianowniku sumę prawdopodobieństw jako prawdopodobieństwo sumy:
+\[
+ \frac{P(B\cap A_i)}{P\left(\bigcup_{j=1}^\infty [B\cap A_j]\right)}
+\]
+Korzystając z rozdzielności iloczynu względem sumy możemy wyciągnąć $B$ przed znak sumy:
+\[
+ \frac{P(B\cap A_i)}{P\left(B \cap \left[\bigcup_{j=1}^\infty A_j\right]\right)}
+\]
+Zdarzenia $A_j$ stanowią podział przestrzeni, a zatem sumują się do zdarzenia pewnego $\Omega$, a w takim razie:
+\[
+ \frac{P(B\cap A_i)}{P\left(B \cap \Omega\right)}
+\]
+Ponieważ $B\subseteq\Omega$, w takim razie $B\cap\Omega=B$ i otrzymujemy:
+\[
+ \frac{P(B\cap A_i)}{P\left(B\right)}
+\]
+Korzystając z przemienności iloczynu zdarzeń zamieniamy kolejność w iloczynie w liczniku:
+\[
+ \frac{P(A_i\cap B)}{P\left(B\right)}
+\]
+Otrzymaliśmy definicję prawdopodobieństwa warunkowego
+\[ P(A_i|B) \]
+czyli lewą stronę równania podanego w twierdzeniu.
+\end{proof}
+\end{document}

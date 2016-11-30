@@ -44,6 +44,7 @@ chomp $date;
 close F;
 $list.=<<EOF;
 <tr><td>&nbsp;</td><td>Materiały do ćwiczeń</td><td><a href="cwiczenia.pdf">zadania</a></td><td><a href="cwiczenia_odp.pdf">odpowiedzi</a></td><td>$date</td></tr>
+<tr><td>&nbsp;</td><td>Dowody wybranych twierdzeń</td><td colspan="2"><a href="dowody.pdf">dowody</a></td><td>$date</td></tr>
 EOF
 
 print <<EOF;

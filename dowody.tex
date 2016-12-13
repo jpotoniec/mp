@@ -2,6 +2,7 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
 \title{Dowody wybranych twierdzeń}
 
 \newtheorem*{theorem}{Twierdzenie}
@@ -47,5 +48,61 @@ Korzystając z przemienności iloczynu zdarzeń zamieniamy kolejność w iloczyn
 Otrzymaliśmy definicję prawdopodobieństwa warunkowego
 \[ P(A_i|B) \]
 czyli lewą stronę równania podanego w twierdzeniu.
+\end{proof}
+
+\clearpage
+\section*{Wartość najbardziej prawdopodobna (modalna) w rozkładzie Bernouliego}
+\begin{theorem}
+Niech zmienna losowa $X$ ma rozkład Bernouliego o parametrach $n$ oraz $p$.
+Jeżeli $(n+1)p$ jest liczbą całkowitą, to zmienna losowa $X$ ma dwa punkty skokowe o największym prawdopodobieństwie: $(n+1)p$ oraz $(n+1)p-1$.
+W przeciwnym wypadku, tzn. gdy $(n+1)p$ nie jest liczbą całkowitą, jest dokładnie jeden taki punkt skokowy: $\lfloor (n+1)p\rfloor$
+\end{theorem}
+
+\begin{proof}
+
+Załóżmy, że $k\in\{1,2,\ldots,n\}$ i rozważmy nierówność 
+\begin{equation}
+P(X=k-1)\leq P(X=k) \label{moda1} 
+\end{equation}
+\begin{gather*}
+P(X=k-1)\leq P(X=k) \\
+{n \choose k-1}p^{k-1}(1-p)^{n-(k-1)} \leq {n \choose k}p^k(1-p)^{n-k} \\
+\frac{n!}{(k-1)!(n-(k-1))!}p^{k-1}(1-p)^{n-(k-1)} \leq \frac{n!}{k!(n-k)!}p^k(1-p)^{n-k} \qquad \bigg/ :\frac{n!}{(k-1)!(n-k)!}p^{k-1}(1-p)^{n-k} \\
+\frac{1-p}{n-k+1} \leq \frac{p}{k} \qquad \bigg/ \cdot k(n-k+1) \\
+(1-p)k \leq p(n-k+1) \\
+k-pk \leq pn-pk+p \\
+k \leq p(n+1)
+\end{gather*}
+Zatem żeby nierówność \ref{moda1} była spełniona potrzeba i wystarcza by $k\leq p(+1)$.
+
+Teraz załóżmy, że $k\in\{0,1, \ldots, n-1\}$ i rozważmy nierówność
+\begin{equation}
+P(X=k)\geq P(X=k+1) \label{moda2}
+\end{equation}
+\begin{gather*}
+P(X=k)\geq P(X=k+1) \\
+{n \choose k}p^k(1-p)^{n-k} \geq {n \choose k+1}p^{k+1}(1-p)^{n-(k+1)}  \\
+\frac{n!}{k!(n-k)!}p^k(1-p)^{n-k} \geq \frac{n!}{(k+1)!(n-(k+1))!}p^{k+1}(1-p)^{n-(k+1)} \qquad \bigg/ :\frac{n!}{k!(n-k-1)!}p^k(1-p)^{n-k-1}  \\
+\frac{1-p}{n-k} \geq \frac{p}{k+1} \qquad \bigg/ \cdot (n-k)(k+1) \\
+(1-p)(k+1) \geq p(n-k) \\
+k+1-pk-p \geq pn-pk \\
+k \geq p(n+1)-1
+\end{gather*}
+W takim razie, żeby nierówność \ref{moda2} była spełniona potrzeba i wystarcza by $k\geq p(n+1)-1$
+
+Rozpatrzymy trzy przypadki:
+\begin{enumerate}
+\item Jeżeli zachodzi $P(X=0)\geq P(X=1)\geq \ldots \geq P(X=n)$ to znaczy, że największe prawdopodobieństwo jest w punkcie $0$.
+Na mocy nierówności \ref{moda2} to jest równoważne $0\geq p(n+1)-1$, a zatem $1\geq p(n+1)$, czyli $\lfloor p(n+1) \rfloor=0$ i otrzymujemy wzór z twierdzenia.
+%TODO tu cos dopisac, bo ten przeskok jest zbyt gwaltowny
+\item Jeżeli zachodzi $P(X=0)\leq P(X=1)\leq \ldots \leq P(X=n)$ to znaczy, że największe prawdopodobieństwo jest w punkcie $n$.
+Na mocy nierówności \ref{moda1} to jest równoważne $n\leq p(n+1)$, czyli $\lfloor p(n+1) \rfloor=n$ i otrzymujemy wzór z twierdzenia.
+\item Rozważmy pozostałe przypadki, tzn. gdy co najmniej jeden z najbardziej prawdopodobnych punktów skokowych jest w zbiorze $\{1,2,\ldots,n-1\}$. Możemy więc rozpatrzyć łącznie nierówności \ref{moda1} i \ref{moda2}, otrzymując
+\begin{equation}
+p(n+1)-1 \leq k \leq p(n+1) \label{moda3}
+\end{equation} 
+Jeżeli $p(n+1)$ nie jest liczbą całkowitą, to nierówność \ref{moda3} ma dokładnie jedno rozwiązanie $k=\lfloor p(n+1)\rfloor$.
+W przeciwnym razie rozwiązania są dwa: $k=p(n+1)$ oraz $k=p(n+1)-1$, czyli tak jak podano w twierdzeniu.
+\end{enumerate}
 \end{proof}
 \end{document}

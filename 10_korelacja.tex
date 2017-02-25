@@ -1,6 +1,7 @@
 \documentclass{mp}
 \graphicspath{{10_korelacja}}
 \subtitle{Momenty dwuwymiarowe}
+\usetikzlibrary{datavisualization} 
 \begin{document}
 \frame{\titlepage}
 \begin{frame}{Momenty zmiennych losowych}
@@ -62,6 +63,62 @@ E(X|Y=y)=\frac{1}{f_Y(y)}\int_{-\infty}^\infty xf(x,y)\d{x}
 \[ D^2(X|Y=y)=E\left[(X-E(X|Y=y))^2|Y=y\right] \]
 \end{block}
 }
+\end{frame}
+
+\begin{frame}[fragile]{Jak skompresować te dane?}
+\begin{minipage}{.4\textwidth}
+
+\begin{tikzpicture}
+\datavisualization [school book axes, visualize as scatter,x axis={label},y axis={label}]
+data {
+x, y
+1, 1
+1, 2
+1, 4
+2, 2
+2, 4
+3, 3
+3, 4
+3, 6
+4, 4
+4, 6
+}
+info {
+\fill<3-> [color2] (visualization cs: x=1, y=1.67) circle [radius=2pt] {};
+\fill<3-> [color2] (visualization cs: x=2, y=3) circle [radius=2pt] {};
+\fill<3-> [color2] (visualization cs: x=3, y=4.33) circle [radius=2pt] {};
+\fill<3-> [color2] (visualization cs: x=4, y=5) circle [radius=2pt] {};
+\draw<4-> [color3,very thick] (visualization cs: x=1, y=2.29) -- (visualization cs: x=4, y=5.1);
+}
+;
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{.55\textwidth}
+\begin{block}<2->{Problem}
+Jak przypisać każdemu $x$-owi jedną wartość $y$?
+\end{block}
+\begin{tabular}{r|cccc}
+\diagbox{y}{x} & 1 & 2 & 3 & 4 \\
+\hline
+1 & $\frac{1}{10}$ &  0 & 0 & 0 \\
+2 & $\frac{1}{10}$ & $\frac{1}{10}$ & 0 & 0 \\
+3 & 0 & 0 & $\frac{1}{10}$ & 0 \\
+4 & $\frac{1}{10}$ & $\frac{1}{10}$ & $\frac{1}{10}$ & $\frac{1}{10}$ \\
+6 & 0 & 0 & $\frac{1}{10}$ & $\frac{1}{10}$
+\uncover<3->
+{
+ \\
+\hline
+\hline
+\textcolor{color2}{$E(Y|X=x)$} & $\frac{7}{3}$ & 3 & $\frac{13}{3}$ & 5 %
+}
+\end{tabular}
+\uncover<5->{
+\\
+\\
+\textcolor{color3}{Y=0{,}94X+1{,}35}}
+\end{minipage}
 \end{frame}
 
 \begin{frame}{Krzywe regresji}

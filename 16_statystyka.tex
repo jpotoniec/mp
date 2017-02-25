@@ -39,11 +39,11 @@ Y_n=\frac{1}{n}\sum_{i=1}^n X_i \text{ jest stochastycznie zbieżny do } \mu \\
 \begin{frame}{Estymacja punktowa}
 \begin{block}<+->{Estymator (parametru $q$)}
 To zmienna losowa $Q_n$, która dla dużej próby trafia dostatecznie blisko tego parametru:
-\[ \exists c>0\colon \lim_{n\to\infty} P\left( \left|Q_n-q\right|\geq c\right)=0 \]
+\[ \exists c>0\colon \lim_{n\to\infty} P\left( \left|Q_n-q\right|< c\right)=1 \]
 \end{block}
 \begin{description}
 \item<+->[zgodny] stochastycznie zbieżny do estymowanej wartości
-\[ \forall \varepsilon > 0\colon \lim_{n\to\infty} P\left(\left|Q_n-q\right|<\varepsilon\right)=0 \]
+\[ \forall \varepsilon > 0\colon \lim_{n\to\infty} P\left(\left|Q_n-q\right|<\varepsilon\right)=1 \]
 \item<+->[nieobciążony] wartość średnia równa esymowanej wartości
 \[ \forall n=1,2,\ldots\colon E(Q_n) = q \]
 \item<+->[najefektywniejszy] wariancja możliwie mała

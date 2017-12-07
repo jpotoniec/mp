@@ -978,4 +978,47 @@ Udowodnij, że:
 \item wartość średnia i wariancja zmiennej losowej $Y=X_1+\ldots+X_n$ są dane poniższym wzorem, gdzie $X_i$ są niezależnymi zmiennymi o rozkładzie zero-jedynkowym z parametrem $p$
 \[E(Y)=np \qquad D^2(Y)=np(1-p) \]
 \end{enumerate}
+
+\clearpage
+
+\section{Algorytm szybkiego sortowania}
+Rozważ następujący algorytm szybkiego sortowanie z losowym wyborem elementu osiowego:
+\begin{enumerate}
+\item Na wejściu jest dana lista składająca się z $n$ elementów. Jeżeli $n\leq 1$, lista jest posortowana, zwróć ją.
+\item Wylosuj spośród nich element osiowy, nazwij go $x$.
+\item Dla wszystkich pozostałych $n-1$ elementów $y$: jeżeli $y\leq x$, dodaj $y$ do listy $L$, w przeciwnym wypadku dodaj $y$ do listy $R$.
+\item Rekurencyjnie wykonaj niniejszą procedurę dla listy $L$ uzyskując posortowaną listę $L'$ oraz dla listy $R$ uzyskując posortowaną listę $R'$.
+\item Zlep w nową listę $L'$, $x$ oraz $R'$. Zwróć tak uzyskaną listę.
+\end{enumerate}
+
+Wykonaj następujące zadania, żeby obliczyć średnią złożoność obliczeniową powyższego algorytmu:
+\begin{enumerate}
+\item Użyj algorytmu, żeby posortować następującą listę liczb: $27, 14, 2, 18, 17$. Zrealizuj w dowolny sposób wybór elementu osiowego.
+\item Przeanalizuj uzyskaną posortowaną listę liczb.
+Dla każdego możliwego wyboru elementu osiowego $x$ zdecyduj jakie jest prawdopodobieństwo, że liczby $2$ i $27$ były porównywane w toku wykonania algorytmu.
+Uzupełnij je w poniższej tabeli\\
+\begin{tabular}{l|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}}
+element osiowy & 2 & 14 & 17 & 18 & 27 \\
+\hline
+prawdopodobieństwo & & & & &
+\end{tabular}
+\item Zakładając wybieranie elementu osiowego w sposób równomierny, na liście długości $n$ elementów każdy element może zostać wybrany jako osiowy z prawdopodobieństwem $\ldots\ldots\ldots$
+\item Połącz wynik dwóch poprzednich zadań: mając listę $j-i+1$ posortowanych liczb $y_i, y_{i+1}, \ldots, y_{j-1}, y_j$, jakie jest prawdpodobieństwo, że elementy $y_i$ i $y_j$ były porównywane w toku działania algorytmu? $p=\ldots\ldots\ldots$
+\item Rozważ wynik sortowania $n$ liczb: $y_1, y_2, \ldots, y_n$.
+Niech $Y_{i,j}$ (dla $i<j$) będzie zmienną losową przyjmującą wartość 1 jeżeli liczby $y_i$ oraz $y_j$ były ze sobą porównywane w toku działania algorytmu i 0 w przeciwnym przypadku. Uzupełnij:
+\[ P(Y_{i,j}=1)=\ldots\ldots\ldots \qquad\qquad P(Y_{i,j}=0)=\ldots\ldots\ldots \]
+Zauważ, że każda para liczb jest porównywana co najwyżej raz.
+\item Ile wynosi wartość średnia zmiennej losowej $Y_{i,j}$?
+\[ EY_{i,j}=\ldots\ldots\ldots\ldots \]
+\item Całkowita liczba porównań wykonanych przez algorytm określona jest przez zmienną losową $Y$ daną poniższym wzorem:
+\[ Y=\sum_{i=1}^{n-1}\sum_{j=i+1}^n Y_{i,j} \]
+Oszacuj z góry średnią liczbę porównań wykonywanych przez algorytm:
+\[ EY\leq\ldots\ldots\ldots \]
+Skorzystaj z następujących przybliżeń: 
+\[\sum_{i=1}^n \frac{1}{i}\leq 1+\ln n \qquad \sum_{i=1}^n \ln i = \ln (n!) \leq \ln n^n = n\ln n\].
+\item Zaimplementuj w dowolnie wybranym języku programowania powyższy algorytm. Wygeneruj losowo 1000 list składających się ze $n=100$ elementów każda.
+Posortuj te listy, zliczając przy okazji liczbę wykonanych porównań.
+Zsumuj porównania wykonane we wszystkich sortowaniach, podziel przez 1000. Czy otrzymany wynik jest mniejszy niż wynikający z oszacowania uzyskanego powyżej?
+\end{enumerate}
+
 \end{document}

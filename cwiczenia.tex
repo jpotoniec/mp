@@ -111,7 +111,6 @@ Rozpatrz poniższe pytania w dwóch wariantach: wszystkie kule w danym kolorze s
 \section{Prawdopodobieństwo warunkowe i niezależność zdarzeń}
 \begin{enumerate}
 \item W sklepie są sprzedawane baterie dwóch firm A i B. Firma A dostarcza do sklepu dwa razy więcej baterii niż firma B. Braki wśród baterii tych firm stanowią odpowiednio $0{,}9\%$ i $1{,}4\%$. Kupujemy jedną baterię. Jakie jest prawdopodobieństwo kupienia baterii dobrej?
-\item Wiadomo, że 90\% produkcji spełnia wymagania techniczne. Przeprowadzono dodatkową kontrolę, przy której mogły być popełnione pewne błędy, a mianowicie: element wadliwy mógł zostać sklasyfikowany jako dobry z prawdopodobieństwem $0{,}05$, a element dobry mógł zostać sklasyfikowany jako wadliwy z prawdopodobieństwem $0{,}02$. Obliczyć prawdopodobieństwo tego, że element, który został sklasyfikowany jako dobry, faktycznie jest dobry. \ans{$P(S|K)=\frac{P(K|S)P(S)}{P(K)}=\frac{(1-P(K'|S))P(S)}{(1-P(K'|S))P(S)+P(K|S')P(S')}=\frac{(1-0{,}02)0{,}9}{(1-0{,}02)0{,}9+0{,}05\cdot0{,}1}\approx0{,}994$}
 \item O pewnym roczniku studentów wiadomo, że dzielą się na grupy:
 \begin{description}
 \item[$G_1$] $5\%$ potrafiące odpowiedzieć na wszystkie pytania;
@@ -131,6 +130,51 @@ Obliczyć prawdopodobieństwo przekazania sygnału:
 \item przy połączeniu równoległym dwóch przekaźników (inaczej: wystarczy, że chociaż jeden przekaźnik będzie działał);
 \item przy połączeniu szeregowym trzech przekaźników;
 \item przy połączeniu równoległym trzech przekaźników;
+\end{enumerate}
+\item Wiadomo, że 90\% produkcji spełnia wymagania techniczne. Przeprowadzono dodatkową kontrolę, przy której mogły być popełnione pewne błędy, a mianowicie: element wadliwy mógł zostać sklasyfikowany jako dobry z prawdopodobieństwem $0{,}05$, a element dobry mógł zostać sklasyfikowany jako wadliwy z prawdopodobieństwem $0{,}02$. Obliczyć prawdopodobieństwo tego, że element, który został sklasyfikowany jako dobry, faktycznie jest dobry. \ans{$P(S|K)=\frac{P(K|S)P(S)}{P(K)}=\frac{(1-P(K'|S))P(S)}{(1-P(K'|S))P(S)+P(K|S')P(S')}=\frac{(1-0{,}02)0{,}9}{(1-0{,}02)0{,}9+0{,}05\cdot0{,}1}\approx0{,}994$}
+
+
+\item Merry wybrał się do Starego Lasu zbierać pewne rośliny o wielce pożądanych właściwościach na nadchodzącą Sobótkę.
+Niestety, Merry nie jest zbyt biegły w rozpoznawaniu roślin.
+Jedyne co wie, to że ma zbierać lejkowate kwiaty w jednym z trzech kolorów: białe, różowe lub niebieskie.
+Czego Merry'emu nie powiedziano to, że wśród białych kwiatów tylko $30\%$ posiada pożądane właściwości, wśród różowych $55\%$, a wśród niebieskich
+aż $90\%$.
+Wracając do domu Merry zauważył, że wśród kwiatów, które zebrał liczba białych do liczby różowych ma się jak $3:2$, a~liczba różowych do
+liczby niebieskich jak $2:1$. Merry dla zabawy zamknął oczy i na chybił-trafił wybrał jeden z~zebranych kwiatów.
+ 
+\begin{enumerate}
+	\item Jakie jest prawdopodobieństwo, że wybrany kwiat jest niebieski?
+	\item Jakie jest prawdopodobieństwo, że wybrany kwiat jest biały lub różowy?
+	\item Jakie jest prawdopodobieństwo, że wybrany kwiat ma pożądane właściwości, jeżeli wiadomo, że jest niebieski?
+	\item Jakie jest prawdopodobieństwo, że wybrany kwiat jednocześnie ma pożądane właściwości i jest niebieski?
+	\item Jakie jest prawdopodobieństwo, że wybrany kwiat ma pożądane właściwości, jeżeli nie wiadomo jaki ma kolor?
+	\item Co by było gdyby Merry nie wiedział, jakiego koloru wylosował kwiat, ale wiedział, że wybrany kwiat nie ma pożądanych
+		właściwości: jakie byłoby wtedy prawdopodobieństwo, że kwiat będzie biały lub niebieski?
+\end{enumerate}
+\clearpage
+\item Kuce w Oatbarton od czasu do czasu zapadają na Straszną Chorobę Kuców.
+Na szczęście zmyślni, hobbicy farmerzy wymyślili sposób na wykrywanie choroby we wczesnym stadium i izolowanie chorych zwierząt.
+Niestety, sposób nie jest idealny: prawdopodobieństwo, że zwierzę zostatnie uznane za chore, wynosi odpowiednio $0,85$ dla zwierzęcia chorego i $0,07$ dla zwierzęcia zdrowego.
+Z danych historycznych wiadomo, że prawdopodobieństwo zapadnięcia na Straszną Chorobę Kuców wynosi $0,2$ dla każdego kuca.
+Rozpatrujemy doświadczenie polegające na badaniu kuca Ostrouchego.
+
+\begin{enumerate}
+\item Zdefiniuj przestrzeń zdarzeń elementarnych. 
+\item Jaki jest rozmiar przestrzeni zdarzeń elementarnych? 
+\item Czy w tej przestrzeni wszystkie zdarzenia elementarne są równoprawdopodobne? Odpowiedź uzasadnij. 
+\item Nazwij i zdefiniuj jako zbiory zdarzeń elementarnych następujące zdarzenia opisane słownie: 
+\begin{itemize}
+\item Ostrouchy jest chory.
+\item Ostrouchy jest zdrowy.
+\item Test wskazał, że Ostrouchy jest chory.
+\item Test wskazał, że Ostrouchy jest zdrowy.
+\end{itemize}
+Wykorzystaj tak przypisane nazwy w dalszych obliczeniach!
+\item Bez przeprowadzania testu, jakie jest prawdopodobieństwo, że Ostrouchy jest zdrowy? 
+\item Jakie jest prawdopodobieństwo, że jednocześnie Ostrouchy jest zdrowy i test wskazał, że Ostrouchy jest zdrowy? 
+\item Jakie jest prawdopodobieństwo, że test wskaże, że Ostrouchy jest zdrowy? 
+\item Jakie jest prawdopodobieństwo, że Ostrouchy jest zdrowy, jeżeli test wskazał, że Ostrouchy jest zdrowy? 
+\item Czy zdarzenia: \emph{Ostrouchy jest zdrowy} oraz \emph{test wskazał, że Ostrouchy jest zdrowy} są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. 
 \end{enumerate}
 \item Telegraficzne przekazywanie informacji odbywa się metodą nadawania
 sygnałów kropka-kreska. Statystyczne właściwości zakłóceń są takie, że błędy
@@ -169,76 +213,6 @@ płynie z kadzi warzelnej (punkt $X$) do pojemnika fermentacyjnego (punkt $Y$)
 	\}$}
 	\item Oblicz prawdpodobieństwo $P(A)$, dbając o to by jasno przedstawić tok rozumowania. \ans{$P(A)=0{,}9^4+4\cdot0{,}9^3\cdot0{,}1+4\cdot0{,}9^2\cdot0{,}1^2=0{,}9801=(0{,}9+0{,}9-0{,}9^2)^2$, np. $P(\omega_{1111})=P(A_1)P(A_2)P(A_3)P(A_4)$}
 \end{enumerate}
-\clearpage
-\item Merry wybrał się do Starego Lasu zbierać pewne rośliny o wielce pożądanych właściwościach na nadchodzącą Sobótkę.
-Niestety, Merry nie jest zbyt biegły w rozpoznawaniu roślin.
-Jedyne co wie, to że ma zbierać lejkowate kwiaty w jednym z trzech kolorów: białe, różowe lub niebieskie.
-Czego Merry'emu nie powiedziano to, że wśród białych kwiatów tylko $30\%$ posiada pożądane właściwości, wśród różowych $55\%$, a wśród niebieskich
-aż $90\%$.
-Wracając do domu Merry zauważył, że wśród kwiatów, które zebrał liczba białych do liczby różowych ma się jak $3:2$, a~liczba różowych do
-liczby niebieskich jak $2:1$. Merry dla zabawy zamknął oczy i na chybił-trafił wybrał jeden z~zebranych kwiatów.
- 
-\begin{enumerate}
-	\item Jakie jest prawdopodobieństwo, że wybrany kwiat jest niebieski?
-	\item Jakie jest prawdopodobieństwo, że wybrany kwiat jest biały lub różowy?
-	\item Jakie jest prawdopodobieństwo, że wybrany kwiat ma pożądane właściwości, jeżeli wiadomo, że jest niebieski?
-	\item Jakie jest prawdopodobieństwo, że wybrany kwiat jednocześnie ma pożądane właściwości i jest niebieski?
-	\item Jakie jest prawdopodobieństwo, że wybrany kwiat ma pożądane właściwości, jeżeli nie wiadomo jaki ma kolor?
-	\item Co by było gdyby Merry nie wiedział, jakiego koloru wylosował kwiat, ale wiedział, że wybrany kwiat nie ma pożądanych
-		właściwości: jakie byłoby wtedy prawdopodobieństwo, że kwiat będzie biały lub niebieski?
-\end{enumerate}
-
-
-%\item
-%Krasnoludowie w Morii prowadzą okresowy przegląd wagoników używanych do przewozu urobku z kopalni do huty.
-%Frar jako mniej doświadczony został przydzielony do sprawdzenia wagoników jako pierwszy.
-%Spośród 100 wagoników, 70 z nich uznał jako sprawne, 20 jako niesprawne, a co do 10 nie był pewien.
-%Jego starszy kolega Gamil ocenił, że Frar pomylił się w jednym przypadku na 10 przy wagonikach sprawnych i w 2 przypadkach na 10 przy wagonikach niesprawnych.
-%Wśród wagoników, których Frar nie potrafił zdiagnozować, Gamil uznał 4 za sprawne, a 6 za niesprawne.
-%Na końcu przyszedł ich przełożony Nali, całkowicie losowo wybrał jeden wagonik i zdiagnozował go jako sprawny.
-%\begin{enumerate}
-%\item  Zdefiniuj przestrzeń zdarzeń elementarnych dla doświadczenia polegającego na ocenie tego wagonika przez Frara i Gamila. 
-%\item  Jaki jest rozmiar przestrzeni zdarzeń elementarnych? 
-%\item  Czy w tej przestrzeni wszystkie zdarzenia elementarne są równoprawdopodobne? 
-%\item  Nazwij i zdefiniuj jako zbiory zdarzeń elementarnych następujące zdarzenia opisane słownie: 
-%\begin{itemize}
-%\item wagonik został uznany za sprawny przez Frara;
-%\item wagonik został uznany za niesprawny przez Frara;
-%\item Frar nie potrafił ocenić wagonika;
-%\item wagonik został uznany za sprawny przez Gamila;
-%\item wagonik został uznany za niesprawny przez Gamila.
-%\end{itemize}
-%\item  Jakie jest prawdopodobieństwo, że wybrany wagonik został uznany za sprawny przez Frara?  
-%\item  Jakie jest prawdopodobieństwo, że wybrany wagonik został uznany za sprawny przez obu krasnoludów? 
-%\item  Jakie jest prawdopodobieństwo, że wybrany wagonik został uznany za sprawny przez Gamila? 
-%\item  Jakie jest prawdopodobieństwo, że wagonik został uznany za sprawny przez Frara, jeżeli wiadomo, że został uznany za dobry przez Gamila? 
-%\item  Czy zdarzenia: \emph{Frar nie potrafił ocenić wagonika} oraz \emph{wagonik został uznany za sprawny przez Gamila} są zdarzeniami niezależnymi? 
-%\end{enumerate}
-\item Kuce w Oatbarton od czasu do czasu zapadają na Straszną Chorobę Kuców.
-Na szczęście zmyślni, hobbicy farmerzy wymyślili sposób na wykrywanie choroby we wczesnym stadium i izolowanie chorych zwierząt.
-Niestety, sposób nie jest idealny: prawdopodobieństwo, że zwierzę zostatnie uznane za chore, wynosi odpowiednio $0,85$ dla zwierzęcia chorego i $0,07$ dla zwierzęcia zdrowego.
-Z danych historycznych wiadomo, że prawdopodobieństwo zapadnięcia na Straszną Chorobę Kuców wynosi $0,2$ dla każdego kuca.
-Rozpatrujemy doświadczenie polegające na badaniu kuca Ostrouchego.
-
-\begin{enumerate}
-\item Zdefiniuj przestrzeń zdarzeń elementarnych. 
-\item Jaki jest rozmiar przestrzeni zdarzeń elementarnych? 
-\item Czy w tej przestrzeni wszystkie zdarzenia elementarne są równoprawdopodobne? Odpowiedź uzasadnij. 
-\item Nazwij i zdefiniuj jako zbiory zdarzeń elementarnych następujące zdarzenia opisane słownie: 
-\begin{itemize}
-\item Ostrouchy jest chory.
-\item Ostrouchy jest zdrowy.
-\item Test wskazał, że Ostrouchy jest chory.
-\item Test wskazał, że Ostrouchy jest zdrowy.
-\end{itemize}
-Wykorzystaj tak przypisane nazwy w dalszych obliczeniach!
-\item Bez przeprowadzania testu, jakie jest prawdopodobieństwo, że Ostrouchy jest zdrowy? 
-\item Jakie jest prawdopodobieństwo, że jednocześnie Ostrouchy jest zdrowy i test wskazał, że Ostrouchy jest zdrowy? 
-\item Jakie jest prawdopodobieństwo, że test wskaże, że Ostrouchy jest zdrowy? 
-\item Jakie jest prawdopodobieństwo, że Ostrouchy jest zdrowy, jeżeli test wskazał, że Ostrouchy jest zdrowy? 
-\item Czy zdarzenia: \emph{Ostrouchy jest zdrowy} oraz \emph{test wskazał, że Ostrouchy jest zdrowy} są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. 
-\end{enumerate}
-
 \end{enumerate}
 
 \clearpage

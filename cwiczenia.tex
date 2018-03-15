@@ -5,6 +5,8 @@
 \usepackage[margin=2cm]{geometry}
 \usepackage{tikz}
 \usepackage{diagbox}
+\usepackage[linesnumbered]{algorithm2e}
+\DontPrintSemicolon
 \pagestyle{empty}
 \linespread{1.3}
 \newcommand{\abs}[1]{\left|#1\right|}
@@ -955,44 +957,84 @@ Udowodnij, że:
 
 \clearpage
 
-\section{Algorytm szybkiego sortowania}
-Rozważ następujący algorytm szybkiego sortowanie z losowym wyborem elementu osiowego:
-\begin{enumerate}
-\item Na wejściu jest dana lista składająca się z $n$ elementów. Jeżeli $n\leq 1$, lista jest posortowana, zwróć ją.
-\item Wylosuj spośród nich element osiowy, nazwij go $x$.
-\item Dla wszystkich pozostałych $n-1$ elementów $y$: jeżeli $y\leq x$, dodaj $y$ do listy $L$, w przeciwnym wypadku dodaj $y$ do listy $R$.
-\item Rekurencyjnie wykonaj niniejszą procedurę dla listy $L$ uzyskując posortowaną listę $L'$ oraz dla listy $R$ uzyskując posortowaną listę $R'$.
-\item Zlep w nową listę $L'$, $x$ oraz $R'$. Zwróć tak uzyskaną listę.
-\end{enumerate}
 
-Wykonaj następujące zadania, żeby obliczyć średnią złożoność obliczeniową powyższego algorytmu:
+\section{Truncated exponential backoff}
+W sieciach opartych na współdzielonym medium (np. Ethernet przy stosowaniu koncentratorów) dochodzi do kolizji, tzn. sytuacji, gdy dwóch nadawców zaczyna jednocześnie nadawać.
+Jedną z technik rozwiązywania tego problemu jest algorytm \emph{truncated exponential backoff}, przedstawiony poniżej.
+Algorytm ten jest uruchamiany jeżeli pierwsze podejście do wysłania pakietu się nie powiodło, zmienna $n$ numeruje kolejne próby retransmisji pakietu.
+(W Ethernecie zamiast liczb $8$ i $5$ używane są, odpowiednio, $16$ i $10$.
+Nie ma to istotne znaczenia przy analizie poza większą ilością obliczeń do wykonania.)
+\begin{algorithm}
+\For{$n\gets 1\, \KwTo\, 8$}
+{
+	\lIf{$n\leq 5$}
+	{
+		$k \gets $ wybierz losową liczbę z $\{0, 1 \ldots, 2^n-1\}$ \label{backoff:delay1}
+	}
+	\lElse
+	{
+		$k \gets $ wybierz losową liczbę z $\{0, 1 \ldots, 2^5-1\}$ \label{backoff:delay2}
+	}
+	poczekaj $k$ jednostek czasu \label{backoff:wait}\;
+	nadaj pakiet \;
+	\If{udało się nadać pakiet bez kolizji}
+	{
+		zakończ algorytm z sukcesem: pakiet został wysłany
+	}
+}
+zakończ algorytm z porażką: nie udało się nadać pakietu
+\end{algorithm}
+
+Rozważ dwóch nadawców $A$ i $B$, którzy próbują nadać pakiet.
+Nastąpiła kolizja i oboje uruchomili powyższy algorytm, ale \emph{niezależnie} od siebie wybierając losowe opóźnienie w liniach \ref{backoff:delay1} i \ref{backoff:delay2}.
+W tym kontekście rozpatrz zadania poniżej.
+W miarę możliwości wszystkie obliczenia wykonuj na ułamkach zwykłych, bo będziesz miał do czynienia z dużymi liczbami i ułamki dziesiętne liczone na zwykłym kalkulatorze szybko mogą zaprowadzić Cię na manowce.
 \begin{enumerate}
-\item Użyj algorytmu, żeby posortować następującą listę liczb: $27, 14, 2, 18, 17$. Zrealizuj w dowolny sposób wybór elementu osiowego.
-\item Przeanalizuj uzyskaną posortowaną listę liczb.
-Dla każdego możliwego wyboru elementu osiowego $x$ zdecyduj jakie jest prawdopodobieństwo, że liczby $2$ i $27$ były porównywane w toku wykonania algorytmu.
-Uzupełnij je w poniższej tabeli\\
-\begin{tabular}{l|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}}
-element osiowy & 2 & 14 & 17 & 18 & 27 \\
+\item Niech $A_1$ będzie zmienną losową odpowiadającą opóźnieniu wylosowanemu przez nadawcę $A$ w linii \ref{backoff:delay1} przed pierwszą retransmisją ($n=1$).
+Uzupełnij poniższy rozkład prawdopodobieństwa zmiennej losowej $A_1$.
+\[ P(A_1=0)=\ldots\ldots\ldots \qquad P(A_1=1)=\ldots\ldots\ldots \]
+\item Uogólnij powyższą analizę na zmienne $A_n$ i $B_n$, tzn. opóźnienie wylosowane przed $n$-tą retransmisją: przez nadawcę $A$ dla $A_n$ i przez nadawcę $B$ dla $B_n$.
+\[ P(A_n=k)=\ldots\ldots\ldots\ldots \qquad P(B_n=k)=\ldots\ldots\ldots\ldots \qquad n=1, 2, 3, 4\, k\in\{0, 1 \ldots, 2^n-1\} \]
+\[ P(A_n=k)=\ldots\ldots\ldots\ldots \qquad P(B_n=k)=\ldots\ldots\ldots\ldots \qquad n=6, 7, 8\, k\in\{0, 1 \ldots, 2^5-1\} \]
+\item Niech $K_n$ będzie zmienną losową przyjmującą wartość $1$ jeżeli przy $n$-tej retransmisji nastąpiła kolizja, tzn. obaj nadawcy wylosowali dokładnie to samo opóźnienie, a $0$ jeżeli kolizja nie wystąpiła.
+Uzupełnij poniższy rozkład prawdopodobieństwa:
+\[ P(K_n=1)=P(A_n=B_n)=\ldots\ldots\ldots\ldots \qquad P(K_n=0)=\ldots\ldots\ldots\ldots \qquad n=1, 2, \ldots, 5\]
+\[ P(K_n=1)=P(A_n=B_n)=\ldots\ldots\ldots\ldots \qquad P(K_n=0)=\ldots\ldots\ldots\ldots \qquad n=6, 7, 8\]
+\item Niech $N$ będzie zmienną losową oznaczającą ile retransmisji zostało wykonane przez algorytm (niezależnie od tego czy zakończył się sukcesem czy porażką).
+Żeby $n$-ta retransmisja została wykonana we wszystkich wcześniejszych musiała zajść kolizja ($K_1=\ldots=K_{n-1}=1$).
+Uzupełnij poniższy rozkład prawdopodobieństwa (zwróć szczególną uwagę na ostatnią kolumnę!):\\
+\begin{tabular}{l|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
+$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
 \hline
-prawdopodobieństwo & & & & &
+$P(N=n)$ & & & & & & & & 
 \end{tabular}
-\item Zakładając wybieranie elementu osiowego w sposób równomierny, na liście długości $n$ elementów każdy element może zostać wybrany jako osiowy z prawdopodobieństwem $\ldots\ldots\ldots$
-\item Połącz wynik dwóch poprzednich zadań: mając listę $j-i+1$ posortowanych liczb $y_i, y_{i+1}, \ldots, y_{j-1}, y_j$, jakie jest prawdpodobieństwo, że elementy $y_i$ i $y_j$ były porównywane w toku działania algorytmu? $p=\ldots\ldots\ldots$
-\item Rozważ wynik sortowania $n$ liczb: $y_1, y_2, \ldots, y_n$.
-Niech $Y_{i,j}$ (dla $i<j$) będzie zmienną losową przyjmującą wartość 1 jeżeli liczby $y_i$ oraz $y_j$ były ze sobą porównywane w toku działania algorytmu i 0 w przeciwnym przypadku. Uzupełnij:
-\[ P(Y_{i,j}=1)=\ldots\ldots\ldots \qquad\qquad P(Y_{i,j}=0)=\ldots\ldots\ldots \]
-Zauważ, że każda para liczb jest porównywana co najwyżej raz.
-\item Ile wynosi wartość średnia zmiennej losowej $Y_{i,j}$?
-\[ EY_{i,j}=\ldots\ldots\ldots\ldots \]
-\item Całkowita liczba porównań wykonanych przez algorytm określona jest przez zmienną losową $Y$ daną poniższym wzorem:
-\[ Y=\sum_{i=1}^{n-1}\sum_{j=i+1}^n Y_{i,j} \]
-Oszacuj z góry średnią liczbę porównań wykonywanych przez algorytm:
-\[ EY\leq\ldots\ldots\ldots \]
-Skorzystaj z następujących przybliżeń: 
-\[\sum_{i=1}^n \frac{1}{i}\leq 1+\ln n \qquad \sum_{i=1}^n \ln i = \ln (n!) \leq \ln n^n = n\ln n\].
-\item Zaimplementuj w dowolnie wybranym języku programowania powyższy algorytm. Wygeneruj losowo 1000 list składających się ze $n=100$ elementów każda.
-Posortuj te listy, zliczając przy okazji liczbę wykonanych porównań.
-Zsumuj porównania wykonane we wszystkich sortowaniach, podziel przez 1000. Czy otrzymany wynik jest mniejszy niż wynikający z oszacowania uzyskanego powyżej?
+\vspace{1cm}\\
+%Podaj wzór ogólny: $ P(N=n)=\ldots\ldots\ldots $
+\item Ile wynosi suma prawdopodobieństw w rozkładzie prawdopodobieństwa zmiennej losowej $N$? \ldots\ldots\ldots\ldots
+\item Jakie jest prawdopodobieństwo, że pakiet nie zostanie wysłany (tzn. że wszystkie retransmisje spowodują kolizję)?
+\[ P(K_1=1, K_2=1, \ldots, K_8=1) = \ldots\ldots\ldots\ldots\ldots\ldots \]
+\item Ile \emph{średnio} jest wykonywanych retransmisji w toku działania algorytmu?
+\[ EN = \ldots\ldots\ldots\ldots\ldots \]
+\item Uzupełnij poniższą tabelę prawdopodobieństwem, że zostanie wykonane co najmniej $n$ retransmisji.
+Zaobserwuj, że jest to równoważne stwierdzeniu, że w ciągu pierwszych $n-1$ retransmisji wystąpiła kolizja.
+\begin{tabular}{l|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
+$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+\hline
+$P(N\geq n)$ & & & & & & & & 
+\end{tabular}
+\vspace{1cm}\\
+\item Niech $W_n$ będzie czasem oczekiwania przed $n$-tą retransmisją (czyli $W_n=A_n$) o ile do $n$-tej retransmisji doszło (tzn. gdy $N\geq n$) i $0$ w przeciwnym wypadku (tzn. gdy $N<n$).
+Ile wynosi \emph{średnia} wartość $W_n$?
+Zauważ, że prawdopodobieństwo $P(W_n=0)$ nie gra roli w obliczaniu średniej.\\
+\begin{tabular}{p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
+$EW_1$ & $EW_2$ & $EW_3$ & $EW_4$ & $EW_5$ & $EW_6$ & $EW_7$ & $EW_8$ \\
+\hline
+ & & & & & & & 
+\end{tabular}
+\vspace{1cm}\\
+\item Ile \emph{średnio} jednostek czasu algorytm spędza na oczekiwaniu w linii \ref{backoff:wait}?
+Innymi słowy: ile wynosi średnia sumy zmiennych losowych $W_n$:
+\[ E(W_1+W_2+\ldots+W_8)=\ldots\ldots\ldots\ldots\ldots\]
 \end{enumerate}
 
 \end{document}

@@ -218,7 +218,7 @@ płynie z kadzi warzelnej (punkt $X$) do pojemnika fermentacyjnego (punkt $Y$)
 \end{enumerate}
 
 \clearpage
-\section{Zmienne losowe jednowymiarowe}
+\section{Zmienne losowe jednowymiarowe typu skokowego}
 \begin{enumerate}
 \item Rozważamy doświadczenie polegające na jednokrotnym rzucie uczciwą kostką sześciościenną
 \begin{enumerate}
@@ -248,6 +248,80 @@ płynie z kadzi warzelnej (punkt $X$) do pojemnika fermentacyjnego (punkt $Y$)
 \item Oblicz wartość średnią. \ans{$7$}
 \item Oblicz odchylenie standardowe. \ans{$\sqrt{D^2X}=\sqrt{54{,}83-49}=2{,}42$}
 \end{enumerate}
+\item Kasyno w Bree wprowadziło następującą grę: gracz rozpoczyna z jednym punktem i rzuca uczciwą kostką sześciościenną.
+Jeżeli wypadnie 1, gracz traci wszystkie punkty i kończy grę.
+Jeżeli wypadnie 2, 3 lub 4, gracz podwaja liczbę punktów i kończy grę.
+Jeżeli wypadnie 5 lub 6, gracz podwaja liczbę punktów i może ponownie rzucić kostką.
+W ciągu gry można maksymalnie rzucić trzy razy kostką, tzn. w trzecim rzucie wyniki 5 lub 6 traktuje się tak samo jak wyniki 2, 3, 4.
+Niech zmienna losowa $X$ oznacza liczbę punktów gracza na końcu gry.
+\begin{enumerate}
+\item Podaj zbiór punktów skokowych, tj. możliwych wartości, zmiennej losowej $X$.
+\ans{$\{0, 2, 4, 8\}$}
+\item Podaj rozkład prawdopodobieństwa zmiennej losowej $X$.
+\ans{
+\[ P(X=2)=\frac{3}{6}=\frac{1}{2} \qquad P(X=4)=\frac{2}{6}\frac{3}{6}=\frac{1}{6} \qquad P(X=8)=\frac{2}{6}\frac{2}{6}\frac{5}{6}=\frac{5}{54} \]
+\[ P(X=0)=\frac{1}{6}+\frac{2}{6}\frac{1}{6}+\frac{2}{6}\frac{2}{6}\frac{1}{6}=\frac{13}{54}\]
+}
+\item Narysuj wykres dystrybuanty zmiennej losowej $X$.
+\item Oblicz prawdopodobieństwo, że gracz zdobędzie niezerową liczbę punktów.
+\ans{ \[P(X>0)=1-P(X=0)=\frac{41}{54} \]}
+\item Oblicz średnią liczbę punktów gracza na końcu gry.
+\ans{
+\[ EX=2\frac{1}{2}+4\frac{1}{6}+8\frac{5}{54}=\frac{65}{27} \]
+}
+\item Obliczy odchylenie standardowe zmiennej losowej $X$.
+\ans{
+\[ EX^2 = 4\frac{1}{2}+16\frac{1}{6}+64\frac{5}{54}=\frac{286}{27} \qquad D^2X = \frac{286}{27}-\left(\frac{65}{27}\right)^2=\frac{3497}{27^2} \qquad DX=\frac{\sqrt{3497}}{27} \]
+}
+\item Jaka jest najbardziej prawdopodobna wartość zmiennej losowej $X$?
+\ans{2}
+\end{enumerate}
+\item Ted Cotton po pracy udaje się do kasyna w Bree, które niedawno wprowadziło następującą grę: gracz rozpoczyna z jednym punktem i rzuca uczciwą kostką sześciościenną.
+Jeżeli wypadnie 1, gracz traci wszystkie punkty i kończy grę.
+Jeżeli wypadnie 2, 3 lub 4, gracz podwaja liczbę punktów i kończy grę.
+Jeżeli wypadnie 5 lub 6, gracz podwaja liczbę punktów i może ponownie rzucić kostką.
+Nie ma górnego ograniczenia na liczbę rzutów ani na wysokość wygranej.
+Niech zmienna losowa $X$ oznacza liczbę punktów gracza na końcu gry.
+
+Podpowiedź: \[
+\sum_{n=0}^\infty q^n = 
+\begin{cases} 
+	\frac{1}{1-q} & \left|q\right|<1 \\
+	\infty & \text{wpp}
+\end{cases}
+\]
+
+\begin{enumerate}
+\item Podaj zbiór punktów skokowych, tj. możliwych wartości, zmiennej losowej $X$.
+\ans{$\{0, 2, 4, \ldots, 2^{n}, \ldots\}=\{0\}\cup\{2^n\colon n\in\mathbb{N}_{+} \}$}
+\item Podaj funkcję prawdopodobieństwa $P$ zmiennej losowej $X$.
+\ans{
+\[
+P(X=k)=\begin{cases} 
+\left(\frac{1}{3}\right)^{n-1}\frac{1}{2} & k=2^n\, n\in\mathbb{N}_{+} \\
+\frac{1}{4} & k=0\quad \text{(wyprowadzenie niżej)}
+\end{cases} \]
+}
+\item Oblicz prawdopodobieństwo, że gracz skończy grę z niezerową liczbą punktów.
+\ans{\[P(X>0)=\sum_{n=1}^\infty \left(\frac{1}{3}\right)^{n-1}\frac{1}{2}=
+\frac{1}{2}\sum_{n=0}^\infty \left(\frac{1}{3}\right)^n = \frac{1}{2}\cdot \frac{1}{1-\frac{1}{3}}=\frac{3}{4} \]}
+\item Oblicz średnią liczbę punktów gracza na końcu gry.
+\ans{\[
+EX = \sum_{n=1}^\infty 2^{n}\left(\frac{1}{3}\right)^{n-1}\frac{1}{2} = \sum_{n=1}^\infty \left(\frac{2}{3}\right)^{n-1} = \sum_{n=0}^\infty \left(\frac{2}{3}\right)^n = \frac{1}{1-\frac{2}{3}} = 3
+\]}
+\item Obliczy odchylenie standardowe zmiennej losowej $X$.
+\ans{$DX=\sqrt{E(X^2)-(EX)^2}$ \\
+\[
+EX^2=\sum_{n=1}^\infty \left(2^{n}\right)^2\left(\frac{1}{3}\right)^{n-1}\frac{1}{2} =
+\frac{1}{2} \sum_{n=1}^\infty 4^{n}\left(\frac{1}{3}\right)^{n-1} =
+\frac{4}{2} \sum_{n=1}^\infty 4^{n-1}\left(\frac{1}{3}\right)^{n-1} =
+\frac{1}{2} \sum_{n=0}^\infty \left(\frac{4}{3}\right)^n \to\infty
+\]
+Wyciągamy z tego wniosek, że nie można obliczyć odchylenia standardowego tej zmiennej losowej.
+}
+\item Jaka jest najbardziej prawdopodobna wartość zmiennej losowej $X$?
+\ans{2}
+\end{enumerate}
 \item Bilbo bierze udział w grze, w której punkty zdobywa się za trafianie kamykami do celu. Każdemu zawodnikowi przysługuje maksymalnie pięć rzutów, przy czym:
 \begin{itemize}
 \item na początku każdy zawodnik ma jeden punkt;
@@ -263,23 +337,8 @@ Bilba.
 \item Oblicz wariancję zmiennej losowej $X$.
 \item Oblicz $P(5\leq X\leq 30)$.
 \end{enumerate}
-\item Rozważmy funkcję \[f(x)=\begin{cases} 0 & x<0 \\ e^{-x} & x\geq 0\end{cases} \]
-\begin{enumerate}
-\item Udowodnij, że jest to funkcja gęstości prawdopodobieństwa pewnej zmiennej losowej $X$. \ans{nieujemna, $\int_{-\infty}^\infty f(x)dx=0+\int_0^\infty f(x)dx=1$}
-\item Oblicz dystrybuantę zmiennej losowej $X$ i narysuj jej wykres.
-\item Oblicz $P(X<\frac{1}{2})$
-\item Oblicz $P(1\leq X<2)$
-\item Oblicz wartość średnią
-\end{enumerate}
-\item Rozważmy funkcję \[f(x)=\begin{cases} Ax^{-4} & \left|x\right|\geq 1 \\ 0 & \text{wpp} \end{cases} \]
-\begin{enumerate}
-\item Dla jakiej wartości stałej $A$ ta funkcja jest gęstością prawdopodobieństwa pewnej zmiennej losowej $X$? \ans{$\frac{3}{2}$}
-\item Oblicz dystrybuantę zmiennej losowej $X$ i narysuj jej wykres. \ans{\[\begin{cases}-\frac{x^{-3}}{2} & x\leq-1\\\frac{1}{2} & -1<x\leq1\\1-\frac{x^{-3}}{2} & x>1 \end{cases}\]}
-\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość większą niż 2. \ans{$\frac{1}{16}$}
-\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość równą 2. \ans{$0$}
-\item Oblicz wartość średnią. \ans{$0$}
-\item Oblicz wariancję. \ans{$3$}
-\end{enumerate}
+
+
 \item Dana jest następująca gra: gracz rzuca uczciwą kostką sześciościenną tak długo, dopóki nie wyrzuci piątki bądź
 szóstki, ale nie więcej niż trzy razy. Jeżeli uda mu się wyrzucić założoną liczbę oczek w $k$-tym rzucie, wygrywa $5-k$
 zł, w przeciwnym razie nie wygrywa nic. Niech zmienna losowa $X$ odpowiada wysokości wygranej. Podaj, dbając
@@ -306,16 +365,11 @@ porysowania lakieru przez maszynę montującą drzwi. Podaj, dbając by przedsta
 \item prawdopodobieństwo, że firma straci przynajmniej 1000 zł w ciągu godziny
 \end{enumerate}
 
-\item Dana jest funkcja 
-\[ f(x)=\begin{cases} ax^2 & x\in \left<0,3\right> \\ 0 & \text{wpp} \end{cases} \]
-\begin{enumerate}
-\item Dla jakiej wartości parametru $a$ funkcja $f(x)$ jest funkcją gęstości prawdopodobieństwa pewnej zmiennej losowej?
-\item Ile wynosi wartość średnia tej zmiennej losowej?
-\item Ile wynosi wariancja tej zmiennej losowej?
-\end{enumerate}
 
 
 \end{enumerate}
+
+
 
 \clearpage
 \section{Dyskretne rozkłady prawdopodobieństwa}
@@ -437,8 +491,33 @@ Inaczej: $X+Y=10$.
 }
 
 \clearpage
-\section{Zmienne losowe typu ciągłego}
+\section{Zmienne losowe jednowymiarowe typu ciągłego}
+
 \begin{enumerate}
+\item Rozważmy funkcję \[f(x)=\begin{cases} Ax^{-4} & \left|x\right|\geq 1 \\ 0 & \text{wpp} \end{cases} \]
+\begin{enumerate}
+\item Dla jakiej wartości stałej $A$ ta funkcja jest gęstością prawdopodobieństwa pewnej zmiennej losowej $X$? \ans{$\frac{3}{2}$}
+\item Oblicz dystrybuantę zmiennej losowej $X$ i narysuj jej wykres. \ans{\[\begin{cases}-\frac{x^{-3}}{2} & x\leq-1\\\frac{1}{2} & -1<x\leq1\\1-\frac{x^{-3}}{2} & x>1 \end{cases}\]}
+\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość większą niż 2. \ans{$\frac{1}{16}$}
+\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość równą 2. \ans{$0$}
+\item Oblicz wartość średnią. \ans{$0$}
+\item Oblicz wariancję. \ans{$3$}
+\end{enumerate}
+\item Dana jest funkcja 
+\[ f(x)=\begin{cases} ax^2 & x\in \left<0,3\right> \\ 0 & \text{wpp} \end{cases} \]
+\begin{enumerate}
+\item Dla jakiej wartości parametru $a$ funkcja $f(x)$ jest funkcją gęstości prawdopodobieństwa pewnej zmiennej losowej?
+\item Ile wynosi wartość średnia tej zmiennej losowej?
+\item Ile wynosi wariancja tej zmiennej losowej?
+\end{enumerate}
+\item Rozważmy funkcję \[f(x)=\begin{cases} 0 & x<0 \\ e^{-x} & x\geq 0\end{cases} \]
+\begin{enumerate}
+\item Udowodnij, że jest to funkcja gęstości prawdopodobieństwa pewnej zmiennej losowej $X$. \ans{nieujemna, $\int_{-\infty}^\infty f(x)dx=0+\int_0^\infty f(x)dx=1$}
+\item Oblicz dystrybuantę zmiennej losowej $X$ i narysuj jej wykres.
+\item Oblicz $P(X<\frac{1}{2})$
+\item Oblicz $P(1\leq X<2)$
+\item Oblicz wartość średnią
+\end{enumerate}
 \item Autobusy linii 64 przyjeżdżają punktualnie co 20 minut na przystanek. Olga nie zna ich rozkładu jazdy, przychodzi więc na przystanek w całkowicie losowym momencie: jak jej się wyjdzie z domu. Niech $T$ oznacza czas oczekiwania Olgi na autobus.
 \begin{enumerate}
 \item Podaj rozkład zmiennej losowej $T$. \ans{$f(t)=\begin{cases}\frac{1}{20} & 0\leq t\leq 20 \\ 0 & \text{wpp} \end{cases}$}
@@ -461,23 +540,23 @@ Inaczej: $X+Y=10$.
 \item Oblicz prawdopodobieństwo, że w worku jest więcej niż $21{,}5$ kg mąki. \ans{$P(X>21{,}5)=1-F_X(21{,}5)=1-F_Y(0{,}75)=1-0{,}7734\approx 0{,}23$}
 \item Oblicz prawdopodobieństwo, że ilość mąki w worku różni się od wartości oczekiwanej o nie więcej niż 1~kg. \ans{$P(19<X<21)=F_X(21)-F_X(19)=F_Y(0{,}5)-F_Y(-0{,}5)=2F_Y(0{,}5)-1=2\cdot0{,}6915-1=0{,}38$}
 \end{enumerate}
-\item Pociągi Kolei Wielkopolskich odjeżdżają w~kierunku Wągrowca co 60 min. Niestety, nastąpiła zmiana rozkładu, strona
-internetowa padła, telefony nie działają, a~plakaty z~rozkładem porwał wiatr. Zakładając, że rozkład czasu przybycia pasażera na stację jest
-jednostajny, a pociągi jeżdżą punktualnie, obliczyć:
-\begin{enumerate}
-	\item prawdopodobieństwo, że czas oczekiwania na pociąg przekroczy 10 min, ale będzie nie większe niż 55 min;
-	\item średni czas oczekiwania na pociąg.
-\end{enumerate}
-\item Zakładając, że wysokość losowo wybranego psa rasy Husky pochodzi z~rozkładu normalnego o średniej $53{,}5$ cm i odchyleniu standardowym $1{,}5$ cm (inaczej: $N(53{,}5;1{,}5)$), oblicz jakie jest prawdodpodobieństwo, że taki pies ma wysokość powyżej $56$ cm.
-\item Taczki wyprodukowane w zakładzie Hamfasta psują się średnio po trzech latach użytkowania.
-Fredegar zakupił jedną z taczek, niech $X$ będzie zmienną losową o rozkładzie wykładniczym, reprezentującą czas w~latach bezawaryjnej pracy taczki Fredegara.
-
-\begin{enumerate}
-\item Podaj wartość średnią i odchylenie standardowe zmiennej losowej $X$.
-\item Podaj dystrybuantę zmiennej losowej $X$.
-\item Oblicz prawdopodobieństwo, że taczka zepsuje się przed upływem dwóch lat. 
-\item Oblicz prawdopodobieństwo, że taczka będzie pracowała bez awarii co najmniej 6 lat, jeżeli wiadomo, że jest używana już od trzech lat.
-\end{enumerate}
+%\item Pociągi Kolei Wielkopolskich odjeżdżają w~kierunku Wągrowca co 60 min. Niestety, nastąpiła zmiana rozkładu, strona
+%internetowa padła, telefony nie działają, a~plakaty z~rozkładem porwał wiatr. Zakładając, że rozkład czasu przybycia pasażera na stację jest
+%jednostajny, a pociągi jeżdżą punktualnie, obliczyć:
+%\begin{enumerate}
+%	\item prawdopodobieństwo, że czas oczekiwania na pociąg przekroczy 10 min, ale będzie nie większe niż 55 min;
+%	\item średni czas oczekiwania na pociąg.
+%\end{enumerate}
+%\item Zakładając, że wysokość losowo wybranego psa rasy Husky pochodzi z~rozkładu normalnego o średniej $53{,}5$ cm i odchyleniu standardowym $1{,}5$ cm (inaczej: $N(53{,}5;1{,}5)$), oblicz jakie jest prawdodpodobieństwo, że taki pies ma wysokość powyżej $56$ cm.
+%\item Taczki wyprodukowane w zakładzie Hamfasta psują się średnio po trzech latach użytkowania.
+%Fredegar zakupił jedną z taczek, niech $X$ będzie zmienną losową o rozkładzie wykładniczym, reprezentującą czas w~latach bezawaryjnej pracy taczki Fredegara.
+%
+%\begin{enumerate}
+%\item Podaj wartość średnią i odchylenie standardowe zmiennej losowej $X$.
+%\item Podaj dystrybuantę zmiennej losowej $X$.
+%\item Oblicz prawdopodobieństwo, że taczka zepsuje się przed upływem dwóch lat. 
+%\item Oblicz prawdopodobieństwo, że taczka będzie pracowała bez awarii co najmniej 6 lat, jeżeli wiadomo, że jest używana już od trzech lat.
+%\end{enumerate}
 \item W hobbickiej wsi Oatbarton znajduje się wielki spichlerz na owies, w~którym okoliczni farmerzy gromadzą swoje plony.
 Masa w tonach $X$ owsa zgromadzonego w spichlerzu bezpośrednio po zbiorach ma rozkład normalny $N(100, 20)$.
 Spichlerz ma pojemność 130 ton, a~roczne potrzeby wsi wynoszą 85 ton.
@@ -516,6 +595,34 @@ we wszystkich magazynach. Załóż, że:
 \item Oblicz (z dokładnością do dwóch miejsc po przecinku) prawdopodobieństwo, że w Bucklandzie zepsują się więcej niż 424 sery.
 \end{enumerate}
 
+\item Ted Cotton, jeden z pracowników urzędu pocztowego w Hobbitonie, poczynił następującą obserwację: w 48 przypadkach na 50 po wyjściu klienta z urzędu następny klient przyjdzie do urzędu przed upływem 2 minut.
+Co więcej, jeżeli przez 2 minuty nikt nie przyjdzie, to sytuacja się powtarza: w 48 przypadkach na 50 przez kolejne 2 minuty przyjdzie klient itd.
+Z urzędu pocztowego właśnie wyszedł klient.
+Niech $T$ będzie zmienną losową \emph{typu ciągłego} charakteryzującą się \emph{brakiem pamięci}, a~oznaczającą czas w minutach oczekiwania na przyjście następnego klienta.
+
+\begin{enumerate}
+\item Podaj rozkład prawdopodobieństwa zmiennej losowej $T$: jego nazwę, parametry i~dystrybuatnę.
+\ans
+{
+Rozkład wykładniczy
+\begin{gather*}
+F(x) = \begin{cases} 1-e^{-\lambda x} & x>0 \\ 0 & \text{wpp} \end{cases} \\
+P(T<2)=F(2)=\frac{48}{50} \\
+1-e^{-2\lambda}=\frac{24}{25} \\
+e^{-2\lambda}=\frac{1}{25} \\ 
+-2\lambda = \ln \frac{1}{25} = -2 \ln 5 \\
+\lambda = \ln 5 \approx 1{,}609
+\end{gather*}
+}
+\item Podaj średni czas oczekiwania na kolejnego klienta.
+\ans{ $ET = \frac{1}{\lambda} = \frac{1}{\ln 5} \approx 0{,}621$ }
+\item Podaj odchylenie standardowe zmiennej losowej $T$.
+\ans{$DT=ET=\frac{1}{\lambda} = \frac{1}{\ln 5} \approx 0{,}621$ }
+\item Jakie jest prawdopodobieństwo, że czas oczekiwania na klienta będzie pomiędzy 1, a 3 minut?
+\ans{$P(1\leq T\leq 3) = F(3)-F(1) = 1-e^{-3\lambda}-(1-e^{-\lambda}) = e^{-\lambda}-e^{-3\lambda}=5^{-1}-5^{-3}=\frac{5^2-1}{5^3}=\frac{24}{125}=0{,}192$}
+\item Ted twierdzi, że kiedyś przez godzinę nikt nie przyszedł do urzędu pocztowego. Jakie jest prawdopodobieństwo takiego zdarzenia? Jakie są jego możliwe przyczyny?
+\ans{$P(T>60)=1-F(60)=1-(1-e^{-60\lambda}) = 5^{-60} \approx 0$}
+\end{enumerate}
 
 \begin{tabular}{|r|r|r||r|r|r|}
 \hline

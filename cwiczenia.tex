@@ -1,22 +1,30 @@
-\documentclass{mwart}
+\documentclass[twoside]{mwart}
 \usepackage[utf8]{inputenc}
 \usepackage{polski}
 \usepackage{amsmath,amssymb}
 \usepackage[margin=2cm]{geometry}
 \usepackage{tikz}
 \usepackage{diagbox}
+\usepackage{qrcode}
+\usetikzlibrary{calc}
 \usepackage[linesnumbered]{algorithm2e}
 \DontPrintSemicolon
 \pagestyle{empty}
 \linespread{1.3}
 \newcommand{\abs}[1]{\left|#1\right|}
+%\let\odp
 \ifx\odp\undefined
 \newcommand{\ans}[1]{}
 \else
-\newcommand{\ans}[1]{\emph{Odpowiedź:} #1}
+\newcommand{\ans}[1]{\par\emph{Odpowiedź:} #1}
 \fi
 \begin{document}
 \section{Przestrzeń probabilistyczna}
+%[anchor=south west,inner sep=0pt]
+\begin{tikzpicture}[remember picture,overlay]
+ \node at ($(current page.north east)-(3cm,3cm)$) {\qrcode[hyperlink,height=3cm]{http://www.cs.put.poznan.pl/jpotoniec/mp/cwiczenia.pdf}};
+\end{tikzpicture}
+
 \begin{enumerate}
 \item Na ile sposobów można ustawić 5 osób w kolejce? \ans{$5!$}
 \item Ile słów pięcioliterowych (nawet tych bezsensownych) można utworzyć z liter \emph{A, B, C}? \ans{$3^5=243$}
@@ -494,15 +502,15 @@ Inaczej: $X+Y=10$.
 \section{Zmienne losowe jednowymiarowe typu ciągłego}
 
 \begin{enumerate}
-\item Rozważmy funkcję \[f(x)=\begin{cases} Ax^{-4} & \left|x\right|\geq 1 \\ 0 & \text{wpp} \end{cases} \]
-\begin{enumerate}
-\item Dla jakiej wartości stałej $A$ ta funkcja jest gęstością prawdopodobieństwa pewnej zmiennej losowej $X$? \ans{$\frac{3}{2}$}
-\item Oblicz dystrybuantę zmiennej losowej $X$ i narysuj jej wykres. \ans{\[\begin{cases}-\frac{x^{-3}}{2} & x\leq-1\\\frac{1}{2} & -1<x\leq1\\1-\frac{x^{-3}}{2} & x>1 \end{cases}\]}
-\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość większą niż 2. \ans{$\frac{1}{16}$}
-\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość równą 2. \ans{$0$}
-\item Oblicz wartość średnią. \ans{$0$}
-\item Oblicz wariancję. \ans{$3$}
-\end{enumerate}
+%\item Rozważmy funkcję \[f(x)=\begin{cases} Ax^{-4} & \left|x\right|\geq 1 \\ 0 & \text{wpp} \end{cases} \]
+%\begin{enumerate}
+%\item Dla jakiej wartości stałej $A$ ta funkcja jest gęstością prawdopodobieństwa pewnej zmiennej losowej $X$? \ans{$\frac{3}{2}$}
+%\item Oblicz dystrybuantę zmiennej losowej $X$ i narysuj jej wykres. \ans{\[\begin{cases}-\frac{x^{-3}}{2} & x\leq-1\\\frac{1}{2} & -1<x\leq1\\1-\frac{x^{-3}}{2} & x>1 \end{cases}\]}
+%\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość większą niż 2. \ans{$\frac{1}{16}$}
+%\item Oblicz prawdopodobieństwo, że zmienna losowa $X$ przyjmie wartość równą 2. \ans{$0$}
+%\item Oblicz wartość średnią. \ans{$0$}
+%\item Oblicz wariancję. \ans{$3$}
+%\end{enumerate}
 \item Dana jest funkcja 
 \[ f(x)=\begin{cases} ax^2 & x\in \left<0,3\right> \\ 0 & \text{wpp} \end{cases} \]
 \begin{enumerate}
@@ -510,14 +518,14 @@ Inaczej: $X+Y=10$.
 \item Ile wynosi wartość średnia tej zmiennej losowej?
 \item Ile wynosi wariancja tej zmiennej losowej?
 \end{enumerate}
-\item Rozważmy funkcję \[f(x)=\begin{cases} 0 & x<0 \\ e^{-x} & x\geq 0\end{cases} \]
-\begin{enumerate}
-\item Udowodnij, że jest to funkcja gęstości prawdopodobieństwa pewnej zmiennej losowej $X$. \ans{nieujemna, $\int_{-\infty}^\infty f(x)dx=0+\int_0^\infty f(x)dx=1$}
-\item Oblicz dystrybuantę zmiennej losowej $X$ i narysuj jej wykres.
-\item Oblicz $P(X<\frac{1}{2})$
-\item Oblicz $P(1\leq X<2)$
-\item Oblicz wartość średnią
-\end{enumerate}
+%\item Rozważmy funkcję \[f(x)=\begin{cases} 0 & x<0 \\ e^{-x} & x\geq 0\end{cases} \]
+%\begin{enumerate}
+%\item Udowodnij, że jest to funkcja gęstości prawdopodobieństwa pewnej zmiennej losowej $X$. \ans{nieujemna, $\int_{-\infty}^\infty f(x)dx=0+\int_0^\infty f(x)dx=1$}
+%\item Oblicz dystrybuantę zmiennej losowej $X$ i narysuj jej wykres.
+%\item Oblicz $P(X<\frac{1}{2})$
+%\item Oblicz $P(1\leq X<2)$
+%\item Oblicz wartość średnią
+%\end{enumerate}
 \item Autobusy linii 64 przyjeżdżają punktualnie co 20 minut na przystanek. Olga nie zna ich rozkładu jazdy, przychodzi więc na przystanek w całkowicie losowym momencie: jak jej się wyjdzie z domu. Niech $T$ oznacza czas oczekiwania Olgi na autobus.
 \begin{enumerate}
 \item Podaj rozkład zmiennej losowej $T$. \ans{$f(t)=\begin{cases}\frac{1}{20} & 0\leq t\leq 20 \\ 0 & \text{wpp} \end{cases}$}
@@ -531,7 +539,7 @@ Inaczej: $X+Y=10$.
 \item Oblicz prawdopodobieństwo bezawaryjnej pracy aparatu w ciągu 24 miesięcy. \ans{$P(X>24)=1-F(24)$}
 \item Oblicz prawdopodobieństwo awarii aparatu w ciągu 36 miesięcy, jeżeli wiadomo, że przepracował bez awarii już 12 miesięcy. \ans{$P(X<36|X>12)=P(X<36-12)=F(24)$}
 \end{enumerate}
-\item W Minas Tirith gromadzą zapasy na wypadek oblężenia. Losowo wybrany worek zawiera $X$ kg mąki, gdzie $X$ jest zmienną losową o rozkładzie $N(20,2)$.
+\item W Minas Tirith gromadzą zapasy na wypadek oblężenia. Losowo wybrany worek zawiera $X$ kg mąki, gdzie $X$ jest zmienną losową o rozkładzie $N(20,2^2)$.
 \begin{enumerate}
 \item Utwórz zmienną losową $Y$ będącą standaryzowaną postacią zmiennej losowej $X$. \ans{$Y=\frac{X-20}{2}$}
 \item Wyraź dystrybuantę zmiennej $X$ w zależności od dystrybuanty zmiennej $Y$. \ans{$F_X(x)=F_Y(\frac{x-20}{2})$}
@@ -558,7 +566,7 @@ Inaczej: $X+Y=10$.
 %\item Oblicz prawdopodobieństwo, że taczka będzie pracowała bez awarii co najmniej 6 lat, jeżeli wiadomo, że jest używana już od trzech lat.
 %\end{enumerate}
 \item W hobbickiej wsi Oatbarton znajduje się wielki spichlerz na owies, w~którym okoliczni farmerzy gromadzą swoje plony.
-Masa w tonach $X$ owsa zgromadzonego w spichlerzu bezpośrednio po zbiorach ma rozkład normalny $N(100, 20)$.
+Masa w tonach $X$ owsa zgromadzonego w spichlerzu bezpośrednio po zbiorach ma rozkład normalny $N(100, 20^2)$.
 Spichlerz ma pojemność 130 ton, a~roczne potrzeby wsi wynoszą 85 ton.
 
 W poniższych zadaniach wyniki podawaj z dokładnością do przynajmniej dwóch miejsc po przecinku.
@@ -624,6 +632,7 @@ e^{-2\lambda}=\frac{1}{25} \\
 \ans{$P(T>60)=1-F(60)=1-(1-e^{-60\lambda}) = 5^{-60} \approx 0$}
 \end{enumerate}
 
+{\small
 \begin{tabular}{|r|r|r||r|r|r|}
 \hline
 \multicolumn{6}{|c|}{Rozkład normalny} \\
@@ -662,6 +671,7 @@ e^{-2\lambda}=\frac{1}{25} \\
 \textbf{1,5}	& 0,933	& 0,939	& \textbf{3,1}	& 0,999	& 0,999 \\
 \hline
 \end{tabular}
+}
 \end{enumerate}
 
 \clearpage
@@ -695,13 +705,22 @@ e^{-2\lambda}=\frac{1}{25} \\
 \item Oblicz współczynnik korelacji zmiennych losowych $X$ i $Y$.
 %\item Wiadomo, że wylosowano trefla. Oblicz prawdopodobieństwo, że nie jest to dama posługując się warunkowym rozkładem prawdopodobieństwa. \ans{$P(X=0|Y=1)=\frac{\frac{12}{52}}{\frac{13}{52}}=\frac{12}{13}$}
 \end{enumerate}
-\item Doświadczenie polega na dwukrotnym rzucie kostką sześciościenną. Niech zmienna $X$ odpowiada liczbie rzutów, w~których wyrzucono parzystą liczbę oczek, natomiast zmienna $Y$ liczbie rzutów, w których wyrzucono co najmniej 5 oczek.
+
+\item W Shire szaleje burza śnieżna, a Merry i Pippin, zamknięci w czterech ścianach, grają w pewną nietypową grę, korzystając z dziwnej kostki sześciościennej, której każda ścianka wypada z równym prawdopodobieństwem, ale ścianki nie są ponumerowane tak jak zwykle.
+Mianowicie, na ściankach znajdują się wyłącznie cyfry 1,2 oraz 3 w kolorach czerwonym i zielonym: dwie czerwone 1, jedna czerwona 2, jedna zielona 2 oraz dwie zielone 3.
+Merry w sekrecie rzuca dwukrotnie kostką, mnoży wyniki i zlicza liczbę czerwonych wyników.
+Niech zmienna losowa $X$ odpowiada iloczynowi, a $Y$ liczbie czerwonych wyników.
+Merry podaje Pippinowi liczbę czerwonych wyników (tj. wartość, którą przyjęła zmienna losowa $Y$), a zadaniem Pippina jest zgadnąć iloczny wyrzuconych liczb (tj. wartość, którą przyjęła zmienna losowa $X$).
+
 \begin{enumerate}
-\item Podaj brzegowe rozkłady prawdopodobieństwa zmiennych losowych $X$ oraz $Y$.
-\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$.
-\item Zbadaj, czy zmienne losowe $X$ oraz $Y$ są niezależne.
-\item Wiadomo, że dwukrotnie wyrzucono parzystą liczbę oczek. Jakie jest prawdopodobieństwo, że były to dwie szóstki? 
-%Odpowiedź przedstaw wykorzystując rozkład prawdopodobieństwa zmiennej losowej $(X,Y)$.
+	\item Podaj brzegowy rozkład prawdopodobieństwa zmiennej losowej $X$. 
+	\item Podaj brzegowy rozkład prawdopodobieństwa zmiennej losowej $Y$. 
+	\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$. 
+	\item Czy zmienne losowe $X$ oraz $Y$ są niezależne? Odpowiedź uzasadnij.
+	\item Oblicz wartości średnie zmiennych losowych $X$ oraz $Y$.
+	\item Oblicz kowariancję zmiennej losowej $(X,Y)$.
+	\item Oblicz odchylenia standardowe zmiennych losowych $X$ oraz $Y$.
+	\item Oblicz współczynnik korelacji zmiennej losowej $(X,Y)$.
 \end{enumerate}
 
 \item Hobbici w skórzanym woreczku mają 7 kartek zapisanych atramentami w dwóch różnych kolorach: czerwonym i zielonym.
@@ -1076,11 +1095,11 @@ Nie ma to istotne znaczenia przy analizie poza większą ilością obliczeń do 
 {
 	\lIf{$n\leq 5$}
 	{
-		$k \gets $ wybierz losową liczbę z $\{0, 1 \ldots, 2^n-1\}$ \label{backoff:delay1}
+		$k \gets $ wylosuj liczbę z $\{0, 1 \ldots, 2^n-1\}$ korzystając z rozkładu jednostajnego \label{backoff:delay1}
 	}
 	\lElse
 	{
-		$k \gets $ wybierz losową liczbę z $\{0, 1 \ldots, 2^5-1\}$ \label{backoff:delay2}
+		$k \gets $ wylosuj liczbę z $\{0, 1 \ldots, 2^5-1\}$  korzystając z rozkładu jednostajnego \label{backoff:delay2}
 	}
 	poczekaj $k$ jednostek czasu \label{backoff:wait}\;
 	nadaj pakiet \;
@@ -1100,13 +1119,21 @@ W miarę możliwości wszystkie obliczenia wykonuj na ułamkach zwykłych, bo b�
 \item Niech $A_1$ będzie zmienną losową odpowiadającą opóźnieniu wylosowanemu przez nadawcę $A$ w linii \ref{backoff:delay1} przed pierwszą retransmisją ($n=1$).
 Uzupełnij poniższy rozkład prawdopodobieństwa zmiennej losowej $A_1$.
 \[ P(A_1=0)=\ldots\ldots\ldots \qquad P(A_1=1)=\ldots\ldots\ldots \]
+\ans{\[P(A_1=0)=P(A_1=1)=\frac{1}{2}\]}
 \item Uogólnij powyższą analizę na zmienne $A_n$ i $B_n$, tzn. opóźnienie wylosowane przed $n$-tą retransmisją: przez nadawcę $A$ dla $A_n$ i przez nadawcę $B$ dla $B_n$.
-\[ P(A_n=k)=\ldots\ldots\ldots\ldots \qquad P(B_n=k)=\ldots\ldots\ldots\ldots \qquad n=1, 2, 3, 4\, k\in\{0, 1 \ldots, 2^n-1\} \]
+\[ P(A_n=k)=\ldots\ldots\ldots\ldots \qquad P(B_n=k)=\ldots\ldots\ldots\ldots \qquad n=1, 2, 3, 4, 5\, k\in\{0, 1 \ldots, 2^n-1\} \]
 \[ P(A_n=k)=\ldots\ldots\ldots\ldots \qquad P(B_n=k)=\ldots\ldots\ldots\ldots \qquad n=6, 7, 8\, k\in\{0, 1 \ldots, 2^5-1\} \]
+\ans{
+	\[P(A_n=k)=P(B_n=k)=\frac{1}{2^n} \quad n\leq 5 \]
+	\[P(A_n=k)=P(B_n=k)=\frac{1}{2^5} \quad n> 5 \]
+}
 \item Niech $K_n$ będzie zmienną losową przyjmującą wartość $1$ jeżeli przy $n$-tej retransmisji nastąpiła kolizja, tzn. obaj nadawcy wylosowali dokładnie to samo opóźnienie, a $0$ jeżeli kolizja nie wystąpiła.
 Uzupełnij poniższy rozkład prawdopodobieństwa:
 \[ P(K_n=1)=P(A_n=B_n)=\ldots\ldots\ldots\ldots \qquad P(K_n=0)=\ldots\ldots\ldots\ldots \qquad n=1, 2, \ldots, 5\]
 \[ P(K_n=1)=P(A_n=B_n)=\ldots\ldots\ldots\ldots \qquad P(K_n=0)=\ldots\ldots\ldots\ldots \qquad n=6, 7, 8\]
+\ans{
+	\[ P(K_n=1)=P(A_n=B_n) = \sum_{k=0}^{2^n-1} P(A_n=k, B_n=k) = \sum_{k=0}^{2^n-1} P(A_n=k) P(B_n=k) = \frac{1}{2^n} \]
+}
 \item Niech $N$ będzie zmienną losową oznaczającą ile retransmisji zostało wykonane przez algorytm (niezależnie od tego czy zakończył się sukcesem czy porażką).
 Żeby $n$-ta retransmisja została wykonana we wszystkich wcześniejszych musiała zajść kolizja ($K_1=\ldots=K_{n-1}=1$).
 Uzupełnij poniższy rozkład prawdopodobieństwa (zwróć szczególną uwagę na ostatnią kolumnę!):\\
@@ -1116,12 +1143,26 @@ $n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
 $P(N=n)$ & & & & & & & & 
 \end{tabular}
 \vspace{1cm}\\
+\ans{~\\
+	\begin{tabular}{l|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
+		$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+		\hline
+		$P(N=n)$ & $\frac{1}{2}$ & $\frac{3}{2^3}$ & $\frac{7}{2^6}$ & $\frac{15}{2^{10}}$ & $\frac{31}{2^{15}}$ & $\frac{31}{2^{20}}$ & $\frac{31}{2^{25}}$ & $\frac{1}{2^{25}}$ 
+	\end{tabular}
+}
 %Podaj wzór ogólny: $ P(N=n)=\ldots\ldots\ldots $
 \item Ile wynosi suma prawdopodobieństw w rozkładzie prawdopodobieństwa zmiennej losowej $N$? \ldots\ldots\ldots\ldots
+\ans{$1$}
 \item Jakie jest prawdopodobieństwo, że pakiet nie zostanie wysłany (tzn. że wszystkie retransmisje spowodują kolizję)?
 \[ P(K_1=1, K_2=1, \ldots, K_8=1) = \ldots\ldots\ldots\ldots\ldots\ldots \]
+\ans{
+	\[ P(K_1=1, K_2=1, \ldots, K_8=1) = \frac{1}{2^{30}} \]
+}
 \item Ile \emph{średnio} jest wykonywanych retransmisji w toku działania algorytmu?
 \[ EN = \ldots\ldots\ldots\ldots\ldots \]
+\ans{
+	\[ EN = 1\cdot\frac{1}{2} + 2\cdot\frac{3}{2^2} + 3\cdot\frac{7}{2^6} + 4\cdot\frac{15}{2^{15}} + 5\cdot\frac{31}{2^{15}} + 6\cdot\frac{31}{2^{20}} + 7\cdot\frac{31}{2^{25}} + 8\cdot\frac{1}{2^{25}} = \frac{55\,084\,065}{2^{25}}\approx 1{,}642 \]
+}
 \item Uzupełnij poniższą tabelę prawdopodobieństwem, że zostanie wykonane co najmniej $n$ retransmisji.
 Zaobserwuj, że jest to równoważne stwierdzeniu, że w ciągu pierwszych $n-1$ retransmisji wystąpiła kolizja.
 \begin{tabular}{l|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
@@ -1130,6 +1171,27 @@ $n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
 $P(N\geq n)$ & & & & & & & & 
 \end{tabular}
 \vspace{1cm}\\
+\ans{\\
+	\begin{tabular}{l|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
+		$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+		\hline
+		$P(N\geq n)$ & 1 & $\frac{1}{2}$ & $\frac{1}{2^3}$ & $\frac{1}{2^6}$ & $\frac{1}{2^{10}}$ & $\frac{1}{2^{15}}$ & $\frac{1}{2^{20}}$ & $\frac{1}{2^{25}}$ 
+	\end{tabular}
+}
+\item Oblicz średni czas oczekiwania w poszczególnych krokach algorytmu, tj. wartości średnie $EA_n=EB_n$.
+\begin{tabular}{p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
+	$EA_1$ & $EA_2$ & $EA_3$ & $EA_4$ & $EA_5$ & $EA_6$ & $EA_7$ & $EA_8$ \\
+	\hline
+	& & & & & & & 
+\end{tabular}
+\vspace{1cm}\\
+\ans{\\
+	\begin{tabular}{p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
+		$EA_1$ & $EA_2$ & $EA_3$ & $EA_4$ & $EA_5$ & $EA_6$ & $EA_7$ & $EA_8$ \\
+		\hline
+		$\frac{1}{2}$ & $\frac{3}{2}$ & $\frac{7}{2}$ & $\frac{15}{2}$ & $\frac{31}{2}$ & $\frac{31}{2}$ & $\frac{31}{2}$ & $\frac{31}{2}$ 
+	\end{tabular}
+}
 \item Niech $W_n$ będzie czasem oczekiwania przed $n$-tą retransmisją (czyli $W_n=A_n$) o ile do $n$-tej retransmisji doszło (tzn. gdy $N\geq n$) i $0$ w przeciwnym wypadku (tzn. gdy $N<n$).
 Ile wynosi \emph{średnia} wartość $W_n$?
 Zauważ, że prawdopodobieństwo $P(W_n=0)$ nie gra roli w obliczaniu średniej.\\
@@ -1139,9 +1201,254 @@ $EW_1$ & $EW_2$ & $EW_3$ & $EW_4$ & $EW_5$ & $EW_6$ & $EW_7$ & $EW_8$ \\
  & & & & & & & 
 \end{tabular}
 \vspace{1cm}\\
+Podpowiedź: dla dowolnych zmiennych losowych typu skokowego $X, Y$ zachodzi 
+\[EX = \sum_{y_j} E\left(X|Y=y_j\right)P(Y=y_j) \]
+\ans{\\
+	\[ EW_n = E(W_n|N\geq n)P(N\geq n) + E(W_n|N<n)P(N<n) = EA_nP(N\geq n)\]
+	\begin{tabular}{p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
+		$EW_1$ & $EW_2$ & $EW_3$ & $EW_4$ & $EW_5$ & $EW_6$ & $EW_7$ & $EW_8$ \\
+		\hline
+		$\frac{1}{2}$ & $\frac{3}{2^2}$ & $\frac{7}{2^4}$ & $\frac{15}{2^7}$ & $\frac{31}{2^{11}}$ & $\frac{31}{2^{16}}$ & $\frac{31}{2^{21}}$ & $\frac{31}{2^{26}}$
+	\end{tabular}
+}
 \item Ile \emph{średnio} jednostek czasu algorytm spędza na oczekiwaniu w linii \ref{backoff:wait}?
 Innymi słowy: ile wynosi średnia sumy zmiennych losowych $W_n$:
 \[ E(W_1+W_2+\ldots+W_8)=\ldots\ldots\ldots\ldots\ldots\]
+\ans{\[ E(W_1+W_2+\ldots+W_8) = \frac{1}{2^{26}}\left(2^{25} + 3\cdot 2^{24} + 7\cdot 2^{22} + 15\cdot 2^{19} + 31\cdot 2^{15} + 31\cdot 2^{10} + 31\cdot 2^{5} + 31 \right) \]}
+\end{enumerate}
+
+\cleardoublepage
+\section{Twierdzenia graniczne}
+
+\begin{enumerate}
+	\item W Bucklandzie na jesieni przygotowują sery na zimę. W każdym ze 100 magazynów
+	zgromadzonych jest po 1000 serów. Prawdopodobieństwo zepsucia się pojedynczego
+	krążka sera wynosi $4\cdot 10^{-3}$ i~nie zależy od pozostałych serów. Niech
+	$i=1,2,\ldots,100$ oznacza numer magazynu i niech zmienna losowa $X_i$ oznacza
+	liczbę zepsutych serów składowanych w $i$-tym magazynie. Ponadto, niech zmienna
+	losowa $Y$ odpowiada sumarycznej liczbie zepsutych serów
+	we wszystkich magazynach.
+	
+	\begin{enumerate}
+		\item Podaj  (w formie funkcji prawdopodobieństwa) rozkład prawdopodobieństwa zmiennej losowej $X_1$.
+		\item Oblicz (z dokładnością do dwóch miejsc po przecinku) prawdopodobieństwo, że w magazynie nr 10 zepsują się mniej niż trzy sery.
+		\item Podaj średnią liczbę zepsutych serów w magazynie nr 15.
+		\item Oblicz średnią liczbę zepsutych serów łącznie we wszystkich magazynach w Bucklandzie.
+		\item Oblicz wartość $DY$.
+		\item Oblicz prawdopodobieństwo, że w Bucklandzie zepsują się więcej niż 424 sery.
+		\item Oblicz prawdopodobieństwo, że w Bucklandzie zepsuje się pomiędzy 385, a 421 serów.
+	\end{enumerate}
+
+	\ans{
+		\begin{enumerate}
+			\item \[ P(X_1=k) = {1000 \choose k} (4\cdot 10^{-3})^k(1-4\cdot 10^{-3})^{1000-k} \]
+			\item Przybliżenie rozkładem Poissona $\lambda=1000\cdot4\cdot 10^{-3}=4$
+			\[ P(X_{10}<3) = P(X_{10}\in\{0,1,2\}) = 0{,}0183+0{,}0733+0{,}1465=0{,}2381 \]
+			\item $EX_{15}=1000\cdot4\cdot 10^{-3}=4$
+			\item $Y$ jest sumą 100 zmiennych o rozkładzie $B(1000, 4\cdot 10^{-3})$, zatem samo ma rozkład dwumianowy: \mbox{$B(100\cdot 1000, 4\cdot 10^{-3})$}
+			\[ EY=100000\cdot4=400 \]
+			\item \[ DY = \sqrt{100000\cdot 4\cdot 10^{-3} \cdot (1-4\cdot 10^{-3})} \approx 20  \]
+			\item Korzystamy z twierdzenia Moivre'a-Laplace'a i przybliżamy $Y$ rozkładem normalnym $N(400, 20^2 )$. $\Phi$ oznacza dystrybuantę $N(0,1)$
+			\[ P(Y>424) = 1-F_{Y}(424) = \text{standaryzacja} = 1-\Phi(\frac{424-400}{20}) = 1-\Phi(1{,}2) = 1-0{,}885=0{,}115  \]
+			\item Analogicznie; Z oznacza zmienną z $N(0,1)$
+			\begin{align*}
+			P(385\leq Y\leq 421) = P(\frac{385-400}{20} \leq Z \leq \frac{421-400}{20} ) = P(-0{,}75 \leq Z \leq 1{,}05) = \\ \Phi(1{,}05) - (1-\Phi(0{,}75)) = \Phi(1{,}05) + \Phi(0{,}75) - 1 = 0{,}8513 + 0{,}7734 - 1 = 0{,}625
+			\end{align*}
+		\end{enumerate}
+	}
+
+	\item Dane są dwie kostki sześciościenne, na każdej znajdują się cyfry $1, 2, \ldots, 6$.
+	Jedna z kostek jest uczciwa, tzn. każdy wynik jest równoprawdopodobny.
+	Druga kostka ma różne prawdopodobieństwa uzyskania poszczególnych wyników, ale identyczną wartość średnią i odchylenie standardowe jak pierwsza kostka.
+	Ile minimalnie należy wykonać rzutów obiema kostkami, żeby z prawdopodobieństwem przynajmniej $95\%$ różnica między średnimi arytmetycznymi uzyskanych wyników była nie większa niż $0{,}1$?
+	
+	\ans{
+		Niech ciąg $(A_i)$ oznacza wyniki w $i$-tym rzucie na uczciwej kostce, a ciąg $(B_i)$ wyniki w $i$-tym rzucie na nieuczciwej kostce.
+		Z konstrukcji doświadczenia (kolejne rzuty kostkami) wnioskujemy, że zmienne $A_i$ i $B_i$ są niezależne (i w obrębie ciągu, i między ciągami).
+		Obliczamy wartości średnie i wariancje:
+		\[ EA_i=EB_i=\frac{7}{2} \qquad D^2A_i=D^2B_i=\frac{35}{12} \]
+		Niech $\overline{A_n}$ i $\overline{B_n}$ oznacza średnie arytmetyczne odpowiednio na uczciwej i nieuczciwej kostce aż do $n$-tego rzutu:
+		\[ \overline{A_n} = \frac{1}{n}\sum_{i=1}^n A_i \qquad  \overline{B_n} = \frac{1}{n} \sum_{i=1}^n B_i \]
+		Dochodzimy do ciągu zmiennych opisujących różnicę między średnimi arytmetycznymi:
+		\[ \overline{X_n} = \overline{A_n}-\overline{B_n} = \frac{1}{n}\sum_{i=1}^n A_i-\frac{1}{n}\sum_{i=1}^n B_i \]
+		Przekształcamy łącząc sumy:
+		\[ \overline{X_n} = \frac{1}{n}\sum_{i=1}^n \left(A_i-B_i\right) \]
+		Rozpatrzmy ciąg $X_i=A_i-B_i$: zmienne $X_i$ mają identyczny rozkład prawdopodobieństwa, $EX_i=EA_i-EB_i=0$, $D^2X_i=D^2A_i+D^2B_i=\frac{35}{6}$ (z niezależności zmiennych $A_i$ oraz $B_i$).
+		Zatem dla ciągów $(X_i)$ oraz $(\overline{X_n})$ spełnione są warunki twierdzenia Lindenberga-Levy'ego.
+		Niech w takim razie \[U_n=\frac{\overline{X_n}-0}{\sqrt{\frac{35}{6}}}\sqrt{n}\] stanowi zmienną losową zbieżną wg dystrybuant do $N(0,1)$.
+		Z treści zadania:
+		\[ P(\left|\overline{X_n}\right| \leq 0{,}1) \geq 0{,}95 \]
+		Przekształcamy nierówność w funkcji prawdopodobieństwa mnożąc stronami:
+		\[
+		P\left(\left|\frac{\overline{X_n}-0}{\sqrt{\frac{35}{6}}}\sqrt{n}\right| \leq \frac{0{,}1-0}{\sqrt{\frac{35}{6}}}\sqrt{n}\right) \geq 0{,}95 \\		
+		\]
+		Dla czytelności oznaczmy prawą stronę nierówności przez $\xi_n = \frac{0{,}1-0}{\sqrt{\frac{35}{6}}}\sqrt{n}$ i skorzystajmy z definicji zmiennej $U_n$:
+		\[ P\left( \left|U_n\right| \leq \xi_n \right) \geq 0{,}95 \]
+		Przepisujemy lewą stronę jako różnicę dystrybuant:
+		\[ P\left( \left|U_n\right| \leq \xi_n \right) = P\left( -\xi_n \leq U_n \leq \xi_n \right) = F_{U_n}(\xi_n)-F_{U_n}(-\xi_n) = 2F_{U_n}(\xi_n)-1 \geq 0{,}95 \]
+		Upraszczamy nierówność:
+		\[ F_{U_n}(\xi_n) \geq \frac{1+0{,}95}{2}=0{,}975 \]
+		Korzystamy z twierdzenia Lindenberga-Levy'ego i przybliżamy $F_{U_n}$ przez $\Phi$, tj. dystrybuantę standaryzowanego rozkładu normalnego.
+		\[ \Phi(\xi_n) \geq 0{,}975 \]
+		Za pomocą tablicy z dystrybuantą standaryzowanego rozkładu normalnego odszukujemy minimalną wartość argumentu, dla której powyższa nierówność zachodzi:
+		\[ \xi_n \geq 1{,}96 \]
+		Podstawiamy $\xi_n$ i rozwiązujemy:
+		\begin{gather*}
+			\frac{0{,}1-0}{\sqrt{\frac{35}{6}}}\sqrt{n} \geq 1{,}96 \\
+			\sqrt{n} \geq 1{,}96\frac{\sqrt{\frac{35}{6}}}{0{,}1} = 19{,}6\sqrt{\frac{35}{6}} \\
+			n \geq (19{,}6)^2 \cdot \frac{35}{6} \approx 2240{,}9
+		\end{gather*}
+		Wnioskujemy z tego, że minimalną wartością $n$ jest 2241.
+		
+	}	
+	
+	\item Dany jest ciąg niezależnych zmiennych losowych $X_1, X_2, \ldots$ taki, że  $X_n$ pochodzi z rozkładu jednostajnego na przedziale $\{1, \ldots, n\}$.
+	Niech $Y_n=\frac{X_n}{n}$.
+	Zbadaj czy dla dużych wartości $n$ zachodzi:
+	\[ \frac{1}{n} \sum_{i=1}^n Y_n \approx \frac{1}{n} \sum_{i=1}^n EY_n \]
+	
+	\ans{
+		Obliczmy wariancje zmiennych losowych $X_n$:
+		\begin{gather*}
+		EX_n = \sum_{i=1}^n \left(i\cdot \frac{1}{n}\right) = \frac{1}{n} \frac{n(n+1)}{2} = \frac{n+1}{2} \\
+		EX_n^2 = \sum_{i=1}^n \left(i^2\cdot \frac{1}{n}\right) = \frac{1}{n} \frac{n(n+1)(2n+1)}{6} = \frac{(n+1)(2n+1)}{6} \\
+		D^2X_n = EX_n^2-(EX_n)^2 = \frac{(n+1)(2n+1)}{6}-\frac{(n+1)^2}{4}=\frac{n^2-1}{12}
+		\end{gather*}
+		Rozważmy następnie wariancje zmiennych losowych $Y_n$:
+		\begin{gather*}
+		D^2Y_n = D^2\left(\frac{X_n}{n}\right) = \frac{D^2X_n}{n^2}=\frac{n^2-1}{12n^2}=\frac{1}{12}-\frac{1}{12n^2} \leq \frac{1}{12}
+		\end{gather*}
+		Zatem wartości $D^2Y_n$ są ograniczone z góry przez wspólną stałą ($\frac{1}{12}$).
+		Spełnione są warunki mocnego prawa wielkich liczb Czebyszewa, a zatem
+		\[ P\left(\lim_{n\to\infty} \frac{1}{n} \sum_{i=1}^n Y_n - \frac{1}{n} \sum_{i=1}^n EY_n =0 \right) =1 \]
+		i możemy powiedzieć, że
+		\[ \frac{1}{n} \sum_{i=1}^n Y_n \approx \frac{1}{n} \sum_{i=1}^n EY_n  \]
+	}
+\end{enumerate}
+
+\vfill
+\subsection*{Ściąga}
+\begin{description}
+	\item[Mocne prawo wielkich liczb Chinczyna]
+	Niech $X_1, X_2, \ldots$ jest ciągiem niezależnych zmiennych losowych o tym samym rozkładzie o skończonej wariancji i wartości oczekiwanej $\mu$. Zachodzi:
+	\[ P\left( \lim_{n\to\infty} X_n = \mu \right) = 1 \]
+	\item[Mocne prawo wielkich liczb Czebyszewa]
+	Niech $X_1, X_2, \ldots$ jest ciągiem niezależnych zmiennych losowych takich, że wariancje są ograniczone wspólną stałą.
+	Niech $\overline{X_n}=\frac{1}{n}\sum_{i=1}^{n} X_i$ będzie średnią arytmetyczną pierwszych $n$ wyrazów tego ciągu, a $\overline{\mu_n}=\frac{1}{n}\sum_{i=1}^n EX_i$ średnią arytmetyczną ich wartości oczekiwanych. Zachodzi:
+	\[ P\left( \lim_{n\to\infty} \overline{X_n}-\overline{\mu_n} =0 \right)) =1 \]
+	\item[Wniosek z twierdzenia Moivre'a--Laplace'a]~\\
+	Jeżeli $np\geq 5$ oraz $np(1-p)\geq 5$, to $B(n,p)\approx N(np, np(1-p)))$
+	\item[Twierdzenia Lindeberga-Levy'ego]
+	Niech $X_1, X_2, \ldots$ będzie ciągiem niezależnych zmiennych losowych o tym samym rozkładzie, takim, że $EX_i=\mu$ i $DX_i=\sigma$.
+	Niech $\overline{X_n}=\frac{1}{n}\sum_{i=1}^{n} X_i$ będzie średnią arytmetyczną pierwszych $n$ wyrazów tego ciągu.
+	Zmienna losowa $U_n=\frac{\overline{X_n}-\mu}{\sigma}\sqrt{n}$ zbiega wg dystrybuant do $N(0,1)$:
+	\[ U_n=\frac{\overline{X_n}-\mu}{\sigma}\sqrt{n} \approx N(0,1) \]
+\end{description}
+
+\cleardoublepage
+\section{Powtórka}
+\begin{enumerate}
+	\item W Bucklandzie na jesieni przygotowują sery na zimę. W każdym ze 100 magazynów
+	zgromadzonych jest po 1000 serów. Prawdopodobieństwo zepsucia się pojedynczego
+	krążka sera wynosi $4\cdot 10^{-3}$ i~nie zależy od pozostałych serów. Niech
+	$i=1,2,\ldots,100$ oznacza numer magazynu i niech zmienna losowa $X_i$ oznacza
+	liczbę zepsutych serów składowanych w $i$-tym magazynie. Ponadto, niech zmienna
+	losowa $Y$ odpowiada sumarycznej liczbie zepsutych serów
+	we wszystkich magazynach.
+	
+	\begin{enumerate}
+		\item Podaj  (w formie funkcji prawdopodobieństwa) rozkład prawdopodobieństwa zmiennej losowej $X_1$.
+		\item Oblicz (z dokładnością do dwóch miejsc po przecinku) prawdopodobieństwo, że w magazynie nr 10 zepsują się mniej niż trzy sery.
+		\item Podaj średnią liczbę zepsutych serów w magazynie nr 15.
+		\item Oblicz średnią liczbę zepsutych serów łącznie we wszystkich magazynach w Bucklandzie.
+		\item Oblicz wartość $DY$.
+		\item Oblicz prawdopodobieństwo, że w Bucklandzie zepsują się więcej niż 424 sery.
+		\item Oblicz prawdopodobieństwo, że w Bucklandzie zepsuje się pomiędzy 385, a 421 serów.
+	\end{enumerate}
+
+\item Ted Cotton po pracy udaje się do kasyna w Bree, które niedawno wprowadziło następującą grę: gracz rozpoczyna z jednym punktem i rzuca uczciwą kostką sześciościenną.
+Jeżeli wypadnie 1, gracz traci wszystkie punkty i kończy grę.
+Jeżeli wypadnie 2, 3 lub 4, gracz podwaja liczbę punktów i kończy grę.
+Jeżeli wypadnie 5 lub 6, gracz podwaja liczbę punktów i może ponownie rzucić kostką.
+Nie ma górnego ograniczenia na liczbę rzutów ani na wysokość wygranej.
+Niech zmienna losowa $X$ oznacza liczbę punktów gracza na końcu gry.
+
+Podpowiedź: \[
+\sum_{n=0}^\infty q^n = 
+\begin{cases} 
+\frac{1}{1-q} & \left|q\right|<1 \\
+\infty & \text{wpp}
+\end{cases}
+\]
+
+\begin{enumerate}
+	\item Podaj zbiór punktów skokowych, tj. możliwych wartości, zmiennej losowej $X$.
+	\ans{$\{0, 2, 4, \ldots, 2^{n}, \ldots\}=\{0\}\cup\{2^n\colon n\in\mathbb{N}_{+} \}$}
+	\item Podaj funkcję prawdopodobieństwa $P$ zmiennej losowej $X$.
+	\ans{
+		\[
+		P(X=k)=\begin{cases} 
+		\left(\frac{1}{3}\right)^{n-1}\frac{1}{2} & k=2^n\, n\in\mathbb{N}_{+} \\
+		\frac{1}{4} & k=0\quad \text{(wyprowadzenie niżej)}
+		\end{cases} \]
+	}
+	\item Oblicz prawdopodobieństwo, że gracz skończy grę z niezerową liczbą punktów.
+	\ans{\[P(X>0)=\sum_{n=1}^\infty \left(\frac{1}{3}\right)^{n-1}\frac{1}{2}=
+		\frac{1}{2}\sum_{n=0}^\infty \left(\frac{1}{3}\right)^n = \frac{1}{2}\cdot \frac{1}{1-\frac{1}{3}}=\frac{3}{4} \]}
+	\item Oblicz średnią liczbę punktów gracza na końcu gry.
+	\ans{\[
+		EX = \sum_{n=1}^\infty 2^{n}\left(\frac{1}{3}\right)^{n-1}\frac{1}{2} = \sum_{n=1}^\infty \left(\frac{2}{3}\right)^{n-1} = \sum_{n=0}^\infty \left(\frac{2}{3}\right)^n = \frac{1}{1-\frac{2}{3}} = 3
+		\]}
+	\item Obliczy odchylenie standardowe zmiennej losowej $X$.
+	\ans{$DX=\sqrt{E(X^2)-(EX)^2}$ \\
+		\[
+		EX^2=\sum_{n=1}^\infty \left(2^{n}\right)^2\left(\frac{1}{3}\right)^{n-1}\frac{1}{2} =
+		\frac{1}{2} \sum_{n=1}^\infty 4^{n}\left(\frac{1}{3}\right)^{n-1} =
+		\frac{4}{2} \sum_{n=1}^\infty 4^{n-1}\left(\frac{1}{3}\right)^{n-1} =
+		\frac{1}{2} \sum_{n=0}^\infty \left(\frac{4}{3}\right)^n \to\infty
+		\]
+		Wyciągamy z tego wniosek, że nie można obliczyć odchylenia standardowego tej zmiennej losowej.
+	}
+	\item Jaka jest najbardziej prawdopodobna wartość zmiennej losowej $X$? 
+	\ans{2}
+\end{enumerate}
+	
+	\item Czarodziej Gandalf bada starożytny krasnoludzki artefakt w kształcie urny.
+	Przeznaczenie artefaktu jest niejasne, a jedynej wskazówki dostarcza umieszczona na nim inskrypcja: 
+	\emph{W środku znajduje się 6 kul: 2 czarne i 4 białe albo 4 czarne i 2 białe.
+		Raz na pełnię księżyca możesz wylosować jednocześnie i uczciwie 2 kule, które natychmiast po obejrzeniu musisz odłożyć z powrotem do wnętrza urny.}
+	Próby wyciągnięcia wszystkich kul albo zajrzenia do urny nic nie dają.
+	Gandalf jest przekonany, że napis na urnie jest prawdziwy i w urnie znajduje się jeden albo drugi zestaw kul, nie ma trzeciej możliwości.
+	Podczas pełni Gandalf przeprowadził eksperyment i~wyciągnął z urny \emph{2 czarne kule}.
+	W związku z tym Gandalf przypisał pierwszemu zestawowi prawdopodobieństwo $\frac{1}{7}$.
+	
+	\begin{enumerate}
+		\item Przypisz symbole następującym zdarzeniom i wykorzystaj podczas dalszego rozwiązywania zadania:
+		\begin{itemize}
+			\item w urnie znajdują się 2 kule czarne i 4 kule białe; \ans{$H_1$}
+			\item w urnie znajdują się 4 kule czarne i 2 kule białe; \ans{$H_2$}
+			\item Gandalf wyciągnął 2 kule czarne.  \ans{$E$}
+		\end{itemize}
+		\item Jakie jest prawdopodobieństwo  zdarzenia \emph{w urnie znajdują się 2 kule czarne i 4 kule białe}, a jakie zdarzenia \emph{w urnie znajdują się 4 kule czarne i 2 kule białe}?
+		\ans{$P(H_1)=\frac{1}{7} \qquad P(H_2)=\frac{6}{7}$}
+		\item Jakie jest prawdopodobieństwo  zdarzenia \emph{Gandalf wyciągnął 2 kule czarne} pod warunkiem, że \emph{w urnie znajdują się 2 kule czarne i 4 kule białe}?
+		\ans{\[P(E|H_1)=\frac{1}{{6\choose 2}}=\frac{1}{15}\]}
+		\item Jakie jest prawdopodobieństwo  zdarzenia \emph{Gandalf wyciągnął 2 kule czarne} pod warunkiem, że \emph{w urnie znajdują się 4 kule czarne i 2 kule białe}?
+		\ans{\[P(E|H_2)=\frac{{4\choose 2}}{{6\choose 2}}=\frac{6}{15}\]}
+		\item Jakie jest prawdopodobieństwo  zdarzenia \emph{Gandalf wyciągnął 2 kule czarne}?
+		\ans{\[P(E)=P(E|H_1)P(H_1)+P(E|H_2)P(H_2)=\frac{1}{15}\frac{1}{7}+\frac{6}{15}\frac{6}{7}=\frac{37}{105}\]}
+	\end{enumerate}
+	Podczas kolejnej pełni Gandalf przeprowadził kolejny eksperyment i ponownie wyciągnął z urny \emph{2 czarne kule}.
+	\begin{enumerate}
+		\setcounter{enumii}{5}
+		\item Jakie jest prawdopodobieństwo, że \emph{w urnie znajdują się 2 kule czarne i 4 kule białe} w świetle wyniku eksperymentu (tj. pod warunkiem, że \emph{Gandalf wyciągnął 2 kule czarne})?
+		\ans{\[P(H_1|E)=\frac{P(E|H_1)P(H_1)}{P(E)}=\frac{\frac{1}{15}\frac{1}{7}}{\frac{37}{105}}=\frac{1}{37} \]}
+		\item Jakie jest prawdopodobieństwo, że \emph{w urnie znajdują się 4 kule czarne i 2 kule białe} w świetle wyniku eksperymentu (tj. pod warunkiem, że \emph{Gandalf wyciągnął 2 kule czarne})?
+		\ans{\[P(H_2|E)=1-P(H_1|E)=\frac{36}{37} \]}
+		\item W świetle wyniku eksperymentu, który zestaw kul w urnie jest bardziej prawdopodobny?
+		\ans{Bardziej prawdopodobne jest, że w urnie znajdują się 4 kule czarne i 2 kule białe}
+	\end{enumerate}
+
 \end{enumerate}
 
 \end{document}

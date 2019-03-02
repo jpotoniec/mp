@@ -24,9 +24,6 @@ def order(a, b):
     assert False
 
 
-#ab-1=2p+1
-#ab=2(p+1)
-
 #safe_primes = [5, 7, 11, 23, 47, 59, 83, 107, 167, 179, 227, 263, 347, 359, 383, 467, 479, 503, 563, 587, 719, 839, 863, 887, 983, 1019, 1187, 1283, 1307, 1319, 1367, 1439, 1487, 1523, 1619, 1823, 1907]
 #
 #for p in safe_primes:
@@ -38,13 +35,13 @@ def order(a, b):
 #                a *= val
 #            b = (p+1)//a
 #            if a < b:
-#                if order(a, b) == a*b-2:
-#                    print(a, b, order(a, b), a*b-2)
+#                if order(a, b) != a*b-2:
+#                    print(a, b, order(a, b), a*b-1)
 #
 #assert False
 
-a = 6
-b = 10
+a = 4
+b = 6
 
 def f(c, x):
     return (a*x+c)//b, (a*x+c)%b
@@ -58,7 +55,7 @@ for i in range(a*b):
 
 print("=========")
 
-c, x = 4, 7
+c, x = 2, 1
 n = 100
 hist = [0]*(a*b)
 for i in range(n*(a*b-2)):

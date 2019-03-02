@@ -185,173 +185,17 @@ Zdarzenia ze zbioru co najwyżej przeliczalnego $\set{A}=\{A_1, A_2, \ldots\}$ s
 	\end{block}
 }
 \end{frame}
-\part{Jak działa filtr antyspamowy, czyli dzień z~życia nauczyciela akademickiego}
-\frame{\partpage}
-\begin{frame}{Filtr antyspamowy}
-\only<1,7>
-{
-	\begin{minipage}{.50\textwidth}
-\begin{block}{List 1}
-Proszę przepisać ocenę.\\
-Student Wytrwały
-\end{block}
-\end{minipage}
-\hfill
-\begin{minipage}{.45\textwidth}
-\includegraphics[width=\textwidth]{Sleeping_students.jpg}\\
-\end{minipage}
-\[ P(\cmark | \text{prosić, przepisać, ocena, student})=1 \]
-}
-\only<2,8>
-{
-	\begin{minipage}{.50\textwidth}
-\begin{block}{List 2}
-Proszę wystawić oceny.\\
-Profesor Ważny
-\end{block}
-\end{minipage}
-\hfill
-\begin{minipage}{.45\textwidth}
-\includegraphics[width=\textwidth]{scientist-28748_1280.png}\\
-\end{minipage}
-\[ P(\cmark | \text{prosić, wystawić, ocena, profesor})=1 \]
-}
-\only<3,9>
-{
-	\begin{minipage}{.50\textwidth}
-\begin{block}{List 3}
-Proszę o ocenę 3.\\
-Student Panda
-\end{block}
-\end{minipage}
-\hfill
-\begin{minipage}{.45\textwidth}
-\includegraphics[width=\textwidth]{Panda_Cub_from_Wolong,_Sichuan,_China.JPG}\\
-\end{minipage}
 
-\[ P(\xmark | \text{prosić, ocena, student})=1 \]
-}
-\only<4,10>
-{
-	\begin{minipage}{.50\textwidth}
-\begin{block}{List 4}
-Proszę przepisać szafę
-\end{block}
-\end{minipage}
-\hfill
-\begin{minipage}{.45\textwidth}
-\begin{centering}
-\includegraphics[height=.4\textheight]{Eichenschrank_Oberschwaben.jpg}\\
-\end{centering}
-\end{minipage}
-\[ P(\xmark | \text{prosić, przepisać, szafa})=1 \]
-}
-\only<5,11>
-{
-	\begin{minipage}{.50\textwidth}
-\begin{block}{List 5}
-Wystaw profesora.\\
-Student Tajniak
-\end{block}
-\end{minipage}
-\hfill
-\begin{minipage}{.45\textwidth}
-\begin{centering}
-\def\svgwidth{.8\textwidth}
-\input{04_warunkowe/bayes/Spy_silhouette.pdf_tex}
-\end{centering}
-\end{minipage}
-\[ P(\xmark | \text{wystawić, profesor, student})=1 \]
-}
+\begin{frame}{Przykład}
+	Dysponujemy zestawem kostek pięciu sześciościennych, które są albo:
+	\begin{enumerate}
+		\item wszystkie uczciwe;
+		\item wszystkie nieuczciwe w taki sposób, że 6-tka wypada z prawdopodobieństwem $\frac{5}{6}$, a każda z pozostałych liczb z prawdopodobieństwem $\frac{1}{30}$.
+	\end{enumerate}	
+	Wykonujemy próbny rzut wszystkimi pięcioma kostkami, uzyskując cztery 6-tki i jedną jedynkę. Czy kostki są raczej uczciwe, czy raczej nieuczciwe?	
+\end{frame}
 
-\only<6,12,22>
-{
-	\begin{minipage}{.45\textwidth}
-	\begin{block}{List 6\only<22>{\cmark}}
-	Wystaw oceny!!!
-	\end{block}
-	\only<-21>
-	{
-	\begin{align*}
-	P(\cmark |& \text{wystawić, ocena})=?\\
-	P(\xmark |& \text{wystawić, ocena})=?
-	\end{align*}
-	}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{.45\textwidth}
-	\begin{block}{List 7\only<22>{\xmark}}
-	Wystaw studenta
-	\end{block}
-	\only<-21>
-	{
-	\begin{align*}
-	P(\cmark |& \text{wystawić, student})=?\\
-	P(\xmark |& \text{wystawić, student})=?
-	\end{align*}
-	}
-	\end{minipage}
-}
-\only<7-21>
-{
-\small
-\begin{tabular}{c|c|cccccccr}
-list & & prosić & przepisać & wystawić & ocena & student & profesor &szafa & \\
-\hline
-\only<-14>
-{
-\only<7-> {1 & \cmark & 1 & 1 & 0 & 1 & 1 & 0 & 0& }
-\only<8->  {\\2 & \cmark & 1 & 0 & 1 & 1 & 0 & 1 & 0& }
-\only<9->  {\\3 & \xmark & 1 & 0 & 0 & 1 & 1 & 0 & 0& }
-\only<10-> {\\4 & \xmark & 1 & 1 & 0 & 0 & 0 & 0 & 1& }
-\only<11-> {\\5 & \xmark & 0 & 0 & 1 & 0 & 1 & 1 & 0& }
-}
-\only<15-> {1, 2 & \cmark& 2 & 1 & 1 & 2 & 1 & 1 & 0&\\
-3, 4, 5& \xmark & 2 & 1 & 1 & 1 & 2 & 1 & 1&}
-\only<12-> {\\\hline
-	      6 & \only<-18>{?}\only<19->{\cmark} 	 & 0 & 0 & 1 & 1 & 0 & 0 & 0&
-	    \\7 & \only<-20>{?}\only<21->{\xmark}	 & 0 & 0 & 1 & 0 & 1 & 0 & 0& }
-\end{tabular}
-\only<13-15>
-{
-\begin{align*}
-P(\cmark |& \text{wystawić, ocena})=\frac{P(\cmark)P(\text{wystawić, ocena}|\cmark)}{P(\text{wystawić, ocena})}
-\only<14->{\\&\sim P(\cmark)P(\text{wystawić, ocena}|\cmark)
-\only<15->{\approx P(\cmark)P(\text{wystawić}|\cmark)P(\text{ocena}|\cmark)}
-} \\
-P(\xmark |& \text{wystawić, ocena})=\frac{P(\xmark)P(\text{wystawić, ocena}|\xmark)}{P(\text{wystawić, ocena})}
-\only<14->{\\&\sim P(\xmark)P(\text{wystawić, ocena}|\xmark)
-\only<15->{\approx P(\xmark)P(\text{wystawić}|\xmark)P(\text{ocena}|\xmark)}
-}
-\end{align*}
-}
-\only<16-19>
-{
-\begin{align*}
-P(\cmark)P(\text{wystawić}|\cmark)P(\text{ocena}|\cmark) = \frac{2}{5}\cdot\only<17->{\frac{1}{2}\cdot\frac{2}{2}=\only<18->{\frac{1}{5}} } \\
-P(\xmark)P(\text{wystawić}|\xmark)P(\text{ocena}|\xmark) = \frac{3}{5}\cdot\only<17->{\frac{1}{3}\cdot\frac{1}{3}=\only<18->{\frac{1}{15}} }
-\end{align*}
-}
-\only<20->
-{
-	\begin{align*}
-	P(\cmark)P(\text{wystawić}|\cmark)P(\text{student}|\cmark) = \ldots\only<21->{=\frac{1}{10}} \\
-	P(\xmark)P(\text{wystawić}|\xmark)P(\text{student}|\xmark) = \ldots\only<21->{=\frac{2}{15}}
-	\end{align*}
-}
-}
-\end{frame}
-\begin{frame}{Credits}
-Rysunki i zdjęcia pochodzą z następujących źródeł:
-\begin{description}
-\item[List 1]  \url{http://commons.wikimedia.org/wiki/File:Sleeping_students.jpg} domena publiczna
-\item[List 2] \url{http://pixabay.com/p-28748/} domena publiczna
-\item[List 3] \url{http://commons.wikimedia.org/wiki/File:Panda_Cub_from_Wolong,_Sichuan,_China.JPG} domena publiczna
-\item[List 4] \url{http://commons.wikimedia.org/wiki/File:Eichenschrank_Oberschwaben.jpg} domena publiczna
-\item[List 5] \url{http://commons.wikimedia.org/wiki/File:Spy_silhouette.svg} CC BY-SA 3.0 by \emph{Itzhak Baum} aka \emph{Setreset}
-\end{description}
-\end{frame}
-\end{document}
+
 \begin{frame}{Monty Hall}
 \begin{minipage}{.30\textwidth}
 \includegraphics<1>[width=\textwidth]{monty_hall/koza.jpg}
@@ -380,7 +224,23 @@ Rysunki i zdjęcia pochodzą z następujących źródeł:
 \item ferrari: domena publiczna \url{http://commons.wikimedia.org/wiki/File:Ferrari_California_Paris_August_2010.jpg}
 \item kurtyny: domena publiczna \url{http://pixabay.com/pl/etap-kurtyna-teatr-czerwony-406306/} \url{http://pixabay.com/pl/kurtyna-etap-teatr-filmy-kino-152112/}
 \end{itemize}
+\note<1>
+{
+	Niech $S_i$ odpowiada zdarzeniu \emph{w bramce $i$ jest samochód}, a $O_i$ zdarzeniu \emph{bramka $i$ została odsłonięta}.
+	Nie wiemy gdzie jest samochód, więc zakładamy jednostajne prawdopodobieństwa a priori: $P(S_i)=\frac{1}{3}$.
+	Oczywiście $P(O_i|S_i)=0$.
+	Załóżmy, że gracz wybiera bramkę 2, a prowadzący odsłania bramkę 3 (wybór konkretnych numerów nie ma znaczenia, problem jest symetryczny).
+	Załóżmy, że prowadzący odsłania z identycznym prawdopodobieństwem, jeżeli ma wybór: $P(O_1|S_2)=P(O_3|S_2)=\frac{1}{2}$.
+	Oczywiście $P(O_3|S_1)=P(O_1|S_3)=1$, bo $O_2$ jest zablokowane przez wybór gracza.
+	Zatem
+	\[ P(S_1|O_3)=\frac{P(O_3|S_1)P(S_1)}{P(O_3|S_1)P(S_1)+P(O_3|S_2)P(S_2)+P(O_3|S_3)P(S_3)} = \frac{1\cdot \frac{1}{3}}{1\cdot \frac{1}{3} + \frac{1}{2}\cdot \frac{1}{3} + 0} = \frac{2}{3} \]
+	\[
+	P(S_2|O_3)=1 - P(S_1|O_3) = \frac{1}{3}
+	\]
+}
 \end{frame}
+
+\end{document}
 
 % \newlength{\koza}
 % \setlength{\koza}{1357pt*\real{.8}}

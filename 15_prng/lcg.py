@@ -11,7 +11,7 @@ granat = (0, 88/255*.8, 124/255*.8)
 srebro = (138/255, 141/255, 143/255)
 cegla = (207/255, 69/255, 32/255)
 #mpl.rcParams['axes.color_cycle'] = ("#00587c", color3, color4)
-mpl.rcParams['axes.color_cycle'] = (granat, cegla)
+mpl.rcParams['axes.prop_cycle'] = mpl.cycler('color', (granat, cegla))
 
 
 class LCG:

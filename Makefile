@@ -1,4 +1,4 @@
-SRC=01_wstep.tex 02_zastosowania.tex 03_aksjomatyka.tex 04_warunkowe.tex 05_zmienne.tex 06_momenty.tex 07_rozklady.tex 08_montecarlo.tex 09_ciagle.tex 10_korelacja.tex 11_ciagi.tex cwiczenia.tex 12_procesy.tex 13_lancuchy_markowa.tex 14_proces_poissona.tex 15_prng.tex 16_statystyka.tex cwiczenia.tex dowody.tex
+SRC=01_wstep.tex 02_zastosowania.tex 03_aksjomatyka.tex 04_warunkowe.tex 05_zmienne.tex 06_momenty.tex 07_rozklady.tex 08_montecarlo.tex 09_ciagle.tex 10_korelacja.tex 11_ciagi.tex cwiczenia.tex 12_procesy.tex 13_lancuchy_markowa.tex 14_proces_poissona.tex 15_prng.tex 15a_prng-simplified.tex 16_statystyka.tex cwiczenia.tex dowody.tex
 NOTES_SRC=$(shell grep -l '\\note' $(SRC))
 
 PDF=$(SRC:%.tex=%.pdf) $(NOTES_SRC:%.tex=%_notes.pdf) cwiczenia_odp.pdf
@@ -36,9 +36,11 @@ clean:
 
 11_ciagi.pdf: circles.tex ll.tex
 
-15_prng.pdf: 15_prng/lcg_mod_17_hist.pdf
+15_prng.pdf: 15_prng/lcg_mod_11_hist.pdf
 
-15_prng/lcg_mod_17_hist.pdf: 15_prng/lcg.py
+15a_prng-simplified.pdf: 15_prng/lcg_mod_11_hist.pdf
+
+15_prng/lcg_mod_11_hist.pdf: 15_prng/lcg.py
 	chmod +x ./15_prng/lcg.py
 	(cd 15_prng; ./lcg.py)
 

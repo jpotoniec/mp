@@ -14,7 +14,7 @@ for my $texfile(@ARGV)
 	{
 		my $subtitle=$1;
 		my $n=$texfile;
-		$n=~s/^(\d+)_.*$/$1/g;
+		$n=~s/^([^_]+)_.*$/$1/g;
 		my $pdf=$texfile;
 		$pdf=~s/\.tex$/\.pdf/g;
 		my $notes=$texfile;

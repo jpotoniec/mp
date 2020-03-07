@@ -1449,6 +1449,35 @@ Podpowiedź: \[
 		\ans{Bardziej prawdopodobne jest, że w urnie znajdują się 4 kule czarne i 2 kule białe}
 	\end{enumerate}
 
+\item Ted Cotton, jeden z pracowników urzędu pocztowego w Hobbitonie, poczynił następującą obserwację: w 48 przypadkach na 50 po wyjściu klienta z urzędu następny klient przyjdzie do urzędu przed upływem 2 minut.
+Co więcej, jeżeli przez 2 minuty nikt nie przyjdzie, to sytuacja się powtarza: w 48 przypadkach na 50 przez kolejne 2 minuty przyjdzie klient itd.
+Z urzędu pocztowego właśnie wyszedł klient.
+Niech $T$ będzie zmienną losową \emph{typu ciągłego} charakteryzującą się \emph{brakiem pamięci}, a~oznaczającą czas w minutach oczekiwania na przyjście następnego klienta.
+
+\begin{enumerate}
+	\item Podaj rozkład prawdopodobieństwa zmiennej losowej $T$: jego nazwę, parametry i~dystrybuatnę.
+	\ans
+	{
+		Rozkład wykładniczy
+		\begin{gather*}
+		F(x) = \begin{cases} 1-e^{-\lambda x} & x>0 \\ 0 & \text{wpp} \end{cases} \\
+		P(T<2)=F(2)=\frac{48}{50} \\
+		1-e^{-2\lambda}=\frac{24}{25} \\
+		e^{-2\lambda}=\frac{1}{25} \\ 
+		-2\lambda = \ln \frac{1}{25} = -2 \ln 5 \\
+		\lambda = \ln 5 \approx 1{,}609
+		\end{gather*}
+	}
+	\item Podaj średni czas oczekiwania na kolejnego klienta.
+	\ans{ $ET = \frac{1}{\lambda} = \frac{1}{\ln 5} \approx 0{,}621$ }
+	\item Podaj odchylenie standardowe zmiennej losowej $T$.
+	\ans{$DT=ET=\frac{1}{\lambda} = \frac{1}{\ln 5} \approx 0{,}621$ }
+	\item Jakie jest prawdopodobieństwo, że czas oczekiwania na klienta będzie pomiędzy 1, a 3 minut?
+	\ans{$P(1\leq T\leq 3) = F(3)-F(1) = 1-e^{-3\lambda}-(1-e^{-\lambda}) = e^{-\lambda}-e^{-3\lambda}=5^{-1}-5^{-3}=\frac{5^2-1}{5^3}=\frac{24}{125}=0{,}192$}
+	\item Ted twierdzi, że kiedyś przez godzinę nikt nie przyszedł do urzędu pocztowego. Jakie jest prawdopodobieństwo takiego zdarzenia? Jakie są jego możliwe przyczyny?
+	\ans{$P(T>60)=1-F(60)=1-(1-e^{-60\lambda}) = 5^{-60} \approx 0$}
+\end{enumerate}
+
 \end{enumerate}
 
 \end{document}

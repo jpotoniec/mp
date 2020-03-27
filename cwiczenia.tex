@@ -37,6 +37,22 @@
 \item $B\cap C$
 \item $B'\cap C'$
 \end{enumerate}
+\ans{
+	W próbie może być (dokładnie) 0, 1, 2 lub 3 sztuki dobre. Zatem:
+	\begin{enumerate}
+		\item 
+		\begin{itemize}
+			\item $A'$ Ze wszystkich możliwości usuwamy odpowiedź 1 sztuka dobra, uzyskując: \emph{0 lub 2 lub 3 sztuki dobre w próbie}. Uwaga, odpowiedź \emph{Dokładnie 1 sztuka zła w próbie} nie jest poprawna, bo to znaczy to samo co \emph{dokładnie 2 sztuki dobre w próbie}, a to jest tylko jedna z pozostałych możliwości.
+			\item $B'$  Ze wszystkich możliwości usuwamy odpowiedzi 0 i 1 sztuk dobrych, uzyskując: \emph{2 lub 3 sztuki dobre w próbie}.
+			\item $C'$  Ze wszystkich możliwości usuwamy odpowiedzi 1, 2, 3 sztuki dobre, uzyskując: \emph{0 sztuk dobrych w próbie}.
+		\end{itemize}
+		\item $A\cup B$ zachodzi zdarzenie $A$ i/lub zachodzi zdarzenie $B$, zatem \emph{w próbie jest dokładnie jedna sztuka dobra i/lub w próbie jest co najwyżej jedna sztuka dobra}, co upraszcza się do \emph{w próbie jest co najwyżej jedna sztuka dobra}
+		\item $A\cap B$ zachodzi zdarzenie $A$ i jednocześnie zachodzi zdarzenie $B$, zatem \emph{w próbie jest dokładnie jedna sztuka dobra i jednocześnie w próbie jest co najwyżej jedna sztuka dobra}, co upraszcza się do \emph{w próbie jest dokładnie jedna sztuka dobra}
+		\item $B\cup C$ \emph{co najwyżej 1 sztuka dobra i/lub co najmniej 1 sztuka dobra}, czyli \emph{dowolna liczba sztuk dobrych} lub \emph{zdarzenie pewne}
+		\item $B\cap C$ \emph{co najwyżej 1 sztuka dobra i jednocześnie co najmniej 1 sztuka dobra}, czyli \emph{dokładnie 1 sztuka dobra}
+		\item $B'\cap C'$ \emph{2 lub 3 sztuki dobre w próbie i jednocześnie 0 sztuk dobrych w próbie}, czyli \emph{zdarzenie niemożliwe}.
+	\end{enumerate}
+}
 \item Inżynier projektuje magazyn do przechowywania kartonów puszek żywności. Kartony mają kształt sześcianów o krawędzi 4 dm i masie 50 kg każdy. Zakłada się, że kartony nie mogą być ułożone w wieżę wyższą niż 24 dm. Zaproponować przestrzeń zdarzeń losowych dla następujących doświadczeń:
 \begin{enumerate}
 \item Obserwacja całkowitego obciążenia 16 $dm^2$ powierzchni pochodzącego z jednego stosu kartonów.
@@ -48,31 +64,92 @@ W obu przestrzeniach opisać następujące zdarzenia:
 \item[B] całkowite obciążenie wynosi nie więcej niż 200 kg;
 \item[C] całkowite obciążenie przekracza 250 kg;
 \end{description}
+\ans{
+	Istnieje wiele możliwych rozwiązań, poniżej zaprezentowane są przykłady. Kryterium jest takie: w danej przestrzeni zdarzeń elementarnych musi dać się opisać jako jej podzbiory zdarzenia $A$, $B$, $C$ i dla danej obserwacji stosu/stosów kartonów musi dać się przypisać dokładnie jedno zdarzenie elementarne (ale może być tak że wielu obserwacjom przypisujemy to samo zdarzenie elementarne).
+	\begin{enumerate}
+		\item Obserwacja całkowitego obciążenia 16 $dm^2$ powierzchni pochodzącego z jednego stosu kartonów.
+		\begin{enumerate}
+			\item Zdarzeniom elementarnym odpowiadają masy stosu i nie rozpatrujemy pustych stosów
+			\begin{gather*}
+				\Omega=\{50, 100, 150, 200, 250, 300\} \\
+				A = \{150, 200, 250, 300\} \\
+				B = \{50, 100, 150, 200\} \\
+				C = \{300\}
+			\end{gather*}
+			\item J.w., ale rozpatrujemy puste stosy
+			\begin{gather*}
+				\Omega=\{0, 50, 100, 150, 200, 250, 300\} \\
+				A = \{150, 200, 250, 300\} \\
+				B = \{0, 50, 100, 150, 200\} \\
+				C = \{300\}
+			\end{gather*}
+			\item Kodujemy zdarzenia elementarne jako wysokość stosu zamiast masy
+			\begin{gather*}
+			\Omega=\{0, 1, 2, 3, 4, 5, 6\} \\
+			A = \{3, 4, 5, 6\} \\
+			B = \{0, 1, 2, 3, 4\} \\
+			C = \{6\}
+			\end{gather*}
+		\end{enumerate}
+		\item Obserwacja całkowitego obciążenia 16 $dm^2$ powierzchni pochodzącego z dwóch stosów kartonów, przy założeniu, że jest to obciążenie wywołane przez połowę masy każdego z dwóch stosów. Wszystkie uwagi o kodowaniu i zerach z poprzedniego podpunktu nadal obowiązują.
+		\begin{enumerate}
+			\item Zdarzeniom elementarnym oznaczone są obserwowaną masą, dopuszczamy puste stosy. Należy zwrócić uwagę, że dopuszczalne jest stosowanie $\ldots$ jeżeli jest jasne co skraca. Musi się wtedy obowiązkowo pojawić ostatni element, bo inaczej zbiór wygląda na nieskończony.
+			\begin{gather*}
+			\Omega=\{0, 25, 50, 75, \ldots, 300\} \\
+			A = \{150, 175, \ldots, 300\} \\
+			B = \{0, 25, \ldots, 200\} \\
+			C = \{275, 300\}
+			\end{gather*}
+			\item Możemy też kodować zdarzenia elementarne jako uporządkowane dwójki, w każdym przypadku kodując oddzielnie wysokość pierwszego i drugiego stosu. Dla ułatwienia zapisu można posłużyć się tzw. \emph{set-builder notation}.
+			\begin{gather*}
+			\Omega = \{ (i,j) \colon i,j\in\{0,1,2,3,4,5,6\}\}=\{(0,0), (0, 1), \ldots (0,6), (1,0), (1,1), \ldots, (6,6) \} \\
+			A=\{(i,j)\in\Omega \colon \frac{i+j}{2}\cdot 50 \geq 150 \}	\\		
+			B=\{(i,j)\in\Omega \colon \frac{i+j}{2}\cdot 50 \leq 200 \}\\
+			C=\{(i,j)\in\Omega \colon \frac{i+j}{2}\cdot 50 > 250 \}
+			\end{gather*}
+			\item Zamiast dwójek uporządkowanych (oznaczanych nawiasami okrągłymi) możemy stosować dwójki nieuporządkowane (dwuelementowe multizbiory)
+			\begin{gather*}
+			\Omega = \{ \{i,j\} \colon i,j\in\{0,1,2,3,4,5,6\}\}=\{\{0,0\}, \{0, 1\}, \ldots \{0,6\}, \{1,1\}, \{1,2\}, \ldots, \{1,6\}, \ldots, \{5,6\}, \{6,6\} \} \\
+			A=\{\{i,j\}\in\Omega \colon \frac{i+j}{2}\cdot 50 \geq 150 \}	\\		
+			B=\{\{i,j\}\in\Omega \colon \frac{i+j}{2}\cdot 50 \leq 200 \} \\
+			C=\{\{i,j\}\in\Omega \colon \frac{i+j}{2}\cdot 50 > 250 \}
+			\end{gather*}
+		\end{enumerate}
+	\end{enumerate}
+}
 \item Na 10 kartkach napisano liczby od 1 do 10 i wrzucono do pudełka. Losujemy w sposób przypadkowy dwie kartki. Niech $A$ odpowiada zdarzeniu \emph{wylosowanie kartki z numerem 1}, a $B$ zdarzeniu \emph{wylosowanie pary liczb, których suma jest większa od 4}. Zakładamy, że wylosowanie każdej z kartek jest równoprawdopodobne.
 \begin{enumerate}
-\item Przedstaw przestrzeń zdarzeń elementarnych. Podaj jej rozmiar. \ans{$\Omega=\{\omega_{\{i,j\}}|i,j\in\{1,\ldots,10\} \land i\neq j\}, \left|\Omega\right|={10 \choose 2}=45$}
-\item Zdefiniuj zdarzenia $A$ i $B$ jako zbiory zdarzeń elementarnych. \ans{$A=\{\omega_{\{i,j\}}\in\Omega|i=1 \lor j=1\}$, $B=\{\omega_{\{i,j\}}\in\Omega|i+j>4\}$}
+\item Przedstaw przestrzeń zdarzeń elementarnych. Podaj jej rozmiar. \ans{$\Omega=\{\{i,j\}|i,j\in\{1,\ldots,10\} \land i\neq j\}, \left|\Omega\right|={10 \choose 2}=45$}
+\item Zdefiniuj zdarzenia $A$ i $B$ jako zbiory zdarzeń elementarnych. \ans{$A=\{\{i,j\}\in\Omega|i=1 \lor j=1\}$, $B=\{\{i,j\}\in\Omega|i+j>4\}$}
 \item Ile jest zdarzeń sprzyjających zdarzeniom $A$ i $B$. \ans{$\left|A\right|=9$, $\left|B\right|=45-4=41$}
 \item Oblicz $P(A)$ i $P(B)$ \ans{$P(A)=\frac{9}{45}, P(B)=\frac{41}{45}$}
+
+\ans{Alternatywne rozwiązanie korzysta z par uporządkowanych, wtedy wszystkie zbiory są dwa razy bardziej liczne, ale prawdopodobieństwa wychodzą takie same. Można też rozważyć przypadek losowania ze zwracaniem, wtedy $\Omega$ musi składać się z par \emph{uporządkowanych}, $\left|\Omega\right|=100$ no i liczności $A$ oraz $B$, a w konsekwencji prawdopodobieństwa wychodzą trochę inne.}
 \end{enumerate}
 \item W gospodzie \emph{Złoty okoń} zorganizowano loterię, w której do sprzedania było 100 biletów, a wygrywał tylko jeden. Każdy mógł kupić najwyżej jeden bilet. Niech zdarzenie $A$ odpowiada sytuacji, w której Estella posiada los wygrywający. Jakie ma szanse na wygraną?
 \begin{enumerate}%
 \item Przedstaw przestrzeń zdarzeń elementarnych. \ans{$\Omega=\{\omega_n|n=1,2,\ldots,100\}$}%
-\item Czy w tej przestrzeni wszystkie zdarzenia elementarne są jednakowo prawdopodobne? \ans{Tak}%
+\item Czy w tej przestrzeni wszystkie zdarzenia elementarne są jednakowo prawdopodobne? \ans{Tak (przy czym jest to raczej kwestia założenia)}%
 \item Jaki jest rozmiar przestrzeni zdarzeń elementarnych? \ans{$\left|\Omega\right|=100$}%
-\item Zdefiniuj zdarzenie $A$ jako zbiór zdarzeń elementarnych. \ans{$A=\{\omega_1$\}}%
-\item Oblicz prawdpodobieństwo $P(A)$, dbając o to by jasno przedstawić tok rozumowania. \ans{$P(A)=\frac{1}{100}$}%
+\item Zdefiniuj zdarzenie $A$ jako zbiór zdarzeń elementarnych. \ans{$A=\{\omega_1$\} (Wybieramy dowolny los jako wygrywający, powiedzmy ten, któremu odpowiada zdarzenie elementarne $\omega_1$)}%
+\item Oblicz prawdpodobieństwo $P(A)$, dbając o to by jasno przedstawić tok rozumowania. \ans{
+	Na podstawie odpowiedzi w punkcie b możemy posłużyć się prawdopodobieństwem klasycznym:
+	$P(A)=\frac{\left|A\right|}{\left|\Omega\right|}=\frac{1}{100}$
+}%
 \end{enumerate}%
 \item W gospodzie \emph{Pod Zielonym Smokiem} oferują sześć różnych dań obiadowych. Pięciu klientów wchodzi jeden po drugim do gospody
 i~niezależnie od siebie zamawia posiłek. Niech zdarzenie $A$ odpowiada sytuacji, w~której pierwsze danie z menu zamówi dokładnie jedna osoba.%
 \begin{enumerate}%
-\item Przedstaw przestrzeń zdarzeń elementarnych. \ans{$\Omega=\{\omega_{i_1,\ldots,i_5}|i_j=1,2,\ldots,6\}$}%
-\item Czy w tej przestrzeni wszystkie zdarzenia elementarne są jednakowo prawdopodobne? \ans{Tak}%
+\item Przedstaw przestrzeń zdarzeń elementarnych. \ans{$\Omega=\{(i_1,\ldots,i_5)|i_j=1,2,\ldots,6\}$
+	 Uporządkowane ciągi 5-ciu elementów, w których kolejne pozycje odpowiadają numerom dań zamówionych przez kolejnych klientów.
+	 Musimy rozpatrywać wszystkich klientów jednocześnie, ponieważ nasze doświadczenie polega na obserwacji wszystkich klientów na raz (\emph{dokładnie jedna osoba}), a jednemu wynikowi obserwacji musi odpowiadac \emph{dokładnie jedno} zdarzenie elementarne.
+}%
+\item Czy w tej przestrzeni wszystkie zdarzenia elementarne są jednakowo prawdopodobne? \ans{Tak (zakładając, że klienci zamawiają dania niezależnie od siebie i }%
 \item Jaki jest rozmiar przestrzeni zdarzeń elementarnych? \ans{$\left|\Omega\right|=6^5$}%
-\item Zdefiniuj zdarzenie $A$ jako zbiór zdarzeń elementarnych. \ans{$A=\{\omega_{i_1,\ldots,i_5}|\exists j: i_j=1 \land \forall k\neq j: i_k\neq 1\}$, $\left|A\right|=5\cdot5^4$}%
+\item Zdefiniuj zdarzenie $A$ jako zbiór zdarzeń elementarnych. \ans{$A=\{(i_1,\ldots,i_5)|\exists j: i_j=1 \land \forall k\neq j: i_k\neq 1\}$, $\left|A\right|=5\cdot5^4$}%
 \item Oblicz prawdpodobieństwo $P(A)$, dbając o to by jasno przedstawić tok rozumowania. \ans{$P(A)=\frac{5^5}{6^5}=\frac{5}{6}^5\approx 0{,}40$}%
 \end{enumerate}%
-\item Oblicz, ile jest liczb naturalnych sześciocyfrowych, w zapisie których występuje dokładnie trzy razy cyfra 0 i dokładnie raz występuje cyfra 5. \ans{${8\choose 2}3\frac{5!}{3!}+8\cdot\left(\frac{5!}{3!2!}+\frac{5!}{3!}\right)=1920$}
+\item Oblicz, ile jest liczb naturalnych sześciocyfrowych, w zapisie których występuje dokładnie trzy razy cyfra 0 i dokładnie raz występuje cyfra 5. %\ans{${8\choose 2}3\frac{5!}{3!}+8\cdot\left(\frac{5!}{3!2!}+\frac{5!}{3!}\right)=1920$}
 \item  Drewniane pale mają losową długość $L$ nie przekraczającą 12 m. Pale są przeznaczone do wbijania w ziemię, której skalna warstwa stanowiąca opór znajduje się na losowej głębokości $H$, nie większej niż 10 m. Zaproponować przestrzeń zdarzeń elementarnych dla tak opisanego doświadczenia. Zdefiniować przez odpowiednie zdarzenia elementarne następujące doświadczenia:
 \begin{description}
 \item[A] długość losowo wybranego pala będzie większa od głębokości skalnej warstwy;
@@ -120,7 +197,28 @@ Rozpatrz poniższe pytania w dwóch wariantach: wszystkie kule w danym kolorze s
 \clearpage
 \section{Prawdopodobieństwo warunkowe i niezależność zdarzeń}
 \begin{enumerate}
-\item W sklepie są sprzedawane baterie dwóch firm A i B. Firma A dostarcza do sklepu dwa razy więcej baterii niż firma B. Braki wśród baterii tych firm stanowią odpowiednio $0{,}9\%$ i $1{,}4\%$. Kupujemy jedną baterię. Jakie jest prawdopodobieństwo kupienia baterii dobrej?
+\item W sklepie są sprzedawane baterie dwóch firm A i B. Firma A dostarcza do sklepu dwa razy więcej baterii niż firma B. Braki wśród baterii (inaczej: niesprawne baterie) tych firm stanowią odpowiednio $0{,}9\%$ i $1{,}4\%$. Kupujemy jedną baterię. Jakie jest prawdopodobieństwo kupienia baterii dobrej?
+\ans{
+	Definiujemy zdarzenia:
+	\begin{itemize}
+		\item $A$ bateria pochodzi z firmy A
+		\item $B$ bateria pochodzi z firmy B
+		\item $D$ bateria jest dobra
+		\item $Z$ bateria jest niesprawna
+	\end{itemize}
+	Z treści zadania budujemy układ równań:
+	\[\begin{cases}
+	P(A)=2P(B) \\
+	P(A)+P(B)=1
+	\end{cases} \]
+	I obliczamy prawdopodobieństwa: \[P(A)=\frac{2}{3}\qquad P(B)=\frac{1}{3}\]
+	Odczytujemy prawdopodobieństwa warunkowe:
+	\[ P(Z|A)=0{,}9\% \qquad P(Z|B)=1{,}4\% \]
+	Zauważamy, że $A$ i $B$ stanowią podział przestrzeni: oba są możliwe, sumują się do całej przestrzeni i są rozłączne. Zatem możemy zastosować twierdzenie o prawdopodobieństwie całkowitym:
+	\[ P(Z)=P(Z|A)P(A)+P(Z|B)P(B)=0{,}9\%\cdot\frac{2}{3}+1{,}4\%\cdot\frac{1}{3}=\frac{3,2}{3}\%=\frac{32}{3000} \]
+	Zauważamy, że $D=Z'$, a zatem:
+	\[P(D)=1-P(Z)=\frac{2968}{3000}\approx 98,93\% \]
+}
 \item O pewnym roczniku studentów wiadomo, że dzielą się na grupy:
 \begin{description}
 \item[$G_1$] $5\%$ potrafiące odpowiedzieć na wszystkie pytania;
@@ -130,9 +228,28 @@ Rozpatrz poniższe pytania w dwóch wariantach: wszystkie kule w danym kolorze s
 \end{description}
 Wybrano w sposób przypadkowy jednego studenta. Obliczyć:
 \begin{enumerate}
-\item prawdopodobieństwo, że odpowie on na pytanie; \ans{$P(O)=\sum P(O|G_i)P(G_i)=0{,}625$}
-\item prawdopodobieństwo, że należy do grupy drugiej, jeżeli wiadomo, że odpowiedział na pytanie. \ans{$P(G_2|O)=\frac{P(O|G_2)|P(G_2)}{P(O)}=0{,}336$}
+\item prawdopodobieństwo, że odpowie on na pytanie;
+\item prawdopodobieństwo, że należy do grupy drugiej, jeżeli wiadomo, że odpowiedział na pytanie.
 \end{enumerate}
+\ans{
+	Definiujemy zdarzenia:
+	\begin{itemize}
+		\item $O$ student umie odpowiedzieć na pytanie
+		\item $G_1, G_2, G_3, G_4$ student należy do danej grupy
+	\end{itemize}
+	Odczytujemy prawdopodobieństwa z treści:
+	\begin{gather*}
+		P(G_1)=\frac{5}{100} \qquad P(O|G_1)=1 \\
+		P(G_2)=\frac{30}{100} \qquad P(O|G_2)=\frac{7}{10} \\
+		P(G_3)=\frac{40}{100} \qquad P(O|G_3)=\frac{6}{10} \\
+		P(G_4)=\frac{25}{100} \qquad P(O|G_4)=\frac{5}{10} \\
+	\end{gather*}
+	Student należy do dokładnie jednej grupy, a zatem zdarzenia $G_1, \ldots, G_4$ stanowią podział przestrzeni i możemy zastosować twierdzenie o prawdopodobieństwie całkowitym, żeby obliczyć odpowiedź na pytanie z punktu a:
+	\[ P(O) = P(O|G_1)P(G_1)+P(O|G_2)P(G_2)+P(O|G_3)P(G_3)+P(O|G_4)P(G_4)=\frac{625}{1000} \]
+	
+	Następnie korzystamy z twierdzenia Bayesa, żeby obliczyć prawdopodobieństwo z punktu b:
+	\[ P(G_2|O) = \frac{P(O|G_2)P(G_2)}{P(O)} = \frac{\frac{7}{10}\cdot\frac{30}{100}}{\frac{625}{1000}} = \frac{210}{625}= 0{,}336 \]
+}
 \item Prawdopodobieństwo przekazania sygnału przez jeden przekaźnik jest równe $0{,}9$. Przekaźniki działają niezależnie, tzn. awaria jednego z nich nie ma wpływu na działanie pozostałych.
 Obliczyć prawdopodobieństwo przekazania sygnału:
 \begin{enumerate}
@@ -141,8 +258,49 @@ Obliczyć prawdopodobieństwo przekazania sygnału:
 \item przy połączeniu szeregowym trzech przekaźników;
 \item przy połączeniu równoległym trzech przekaźników;
 \end{enumerate}
-\item Wiadomo, że 90\% produkcji spełnia wymagania techniczne. Przeprowadzono dodatkową kontrolę, przy której mogły być popełnione pewne błędy, a mianowicie: element wadliwy mógł zostać sklasyfikowany jako dobry z prawdopodobieństwem $0{,}05$, a element dobry mógł zostać sklasyfikowany jako wadliwy z prawdopodobieństwem $0{,}02$. Obliczyć prawdopodobieństwo tego, że element, który został sklasyfikowany jako dobry, faktycznie jest dobry. \ans{$P(S|K)=\frac{P(K|S)P(S)}{P(K)}=\frac{(1-P(K'|S))P(S)}{(1-P(K'|S))P(S)+P(K|S')P(S')}=\frac{(1-0{,}02)0{,}9}{(1-0{,}02)0{,}9+0{,}05\cdot0{,}1}\approx0{,}994$}
-
+\ans{
+	Oznaczamy zdarzenia:
+	\begin{itemize}
+		\item $A$ działa 1. przekaźnik
+		\item $B$ działa 2. przekaźnik
+		\item $C$ działa 3. przekaźnik
+	\end{itemize}
+	Zdarzenia są niezależne i każde zachodzi z prawdopodobieństwem $0{,}9$.
+	Zatem:
+	\begin{enumerate}
+		\item \[ P(A\cap B)\underset{\text{z niezależności}}{=}P(A)\cdot P(B)=0{,}9\cdot0{,}9=0{,}81 \]
+		\item Interesuje nas $P(A\cup B)$. Możemy skorzystać z prawa de Morgana:
+		\[P(A\cup B)=P([A'\cap B']')=1-P(A'\cap B') \]
+		A następnie z twierdzenia o niezależności zdarzeń przeciwnych:
+		\[P(A'\cap B') = P(A')P(B')=(1-0{,}9)^2=0{,}01\]
+		Wracając do pierwszego równania otrzymujemy
+		\[P(A\cup B)=1-0{,}01=0{,}99\]
+		\item \[ P(A\cap B\cap C)\underset{\text{z niezależności}}{=}P(A)\cdot P(B)\cap P(C)=0{,}9^3=0{,}729 \]
+		\item Analogicznie jak punkt b:
+		\[ P(A\cup B\cup C)=1-P(A'\cap B'\cap C')=1-(1-0{,}1)^3=0{,}999 \]
+	\end{enumerate}
+}
+\item Wiadomo, że 90\% produkcji spełnia wymagania techniczne. Przeprowadzono dodatkową kontrolę, przy której mogły być popełnione pewne błędy, a mianowicie: element wadliwy mógł zostać sklasyfikowany jako dobry z prawdopodobieństwem $0{,}05$, a element dobry mógł zostać sklasyfikowany jako wadliwy z prawdopodobieństwem $0{,}02$. Obliczyć prawdopodobieństwo tego, że element, który został sklasyfikowany jako dobry, faktycznie jest dobry.
+\ans{
+	Oznaczamy zdarzenia:
+	\begin{itemize}
+		\item $K$ element sklasyfikowany jako dobry
+		\item $K'$ element sklasyfikowany jako zły
+		\item $D$ element faktycznie dobry
+		\item $D'$ element faktycznie zły
+	\end{itemize}
+	Odczytujemy prawdopodobieństwa z treści zadania i obliczamy prawdopodobieństwa zdarzeń przeciwnych:
+	\begin{gather*}
+		P(D)=0{,}9 \qquad P(D')=0{,}1 \\
+		P(K|D')=0{,}05 \qquad P(K'|D')=0{,}95 \\
+		P(K'|D)=0{,}02 \qquad P(K|D)=0{,}98
+	\end{gather*}
+	Mamy policzyć $P(D|K)$, a skoro znamy prawdopodobieństwa "w drugą stronę" (tj. np. $P(K|D)$), to korzystamy z tw. Bayesa:
+	\begin{gather*}
+		P(D|K)=  \frac{P(K|D)P(D)}{P(K)} = \frac{P(K|D)P(D)}{P(K|D)P(D)+P(K|D')P(D')} = 
+		\frac{0{,}98\cdot 0{,}9}{0{,}98\cdot 0{,}9 + 0{,}05\cdot 0{,}1}=\frac{882}{887}
+	\end{gather*}
+} 
 
 \item Merry wybrał się do Starego Lasu zbierać pewne rośliny o wielce pożądanych właściwościach na nadchodzącą Sobótkę.
 Niestety, Merry nie jest zbyt biegły w rozpoznawaniu roślin.
@@ -161,6 +319,47 @@ liczby niebieskich jak $2:1$. Merry dla zabawy zamknął oczy i na chybił-trafi
 	\item Co by było gdyby Merry nie wiedział, jakiego koloru wylosował kwiat, ale wiedział, że wybrany kwiat nie ma pożądanych
 		właściwości: jakie byłoby wtedy prawdopodobieństwo, że kwiat będzie biały lub niebieski?
 \end{enumerate}
+
+\ans{
+	Zaczynamy od nazwania zdarzeń:
+	\begin{itemize}
+		\item $N$ niebieski kwiat
+		\item $B$ biały kwiat
+		\item $R$ różowy kwiat
+		\item $W$ kwiat ma właściwości
+	\end{itemize}
+
+	Odczytujemy prawdopodobieństwa z treści:
+	\[ P(W|B)=\frac{3}{10} \qquad P(W|R)=\frac{55}{100}=\frac{11}{20} \qquad P(W|N)=\frac{9}{10} \]
+	
+	Z proporcji budujemy układ równań:
+	\[ \begin{cases}
+		\frac{P(B)}{P(R)}=\frac{3}{2} \\
+		\frac{P(R)}{P(N)}=2 \\
+		P(B)+P(N)+P(R)=1
+	\end{cases} \]
+	
+	Rozwiązujemy układ równań otrzymując:
+	\[ P(B)=\frac{3}{6} \qquad P(R)=\frac{2}{6} \qquad P(N)=\frac{1}{6} \]
+	
+	\begin{enumerate}
+		\item $P(N)=\frac{1}{6}$
+		\item $P(B\cup R)=P(B)+P(R)=\frac{5}{6}$ (zdarzenia $B$ i $R$ są rozłączne)
+		\item odczytujemy z treści zadania: $P(W|N)=\frac{9}{10}$
+		\item korzystamy z definicji prawdopodobieństwa warunkowego: \[P(W\cap N)=P(W|N)P(N)=\frac{9}{10}\cdot\frac{1}{6}=\frac{9}{60}\]
+		\item Zdarzenia $B, R, N$ stanowią podział przestrzeni, zatem korzystam z prawdopodobieństwa całkowitego:
+		\[ P(W)=P(W|N)P(N)+P(W|R)P(R)+P(W|B)P(B)= 
+		\frac{9}{10}\cdot\frac{1}{6} + \frac{11}{20}\cdot\frac{1}{3} + \frac{3}{10}\cdot\frac{3}{6} = \frac{9+11+9}{60}=\frac{29}{60} \]
+		\item Korzystamy z faktu, że $R$ jest zdarzeniem przeciwnym dla $B\cup N$ i przepisujemy z twierdzenia Bayesa:
+		\[ P(B\cup N|W')=1-P(R|W') = 1-\frac{P(W'|R)P(R)}{P(W')} \]
+		Korzystając ze zdarzeń przeciwnych:
+		\[1-\frac{P(W'|R)P(R)}{P(W')} = 1-\frac{1-P(W|R)P(R)}{1-P(W)} \]
+		Podstawiamy wartości liczbowe:
+		\[ 1-\frac{1-P(W|R)P(R)}{1-P(W)} = 1-\frac{1-\frac{11}{20}\cdot \frac{1}{3}}{1-\frac{29}{60}} = 1-\frac{\frac{9}{60}}{\frac{31}{60}}=\frac{22}{31}
+		\]
+	\end{enumerate}
+}
+
 \clearpage
 \item Kuce w Oatbarton od czasu do czasu zapadają na Straszną Chorobę Kuców.
 Na szczęście zmyślni, hobbicy farmerzy wymyślili sposób na wykrywanie choroby we wczesnym stadium i izolowanie chorych zwierząt.

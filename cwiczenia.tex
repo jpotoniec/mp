@@ -666,28 +666,61 @@ porysowania lakieru przez maszynę montującą drzwi. Podaj, dbając by przedsta
 \begin{enumerate}
 \item Prawdopodobieństwo trafienia do celu w jednym strzale jest równie $\frac{1}{5}$. Niech $X$ oznacza liczbę strzałów celnych w wykonanej serii 5 niezależnych strzałów. 
 \begin{enumerate}
-\item Podaj rozkład zmiennej losowej $X$. \ans{$P(X=k)={5 \choose k}\frac{4^{5-k}}{5^5}$}
+\item Podaj rozkład zmiennej losowej $X$. \ans{
+	Mamy do czynienia z powtarzającymi się próbami, niezależnymi od siebie, o stałym prawdopodobieństwie sukcesu i których liczba jest z góry ustalona. Zatem korzystamy z rozkładu dwumianowego:
+	\[P(X=k)={5 \choose k}\left(\frac{1}{5}\right)^k\left(\frac{4}{5}\right)^{5-k} \qquad k\in\{0,1,\ldots,5\}\]
+}
 \item Oblicz prawdopodobieństwo, że liczba strzałów celnych będzie nie mniejsza niż 2. \ans{$P(X\geq 2)=1-P(X=0)-P(X=1)=1-\frac{4^5}{5^5}-5\cdot\frac{4^4}{5^5}=\frac{821}{3125}\approx0{,}263$}
 \item Oblicz średnią liczbę celnych strzałów. \ans{$EX=np=1$}
 \item Oblicz odchylenie standardowe zmiennej losowej $X$. \ans{$DX=\sqrt{np(1-p)}=\sqrt{\frac{4}{5}}$}
-\item Podaj najbardziej prawdopodobną liczbę celnych strzałów. \ans{$\lfloor(n+1)p\rfloor=1$}
+\item Podaj najbardziej prawdopodobną liczbę celnych strzałów. \ans{
+	Patrzymy czy iloczyn $(n+1)p$ jest liczbą całkowitą. W tym przypadku nie jest ($(n+1)p=\frac{6}{5}$), a zatem jest jeden punkt najbardziej prawdopodobny:
+	$\lfloor(n+1)p\rfloor=1$}
 \end{enumerate}
 \item Linia 64 jeżdżąca na trasie Literacka--Kacza jest obsługiwana przez 7 autobusów, które psują się przypadkowo i niezależnie od siebie. Każdy autobus może w ciągu całego dnia zepsuć się z~prawdopodobieństwem $0{,}25$. Niech $X$ oznacza liczbę autobusów, które w ciągu dnia uległy awarii i musiały zjechać do zajezdni.
 \begin{enumerate}
 \item Podaj rozkład zmiennej losowej $X$.
+\ans{
+	Mamy do czynienia z sytuacją analogiczną jak w poprzednim zadaniu, a zatem
+	\[ P(X=k)={7\choose k}\left(0{,}25\right)^k\left(0{,}75\right)^{7-k} \qquad k\in\{0,1,\ldots,7\} \]
+}
 \item Oblicz prawdopodobieństwo, że w ciągu całego dnia zepsują się przynajmniej 3 autobusy.
+\ans{
+	\begin{align*}
+	 P(X\geq 3) = & 1-P(X<3)=1-P(X=0)-P(X=1)-P(X=2) = \\ & 1 - (0{,}75)^7 - 7\cdot 0{,}25 \cdot (0{,}75)^6 - \frac{7\cdot 6}{2} \cdot (0{,}25)^2\cdot (0{,}75)^5 
+	\end{align*}
+}
 \item Oblicz średnią liczbę zepsutych autobusów.
+\ans{
+	\[ EX=np=7\cdot 0{,}25 = 1{,}75 \]
+}
 \item Oblicz odchylenie standardowe zmiennej losowej $X$.
-\item Podaj najbardziej prawdopodobną liczbę zepsutych autobusów. \ans{$(n+1)p-1=1, (n+1)p=2$}
+\ans{
+	\[ DX=\sqrt{np(1-p)}=\sqrt{7\cdot 0{,}25\cdot 0{,}75}=\frac{\sqrt{21}}{4} \approx 1{,}15 \]
+}
+\item Podaj najbardziej prawdopodobną liczbę zepsutych autobusów. \ans{
+	Iloczyn $(n+1)p=2$ jest liczbą całkowitą, zatem mamy dwa punkty skokowe, które są najbardziej prawdopodobne:
+	\[(n+1)p-1=1, (n+1)p=2\]}
 \end{enumerate}
 \item W Minas Tirith gromadzą zapasy na wypadek oblężenia. Jeżeli mięso,
 pakowane w beczki, jest źle wysuszone może się zepsuć. Prawdopodobieństwo, że
 tak się stanie wynosi $0{,}0045$ niezależnie dla każdej beczki. W~piwnicach zgromadzono 1000 beczek z mięsem,
 niech $X$ oznacza liczbę beczek z zepsutym mięsem.  \begin{enumerate}
-\item Podaj rozkład zmiennej losowej $X$. \ans{$P(X=k)={1000\choose k}p^k(1-p)^{1000-k}\approx\frac{\lambda^k}{k!}e^{-\lambda} \quad \lambda=1000\cdot0{,}0045=4{,}5$}
-\item Oblicz prawdopodobieństwo, że zepsuje się nie więcej niż 5 beczek. \ans{$P(X\leq 5)=0{,}70290$}
-\item Oblicz średnią liczbę zepsutych beczek. \ans{$EX=4{,}5$}
-\item Oblicz odchylenie standardowe zmiennej losowej $X$. \ans{$DX=\sqrt{4{,}5}$}
+\item Podaj rozkład zmiennej losowej $X$. \ans{
+	Mamy podobną sytuację jak w poprzednich zadaniach, możemy więc posłużyć się rozkładem dwumianowym:
+	\[P(X=k)={1000\choose k}p^k(1-p)^{1000-k}\]
+	Ponieważ mamy do czynienia z dużą liczbą mało prawdopodobnych prób ($n>50, p<0{,}1, np<10$) możemy posłużyć się też przybliżeniem rozkładem Poissona:
+	\[ P(X=k) = \frac{\lambda^k}{k!}e^{-\lambda} \quad \lambda=1000\cdot0{,}0045=4{,}5\]}
+\item Oblicz prawdopodobieństwo, że zepsuje się nie więcej niż 5 beczek. \ans{
+	Możemy skorzystać ze stablicowanego rozkładu Poissona (dostępny na końcu tego rozdziału), odczytujemy wartości z wiersza odpowiadającego $\lambda=4{,}5$ i kolumn odpowiadających punktom skokowym, które nas interesują:
+	\begin{align*}
+		P(X\leq 5)= & P(X=0)+P(X=1)+P(X=2)+P(X=3)+P(X=4)+P(X=5) = \\ &
+		0{,}0111	+ 0{,}0500	+ 0{,}1125	+ 0{,}1687	+ 0{,}1898	+ 0{,}1708 =
+	0{,}70290
+	\end{align*}
+}
+\item Oblicz średnią liczbę zepsutych beczek. \ans{$EX=\lambda=4{,}5$}
+\item Oblicz odchylenie standardowe zmiennej losowej $X$. \ans{$DX=\sqrt{\lambda} = \sqrt{4{,}5}$}
 \end{enumerate}
 \item Hobbici znani są ze swojej intensywnej i obfitej korespondencji. W Michael
 Delving mieszka 500 hobbitów, a~w~ciągu jednego dnia do urzędu pocztowego
@@ -696,24 +729,80 @@ siebie i~z~równym prawdopodobieństwem $p$, a~każdego dnia jest ich tam
 \emph{średnio} 75. Załóż, że zmienna losowa $X$ ma rozkład dwumianowy.
 \begin{enumerate}
 \item Oblicz wartość prawdopodobieństwa $p$ przyjścia do urzędu przez pojedynczego hobbita.
+\ans{
+	Hobbici przychodzą niezależnie i z równym prawdopodobieństwem, jest ich też stała liczba $n=500$, a zatem mamy do czynienia z modelem rozkładu dwumianowego. Znamy średnią, więc łatwo obliczyć prawdopodobieństwo:
+	\[ p=\frac{EX}{n}=\frac{75}{500}=\frac{3}{20} \]
+}
 \item Podaj  (w formie funkcji prawdopodobieństwa) rozkład prawdopodobieństwa zmiennej losowej $X$.
+\ans{
+	\[ P(X=k)={500 \choose k}\left(\frac{3}{20}\right)^k\left(\frac{17}{20}\right)^{500-k} k\in\{0,1,\ldots,500\} \]
+}
 \item Ile różnych wartości może przyjąć dystrybuanta zmiennej losowej $X$? Odpowiedź uzasadnij.
+\ans{
+	Mamy 500 hobbitów, a zatem 501 punktów skokowych (0 do 500). Dystrybuanta zmiennej losowej typu skokowego rośnie w każdym punkcie skokowym, zatem mamy 501 wzrostów. Żeby mieć 501 wzrostów musimy mieć 502 różne wartości.
+}
 \item Jaką wartość przyjmie dystrybuanta zmiennej losowej $X$ w punkcie 1000?
+\ans{
+	\[F(1000)=P(X\leq 1000)=1\]
+}
 \item Oblicz prawdopodobieństwo, że przez cały dzień do urzędu nikt nie przyjdzie.
+\ans{
+	\[ P(X=0)=\left(\frac{17}{20}\right)^{500} \approx 0 \]
+}
 \item Podaj wartość $EX$.
+\ans{
+	\[ EX=75 \] (wystarczy przepisać z treści zadania)
+}
 \item Oblicz odchylenie standardowe zmiennej losowej $X$.
+\ans{
+	\[ DX=\sqrt{np(1-p)}=\sqrt{500\cdot\frac{3}{20}\cdot\frac{17}{20}}\approx 7{,}98 \]
+}
 \item Oblicz najbardziej prawdopodobną liczbę hobbitów, którzy przyjdą w ciągu dnia do urzędu.
+\ans{
+	Iloczyn $(n+1)p$ nie jest liczbą całkowitą, zatem bierzemy z niego podłogę:
+	\[\lfloor(n+1)p\rfloor = 75 \]
+}
 \end{enumerate}
 \item Słoń Nino przechodzi przez skład porcelany zawierający 4~regały, z~których każdy zawiera talerze warte 3000 zł.
 	Każdy z regałów może zostać przewrócony przez Nina z~prawdopodobieństwem $0{,}2$.
-	Niech zmienna $X$ oznacza wartość uszkodzonych talerzy (zakładając, że przerwócenie regału powoduje uszkodzenie się wszystkich zawartych na nim talerzy).
+	Niech zmienna $X$ oznacza wartość uszkodzonych talerzy (zakładając, że przewrócenie regału powoduje uszkodzenie się wszystkich zawartych na nim talerzy).
 Podaj, dbając by przedstawić tok rozumowania:
 \begin{enumerate}
 \item funkcję prawdopodobieństwa zmiennej losowej $X$;
+\ans{
+	Zmienna losowa $X$ \textbf{nie} ma rozkładu dwumianowego i nie możemy bezpośrednio posłużyć się rozwiązaniami jak z poprzednich zadań. Na szczęście możemy posłużyć się zmienną pomocniczą o rozkładzie dwumianowym. Niech zmienna $Y$ oznacza liczbę przewróconych regałów:
+	\[ P(Y=k)={4 \choose k}\left(0{,}2\right)^k\left(0{,}8\right)^{4-k} \qquad k\in\left\{0,1,2,3,4\right\} \]
+	Na tej bazie zdefiniujemy zmienną $X$:
+	\[ X=3000 Y \]
+	I jej rozkład prawdopodobieństwa:
+	\[ P(X=3000k) = P(Y=k) = {4 \choose k}\left(0{,}2\right)^k\left(0{,}8\right)^{4-k} \qquad k\in\left\{0,1,2,3,4\right\} \]
+	albo:
+	\[ P(X=k) = P(Y=\frac{k}{3000}) = {4 \choose \frac{k}{3000}}\left(0{,}2\right)^{\frac{k}{3000}}\left(0{,}8\right)^{4-\frac{k}{3000}} \qquad k\in\left\{0,3000,6000,9000,12000\right\} \]
+}
 \item dystrybuatnę zmiennej losowej $X$;
+\ans{\\
+	\begin{tabular}{c|cccccc}
+		$x$ & $\left(-\infty, 0\right)$ & $\left[0, 3000\right)$& $\left[ 3000, 6000\right)$& $\left[6000, 9000\right)$& $\left[9000, 12000\right)$& $\left[12000, \infty\right)$ \\
+		\hline
+		$F(x)$ & 0 & $\frac{256}{625}$ & $\frac{512}{625}$ & $\frac{608}{625}$ & $\frac{624}{625}$ & $1$
+	\end{tabular}
+}
 \item prawdopodobieństwo, że słoń stłucze talerzy za co najmniej $5{,}5$ tys. zł.
+\ans{
+	\[ P(X\geq 5500)=1-P(X<5500)=1-F(5499)=1-\frac{512}{625}=\frac{113}{625} \]
+}
 \item średnią wartość straty;
+\ans{
+	\[ EX = E(3000Y)=3000EY=3000\cdot 4\cdot 0{,}2=2400 \]
+}
 \item odchylenie standardowe zmiennej losowej $X$.
+\ans{
+	\[ DX = D(3000Y)=3000DY=3000\cdot\sqrt{4\cdot 0{,}2\cdot 0{,}8}=2400 \]
+	Uwaga! Odpowiedź \textbf{nie} brzmi 1920.
+	
+	Gdyby pytanie było o wariancję, to wtedy trzeba uwzględnić, że tam jest kwadrat:
+	\[ D^2X=D^2(3000Y)=3000^2D^2Y=3000^2\cdot 4\cdot 0{,}2\cdot 0{,}8 \]
+}
 \end{enumerate}
 \newpage
 \item W piwnicach Brandy Hallu zgromadzono 500 butelek soków na zimę.

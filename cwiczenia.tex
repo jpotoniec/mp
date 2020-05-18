@@ -6,6 +6,7 @@
 \usepackage{tikz}
 \usepackage{diagbox}
 \usepackage{qrcode}
+\usepackage{url}
 \usetikzlibrary{calc}
 \usepackage[linesnumbered]{algorithm2e}
 \DontPrintSemicolon
@@ -14,9 +15,12 @@
 \newcommand{\abs}[1]{\left|#1\right|}
 %\let\odp
 \ifx\odp\undefined
+\usepackage{verbatim}
 \newcommand{\ans}[1]{}
+\newenvironment{ansenv}{\comment}{\endcomment}
 \else
-\newcommand{\ans}[1]{\par\emph{Odpowiedź:} #1}
+\newenvironment{ansenv}{\paragraph{Odpowiedź:}}{}
+\newcommand{\ans}[1]{\begin{ansenv}#1\end{ansenv}}
 \fi
 \begin{document}
 \section{Przestrzeń probabilistyczna}
@@ -510,23 +514,23 @@ Możemy to też oczywiście zapisać inaczej, np. $P(X=i)=\frac{1}{6}$ dla $i\in
 	\[ X((i, j)) = i+j \qquad \forall (i,j)\in \Omega \]
 	
 }
-\item Podaj rozkład prawdopodobieństwa zmiennej losowej $X$. \ans{
-	\\
+\item Podaj rozkład prawdopodobieństwa zmiennej losowej $X$. 
+\begin{ansenv}
 	\begin{tabular}{c|cccccccccccc}
 		$x_i$ & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
 		\hline
 		$P(X=x_i)$ & $\frac{1}{36}$ & $\frac{2}{36}$ & $\frac{3}{36}$ & $\frac{4}{36}$ & $\frac{5}{36}$ & $\frac{6}{36}$ & $\frac{5}{36}$ & $\frac{4}{36}$ & $\frac{3}{36}$ & $\frac{2}{36}$ & $\frac{1}{36}$ \\
 	\end{tabular}
-	}
+\end{ansenv}
 \item Podaj dystrybuantę zmiennej losowej $X$ i narysuj jej wykres.
-\ans{\\
+\begin{ansenv}
 	\begin{tabular}{c|cccccccccccc}
 	$x$ & $\left(-\infty, 2\right)$ & $[2, 3)$ & $[3, 4)$ & $[4, 5)$ & $[5, 6)$ &	
 	 $[6, 7)$ & $[7, 8)$ & $[8, 9)$ & $[9, 10)$ & $[10, 11)$ & $[11, 12)$ & $[12, \infty)$ \\
 	 \hline
 	$F(x)$ & 0 & $\frac{1}{36}$ & $\frac{3}{36}$ & $\frac{6}{36}$ & $\frac{10}{36}$ & $\frac{15}{36}$ & $\frac{21}{36}$ & $\frac{26}{36}$ & $\frac{30}{36}$ & $\frac{33}{36}$ & $\frac{35}{36}$ & $1$ \\
 \end{tabular}
-}
+\end{ansenv}
 \item Oblicz $P(X>5)$ korzystając z dystrybuanty.
 \ans{\[ P(X>5)=1-P(X\leq 5)=1-F(5)=1-\frac{10}{36}=\frac{26}{36} \]}
 \item Oblicz wartość średnią. \ans{
@@ -780,13 +784,13 @@ Podaj, dbając by przedstawić tok rozumowania:
 	\[ P(X=k) = P(Y=\frac{k}{3000}) = {4 \choose \frac{k}{3000}}\left(0{,}2\right)^{\frac{k}{3000}}\left(0{,}8\right)^{4-\frac{k}{3000}} \qquad k\in\left\{0,3000,6000,9000,12000\right\} \]
 }
 \item dystrybuatnę zmiennej losowej $X$;
-\ans{\\
+\begin{ansenv}
 	\begin{tabular}{c|cccccc}
 		$x$ & $\left(-\infty, 0\right)$ & $\left[0, 3000\right)$& $\left[ 3000, 6000\right)$& $\left[6000, 9000\right)$& $\left[9000, 12000\right)$& $\left[12000, \infty\right)$ \\
 		\hline
 		$F(x)$ & 0 & $\frac{256}{625}$ & $\frac{512}{625}$ & $\frac{608}{625}$ & $\frac{624}{625}$ & $1$
 	\end{tabular}
-}
+\end{ansenv}
 \item prawdopodobieństwo, że słoń stłucze talerzy za co najmniej $5{,}5$ tys. zł.
 \ans{
 	\[ P(X\geq 5500)=1-P(X<5500)=1-F(5499)=1-\frac{512}{625}=\frac{113}{625} \]
@@ -883,11 +887,64 @@ Inaczej: $X+Y=10$.
 %\item Oblicz wariancję. \ans{$3$}
 %\end{enumerate}
 \item Dana jest funkcja 
-\[ f(x)=\begin{cases} ax^2 & x\in \left<0,3\right> \\ 0 & \text{wpp} \end{cases} \]
+\[ f(x)=\begin{cases} ax^2 & x\in \left<0,3\right> \\ 0 & \text{w przeciwnym przypadku} \end{cases} \]
 \begin{enumerate}
 \item Dla jakiej wartości parametru $a$ funkcja $f(x)$ jest funkcją gęstości prawdopodobieństwa pewnej zmiennej losowej?
+\ans{
+	Żeby funkcja była funkcją gęstości prawdopodobieństwa pewnej zmiennej losowej muszą być jednocześnie spełnione dwa warunki:
+	\begin{enumerate}
+		\item Całka oznaczona od $-\infty$ do $\infty$ z tej funkcji jest równa 1:
+		\[ \int_{-\infty}^\infty f(x)\,dx=1\]
+		\item Funkcja jest nieujemna dla dowolnego argumentu:
+		\[ \forall x\in\mathbb{R}\colon f(x)\geq 0\]
+	\end{enumerate}
+	Zaczniemy od pierwszego warunku i będziemy szukali wartości $a$, dla której jest on spełniony:
+	\[ \int_{-\infty}^\infty f(x)\,dx = \int_{-\infty}^0 0\,dx + \int_0^3 ax^2\,dx + \int_{3}^\infty 0\,dx =  \int_0^3 ax^2\,dx\]
+	Obliczymy całkę nieoznaczoną z $ax^2$:
+	\[ \int ax^2\, dx = a\int x^2\, dx = \frac{a}{3}x^3 + C \]
+	Podstawiamy do całki oznaczonej:
+	\[ \int_0^3 ax^2\,dx = \left. \frac{a}{3}x^3\right|_0^3 = \frac{a}{3}(3^3-0^3)=9a \]
+ 	W takim razie zostajemy z równaniem
+	\[ 9a=1 \]
+	I dochodzimy do
+	\[ a=\frac{1}{9} \]
+	Drugi warunek jest spełniony, bo ${x^2}{9}\geq 0$ dla dowolnej wartości $x\in\left<0,3\right>$, a $0\geq 0$.
+	W takim razie odpowiedź brzmi: $a=\frac{1}{9}$.
+}
 \item Ile wynosi wartość średnia tej zmiennej losowej?
+\ans{
+	Posługujemy się definicją wartości średniej: \[ EX=\int_{-\infty}^\infty xf(x)\,dx \]
+	Podstawiamy funkcję gęstości prawdopodobieństwa z treści zadania:
+	\[ EX=\int_{-\infty}^0 x\cdot 0\, dx + \int_0^3 x\cdot \frac{x^2}{9}\, dx + \int_3^\infty x\cdot 0\, dx = \int_0^3 \frac{x^3}{9}\, dx \]
+	Obliczamy całkę nieoznaczoną z $x^3$:
+	\[ \int x^3\, dx=\frac{x^4}{4} +C \]
+	Wracamy do całki oznaczonej:
+	\[ \int_0^3 \frac{x^3}{9}\, dx = \frac{1}{9}\int_0^3 x^3\, dx = \frac{1}{9}\cdot \left.\frac{x^4}{4}\right|_0^3 = \frac{3^4-0^4}{9\cdot 4} = \frac{9}{4} \] 
+	Zatem wartość średnia $EX$ zmiennej losowej $X$ wynosi $\frac{9}{4}$
+}
 \item Ile wynosi wariancja tej zmiennej losowej?
+\ans{
+	Rozwiążemy zadanie na dwa sposoby. Sposób 1, bezpośrednio z definicji wariancji $D^2X$:
+	\[ D^2X = E\left[(X-EX)^2\right] = \int_{-\infty}^\infty (x-EX)^2 f(x)\, dx \]
+	Z poprzedniego podpunktu wiemy, że $EX=\frac{9}{4}$. Dodatkowo, ponieważ funkcja gęstości prawdopodobieństwa jest niezerowa tylko w przedziale $\left(0, 3\right>$, iloczyn pod całką również tylko wtedy może być niezerowy. Zatem:
+	\[ \int_{-\infty}^\infty (x-EX)^2 f(x)\, dx = \int_0^3 \left(x-\frac{9}{4}\right)^2 \cdot \frac{x^2}{9}\, dx \]
+	Wyciągamy stałą $\frac{1}{9}$ przed całkę, a pod całką wykonujemy mnożenie:
+	\[ \int_0^3 \left(x-\frac{9}{4}\right)^2 \cdot \frac{x^2}{9}\, dx = \frac{1}{9} \int_0^3 \left[ x^4-2\cdot\frac{9}{4}\cdot x^3 +\left(\frac{9}{4} \right)^2 x^2\right]\, dx
+	\]
+	Posługujemy się rodziną całek nieoznaczonych dla jednomianów o wykładniku $a>0$: \[ \int x^a\, dx = \frac{x^{a+1}}{a+1} + C \]
+	i uzyskujemy:
+	\[ \frac{1}{9} \int_0^3 \left[ x^4-2\cdot\frac{9}{4}\cdot x^3 +\left(\frac{9}{4} \right)^2 x^2\right]\, dx = \frac{1}{9} \left[ \frac{x^5}{5}-\frac{9}{2}\cdot\frac{x^4}{4} + \frac{3^4}{4^2}\cdot\frac{x^3}{3} \right]_0^3 = \frac{1}{9} \left[ \frac{3^5}{5} - \frac{3^6}{8} + \frac{3^6}{16} \right] = \frac{3^3}{5} -\frac{3^4}{16} = \frac{27}{80}  \]
+	\par
+	Sposób 2, posługując się przekształconym wzorem na wariancję:
+	\[ D^2X = E\left(X^2\right) - \left(EX\right)^2 \]
+	Obliczamy $EX^2$: 
+	\[ E\left(X^2\right) = \int_{-\infty}^\infty x^2f(x)\,dx \]
+	Wiemy, że iloczny pod całką jest niezerowy tylko tam, gdzie funkcja gęstości jest niezerowa, a zatem:
+	\[ \int_{-\infty}^\infty x^2f(x)\,dx = \int_0^3 x^2\cdot \frac{x^2}{9}\,dx = \frac{1}{9} \int_0^3 x^4\,dx = \frac{1}{9}\cdot \frac{3^5-0^5}{5} = \frac{3^3}{5} \]
+	Wracam do wzoru na wariancję pamiętając, że $EX=\frac{9}{4}$ z poprzedniego podpunktu w zadaniu:
+	\[ D^2X = E\left(X^2\right) - \left(EX\right)^2 = \frac{3^3}{5} - \left(\frac{9}{4}\right)^2 =  \frac{3^3}{5} -\frac{3^4}{16} = \frac{27}{80} \]
+	Czyli otrzymaliśmy dokładnie to samo co sposobem 1, ale szybciej.
+}
 \end{enumerate}
 %\item Rozważmy funkcję \[f(x)=\begin{cases} 0 & x<0 \\ e^{-x} & x\geq 0\end{cases} \]
 %\begin{enumerate}
@@ -897,27 +954,179 @@ Inaczej: $X+Y=10$.
 %\item Oblicz $P(1\leq X<2)$
 %\item Oblicz wartość średnią
 %\end{enumerate}
-\item Autobusy linii 64 przyjeżdżają punktualnie co 20 minut na przystanek. Olga nie zna ich rozkładu jazdy, przychodzi więc na przystanek w całkowicie losowym momencie: jak jej się wyjdzie z domu. Niech $T$ oznacza czas oczekiwania Olgi na autobus.
+\item Autobusy linii 164 przyjeżdżają punktualnie co 20 minut na przystanek. Olga nie zna ich rozkładu jazdy, przychodzi więc na przystanek w całkowicie losowym momencie: jak jej się wyjdzie z domu. Niech $T$ oznacza czas oczekiwania Olgi na autobus.
 \begin{enumerate}
-\item Podaj rozkład zmiennej losowej $T$. \ans{$f(t)=\begin{cases}\frac{1}{20} & 0\leq t\leq 20 \\ 0 & \text{wpp} \end{cases}$}
-\item Oblicz prawdopodobieństwo, że Olga będzie czekała mniej niż 5 minut. \ans{$P(T<5)=F(5)=0{,}25$}
-\item Oblicz średni czas oczekiwania na autobus. \ans{$ET=10$}
-\item Oblicz odchylenie standardowe zmiennej losowej $T$. \ans{$DT=\sqrt{\frac{400}{12}}$}
+\item Podaj rozkład zmiennej losowej $T$. \ans{
+	Z tego, że Olga nie zna rozkładu jazdy wnioskujemy, że czas oczekiwania można modelować jako zmienną losową typu ciągłego o \emph{jednostajnym} rozkładzie prawdopodobieństwa, to znaczy o funkcji gęstości prawdopodobieństwa danej poniższym wzorem dla pewnych parametrów $a<b$:
+	\[ f(t)=\begin{cases}\frac{1}{b-a} & a\leq t\leq b \\ 0 & \text{w przeciwnym przypadku} \end{cases} \]
+	Wiemy, że Olga może czekać co najmniej 0 minut (przychodzi równo z autobusem), a co najwyżej 20 minut (autobus jeździ punktualnie i co 20 minut), wnioskujemy zatem, że $a=0$, $b=20$.	
+	W takim razie możemy zapisać kompletną funkcję gęstości prawdopodobieństwa zmiennej losowej $T$:
+		\[ f(t)=\begin{cases}\frac{1}{20} & 0\leq t\leq 20 \\ 0 & \text{w przeciwnym przypadku} \end{cases} \]
+}
+\item Oblicz prawdopodobieństwo, że Olga będzie czekała mniej niż 5 minut. \ans{
+Podejdziemy do problemu na dwa sposoby. 
+\paragraph{Sposób 1} posłużymy się wzorem, który pozwala obliczyć prawdopodobieństwo, że zmienna losowa przyjmie wartość z przedziału $\left<c, d\right>$ korzystając z funkcji gęstości prawdopodobieństwa:
+\[ P(c\leq X \leq d)=\int_c^d f(x)\, dx \]
+Z treści zadania wynika, że szukamy $P(X<5)$, czyli: $c=-\infty$, a $d=5$. Różnicę pomiędzy nierównością nieostrą $\leq$, a ostrą $<$ można zaniedbać w przypadku zmiennych losowych typu ciągłego, ponieważ prawdopodobieństwa w punkcie są równe 0.
+W takim razie:
+\[ P(X<5) = P(-\infty \leq X \leq 5) = \int_{-\infty}^5 f(x)\, dx \]
+Ale wiemy, że $f(x)$ jest niezerowe tylko w przedziale $\left<0,20\right>$, zatem możemy zacząć całkowanie w $0$:
+\[ P(X<5) = P(0 \leq X \leq 5) = \int_0^5 f(x)\, dx = \int_0^5 \frac{1}{20}\, dx = \left.\frac{x}{20}\right|^5_0=\frac{1}{4} \]
+\paragraph{Sposób 2} Zaczniemy od obliczenia \emph{dystrybuanty}, czyli funkcji $F$ zmiennej rzeczywistej $u$ danej poniższym wzorem:
+\[ F(u) = P(X\leq u) = \int_{-\infty}^u f(x)\, dx \]
+Dla $u<0$ sprawa jest prosta: pod całką jest 0, zatem dystrybuanta też jest $0$.
+Dla $u>20$ sprawa też jest prosta: na pewno Olga czeka nie więcej niż $u$ minut (bo $u>20$, a Olga czeka najwyżej 20 minut), zatem dystrybuanta musi wynosić $1$.
+Pozostaje obszar $u\in\left<0,20\right>$:
+\[ F(u) = \int_{-\infty}^0 0\, dx + \int_0^u \frac{1}{20}\, dx = \frac{u}{20} \]
+Podsumowując, otrzymujemy następującą funkcję sklejaną:
+\[ F(u) = P(T\leq u) = \begin{cases} 0 & u<0 \\ \frac{u}{20} & u\in\left<0,20\right> \\ 1 & u>20 \end{cases} \]
+W takim razie podstawiając $u=5$ otrzymujemy:
+\[ F(5) = P(T\leq 5) = \frac{5}{20}=\frac{1}{4} \]
+}
+\item Oblicz średni czas oczekiwania na autobus. 
+\begin{ansenv}
+	Oszukamy i zajrzymy do Wikipedii: \url{https://pl.wikipedia.org/w/index.php?title=Rozk%C5%82ad_jednostajny_ci%C4%85g%C5%82y&oldid=56001777}
+	gdzie znajdziemy gotowy wzór na wartość średnią (oczekiwaną):
+	\[ ET = \frac{a+b}{2} \]
+	W takim razie: \[ ET = \frac{0+20}{2} = 10 \]
+	
+	Możemy też wzór wyprowadzić podobnie jak w zadaniu 1:
+	\[ ET = \int_{-\infty}^\infty xf(x)\, dx \]
+	Wiemy, że iloczyn pod całką będzie zerowy dla $x\not\in\left<a,b\right>$, zatem:
+	\[ ET = \int_{-\infty}^\infty xf(x)\, dx = \int_a^b \frac{x}{b-a}\, dx = \left.\frac{x^2}{2(b-a)}\right|_a^b = \frac{b^2-a^2}{2(b-a)} \]
+	Ze wzoru skróconego mnożenia:
+	\[ ET = \frac{b^2-a^2}{2(b-a)} = \frac{(b-a)(b+a)}{2(b-a)} = \frac{b+a}{2} \]
+	Co kończy wyprowadzenie.
+\end{ansenv}
+\item Oblicz odchylenie standardowe zmiennej losowej $T$. 
+\begin{ansenv}
+	Korzystamy z takiego samego oszustwa jak poprzednio i odkrywamy, że wariancja $D^2T$ dana jest wzorem:
+	\[ D^2T=\frac{(b-a)^2}{12} \]
+	a zatem odchylenie standardowe wynosi:
+	\[ DT = \sqrt{\frac{(b-a)^2}{12}} = \frac{b-a}{\sqrt{12}} = \frac{20}{\sqrt{12}} \approx 5{,}77 \]
+	
+	Żeby wyprowadzić wzór skorzystamy z przekształconego wzoru jak w poprzednim zadaniu:
+	\[ D^2T = E\left(T^2\right) - \left(ET\right)^2 \]
+	Odjemnik znamy z poprzedniego punktu, zatem potrzebujemy obliczyć odjemną:
+	\[ E\left(T^2\right) = \int_{-\infty}^\infty t^2f(t)\,dt \]
+	Iloczyn pod całką jest niezerowy najwyżej dla $t\in\left<a,b\right>$, zatem:
+	\[ E\left(T^2\right) = \int_{-\infty}^\infty t^2f(t)\,dt = \int_a^b \frac{t^2}{b-a} = \left.\frac{t^3}{3(b-a)}\right|_a^b = \frac{b^3-a^3}{3(b-a)} \]
+	Ze wzoru skróconego mnożenia:
+	\[ E\left(T^2\right) = \frac{b^3-a^3}{3(b-a)} = \frac{(b-a)(a^2+ab+a^2)}{3(b-a)} = \frac{a^2+ab+b^2}{3} \]
+	Wracamy do wzoru na wariancję:
+	\[ D^2T = E\left(T^2\right) - \left(ET\right)^2 = \frac{a^2+ab+b^2}{3} - \left(\frac{a+b}{2}\right)^2 = \frac{a^2+ab+b^2}{3} - \frac{a^2+2ab+b^2}{4} = \frac{a^2-2ab+b^2}{12} = \frac{(a-b)^2}{12} \]
+\end{ansenv}
 \end{enumerate}
 \item Prawdopodobieństwo, że aparat fotograficzny nie zepsuje się w ciągu pierwszych pięciu miesięcy użytkowania wynosi $0{,}9$. Niech $X$ oznacza liczbę miesięcy bezawaryjnej pracy aparatu. Zakładamy, że zmienna $X$ ma rozkład wykładniczy.
 \begin{enumerate}
-\item Oblicz parametry tego rozkładu. \ans{$P(X>5)=\exp(-\frac{5}{\lambda}) \quad \lambda=-\frac{5}{\ln 0{,}9}$}
-\item Oblicz prawdopodobieństwo bezawaryjnej pracy aparatu w ciągu 24 miesięcy. \ans{$P(X>24)=1-F(24)$}
-\item Oblicz prawdopodobieństwo awarii aparatu w ciągu 36 miesięcy, jeżeli wiadomo, że przepracował bez awarii już 12 miesięcy. \ans{$P(X<36|X>12)=P(X<36-12)=F(24)$}
+\item Oblicz parametry tego rozkładu. 
+\begin{ansenv}
+	Zaczniemy od analizy zadania. Wiemy, że zmienna losowa reprezentująca czas \emph{bezawaryjnej pracy} ma rozkład wykładniczy. Czas bezawaryjnej pracy, to innymi słowy czas do pierwszej awarii, czyli do zepsucia się aparatu.
+	W takim razie \emph{Prawdopodobieństwo, że aparat fotograficzny nie zepsuje się w ciągu pierwszych pięciu miesięcy} możemy rozumieć jako \emph{Prawdopodobieństwo, że do pierwszej awarii upłynie więcej niż pięć miesięcy}.
+	W takim razie uzyskujemy: $P(X>5)=0{,}9$.
+	Z treści zadania wiemy, że zmienna losowa ma rozkład wykładniczy, czyli opisana jest funkcją gęstości prawdopodobieństwa:
+	\[ f(x) = \begin{cases} \lambda e^{-\lambda x} & x\geq 0 \\ 0 & \text{w przeciwnym przypadku} \end{cases} \]
+	gdzie $\lambda$ jest poszukiwanym parametrem.
+	
+	Wyprowadzić wzór na dystrybuantę jest prosto (patrz niżej), ale na razie oszukamy i zajrzymy do Wikipedii: \url{https://pl.wikipedia.org/w/index.php?title=Rozk%C5%82ad_wyk%C5%82adniczy&oldid=59056371}
+	\[ F(x) = P(X\leq x) = \begin{cases} 1-e^{-\lambda x} & x\geq 0 \\ 0 & \text{w przeciwnym przypadku} \end{cases} \]
+	
+	Skorzystamy ze zdarzenia przeciwnego do $X>5$:
+	\[ P(X>5)=1-P(X\leq 5)=1-F(5) = 1-\left(1-e^{-\lambda\cdot 5}\right) = e^{-5\lambda} = 0{,}9 \]
+	Rozwiązujemy równanie ze względu na zmienną $\lambda$ zaczynając od logarytmowania stronami:
+	\[ \lambda = -\frac{\ln(0{,}9)}{5} \approx 0{,}021 \]
+	
+	Wyprowadzenie dystrybuanty (dla $u\geq 0$):
+	\[ F(u) = \int_{-\infty}^u f(x)\, dx \]
+	Wiemy, że dla $x\in(-\infty,0)$ pod całką jest 0, zatem:
+	\[ F(u) = \int_0^u \lambda e^{-\lambda x}\, dx \]
+	Obliczamy całkę nieoznaczoną stosując podstawienie $z=-x\lambda$, wtedy $dz=-\lambda dx$, a zatem $dx=\frac{-dz}{\lambda}$
+	\[ \int \lambda e^{-x\lambda}\, dx = \int \lambda e^z\cdot\frac{-dz}{\lambda} = -\int e^z\, dz = -e^z + C = -e^{-x\lambda} +C \]
+	Wracamy do całki nieoznaczonej:
+	\[ F(u) = \int_0^u \lambda e^{-\lambda x}\, dx = \left. -e^{-x\lambda} \right|_0^u = -e^{-u\lambda} - \left(-e^{0\lambda}\right) = 1-e^{-u\lambda} \]
+	Co kończy wyprowadzenie.
+\end{ansenv}
+\item Oblicz prawdopodobieństwo bezawaryjnej pracy aparatu w ciągu 24 miesięcy.
+\begin{ansenv}
+	$X$ to liczba miesięcy bezawaryjnej pracy, a zatem pytanie jest o $P(X>24)$.
+	Korzystamy znowu ze zdarzenia przeciwnego i wzoru na dystrybuantę:
+	\[ P(X>24) = 1-P(X\leq 24)=1-F(24) = e^{-\lambda\cdot 24} = e^{-\lambda = -\frac{\ln(0{,}9)}{5}\cdot 24} \]
+	Korzystając z własności logarytmu naturalnego: $e^{\ln(x)} = x$ otrzymujemy:
+	\[ P(X>24) = \left(0{,}9\right)^\frac{24}{5} \approx 0{,}603 \]
+\end{ansenv}
+\item Oblicz prawdopodobieństwo awarii aparatu w ciągu 36 miesięcy, jeżeli wiadomo, że przepracował bez awarii już 12 miesięcy. %\ans{$P(X<36|X>12)=P(X<36-12)=F(24)$}
+\begin{ansenv}
+	Skoro pojawia się słowo \emph{jeżeli}, to mamy do czynienia z prawdopodobieństwem warunkowym $P(X\leq 36|X>12)$. Korzystamy ze zdarzenia przeciwnego i definicji prawdopodobieństwa warunkowego:
+	\[ P(X\leq 36|X>12) = 1-P(X>36|X>12) = 1-\frac{P(X>36 \land X>12)}{P(X>12)} = 1-\frac{P(X>36)}{P(X>12)} = 1-\frac{1-F(36)}{1-F(12)} \]
+	Korzystając z definicji dystrybuanty i własności potęgowania:
+	\[ 1-\frac{1-F(36)}{1-F(12)} = 1-\frac{e^{-36\lambda}}{e^{-12\lambda}} = 1-e^{-36\lambda-(-12\lambda)} = 1-e^{-24\lambda} = F(24) \approx 0{,}397 \]
+	
+	Powyższe można uogólnić do \emph{własności braku pamięci} (dla rozkładów typu ciągłego działa tylko w rozkładzie wykładniczym!):
+	\[ \forall a,b>0\colon P(X>a+b|X>b) = P(X>a) \]
+	W naszym przypadku $a=24$, a $b=12$ i już od $1-P(X>36|X>12)$ mogliśmy przejść do $1-P(X>24)=F(24)$.
+\end{ansenv}
 \end{enumerate}
 \item W Minas Tirith gromadzą zapasy na wypadek oblężenia. Losowo wybrany worek zawiera $X$ kg mąki, gdzie $X$ jest zmienną losową o rozkładzie $N(20,2^2)$.
 \begin{enumerate}
-\item Utwórz zmienną losową $Y$ będącą standaryzowaną postacią zmiennej losowej $X$. \ans{$Y=\frac{X-20}{2}$}
+\item Utwórz zmienną losową $Y$ będącą standaryzowaną postacią zmiennej losowej $X$.
+\begin{ansenv}
+	$N(20, 2^2)$ należy rozumieć jako \emph{rozkład normalny o wartości średniej $\mu=20$ i wariancji $\sigma^2=2^2$}.
+	Standaryzacja zawsze polega na odjęciu wartości średniej i podzieleniu przez odchylenie standardowe. Zatem zmienna $Y$ będąca standaryzowaną postacią zmiennej losowej $X$:
+	\[ Y=\frac{X-20}{2} \]
+\end{ansenv}
 \item Wyraź dystrybuantę zmiennej $X$ w zależności od dystrybuanty zmiennej $Y$. \ans{$F_X(x)=F_Y(\frac{x-20}{2})$}
 \item Oblicz wartość średnią i odchylenie standardowe zmiennej losowej $Y$.
-\item Oblicz prawdopodobieństwo, że w worku jest mniej niż 18 kg mąki. \ans{$P(X<18)=F_X(18)=F_Y(-1)=1-F_Y(1)=1-0{,}8413\approx 0{,}16$}
-\item Oblicz prawdopodobieństwo, że w worku jest więcej niż $21{,}5$ kg mąki. \ans{$P(X>21{,}5)=1-F_X(21{,}5)=1-F_Y(0{,}75)=1-0{,}7734\approx 0{,}23$}
-\item Oblicz prawdopodobieństwo, że ilość mąki w worku różni się od wartości oczekiwanej o nie więcej niż 1~kg. \ans{$P(19<X<21)=F_X(21)-F_X(19)=F_Y(0{,}5)-F_Y(-0{,}5)=2F_Y(0{,}5)-1=2\cdot0{,}6915-1=0{,}38$}
+\begin{ansenv}
+	Jeżeli mamy do czynienia ze standaryzowaną zmienną losową to zawsze $EY=0$ i $DY=1$. Dlaczego?
+	
+	\[ EY=E\left[\frac{X-20}{2}\right] = \frac{E(X-20)}{2} = \frac{EX-20}{2}=\frac{20-20}{2} = 0 \]
+	
+	\[ D^2Y=D^2\left[\frac{X-20}{2}\right] = \frac{D^2(X-20)}{2^2} = \frac{D^2X}{2^2} =\frac{2^2}{2^2} = 1\]
+	
+	Posłużyliśmy się przy tym następującymi własnościami wartości średniej i wariancji, prawdziwymi dla dowolnej wartości $a\in\mathbb{R}$:
+	\begin{gather*}
+	E(aX) = aEX \\
+	D^2(aX) = a^2D^2X \\
+	E(X-a) = EX-a \\
+	D^2(X-a) = D^2X \\
+	\end{gather*}
+\end{ansenv}
+\item Oblicz prawdopodobieństwo, że w worku jest mniej niż 18 kg mąki.
+\begin{ansenv}
+	Do obliczania prawdopodobieństw będziemy posługiwać się tablicą zawierającą wartości dystrybuanty standaryzowanego rozkładu normalnego. Taka tablica jest dostępna na odwrocie kartki z ćwiczeniami, na egzaminie, jest też łatwa do znalezienia w Internecie.
+	Zaczynamy od sprowadzenia polecenia do dystrybuanty zmiennej losowej $Y$ o standaryzowanym rozkładzie normalnym $N(0,1)$:
+	\[ P(X<18) = F_X(18) = F_Y\left(\frac{18-20}{2}\right) = F_Y(-1) \]
+	Następnie korzystamy z własności dystrybuanty standaryzowanego rozkładu normalnego:
+	\[ F_Y(u) = 1-F_Y(-u) \]
+	I w takim razie:
+	\[ P(X<18) = F_Y(-1)=1-F_Y(1) \]
+	$1$ możemy zapisać jako $1{,}00$ -- w tabeli odnajdujemy wiersz podpisany $1{,}0$ i kolumnę odpowiadającą cyfrze setek, więc $0$, a następnie odczytujemy wartość na przecięciu:
+	\[ F_Y(1) = 0{,}8413 \]
+	W takim razie:
+	\[P(X<18)=F_X(18)=F_Y(-1)=1-F_Y(1)=1-0{,}8413\approx 0{,}16\]
+\end{ansenv}
+\item Oblicz prawdopodobieństwo, że w worku jest więcej niż $21{,}5$ kg mąki.
+\begin{ansenv}
+	Korzystamy ze zdarzenia przeciwnego, żeby przejść do dystrybuanty i sprowadzamy do dystrybuanty standaryzowanego rozkładu normalnego:
+	\[ P(X>21{,}5)=1-F_X(21{,}5)=1-F_Y\left(\frac{21{,}5-20}{2}\right)=1-F_Y(0{,}75) \]
+	W tabeli odnajdujemy wiersz podpisany $0{,}7$ i kolumnę podpisaną $0{,}05$:
+	\[ F_Y(0{,}75)=0{,}7734 \]
+	Wracamy do poprzedniej równości:
+	\[ P(X>21{,}5)=1-F_Y(0{,}75) =1-0{,}7734\approx 0{,}23 \]
+\end{ansenv}
+\item Oblicz prawdopodobieństwo, że ilość mąki w worku różni się od wartości oczekiwanej o nie więcej niż 1~kg.
+\begin{ansenv}
+	Wartość oczekiwana (średnia) zmiennej losowej $X$ to 20, w takim razie pytanie jest o $X$ pomiędzy 19, a 21 kg. Potem postępujemy jak wcześniej:
+	\begin{gather*}
+	 P(\left|X-20\right|<1) = P(19<X<21) = F_X(21) - F_X(19) = F_Y\left(\frac{21-20}{2}\right)-F_Y\left(\frac{19-20}{2}\right) = \\ 
+	 F_Y(0{,}5) - F_Y(-0{,}5) = F_Y(0{,}5) - (1-F_Y(0{,}5)) = 2F_Y(0{,}5) - 1
+	\end{gather*}
+	Z tablicy standaryzowanego rozkładu normalnego (wiersz $0{,}5$, kolumna $0$) odczytujemy:
+	\[ F_Y(0{,}5)=0{,}6915 \]
+	Zatem:
+	\[ P(\left|X-20\right|<1) = 2F_Y(0{,}5) - 1 = 2\cdot0{,}6915-1=0{,}38 \]
+\end{ansenv}
+% \ans{$P(19<X<21)=F_X(21)-F_X(19)=F_Y(0{,}5)-F_Y(-0{,}5)=2F_Y(0{,}5)-1=2\cdot0{,}6915-1=0{,}38$}
 \end{enumerate}
 %\item Pociągi Kolei Wielkopolskich odjeżdżają w~kierunku Wągrowca co 60 min. Niestety, nastąpiła zmiana rozkładu, strona
 %internetowa padła, telefony nie działają, a~plakaty z~rozkładem porwał wiatr. Zakładając, że rozkład czasu przybycia pasażera na stację jest
@@ -943,12 +1152,26 @@ Spichlerz ma pojemność 130 ton, a~roczne potrzeby wsi wynoszą 85 ton.
 W poniższych zadaniach wyniki podawaj z dokładnością do przynajmniej dwóch miejsc po przecinku.
 \begin{enumerate}
 \item Podaj $EX$ oraz $DX$.
+\ans{$EX=100 \quad DX=20$}
 \item Niech $Y$ będzie standaryzowaną postacią zmiennej losowej $X$. Podaj $EY$ oraz $DY$.
+\ans{$EY=0 \quad DY=1$}
 \item Oblicz prawdopodobieństwo, że hobbici wyprodukują dokładnie 100 ton owsa.
+\ans{$P(X=100)=0$, bo dla zmiennych losowych typu ciągłego prawdopodobieństwo w punkcie jest zawsze równe 0}
 \item Oblicz prawdopodobieństwo, że hobbici wychodują najwyżej tyle owsa ile są w stanie zmagazynować.
+\ans{$P(X<130)=F_X(130)=F_Y(1{,}5)=0{,}933$}
 \item Oblicz prawdopodobieństwo, że hobbici nie wyprodukują dostatecznie dużo owsa i będą musieli go dokupić.
-\item Oblicz prawdopodobieńśtwo, że masa owsa wyprodukowanego przez hobbitów będzie się różnić od wartości oczekiwanej o nie więcej niż pół odchylenia standardowego.
-\item Oblicz prawdopodobieńśtwo, że masa owsa wyprodukowanego przez hobbitów będzie się różnić od wartości oczekiwanej o nie więcej niż dwie wariancje.
+\ans{$P(X<85)=F_X(85)=F_Y(-0{,}75)=1-F_Y(0{,}75)=1-0{,}773=0{,}227$}
+\item Oblicz prawdopodobieństwo, że masa owsa wyprodukowanego przez hobbitów będzie się różnić od wartości oczekiwanej o nie więcej niż pół odchylenia standardowego.
+\ans{\begin{gather*}
+	P\left(\left|X-EX\right|\leq \frac{DX}{2}\right) = P(\left|X-100\right|\leq 10) = P(90\leq X\leq 110) = F_X(110)-F_X(90) =\\
+	F_Y(0{,}5)-F_Y(-0{,}5) = F_Y(0{,}5)-\left(1-F_Y(0{,}5)\right) = 2F_Y(0{,}5)-1 = 2\cdot0{,}6915-1=0{,}38
+	\end{gather*}
+}
+\item Oblicz prawdopodobieństwo, że masa owsa wyprodukowanego przez hobbitów będzie się różnić od wartości oczekiwanej o nie więcej niż dwie wariancje.
+\ans{\begin{gather*}
+	P(\left|X-EX\right|<2D^2X) = P(\left|X-100\right|<800) = P(-700<X<900) = F_X(900)-F_X(-700)=2F_Y(40)-1=1
+	\end{gather*}	
+}
 \end{enumerate}
 
 \item W Bucklandzie na jesieni przygotowują sery na zimę. W każdym ze 100 magazynów
@@ -1542,13 +1765,13 @@ $n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
 $P(N\geq n)$ & & & & & & & & 
 \end{tabular}
 \vspace{1cm}\\
-\ans{\\
+\begin{ansenv}
 	\begin{tabular}{l|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
 		$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
 		\hline
 		$P(N\geq n)$ & 1 & $\frac{1}{2}$ & $\frac{1}{2^3}$ & $\frac{1}{2^6}$ & $\frac{1}{2^{10}}$ & $\frac{1}{2^{15}}$ & $\frac{1}{2^{20}}$ & $\frac{1}{2^{25}}$ 
 	\end{tabular}
-}
+\end{ansenv}
 \item Oblicz średni czas oczekiwania w poszczególnych krokach algorytmu, tj. wartości średnie $EA_n=EB_n$.
 \begin{tabular}{p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
 	$EA_1$ & $EA_2$ & $EA_3$ & $EA_4$ & $EA_5$ & $EA_6$ & $EA_7$ & $EA_8$ \\
@@ -1556,13 +1779,13 @@ $P(N\geq n)$ & & & & & & & &
 	& & & & & & & 
 \end{tabular}
 \vspace{1cm}\\
-\ans{\\
+\begin{ansenv}
 	\begin{tabular}{p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
 		$EA_1$ & $EA_2$ & $EA_3$ & $EA_4$ & $EA_5$ & $EA_6$ & $EA_7$ & $EA_8$ \\
 		\hline
 		$\frac{1}{2}$ & $\frac{3}{2}$ & $\frac{7}{2}$ & $\frac{15}{2}$ & $\frac{31}{2}$ & $\frac{31}{2}$ & $\frac{31}{2}$ & $\frac{31}{2}$ 
 	\end{tabular}
-}
+\end{ansenv}
 \item Niech $W_n$ będzie czasem oczekiwania przed $n$-tą retransmisją (czyli $W_n=A_n$) o ile do $n$-tej retransmisji doszło (tzn. gdy $N\geq n$) i $0$ w przeciwnym wypadku (tzn. gdy $N<n$).
 Ile wynosi \emph{średnia} wartość $W_n$?
 Zauważ, że prawdopodobieństwo $P(W_n=0)$ nie gra roli w obliczaniu średniej.\\
@@ -1574,14 +1797,14 @@ $EW_1$ & $EW_2$ & $EW_3$ & $EW_4$ & $EW_5$ & $EW_6$ & $EW_7$ & $EW_8$ \\
 \vspace{1cm}\\
 Podpowiedź: dla dowolnych zmiennych losowych typu skokowego $X, Y$ zachodzi 
 \[EX = \sum_{y_j} E\left(X|Y=y_j\right)P(Y=y_j) \]
-\ans{\\
+\begin{ansenv}
 	\[ EW_n = E(W_n|N\geq n)P(N\geq n) + E(W_n|N<n)P(N<n) = EA_nP(N\geq n)\]
 	\begin{tabular}{p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}}
 		$EW_1$ & $EW_2$ & $EW_3$ & $EW_4$ & $EW_5$ & $EW_6$ & $EW_7$ & $EW_8$ \\
 		\hline
 		$\frac{1}{2}$ & $\frac{3}{2^2}$ & $\frac{7}{2^4}$ & $\frac{15}{2^7}$ & $\frac{31}{2^{11}}$ & $\frac{31}{2^{16}}$ & $\frac{31}{2^{21}}$ & $\frac{31}{2^{26}}$
 	\end{tabular}
-}
+\end{ansenv}
 \item Ile \emph{średnio} jednostek czasu algorytm spędza na oczekiwaniu w linii \ref{backoff:wait}?
 Innymi słowy: ile wynosi średnia sumy zmiennych losowych $W_n$:
 \[ E(W_1+W_2+\ldots+W_8)=\ldots\ldots\ldots\ldots\ldots\]

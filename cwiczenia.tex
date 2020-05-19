@@ -22,6 +22,9 @@
 \newenvironment{ansenv}{\paragraph{Odpowiedź:}}{}
 \newcommand{\ans}[1]{\begin{ansenv}#1\end{ansenv}}
 \fi
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\corr}{\rho}
+\colorlet{darkgreen}{green!50!black}
 \begin{document}
 \section{Przestrzeń probabilistyczna}
 %[anchor=south west,inner sep=0pt]
@@ -1273,30 +1276,158 @@ e^{-2\lambda}=\frac{1}{25} \\
 \begin{enumerate}
 \item Z talii 52 kart wylosowano jedną kartę. Niech zmienna losowa $X$ przyjmuje wartość odpowiadającą liczbie wylosowanych waletów, zaś $Y$ odpowiadającą liczbie wylosowanych trefli.
 \begin{enumerate}
-\item Wyznacz rozkłady zmiennych losowych $X$ oraz $Y$. \ans{$P(X=0)=\frac{48}{52} P(X=1)=\frac{4}{52} P(Y=1)=\frac{13}{52} P(Y=0)=\frac{39}{52}$}
-\item Wyznacz rozkład zmiennej losowej $(X,Y)$. \ans{$P(0,0)=\frac{36}{52} P(1,0)=\frac{3}{52} P(0,1)=\frac{12}{52} P(1,1)=\frac{1}{52}$}
-\item Oblicz dystrybuantę zmiennej losowej $(X,Y)$. \ans{\[F(u,v)=\begin{cases} 
-	0 & u\leq 0 \lor v\leq 0 \\ 
-	\frac{36}{52} & 0<u\leq 1 \land 0<v\leq 1 \\
-	\frac{39}{52} & u>1 \land 0<v\leq 1 \\
-	\frac{48}{52} & 0<u\leq 1 \land v>1 \\
-	1 & u>1 \land v>1
-	\end{cases}\]}
-\item Czy zmienne losowej $X$ i $Y$ są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. \ans{Tak}
-\item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$. \ans{$EXY=\frac{1}{52}$}
+\item Wyznacz rozkłady zmiennych losowych $X$ oraz $Y$. 
+\begin{ansenv}
+	Postępujemy tak samo przy zadaniach o zmiennych losowych jednowymiarowych typu skokowego. Obie zmienne mogą przyjmować wyłącznie wartości ze zbioru $\{0, 1\}$, zatem:
+	\[ P(X=1) = P(\text{wylosowanie waleta}) = \frac{4}{52}=\frac{1}{13} \qquad P(X=0)=1-P(X=1)=\frac{48}{52}=\frac{12}{13} \]
+	\[ P(Y=1) = P(\text{wylosowanie trefla}) = \frac{13}{52}=\frac{1}{4} \qquad P(Y=0)=1-P(Y=1)=\frac{39}{52}=\frac{3}{4} \]
+\end{ansenv}
+\item Wyznacz rozkład zmiennej losowej $(X,Y)$. 
+\begin{ansenv}
+	Musimy rozważyć wszystkie możliwe pary punków skokowych zmiennej losowej $(X,Y)$: $\{0,1\}\times\{0,1\} = \{(0,0), (0, 1), (1, 0), (1,1)\}$, za każdym razem rozważając jednocześnie oba warunki wyznaczone przez zmienne losowe.
+	Rozważania dotyczą tego samego zdarzenia elementarnego, tzn. $X=1, Y=1$ odpowiada sytuacji, w której \emph{ta sama wylosowana karta} okazuje się waletem ($X=1$) oraz treflem ($Y=1$).
+	\[ P(X=1, Y=1) = P(\text{wylosowanie waleta i wylosowanie trefla}) = P(\text{wylosowanie waleta trefl}) = \frac{1}{52} \]
+	\begin{align*}
+	P(X=1, Y=0) = & P(\text{wylosowanie waleta i wylosowanie nie-trefla}) = \\ & P(\text{wylosowanie waleta pik, kier lub karo}) = \frac{3}{52}
+	\end{align*}
+	\begin{align*}
+	P(X=0, Y=1) = & P(\text{wylosowanie nie-waleta i wylosowanie trefla}) = \\ & P(\text{wylosowanie trefla niebędącego waletem}) = \frac{12}{52} 
+	\end{align*}
+	\begin{align*}
+	 P(X=0, Y=0) = & P(\text{wylosowanie nie-waleta i wylosowanie nie-trefla}) = \\  & P(\text{dowolna z 13 kart poza waletem z kolorów pik, kier, karo}) = \frac{3\cdot (13-1)}{52}=\frac{36}{52}
+	 \end{align*}
+	 Wygodnie jest zapisać tak uzyskane prawdopodobieństwa w formie tablicy dwuwymiarowej: \\
+	 \begin{tabular}{c|cc|c}
+	 	\diagbox{y}{x} & 0 & 1 & $\sum$ \\
+	 	\hline
+	 	0 & $\frac{36}{52}$ & $\frac{3}{52}$ & $\frac{39}{52}$ \\
+	 	1 & $\frac{12}{52}$ & $\frac{1}{52}$ & $\frac{13}{52}$ \\
+	 	\hline
+	 	$\sum$ & $\frac{48}{52}$ & $\frac{4}{52}$ & 1
+ 	\end{tabular}
+ 
+ 	Wiersz i kolumna podpisane $\sum$ reprezentują, odpowiednio, sumy w kolumnach i w wierszach, i jednocześnie \emph{rozkłady brzegowe}, tzn. rozkłady prawdopodobieństwa zmiennych losowych $Y$ i $X$, takie same jak te, które wyznaczyliśmy w poprzednim podpunkcie.
+\end{ansenv}
+\item Oblicz dystrybuantę zmiennej losowej $(X,Y)$. 
+\begin{ansenv}
+	Dystrybuanta $F(u, v)$ w ogólności dana jest wzorem:
+	\[ F(u, v) = P(X\leq u, Y\leq v) \]
+	Punkty skokowe w każdym z wymiarów wyznaczają przedziały, w których dystrybuanta przyjmuje identyczne wartości. Zatem musimy rozważyć 9 takich par przedziałów:
+	\[ \{(-\infty, 0), \left[0, 1\right), \left[1, \infty\right)\} \times \{(-\infty, 0), \left[0, 1\right), \left[1, \infty\right)\} \]
+	Najwygodniej przedstawić to w postaci tabeli: 
+	
+    \begin{tabular}{c|ccc}
+		\diagbox{v}{u} & $(-\infty, 0)$ & $[0, 1)$ & $(1, \infty)$ \\
+		\hline
+		$(-\infty, 0)$ & 0 & 0 & 0 \\
+		$[0, 1)$ & 0 &  $\frac{36}{52}$ & $\frac{39}{52}$ \\
+		$[1, \infty)$ & 0 & $\frac{48}{52}$ & 1 
+	\end{tabular}
+
+	Pierwszy wiersz i pierwsza kolumna zawierają same 0, bo zawsze co najmniej jeden z wymiarów jest przed pierwszym punktem skokowym, czyli jest niemożliwe żeby dana zmienna losowa przyjęła wartość nie większą niż dana.
+	W prawym dolnym rogu zawsze 1, bo w obu wymiarach pytamy o sytuację gdzie zmienne losowe są nie większe niż największy z punktów skokowych - czyli zachodzi zdarzenie pewne.
+	Pozostałe pola wypełniamy sumując kolejne fragmenty rozkładu prawdopodobieństwa, który uzyskaliśmy w poprzednim punkcie, np.:
+	\[ F(0{,}5, 2) = P(X\leq 0{,}5, Y \leq 2) = P(X=0, Y=0) + P(X=0, Y=1) = \frac{36}{52}+\frac{12}{52} = \frac{48}{52} \]
+	
+	Dystrybuantę możemy zapisać też w formie funkcji sklejanej, np.
+	\[F(u,v)=\begin{cases} 
+	0 & u< 0 \lor v< 0 \\ 
+	\frac{36}{52} & 0\leq u< 1 \land 0\leq v< 1 \\
+	\frac{39}{52} & 1\leq u \land 0\leq v< 1 \\
+	\frac{48}{52} & 0\leq u< 1 \land 1\leq v\\
+	1 & 1\leq u \land 1\leq v
+	\end{cases}\]
+\end{ansenv}
+\item Czy zmienne losowej $X$ i $Y$ są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. 
+\begin{ansenv}
+	Posługujemy się definicją niezależności zmiennych losowych $X$ i $Y$:
+	\[ \left[\forall x,y\in\mathbb{R}\colon P(X=x, Y=y)=P(X=x)\cdot P(Y=y) \right] \iff \text{$X$ i $Y$ są niezależne} \]
+	W takim razie musimy sprawdzić dla wszystkich par liczb rzeczywistych czy powyższy iloczyn zachodzi.
+	Dla par $(x, y)$ niebędących punktami skokowymi zachodzi trywialnie, bo po obu stronach mamy 0.
+	Pozostają nam zatem 4 pary:  $\{(0,0), (0, 1), (1, 0), (1,1)\}$
+	
+	\begin{align*}
+		P(X=0, Y=0)=\frac{36}{52} \qquad & P(X=0)\cdot P(Y=0)=\frac{48}{52}\cdot\frac{39}{52}=\frac{36}{52} & \checkmark \\
+		P(X=0, Y=1)=\frac{12}{52} \qquad & P(X=0)\cdot P(Y=1)=\frac{48}{52}\cdot\frac{13}{52}=\frac{12}{52} & \checkmark \\
+		P(X=1, Y=0)=\frac{3}{52} \qquad & P(X=1)\cdot P(Y=0)=\frac{4}{52}\cdot\frac{39}{52}=\frac{3}{52} & \checkmark \\
+		P(X=1, Y=1)=\frac{1}{52} \qquad & P(X=1)\cdot P(Y=1)=\frac{4}{52}\cdot\frac{13}{52}=\frac{1}{52} & \checkmark \\
+	\end{align*}
+
+	Skoro dla wszystkich par się zgadza, to znaczy, że zmienne losowe $X$ i $Y$ są niezależne.
+\end{ansenv}
+\item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$. \ans{\[EXY=E(X\cdot Y)=\sum_{x}\sum_{y} x\cdot y\cdot P(X=x, Y=y) = 
+	0\cdot 0\cdot \frac{36}{52} + 0\cdot 1\cdot \frac{12}{52} + 1\cdot 0\cdot \frac{3}{52} + 1\cdot 1\cdot \frac{1}{52} = \frac{1}{52}
+	\]}
 \item Oblicz kowariancję zmiennych losowych $X$ i $Y$.
+\ans{
+	\[\cov(X,Y)= EXY-EX\cdot EY = \frac{1}{52} - \left(0\cdot \frac{48}{52}+1\cdot \frac{4}{52}\right)\cdot\left(0\cdot\frac{39}{52}+1\cdot\frac{13}{52}\right) = 0 \]
+	Oczywiście otrzymujemy 0, ponieważ zmienne losowe są niezależne, a zatem ich kowariancja musi wynosić 0.
+}
 \item Oblicz współczynnik korelacji zmiennych losowych $X$ i $Y$.
+\ans{
+	\[ \corr(X, Y) = \frac{\cov(X,Y)}{DX\cdot DY} = \frac{0}{DX\cdot DY} = 0 \]
+}
 %\item Wiadomo, że wylosowano trefla. Oblicz prawdopodobieństwo, że jest to walet posługując się warunkowym rozkładem prawdopodobieństwa. \ans{$P(X=1|Y=1)=\frac{\frac{1}{52}}{\frac{13}{52}}=\frac{1}{13}$}
 \end{enumerate}
 \item Z talii 52 kart wylosowano jedną kartę. Niech zmienna losowa $X$ przyjmuje wartość odpowiadającą liczbie wylosowanych dam trefl, zaś $Y$ odpowiadającą liczbie wylosowanych trefli.
 \begin{enumerate}
-\item Wyznacz rozkłady zmiennych losowych $X$ oraz $Y$. \ans{$P(X=0)=\frac{51}{52} P(X=1)=\frac{1}{52} P(Y=1)=\frac{13}{52} P(Y=0)=\frac{39}{52}$}
-\item Wyznacz rozkład zmiennej losowej $(X,Y)$. \ans{$P(0,0)=\frac{39}{52} P(1,0)=0 P(0,1)=\frac{12}{52} P(1,1)=\frac{1}{52}$}
+\item Wyznacz rozkłady zmiennych losowych $X$ oraz $Y$. \ans{
+	Zadanie jest prawie identyczne jak poprzednie jeżeli chodzi o technikę rozwiązywania.
+	\[P(X=0)=\frac{51}{52} \qquad P(X=1)=\frac{1}{52} \]
+	\[ P(Y=1)=\frac{13}{52} \qquad P(Y=0)=\frac{39}{52} \]
+}
+\item Wyznacz rozkład zmiennej losowej $(X,Y)$. 
+\begin{ansenv}
+ 	\begin{tabular}{c|cc|c}
+		\diagbox{y}{x} & 0 & 1 & $\sum$ \\
+		\hline
+		0 & $\frac{39}{52}$ & $0$ & $\frac{39}{52}$ \\
+		1 & $\frac{12}{52}$ & $\frac{1}{52}$ & $\frac{13}{52}$ \\
+		\hline
+		$\sum$ & $\frac{51}{52}$ & $\frac{1}{52}$ & 1
+	\end{tabular}
+\end{ansenv}
 \item Oblicz dystrybuantę zmiennej losowej $(X,Y)$.
-\item Czy zmienne losowej $X$ i $Y$ są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. \ans{Nie, $0=P(1,0)\neq P(X=1)P(Y=0)=\frac{39}{52^2}$}
-\item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$. \ans{$EXY=\frac{1}{52}$}
+\begin{ansenv}
+	    \begin{tabular}{c|ccc}
+		\diagbox{v}{u} & $(-\infty, 0)$ & $[0, 1)$ & $(1, \infty)$ \\
+		\hline
+		$(-\infty, 0)$ & 0 & 0 & 0 \\
+		$[0, 1)$ & 0 &  $\frac{39}{52}$ & $\frac{39}{52}$ \\
+		$[1, \infty)$ & 0 & $\frac{51}{52}$ & 1 
+	\end{tabular}
+\end{ansenv}
+\item Czy zmienne losowej $X$ i $Y$ są niezależne? Odpowiedź uzasadnij odpowiednim rachunkiem. 
+\begin{ansenv}
+	Żeby stwierdzić, że nie są wystarczy pokazać jedną parę $(x, y)$ dla której równość $P(X=x, Y=y)=P(X=x)P(Y=y)$ nie zachodzi. Zatem niech $x=1$ i $y=0$:
+	\[ P(X=1, Y=0)=0 \neq P(X=1)P(Y=0)=\frac{39}{52}\cdot\frac{1}{52}=\frac{1}{208} \]
+	W takim razie zmienne losowe $X$ i $Y$ nie są niezależne.
+	
+	Można też na to popatrzeć intuicyjnie: czy z wartości zmiennej losowej $Y$ możemy się czegoś dowiedzieć o wartościach zmiennej losowej $X$?
+	Przykładowo, jeżeli $Y=0$ (nie wylosowano trefla), to na pewno $X=0$ (nie wylosowano damy trefl), bo nie istnieją damy trefl niebędące treflami.
+	W takim razie zmienne są zależne.
+\end{ansenv}
+\item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$. \ans{\[EXY=E(X\cdot Y)=\sum_{x}\sum_{y} x\cdot y\cdot P(X=x, Y=y) = 
+	0\cdot 0\cdot \frac{39}{52} + 0\cdot 1\cdot \frac{12}{52} + 1\cdot 1\cdot \frac{1}{52} = \frac{1}{52}
+	\]}
 \item Oblicz kowariancję zmiennych losowych $X$ i $Y$.
+\begin{ansenv}
+	\begin{gather*}
+	 EX = 0\cdot\frac{51}{52} + 1\cdot\frac{1}{52} = \frac{1}{52}  \\
+	 EY = 0\cdot\frac{39}{52} + 1\cdot\frac{13}{52} = \frac{1}{4}  \\
+	 \cov(X,Y) = EXY-EX\cdot EY = \frac{1}{52} - \frac{1}{52}\cdot \frac{1}{4} = \frac{3}{208} 
+	\end{gather*}
+\end{ansenv}
 \item Oblicz współczynnik korelacji zmiennych losowych $X$ i $Y$.
+\begin{ansenv}
+	\begin{gather*}
+	E(X^2) = \sum_x x^2P(X=x) = 0^2\cdot\frac{51}{52} + 1^2\cdot\frac{1}{52} = \frac{1}{52} \\
+	E(Y^2) = \sum_y y^2P(Y=y) = 0^2\cdot\frac{39}{52} + 1^2\cdot\frac{13}{52} = \frac{13}{52} = \frac{1}{4} \\
+	D^2X = E(X^2)-(EX)^2 = \frac{1}{52} - \left(\frac{1}{52}\right)^2 = \frac{51}{52^2} \\
+	D^2Y = E(Y^2)-(EY)^2 = \frac{1}{4} - \left(\frac{1}{4}\right)^2 = \frac{3}{4^2} \\
+	\corr(X,Y) = \frac{\cov(X,Y)}{DX\cdot DY} = \frac{\frac{3}{208}}{\sqrt{\frac{51}{52^2}}\cdot\sqrt{\frac{3}{4^2}}} = \frac{3}{\sqrt{51\cdot 3}} = \sqrt{\frac{3}{51}} \approx 0{,}2425
+	\end{gather*}
+\end{ansenv}
 %\item Wiadomo, że wylosowano trefla. Oblicz prawdopodobieństwo, że nie jest to dama posługując się warunkowym rozkładem prawdopodobieństwa. \ans{$P(X=0|Y=1)=\frac{\frac{12}{52}}{\frac{13}{52}}=\frac{12}{13}$}
 \end{enumerate}
 
@@ -1310,11 +1441,71 @@ Merry podaje Pippinowi liczbę czerwonych wyników (tj. wartość, którą przyj
 	\item Podaj brzegowy rozkład prawdopodobieństwa zmiennej losowej $X$. 
 	\item Podaj brzegowy rozkład prawdopodobieństwa zmiennej losowej $Y$. 
 	\item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej dwuwymiarowej $(X,Y)$. 
+	\begin{ansenv}
+		Pierwsze trzy punkty rozwiązujemy łącznie budując łączny rozkład prawdopodobieństwa. Zaczniemy od stworzenia pomocniczej tabeli zawierającej pary wyników wraz z odpowiadającymi im kolorami oraz wartości iloczynów:
+		
+		\begin{tabular}{c|ccc|ccc}
+			\diagbox{kostka 1}{kostka 2} & \textcolor{red}{1} & \textcolor{red}{1} & \textcolor{red}{2} & \textcolor{darkgreen}{2} & \textcolor{darkgreen}{3} & \textcolor{darkgreen}{3} \\
+			\hline
+			\textcolor{red}{1} & 1 & 1 & 2 & 2 & 3 & 3 \\
+			\textcolor{red}{1} & 1 & 1 & 2 & 2 & 3 & 3 \\
+			\textcolor{red}{2} & 2 & 2 & 4 & 4 & 6 & 6 \\
+			\hline
+			\textcolor{darkgreen}{2} & 2 & 2 & 4 & 4 & 6 & 6 \\
+			\textcolor{darkgreen}{3} & 3 & 3 & 6 & 6 & 9 & 9 \\
+			\textcolor{darkgreen}{3} & 3 & 3 & 6 & 6 & 9 & 9 \\
+		\end{tabular}
+	
+		Lewy górny kwadrat odpowiada iloczynom, które powstają z dwóch czerwonych wyników (czyli $Y=2$). Prawy dolny kwadrat iloczynom, które powstają z dwóch zielonych wyników (czyli $Y=0$).
+		Pozostałe dwa kwadraty są mieszane: jeden wynik czerwony, jeden wynik zielony (czyli $Y=1$).
+		
+		Rzuty kostką się niezależne od siebie, a każdy wynik równoprawdopodobny, zatem wystarczy zliczać liczbę wyników spełniających kryteria wyznaczone przez zmienne losowe i dzielić przez 36:
+		
+		\begin{tabular}{c|cccccc|c}
+			& \multicolumn{7}{c}{zmienna $X$ -- iloczyn} \\
+			\diagbox{y}{x} & 1 & 2 & 3 & 4 & 6 & 9 & $\sum$ \\
+			\hline
+			0 & 0 & 0 & 0 & $\frac{1}{36}$ & $\frac{4}{36}$ & $\frac{4}{36}$ & $\frac{9}{36}$ \\
+			1 & 0 & $\frac{4}{36}$ & $\frac{8}{36}$ & $\frac{2}{36}$ & $\frac{4}{36}$ & 0 & $\frac{18}{36}$ \\
+			2 & $\frac{4}{36}$ & $\frac{4}{36}$ & 0 & $\frac{1}{36}$ & 0 & 0 & $\frac{9}{36}$ \\
+			\hline
+			$\sum$ & $\frac{4}{36}$ & $\frac{8}{36}$ & $\frac{8}{36}$ & $\frac{4}{36}$ & $\frac{8}{36}$ & $\frac{4}{36}$ & $1$ \\
+		\end{tabular}
+	
+		Wiersz oznaczony $\sum$ stanowi jednocześnie odpowiedź na podpunkt a, a kolumna oznaczona $\sum$ odpowiedź na podpunkt b.
+	\end{ansenv}
 	\item Czy zmienne losowe $X$ oraz $Y$ są niezależne? Odpowiedź uzasadnij.
+	\ans{Zmienne są niezależne, bo np. $P(X=1,Y=0)=0\neq P(X=1)\cdot P(Y=0)=\frac{9}{36}\cdot\frac{4}{36}=\frac{1}{36}$}
 	\item Oblicz wartości średnie zmiennych losowych $X$ oraz $Y$.
-	\item Oblicz kowariancję zmiennej losowej $(X,Y)$.
+	\begin{ansenv}
+		\[
+		EX = 1\cdot \frac{4}{36} + 2\cdot\frac{8}{36} + 3\cdot\frac{8}{36} + 4\cdot\frac{4}{36} + 6\cdot\frac{8}{36} + 9\cdot\frac{4}{36} = \frac{144}{36} = 4
+		\]
+		\[
+		EY = 0\cdot \frac{9}{36} + 1\cdot\frac{18}{36} + 2\cdot\frac{9}{36} = 1
+		\]
+	\end{ansenv}
+	\item Oblicz kowariancję zmiennej losowej $(X,Y)$ (poniższe wyliczenia pomijają składniki sumy gdzie prawdopodobieństwo jest równe 0, co oczywiście nie wpływa na wynik)
+	\begin{ansenv}
+		\begin{align*}
+		EXY = & \sum_x\sum_y x\cdot y\cdot P(X=x, Y=y) = \\ & 4\cdot 0\cdot \frac{1}{36} + 6\cdot 0\cdot \frac{4}{36} + 9\cdot 0\cdot \frac{4}{36} + \\ & 2\cdot 1\cdot \frac{4}{36} + 3\cdot 1\cdot \frac{8}{36} + 4\cdot 1\cdot \frac{2}{36} + 6\cdot 1\cdot \frac{4}{36} + \\ & 1\cdot 2\cdot \frac{4}{36} + 2\cdot 2\cdot \frac{4}{36} + 4\cdot 2\cdot \frac{1}{36} = \frac{96}{36} = \frac{7}{3}
+		\end{align*}
+		\[ \cov(X,Y)=EXY-EX\cdot EY = \frac{8}{3} - 4\cdot 1 = -\frac{4}{3} \]
+	\end{ansenv}
 	\item Oblicz odchylenia standardowe zmiennych losowych $X$ oraz $Y$.
+	\begin{ansenv}
+		\begin{gather*}
+		EX^2 = 1^2\cdot \frac{4}{36} + 2^2\cdot\frac{8}{36} + 3^2\cdot\frac{8}{36} + 4^2\cdot\frac{4}{36} + 6^2\cdot\frac{8}{36} + 9^2\cdot\frac{4}{36} = \frac{784}{36} = \frac{196}{9} \\
+		EY^2 = 0^2\cdot \frac{9}{36} + 1^2\cdot\frac{18}{36} + 2^2\cdot\frac{9}{36} = \frac{3}{2} \\
+		DX = \sqrt{EX^2 - (EX)^2} = \sqrt{\frac{196}{9} - 4^2} = \sqrt{\frac{52}{9}} = \frac{2\sqrt{13}}{3} \\
+		DY = \sqrt{EY^2- (EY)^2} = \sqrt{\frac{3}{2}-1^2} = \sqrt{\frac{1}{2}} = \frac{\sqrt{2}}{2}
+		\end{gather*}
+	\end{ansenv}
 	\item Oblicz współczynnik korelacji zmiennej losowej $(X,Y)$.
+	\begin{ansenv}
+		\[\corr(X,Y)=\frac{\cov(X,Y)}{DX\cdot DY} = \frac{-\frac{4}{3}}{\frac{2\sqrt{13}}{3}\cdot \frac{\sqrt{2}}{2}} =
+		\frac{-4}{\sqrt{13}\cdot\sqrt{2}} = \frac{-4}{\sqrt{26}} \approx -0{,}784 \]
+	\end{ansenv}
 \end{enumerate}
 
 \item Hobbici w skórzanym woreczku mają 7 kartek zapisanych atramentami w dwóch różnych kolorach: czerwonym i zielonym.
@@ -1326,10 +1517,65 @@ Niech $X$ będzie zmienną losową odpowiadającą liczbie wylosowanych kartek, 
 \item Podaj rozkład brzegowy zmiennej $X$.
 \item Podaj rozkład brzegowy zmiennej $Y$.
 \item Podaj łączny rozkład prawdopodobieństwa zmiennej losowej $(X,Y)$.
+\begin{ansenv}
+	Podobnie jak w poprzednim zadaniu budujemy pomocniczą macierz, której nagłówki odpowiadają możliwym wartościom kartek, a w komórkach znajdują się odpowiadające im wartości zmiennej losowej $X$, natomiast wartości zmiennej losowej $Y$ będziemy widzieli na podstawie prostokątów wyznaczonych w macierzy:
+	
+	\begin{tabular}{c|ccc|cc|cc}
+		\diagbox{II kartka}{I kartka} & \textcolor{red}{1} & \textcolor{red}{2} & \textcolor{red}{3} & \textcolor{darkgreen}{4} & \textcolor{darkgreen}{5} & \textcolor{red}{6} & \textcolor{red}{7} \\	
+		\hline	
+		 \textcolor{red}{1} & 0 & 1 & 0 & 1 & 0 & 1 & 0 \\
+		 \textcolor{red}{2} & 1 & 2 & 1 & 2 & 1 & 2 & 1 \\
+		 \textcolor{red}{3} & 0 & 1 & 0 & 1 & 0 & 1 & 0 \\
+		 \hline
+		 \textcolor{darkgreen}{4} & 1 & 2 & 1 & 2 & 1 & 2 & 1 \\
+		 \textcolor{darkgreen}{5} & 0 & 1 & 0 & 1 & 0 & 1 & 0 \\
+		 \hline
+		 \textcolor{red}{6} & 1 & 2 & 1 & 2 & 1 & 2 & 1\\
+		 \textcolor{red}{7} & 0 & 1 & 0 & 1 & 0 & 1 & 0 \\
+	\end{tabular}
+
+	Prostokąty w narożnikach odpowiadają dwóm kartkom zapisanym na czerwono, a więc $Y=2$.
+	Kwadrat w środku odpowiada dwóm kartkom zapisanym na zielono, a więc $Y=0$.
+	Pozostałe 4 prostokąty odpowiadają $Y=1$.
+	Podobnie jak poprzednio: 49 równoprawdopodobnych możliwości, wystarczy zliczać i uzupełniać rozkład prawdopodobieństwa:
+	
+	\begin{tabular}{c|ccc|c}
+		\diagbox{y}{x} & 0 & 1 & 2 & $\sum$ \\
+		\hline
+		0 & $\frac{1}{49}$ & $\frac{2}{49}$ & $\frac{1}{49}$ & $\frac{4}{49}$ \\
+		1 & $\frac{6}{49}$ & $\frac{10}{49}$ & $\frac{4}{49}$ & $\frac{20}{49}$ \\
+		2 & $\frac{9}{49}$ & $\frac{12}{49}$ & $\frac{4}{49}$ & $\frac{25}{49}$ \\
+		\hline
+		$\sum$ & $\frac{16}{49}$ & $\frac{24}{49}$ & $\frac{9}{49}$ & 1
+	\end{tabular}
+\end{ansenv}
 \item Zbadaj, czy zmienne losowej $X$ oraz $Y$ są niezależne.
+\ans{Zmienne nie są niezależne, ponieważ \[P(X=0, Y=0)=\frac{1}{49}\neq P(X=0)\cdot P(Y=0) = \frac{16}{49}\cdot\frac{4}{49}\]}
 \item Oblicz moment zwykły mieszany rzędu 1+1 zmiennej losowej $(X,Y)$.
+\ans{
+	W obliczeniach $EXY$ (czyli momentu zwykłego mieszanego rzędu 1+1) pominięte są składniki wynoszące $0$.
+	\begin{gather*}
+	EXY = \sum_{x}\sum_{y} x\cdot y\cdot P(X=x, Y=y) = 1\cdot 1\cdot \frac{10}{49} + 2\cdot 1\cdot \frac{4}{49} + 1\cdot 2\cdot \frac{12}{49} + 2\cdot 2\cdot \frac{4}{49} = \frac{58}{49}
+	\end{gather*}
+}
 \item Oblicz kowariancję zmiennych losowych $X$ i $Y$.
+\begin{ansenv}
+	\begin{gather*}
+		EX = 0\cdot\frac{16}{49} + 1\cdot\frac{24}{49} + 2\cdot\frac{9}{49} = \frac{42}{49} = \frac{6}{7} \\
+		EY = 0\cdot\frac{4}{49} + 1\cdot\frac{20}{49} + 2\cdot\frac{25}{49} = \frac{70}{49} = \frac{10}{7} \\
+		\cov(X,Y) = EXY-EX\cdot EY = \frac{58}{49}-\frac{6}{7}\cdot\frac{10}{7}=-\frac{2}{49}
+	\end{gather*}
+\end{ansenv}
 \item Oblicz współczynnik korelacji zmiennych losowych $X$ i $Y$.
+\begin{ansenv}
+	\begin{gather*}
+	E(X^2) = 0^2\cdot\frac{16}{49} + 1^2\cdot\frac{24}{49} + 2^2\cdot\frac{9}{49} = \frac{60}{49} \\
+	E(Y^2) = 0^2\cdot\frac{4}{49} + 1^2\cdot\frac{20}{49} + 2^2\cdot\frac{25}{49} = \frac{120}{49} \\
+	DX = \sqrt{E(X^2)-(EX)^2} = \sqrt{\frac{60}{49}-\left(\frac{6}{7}\right)^2} = \sqrt{\frac{24}{49}} = \frac{2\sqrt{6}}{7} \\
+	DY = \sqrt{E(Y^2)-(EY)^2} = \sqrt{\frac{120}{49}-\left(\frac{10}{7}\right)^2} = \sqrt{\frac{20}{49}} = \frac{2\sqrt{5}}{7} \\
+	\corr(X,Y)=\frac{\cov(X,Y)}{DX\cdot DY} = \frac{-\frac{2}{49}}{\frac{2\sqrt{6}}{7}\cdot \frac{2\sqrt{5}}{7}} = \frac{-2}{4\sqrt{30}} = -\frac{1}{2\sqrt{30}} \approx -0{,}0912
+	\end{gather*}
+\end{ansenv}
 \end{enumerate}
 
 \item Hobbici w skórzanym woreczku mają 7 kartek zapisanych atramentami w dwóch różnych kolorach: czerwonym i zielonym.
